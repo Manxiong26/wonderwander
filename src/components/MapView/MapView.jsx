@@ -11,9 +11,10 @@ const useStyles = makeStyles((theme) => ({
 
 const MapView = () => {
   const [toggle, setToggle] = useState(false);
-  console.log(toggle);
+//   console.log(toggle);
 
   const classes = useStyles();
+  
   // Map location parameters
   // to pass to Map component
   const center = {
