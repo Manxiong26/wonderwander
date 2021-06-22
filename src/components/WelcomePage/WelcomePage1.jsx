@@ -3,8 +3,8 @@ import {useDispatch, useSelector, } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 function WelcomePage1(){
-    const quotes = useSelector((store) => store.quote);
-    const art = useSelector((store) => store.art);
+    const quote = useSelector((store) => store.randomQuote);
+    const art = useSelector((store) => store.randomArt);
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -13,11 +13,11 @@ function WelcomePage1(){
     }
 
     useEffect(() => {
-        dispatch({type: 'FETCH_QUOTES'})
+        dispatch({type: 'FETCH_RANDOM_QUOTE'})
     }, [])
     
     useEffect(() => {
-        dispatch({type: 'FETCH_ART'})
+        dispatch({type: 'FETCH_RANDOM_ART'})
     }, []);
 
     return (
