@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "auto",
     marginBottom: "auto",
   },
+  view: {
+    textAlign: 'center',
+    border: '1px solid black'
+  }
 }));
 
 const MapView = () => {
@@ -25,7 +29,7 @@ const MapView = () => {
 
   // --- REDUCERS --- //
   const artwork = useSelector((store) => store.artworkReducer);
-  console.log(artwork);
+//   console.log(artwork);
 
   console.log()
 
@@ -45,7 +49,7 @@ const MapView = () => {
     <>
       {!toggle ? (
         <div>
-          <Typography onClick={toggleViews}>List View</Typography>
+          <Typography className={classes.view} onClick={toggleViews}>List View</Typography>
           <div className={classes.mapContainer}>
             <Map
               mapLat={center.lat}
