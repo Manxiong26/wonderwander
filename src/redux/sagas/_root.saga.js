@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
+import artworkSaga from './artwork.saga'
 import randomQuoteSaga from './randomQuote.saga';
 import randomArtSaga from './randomArt.saga';
 
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    artworkSaga(),
     randomQuoteSaga(),
     randomArtSaga(),
   ]);
