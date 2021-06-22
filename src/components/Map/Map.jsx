@@ -4,9 +4,14 @@ import { makeStyles } from "@material-ui/core";
 import GoogleMapReact from "google-map-react";
 import "./Map.css";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+    map: {
+        marginRight: 'auto',
+        marginLeft: 'auto'
+        }
+}));
 
-const Map = ({ lat, lng, zoom }) => {
+const Map = ({ lat, lng, zoom, height, width }) => {
   const classes = useStyles();
 
   // --IDEA: May need to map this component with the values
@@ -24,20 +29,20 @@ const Map = ({ lat, lng, zoom }) => {
     },
     zoom: zoom,
   };
-  
+
   // TODO: take user to art detail on click
   const toArtDetail = () => {
     console.log("Balloon clicked!!");
   };
 
   return (
-    <div className="map">
+    <div style={{height: height, width: width}} className={classes.map}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
         defaultCenter={locationVars.center}
         defaultZoom={locationVars.zoom}
       >
-        <BalloonMarker lat={lat} lng={lng} text="Walker Art Center" />
+        <BalloonMarker lat={lat} lng={lng}/>
       </GoogleMapReact>
     </div>
   );

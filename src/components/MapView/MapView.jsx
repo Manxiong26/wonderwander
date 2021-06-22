@@ -11,7 +11,7 @@ const MapView = () => {
 
   return (
     <>
-      <Map lat={center.lat} lng={center.lng} zoom={10} />
+      <Map lat={center.lat} lng={center.lng} zoom={10} height={500} width={'90%'}/>
     </>
   );
 };
