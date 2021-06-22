@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
   },
   view: {
     textAlign: 'center',
-    border: '1px solid black'
   }
 }));
 
@@ -64,7 +63,7 @@ const MapView = () => {
       ) : (
         <div>
           <div>
-            <Typography onClick={toggleViews}>Map View</Typography>
+            <Typography className={classes.view} onClick={toggleViews}>Map View</Typography>
             <List>
             <Divider />
             {artwork.map((item, i) => {
