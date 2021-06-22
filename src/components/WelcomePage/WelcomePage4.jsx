@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 
-function WelcomePage2(){
+function WelcomePage4(){
     const history = useHistory();
     const goBack = () => {
         history.push('/welcome3');

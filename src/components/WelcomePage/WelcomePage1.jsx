@@ -5,11 +5,17 @@ import { useHistory } from 'react-router-dom';
 function WelcomePage1(){
     const quote = useSelector((store) => store.randomQuote);
     const art = useSelector((store) => store.randomArt);
+    console.log(quote);
+    console.log(art);
     const history = useHistory();
     const dispatch = useDispatch();
+    console.log(quote[0]);
 
     const goNext = () => {
         history.push('/welcome2');
+    }
+    const skipWelcome = () => {
+        history.push('/home');
     }
 
     useEffect(() => {
@@ -21,16 +27,20 @@ function WelcomePage1(){
     }, []);
 
     return (
-        <div>
-            <h1>Random Quote Here</h1>
-            <h1>Random Art here</h1>
-            <button>Go to login</button>
-            <button onClick={goNext}>Next</button>
-            <button onClick={skipWelcome}>Skip</button>
-        </div>
-    )
-
-
+        <>
+        {quote.quote === undefined ?
+        '' : (
+            <div>
+                <h1>{quote.quote}</h1>
+                <img src={art.image}></img>
+                <button>Go to login</button>
+                <button onClick={goNext}>Next</button>
+                <button onClick={skipWelcome}>Skip</button>
+            </div>
+        )
+        }
+        </>
+    );
 }
 
 export default WelcomePage1;
