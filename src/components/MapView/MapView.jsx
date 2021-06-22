@@ -1,24 +1,19 @@
-import React from 'react'
-import Map from '../Map/Map';
-
-
+import React from "react";
+import Map from "../Map/Map";
 
 const MapView = () => {
+  // Map location parameters
+  // to pass to Map component
+  const center = {
+    lat: 44.9681,
+    lng: -93.2886,
+  };
 
-    // Map location parameters to pass to Map component
-    const center = {
-        lat: 44.9681,
-        lng: -93.2886
-    }
-   
+  return (
+    <>
+      <Map lat={center.lat} lng={center.lng} zoom={10} />
+    </>
+  );
+};
 
-
-
-    return(
-        <>
-        <Map lat={center.lat} lng={center.lng} zoom={10}/>
-        </>
-    )
-}
-
-export default MapView
+export default MapView;
