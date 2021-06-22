@@ -11,7 +11,7 @@ function* fetchRandomQuote(){
     }
 }
 
-function randomQuoteSaga(){
+function* randomQuoteSaga(){
     yield takeLatest('FETCH_RANDOM_QUOTE', fetchRandomQuote);
 }
 
