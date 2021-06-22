@@ -3,6 +3,7 @@ import ImageHeader from "./ImageHeader";
 import CollectionLinks from "./CollectionLinks";
 import { Typography } from "@material-ui/core";
 import SeePrompt from "../SeePrompt/SeePrompt";
+import SayPrompt from "../SayPrompt/SayPrompt";
 
 
 function CollectionDetail() {
@@ -15,7 +16,7 @@ function CollectionDetail() {
                 See. Say. Do.
             </Typography>
             <SeePrompt />
-            
+            <SayPrompt />
         </div>
     );
 }
