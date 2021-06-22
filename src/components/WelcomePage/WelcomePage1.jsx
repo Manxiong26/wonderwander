@@ -26,6 +26,7 @@ function WelcomePage1(){
             <h1>Random Art here</h1>
             <button>Go to login</button>
             <button onClick={goNext}>Next</button>
+            <button onClick={skipWelcome}>Skip</button>
         </div>
     )
 

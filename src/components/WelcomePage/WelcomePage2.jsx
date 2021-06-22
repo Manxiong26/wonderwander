@@ -8,6 +8,10 @@ function WelcomePage2(){
     const goBack = () => {
         history.push('/welcome1');
     }
+    const skipWelcome = () => {
+        history.push('/home');
+    }
+
 
     return (
         <div>
@@ -15,6 +19,7 @@ function WelcomePage2(){
             <h1>What</h1>
             <h1>Benefits</h1>
             <button onClick={goBack}>Back</button> <button onClick={goNext}>Next</button>
+            <button onClick={skipWelcome}>Skip</button>
         </div>
     )
 }
