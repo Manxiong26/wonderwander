@@ -23,6 +23,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 import './App.css';
 
+import Menu from '../Menu/Menu'
+
 function App() {
   const dispatch = useDispatch();
 
@@ -51,8 +53,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
+        <Menu />
         <div>
-          <Nav />
+          {/* <Nav /> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
