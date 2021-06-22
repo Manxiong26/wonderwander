@@ -1,0 +1,12 @@
+.mapMarker {
+    content: url('./WW\ Balloon.png');
+    padding: 15px 10px;
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    height: 90px;
+    width: 65px;
+}
