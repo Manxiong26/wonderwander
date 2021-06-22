@@ -7,7 +7,8 @@ import "./Map.css";
 const useStyles = makeStyles((theme) => ({
     map: {
         marginRight: 'auto',
-        marginLeft: 'auto'
+        marginLeft: 'auto',
+        border: '1px solid black',
         }
 }));
 
