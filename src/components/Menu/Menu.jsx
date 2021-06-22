@@ -158,6 +158,13 @@ function Menu(){
         </IconButton>
       </div>
       <Divider />
+      <Link to='/home' style={styles.link}>
+      <List>
+          <ListItem button key={'Home'}>
+            <ListItemText primary={'Home'} />
+          </ListItem>
+      </List>
+      </Link>
       <Link to='/map' style={styles.link}>
       <List>
           <ListItem button key={'View Map/List'}>

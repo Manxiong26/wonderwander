@@ -1,0 +1,26 @@
+.browse{
+    float: right;
+    margin-right: 10px;
+}
+
+.arrow{
+    float: right;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.weekly{
+    text-align: center;
+}
+
+.art{
+    margin-left: 15px;
+    
+}
+
+.logo{
+    margin-right: 10px;
+    border: 3px solid #fc0505;
+    padding: 10px;
+}
