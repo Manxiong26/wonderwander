@@ -9,6 +9,8 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const randomQuoteRouter = require('./routes/random.quote.router');
+const randomArtRouter = require('./routes/random.art.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -23,6 +25,8 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/random-quote', randomQuoteRouter);
+app.use('/api/random-art', randomArtRouter);
 
 // Serve static files
 app.use(express.static('build'));
