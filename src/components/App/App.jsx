@@ -19,7 +19,10 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import MapView from '../MapView/MapView'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+
+
 
 import './App.css';
 
@@ -64,6 +67,13 @@ function App() {
               path="/about"
             >
               <AboutPage />
+            </Route>
+            <Route
+            
+              exact
+              path="/map"
+            >
+                <MapView />
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.
