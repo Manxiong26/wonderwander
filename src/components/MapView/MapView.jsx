@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Map from "../Map/Map";
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar, Divider  } from "@material-ui/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 
 const useStyles = makeStyles((theme) => ({
   mapContainer: {
@@ -13,20 +12,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MapView = () => {
-useEffect(() => {
-dispatch({type: 'FETCH_ARTWORK'})
-}, [])
-
-const dispatch = useDispatch()
-  const [toggle, setToggle] = useState(false);
-//   console.log(toggle);
+  useEffect(() => {
+    dispatch({ type: "FETCH_ARTWORK" });
+  }, []);
 
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const artwork = useSelector(store => store.artworkReducer)
-  console.log(artwork)
+  // --- LOCAL STATE -- //
+  const [toggle, setToggle] = useState(false);
+  //   console.log(toggle);
 
+  // --- REDUCERS --- //
+  const artwork = useSelector((store) => store.artworkReducer);
+  console.log(artwork);
 
+  console.log()
 
   // Map location parameters
   // to pass to Map component
@@ -47,18 +48,38 @@ const dispatch = useDispatch()
           <Typography onClick={toggleViews}>List View</Typography>
           <div className={classes.mapContainer}>
             <Map
-              lat={center.lat}
-              lng={center.lng}
+              mapLat={center.lat}
+              mapLng={center.lng}
               zoom={10}
               height={500}
               width={"90%"}
+              reducer={artwork}
             />
           </div>
         </div>
       ) : (
         <div>
           <div>
-            <Typography onClick={toggleViews}>List View</Typography>
+            <Typography onClick={toggleViews}>Map View</Typography>
+            <List>
+            <Divider />
+            {artwork.map((item, i) => {
+                return(
+                    <>
+                    <ListItem key={i}>
+                        <ListItemAvatar>
+                            <Avatar variant="square" src={item.image}/>
+                        </ListItemAvatar>
+                        <ListItemText 
+                            primary={item.title}
+                            secondary={item.name}
+                            />
+                    </ListItem>
+                    <Divider />
+                    </>
+                )
+            })}
+            </List>
           </div>
         </div>
       )}

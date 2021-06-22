@@ -4,7 +4,8 @@ const router = express.Router();
 
 // GET request to grab all artwork info
 router.get('/', (req, res) => {
-    const query = `SELECT * FROM artwork;`;
+    const query = `SELECT artwork.name as title, artwork.year, artwork.lat, artwork.long, artwork.image, artwork.description, artwork.vid_link, artwork.vid_description, artist.name, artist.bio, artist.site_link FROM artwork
+    JOIN artist ON artist.id=artwork.id;`;
 
     pool.query(query)
       .then(result => {

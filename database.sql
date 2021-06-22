@@ -53,7 +53,8 @@ CREATE TABLE "artwork" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(100) NOT NULL,
 	"year" varchar(10),
-	"lat/long" varchar(255),
+	"lat" varchar(255),
+	"long"
 	"image" varchar(255),
 	"description" varchar(500),
 	"vid_link" varchar(255),
@@ -140,10 +141,10 @@ INSERT INTO collection ("name", "image", "city", "state", "bio", "donate_link", 
 INSERT INTO artist ("name", "image", "bio", "site_link", "published")
 			VALUES ('John Doe', 'https://i.ytimg.com/vi/LguXG80DezY/maxresdefault.jpg', 'A talented but tormented artist.', 'https://en.wikipedia.org/wiki/The_Silence_of_the_Lambs_(film)', 'true');
 			
-INSERT INTO artwork ("name", "year", "lat/long", "image", "description", "vid_link", "vid_description", "artist_id", "sponsor_id", "collection_id", "published")
-VALUES ('Mona Lisa', '1503', '44.9681, 93.2886', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg', 'A simple picture during simpler times', 'monalisa.com', 'This has literally nothing to do with the painting', 1, 1, 1, 'true'),
-		('Leap of Faith', null, '27.447635604171282, -80.32600106994082', 'https://artstlucie.org/wp-content/uploads/2018/08/Taking-the-Dive.jpg', 'In 2009, after entering a competition for a work of art for the new downtown Ft. Pierce parking garage. Pat Cochran was awarded the commission . The piece represents our beautiful city, Ft. Pierce, the oldest city on the treasure coast, having seen its share of history, but looking into a prophetic rosy future.  Leap of Faith took four months to complete and consists of 3,000 pounds of bronze.', null, null, null, 1, 1, 'true'),
-		('Spaulding', null, '44.91189153397999, -93.32904656902083', 'https://www.edinamn.gov/ImageRepository/Document?documentID=1216', 'A bronze sculpture of a dog.', 'https://youtu.be/sY6TXeM9PnU', 'Heidi Hoy: Foundry Dance', null, 1, 1, 'true');
+INSERT INTO artwork ("name", "year", "lat", "long", "image", "description", "vid_link", "vid_description", "artist_id", "sponsor_id", "collection_id", "published")
+VALUES ('Mona Lisa', '1503', '44.9681', '93.2886', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg', 'A simple picture during simpler times', 'monalisa.com', 'This has literally nothing to do with the painting', 1, 1, 1, 'true'),
+		('Leap of Faith', null, '27.447635604171282', '-80.32600106994082', 'https://artstlucie.org/wp-content/uploads/2018/08/Taking-the-Dive.jpg', 'In 2009, after entering a competition for a work of art for the new downtown Ft. Pierce parking garage. Pat Cochran was awarded the commission . The piece represents our beautiful city, Ft. Pierce, the oldest city on the treasure coast, having seen its share of history, but looking into a prophetic rosy future.  Leap of Faith took four months to complete and consists of 3,000 pounds of bronze.', null, null, null, 1, 1, 'true'),
+		('Spaulding', null, '44.91189153397999', '-93.32904656902083', 'https://www.edinamn.gov/ImageRepository/Document?documentID=1216', 'A bronze sculpture of a dog.', 'https://youtu.be/sY6TXeM9PnU', 'Heidi Hoy: Foundry Dance', null, 1, 1, 'true');
 
 INSERT INTO "do" ("prompts", "artwork_id", "activity_id")
 VALUES ('Make a self portrait!', 1, null),

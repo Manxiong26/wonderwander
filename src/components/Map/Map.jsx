@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         }
 }));
 
-const Map = ({ lat, lng, zoom, height, width }) => {
+const Map = ({ mapLat, mapLng, zoom, reducer, height, width }) => {
   const classes = useStyles();
 
   // --IDEA: May need to map this component with the values
@@ -25,8 +25,8 @@ const Map = ({ lat, lng, zoom, height, width }) => {
   // center and zoom
   let locationVars = {
     center: {
-      lat: lat,
-      lng: lng,
+      lat: mapLat,
+      lng: mapLng,
     },
     zoom: zoom,
   };
@@ -43,7 +43,9 @@ const Map = ({ lat, lng, zoom, height, width }) => {
         defaultCenter={locationVars.center}
         defaultZoom={locationVars.zoom}
       >
-        <BalloonMarker lat={lat} lng={lng}/>
+        {reducer.map((item, i) => (
+        <BalloonMarker key={i} lat={item.lat} lng={item.long}/>
+    ))}
       </GoogleMapReact>
     </div>
   );
