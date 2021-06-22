@@ -25,7 +25,8 @@ import WelcomePage1 from '../WelcomePage/WelcomePage1';
 import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
-
+import CollectionDetail from '../CollectionDetail/CollectionDetail';
+import SeePage from '../SeePage/SeePage';
 
 
 import './App.css';
@@ -81,6 +82,23 @@ function App() {
               path="/map"
             >
                 <MapView />
+            </Route>
+
+            {/* This is where the collection detail is */}
+            <Route
+            exact
+            // Add in id
+            path="/collectiondetail"
+            >
+              <CollectionDetail />
+            </Route>
+
+            <Route
+            // Add in id
+            exact
+            path="/see"
+            >
+              <SeePage />
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.
