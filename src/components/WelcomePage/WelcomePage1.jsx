@@ -9,7 +9,7 @@ function WelcomePage1(){
     const dispatch = useDispatch();
 
     const goNext = () => {
-        history.push(`/welcome2`);
+        history.push('/welcome2');
     }
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function WelcomePage1(){
             <h1>Random Quote Here</h1>
             <h1>Random Art here</h1>
             <button>Go to login</button>
-            <button>Next</button>
+            <button onClick={goNext}>Next</button>
         </div>
     )
 

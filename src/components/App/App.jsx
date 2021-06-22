@@ -20,6 +20,10 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import WelcomePage1 from '../WelcomePage/WelcomePage1';
+import WelcomePage2 from '../WelcomePage/WelcomePage2';
+import WelcomePage3 from '../WelcomePage/WelcomePage3';
+import WelcomePage4 from '../WelcomePage/WelcomePage4';
 
 import './App.css';
 
@@ -129,6 +133,26 @@ function App() {
           </Switch>
           <Footer />
         </div>
+        <Route
+          exact path='/welcome1'
+        >
+          <WelcomePage1></WelcomePage1>
+        </Route>
+        <Route
+          exact path='/welcome2'
+        >
+          <WelcomePage2></WelcomePage2>
+        </Route>
+        <Route
+          exact path='/welcome3'
+        >
+          <WelcomePage3></WelcomePage3>
+        </Route>
+        <Route
+          exact path='/welcome4'
+        >
+          <WelcomePage4></WelcomePage4>
+        </Route>
       </Router>
     </ThemeProvider>
   );
