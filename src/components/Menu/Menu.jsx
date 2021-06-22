@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 //material ui drawer
 import clsx from 'clsx';
@@ -92,6 +93,18 @@ const useStyles = makeStyles((theme) => ({
 
 function Menu(){
 
+    const user = useSelector((store) => store.user);
+
+    let loginLinkData = {
+        path: '/login',
+        text: 'Login / Register',
+      };
+    
+      if (user.id != null) {
+        loginLinkData.path = '/user';
+        loginLinkData.text = 'Home';
+      }
+
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -152,7 +165,7 @@ function Menu(){
           </ListItem>
       </List>
       </Link>
-      <Link to='/about-us' style={styles.link}>
+      <Link to='/about' style={styles.link}>
       <List>
           <ListItem button key={'About Us'}>
             <ListItemText primary={'About Us'} />
@@ -180,7 +193,8 @@ function Menu(){
           </ListItem>
       </List>
       </Link>
-      <Link to='/SignInOut' style={styles.link}>
+      <Link to={loginLinkData.path} style={styles.link}>
+      
       <List>
           <ListItem button key={'Sign In/Out'}>
             <ListItemText primary={'Sign In/Out'} />
