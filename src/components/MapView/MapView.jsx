@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Map from "../Map/Map";
 import { makeStyles, Typography } from "@material-ui/core";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const useStyles = makeStyles((theme) => ({
   mapContainer: {
@@ -10,11 +13,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MapView = () => {
+useEffect(() => {
+dispatch({type: 'FETCH_ARTWORK'})
+}, [])
+
+const dispatch = useDispatch()
   const [toggle, setToggle] = useState(false);
 //   console.log(toggle);
 
   const classes = useStyles();
-  
+
+  const artwork = useSelector(store => store.artworkReducer)
+  console.log(artwork)
+
+
+
   // Map location parameters
   // to pass to Map component
   const center = {
