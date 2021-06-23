@@ -101,7 +101,7 @@ function App() {
             <Route
             exact
             // Add in id
-            path="/artworkdetail"
+            path="/artworkdetail/:id"
             >
               <ArtworkDetail />
             </Route>

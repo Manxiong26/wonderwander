@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import artworkSaga from './artwork.saga'
 import randomQuoteSaga from './randomQuote.saga';
 import randomArtSaga from './randomArt.saga';
+import artDetailSaga from './artworkdetail.saga';
 
 import collectionSaga from './collection.saga';
 import threeCollectionSaga from './collection.3.saga';
@@ -28,6 +29,9 @@ export default function* rootSaga() {
     artworkSaga(),
     randomQuoteSaga(),
     randomArtSaga(),
+
+    artDetailSaga(),
+
 
     collectionSaga(),
     threeCollectionSaga(),

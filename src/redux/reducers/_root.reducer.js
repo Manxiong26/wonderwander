@@ -4,6 +4,7 @@ import user from './user.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
+import artworkDetailReducer from './artworkDetail.reducer';
 
 import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
@@ -26,11 +27,15 @@ const rootReducer = combineReducers({
   randomQuote,
   randomArt,
 
+  artworkDetailReducer,
+
+
   collection,
   collectionThree,
   collectionDetail,
 
   artistDetail,
+
 
 });
 

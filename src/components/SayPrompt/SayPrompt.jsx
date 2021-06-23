@@ -2,6 +2,7 @@ import React from 'react';
 import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, CardActionArea, } from "@material-ui/core";
 import { useHistory } from 'react-router-dom';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { render } from 'react-dom';
 
 
 const useStyles = makeStyles({
@@ -26,11 +27,12 @@ const useStyles = makeStyles({
 function SayPrompt() {
     const classes = useStyles();
     const history = useHistory();
+    
 
     // Currently using red to tell the cards apart at the moment
     return (
         <Card className={classes.card}>
-            <CardContent >
+            <CardContent>
                 <CardMedia
                 className={classes.cardmedia}
                 component="img" 
