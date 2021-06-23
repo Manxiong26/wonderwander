@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import artworkSaga from './artwork.saga'
 import randomQuoteSaga from './randomQuote.saga';
 import randomArtSaga from './randomArt.saga';
+import artistSaga from './artist.saga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     artworkSaga(),
     randomQuoteSaga(),
     randomArtSaga(),
+    artistSaga(),
   ]);
 }

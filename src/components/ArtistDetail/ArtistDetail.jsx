@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import {makeStyles, Typography, Button, Divider, List, ListItem, ListItemAvatar, Avatar, ListItemText} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,39 +20,51 @@ const useStyles = makeStyles((theme) => ({
 
 
 const ArtistDetail = () => {
+    const {id} = useParams()
+    console.log(id)
+
+    useEffect(() => {
+
+    dispatch({ type: 'FETCH_ARTIST_DETAIL', payload: id })
+
+    }, [])
 
 
-    const artwork = [];
+    const artist = useSelector(store => store.artistDetail);
+    console.log('Artist Detail: ', artist)
+
+    const artwork = []
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const toWebsite = () => {
-        console.log('To website!!')
+        console.log(artist[0].site_link)
     }
 
     return(
         <>
         <div className={classes.name}>
-        <Typography variant="h5">Artist Name Here!</Typography>
+        <Typography variant="h5">{artist[0].name}</Typography>
         <div>
-            <img className={classes.pic} src="https://i.ytimg.com/vi/LguXG80DezY/maxresdefault.jpg"/>
+            <img className={classes.pic} src={artist[0].image}/>
         </div>
         <div>
-           <Typography>A talented but tormented artist.</Typography>
+           <Typography>{artist[0].bio}</Typography>
         </div>
         <div>
             <Button onClick={toWebsite}>Website</Button>
         </div>
         <div>
-            <Typography variant="h6">Art by...</Typography>
+            <Typography variant="h6">Art by {artist[0].name}</Typography>
             <Divider />
             <List>
-            {artwork.map((item, i) => {
+            {artist.map((item, i) => {
                 return(
                     <>
                     <ListItem key={i}>
                         <ListItemAvatar>
-                            <Avatar variant="square" src={item.image}/>
+                            <Avatar variant="square" src={item.art_pic}/>
                         </ListItemAvatar>
                         <ListItemText 
                             primary={item.title}
