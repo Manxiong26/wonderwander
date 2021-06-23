@@ -54,7 +54,7 @@ CREATE TABLE "artwork" (
 	"name" varchar(100) NOT NULL,
 	"year" varchar(10),
 	"lat" varchar(255),
-	"long"
+	"long" varchar(255),
 	"image" varchar(255),
 	"description" varchar(500),
 	"vid_link" varchar(255),

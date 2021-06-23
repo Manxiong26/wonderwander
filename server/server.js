@@ -9,7 +9,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const artworkRouter = require('./routes/artwork.reducer')
+const artworkRouter = require('./routes/artwork.router')
 const randomQuoteRouter = require('./routes/random.quote.router');
 const randomArtRouter = require('./routes/random.art.router');
 
