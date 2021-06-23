@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -65,6 +65,30 @@ function App() {
     }
   })
 
+     // --- Geo Location --- //
+     let geo = navigator.geolocation;
+
+     geo.getCurrentPosition((position) => {
+       setUserLat(position.coords.latitude);
+       setUserLng(position.coords.longitude);
+     });
+     // Load if location is available 
+     useEffect(() => {
+       if ("geolocation" in navigator) {
+         console.log("Available");
+         setGeoAvailable(true);
+       } else {
+         console.log("Not Available");
+         setGeoAvailable(false);
+       }
+     }, []);
+   
+     const [userLat, setUserLat] = useState(0);
+     console.log("user lat: ", userLat);
+     const [userLng, setUserLng] = useState(0);
+     console.log("user lng: ", userLng);
+     const [geoAvailable, setGeoAvailable] = useState(false);
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -88,7 +112,7 @@ function App() {
               exact
               path="/map"
             >
-                <MapView />
+                <MapView userLat={userLat} userLng={userLng} geoAvailable={geoAvailable}/>
             </Route>
             <Route
               exact
