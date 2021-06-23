@@ -25,7 +25,8 @@ import WelcomePage1 from '../WelcomePage/WelcomePage1';
 import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
-import CollectionDetail from '../CollectionDetail/CollectionDetail';
+import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
+
 import SeePage from '../SeePage/SeePage';
 
 
@@ -88,9 +89,9 @@ function App() {
             <Route
             exact
             // Add in id
-            path="/collectiondetail"
+            path="/artworkdetail"
             >
-              <CollectionDetail />
+              <ArtworkDetail />
             </Route>
 
             <Route
