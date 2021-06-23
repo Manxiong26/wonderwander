@@ -7,4 +7,4 @@ const sponsorArt = (state = [], action) => {
     }
 }
 
-export default sponsorArt
+export default sponsorArt;

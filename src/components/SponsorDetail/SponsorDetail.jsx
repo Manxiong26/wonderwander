@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+import {useParams} from 'react-router-dom';
 
 
 function SponsorDetail(){
@@ -14,20 +15,22 @@ function SponsorDetail(){
     const goWebsite = () => {
         console.log('click!');
     }
+    
+    const {id} = useParams();
 
     useEffect (() => {
         dispatch({type: 'FETCH_SPONSOR_DETAILS', payload: id})
     }, [])
     useEffect (() => {
         dispatch({type: 'FETCH_SPONSOR_ART', payload: id})
-    })
+    }, [])
 
     return (
         <div>
             <img src={details.logo}></img>
             <button onClick={goWebsite}>Visit Website</button>
             <h3>MAP HERE</h3>
-            <Grid container spacing={2}  justify="left">
+            <Grid container spacing={2}>
                 <Grid item>
                     {sponsorArt.map((art, index) => {
                         <Card className="artCard">

@@ -24,6 +24,7 @@ import WelcomePage1 from '../WelcomePage/WelcomePage1';
 import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
+import SponsorDetail from '../SponsorDetail/SponsorDetail';
 
 import './App.css';
 
@@ -150,6 +151,11 @@ function App() {
             exact path='/welcome4'
           >
             <WelcomePage4></WelcomePage4>
+          </Route>
+          <Route
+            exact path='/sponsor/:id'
+          >
+            <SponsorDetail />
           </Route>
         <Footer />
         </div>
