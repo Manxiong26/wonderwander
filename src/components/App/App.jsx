@@ -25,9 +25,15 @@ import WelcomePage1 from '../WelcomePage/WelcomePage1';
 import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
+
+import Collection from '../Collection/Collection';
+import CollectionDetail from '../CollectionDetail/CollectionDetail';
+
 import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
 
 import SeePage from '../SeePage/SeePage';
+import ArtistDetail from '../ArtistDetail/ArtistDetail'
+
 
 
 import './App.css';
@@ -84,6 +90,12 @@ function App() {
             >
                 <MapView />
             </Route>
+            <Route
+              exact
+              path="/artist_detail/:id"
+              >
+                <ArtistDetail />
+            </Route>
 
             {/* This is where the collection detail is */}
             <Route
@@ -113,7 +125,16 @@ function App() {
             >
               <HomePage />
             </Route>
-
+              <Route
+              exact
+              path='/collection'>
+                <Collection />
+              </Route>
+              <Route
+              exact
+              path='/collectionDetail/:id'>
+                <CollectionDetail />
+              </Route>
             <Route
               // logged in shows InfoPage else shows LoginPage
               exact
