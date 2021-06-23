@@ -1,17 +1,16 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
+import adminArtistListReducer from './adminArtistList.reducer';
+import adminArtistInfoReducer from './adminArtist.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
 import artworkDetailReducer from './artworkDetail.reducer';
-
 import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
 import collectionDetail from './collection.detail.reducer';
-
 import artistDetail from './artist.reducer'
-
 
 
 // rootReducer is the primary reducer for our entire project
@@ -23,20 +22,17 @@ import artistDetail from './artist.reducer'
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
+
+  adminArtistListReducer,
+  adminArtistInfoReducer,
   artworkReducer,
   randomQuote,
   randomArt,
-
   artworkDetailReducer,
-
-
   collection,
   collectionThree,
   collectionDetail,
-
   artistDetail,
-
-
 });
 
 export default rootReducer;
