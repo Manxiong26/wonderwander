@@ -4,11 +4,14 @@ const pool = require('../modules/pool');
 
 //need to add the random nature to this part, currently just grabs the first artwork
 router.get('/', (req, res) => {
-    const queryText = `SELECT * FROM artwork where id >= (
-        SELECT random()*(max(id)-min(id))+min(id) FROM artwork
-      )
-      ORDER BY id
-      LIMIT 1;`;
+    const queryText = `SELECT artist."name" AS artist_name, artwork."name", artwork.image
+    FROM  (
+       SELECT DISTINCT 1 + trunc(random() * 5)::integer AS id
+       FROM   generate_series(1,10) g
+       ) r
+    JOIN   artwork USING (id)
+    JOIN artist ON artist.id = artwork.artist_id
+    LIMIT  1;`;
     pool.query(queryText)
         .then(result => {
             res.send(result.rows[0]);

@@ -12,6 +12,9 @@ const userRouter = require('./routes/user.router');
 const artworkRouter = require('./routes/artwork.router')
 const randomQuoteRouter = require('./routes/random.quote.router');
 const randomArtRouter = require('./routes/random.art.router');
+
+const collectionRouter = require('./routes/collection.router');
+
 const artistRouter = require('./routes/artist.router');
 
 
@@ -31,7 +34,11 @@ app.use('/api/user', userRouter);
 app.use('/api/artwork', artworkRouter)
 app.use('/api/random-quote', randomQuoteRouter);
 app.use('/api/random-art', randomArtRouter);
+
+app.use('/api/collection', collectionRouter);
+
 app.use('/api/artist', artistRouter);
+
 
 // Serve static files
 app.use(express.static('build'));
