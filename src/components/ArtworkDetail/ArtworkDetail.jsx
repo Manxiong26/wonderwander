@@ -5,6 +5,7 @@ import { Typography } from "@material-ui/core";
 import SeePrompt from "../SeePrompt/SeePrompt";
 import SayPrompt from "../SayPrompt/SayPrompt";
 import DoPrompt from "../DoPrompt/DoPrompt";
+import ArtworkDescription from "./ArtworkDescription";
 
 
 function CollectionDetail() {
@@ -19,6 +20,7 @@ function CollectionDetail() {
             <SeePrompt />
             <SayPrompt />
             <DoPrompt />
+            <ArtworkDescription />
         </div>
     );
 }
