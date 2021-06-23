@@ -12,30 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Map = ({ mapLat, mapLng, zoom, reducer, height, width }) => {
-    // --- Geo Location --- //
-  let geo = navigator.geolocation;
-
-  geo.getCurrentPosition((position) => {
-    setUserLat(position.coords.latitude);
-    setUserLng(position.coords.longitude);
-  });
-  // Load if location is available 
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      console.log("Available");
-      setGeoAvailable(true);
-    } else {
-      console.log("Not Available");
-      setGeoAvailable(false);
-    }
-  }, []);
-
-  const [userLat, setUserLat] = useState(0);
-  console.log("user lat: ", userLat);
-  const [userLng, setUserLng] = useState(0);
-  console.log("user lng: ", userLng);
-  const [geoAvailable, setGeoAvailable] = useState(false);
+const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, geoAvailable }) => {
 
   const classes = useStyles();
 

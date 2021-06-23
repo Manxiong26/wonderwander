@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapView = () => {
+const MapView = ({userLat, userLng, geoAvailable}) => {
   useEffect(() => {
     dispatch({ type: "FETCH_ARTWORK" });
   }, []);
@@ -54,6 +54,9 @@ const MapView = () => {
               height={500}
               width={"90%"}
               reducer={artwork}
+              userLat={userLat}
+              userLng={userLng}
+              geoAvailable={geoAvailable}
             />
           </div>
         </div>
