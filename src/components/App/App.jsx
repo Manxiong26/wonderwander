@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AdminArtist from '../AdminArtist/AdminArtist';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 import './App.css';
@@ -64,6 +65,15 @@ function App() {
               path="/about"
             >
               <AboutPage />
+            </Route>
+
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminArtist Page at all times (logged in or not)
+              exact
+              path="/admin/artist"
+            >
+              <AdminArtist />
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.
@@ -121,6 +131,17 @@ function App() {
             >
               <LandingPage />
             </ProtectedRoute>
+
+            {/* <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/admin/artist"
+              // - else shows LandingPage at "/home" ***Need to change this to WELCOME ***
+              exact
+              path="/home"
+              authRedirect="/admin/artist"
+            >
+              <AdminArtist />
+            </ProtectedRoute> */}
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route>
