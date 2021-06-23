@@ -6,6 +6,7 @@ import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
 import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
+import collectionDetail from './collection.detail.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   randomArt,
   collection,
   collectionThree,
+  collectionDetail,
 });
 
 export default rootReducer;

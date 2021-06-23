@@ -29,6 +29,10 @@ useEffect(() => {
   const randomArt = useSelector((store) => store.randomArt);
 //collection Store reducer
   const collectionThreeList = useSelector((store) => store.collectionThree);
+
+  const viewCollectionDetail = (event, collDet ) => {
+    history.push(`/collectionDetail/${collDet.id}`)
+  }
   return (
     <>
       <div className="art">
@@ -46,7 +50,7 @@ useEffect(() => {
                 
        return( <Box component="span" m={1} key={collection.id}>
         <Divider/>
-        <p className="logo"><img className="logo2" src={collection.image}/> {collection.name} {collection.city}, {collection.state} xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
+        <p className="logo"><img className="logo2" src={collection.image}/> {collection.name} {collection.city}, {collection.state} xx.miles <Link onClick={(event) => viewCollectionDetail(event, collection)} className="arrow"> <ArrowForwardIosIcon/> </Link></p>
       </Box >) })}
       <Divider/>
       </div>
@@ -67,7 +71,7 @@ useEffect(() => {
       <Divider/>
       <div className="art">
         <h4>Other Art Adventures</h4>
-        <div>At the Museum <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></div>
+        <div>At the Museum <Link to='/adventure' className="arrow"> <ArrowForwardIosIcon/> </Link></div>
       </div>
       <div className="container">
         <h2>Welcome, {user.username}!</h2>

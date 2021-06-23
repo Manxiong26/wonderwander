@@ -26,7 +26,7 @@ import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
 import Collection from '../Collection/Collection';
-
+import CollectionDetail from '../CollectionDetail/CollectionDetail';
 
 import './App.css';
 
@@ -98,6 +98,11 @@ function App() {
               exact
               path='/collection'>
                 <Collection />
+              </Route>
+              <Route
+              exact
+              path='/collectionDetail/:id'>
+                <CollectionDetail />
               </Route>
             <Route
               // logged in shows InfoPage else shows LoginPage

@@ -25,6 +25,10 @@ useEffect(() => {
 //collection Store reducer
 const collectionList = useSelector((store) => store.collection);
 console.log('WHAT IS IN COLLECTION__________',collectionList);
+
+const viewCollectionDetail = (event, collDet ) => {
+    history.push(`/collectionDetail/${collDet.id}`)
+  }
     return(
         <>
         
@@ -44,7 +48,7 @@ console.log('WHAT IS IN COLLECTION__________',collectionList);
                 
        return( <Box component="span" m={1} key={collection.id}>
         <Divider/>
-        <p className="logo"><img className="logo2" src={collection.image}/> {collection.name} {collection.city}, {collection.state} xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
+        <p className="logo"><img className="logo2" src={collection.image}/> {collection.name} {collection.city}, {collection.state} xx.miles <Link onClick={(event) => viewCollectionDetail(event, collection)} className="arrow"> <ArrowForwardIosIcon/> </Link></p>
       </Box >) })}
       <Divider/>
 
