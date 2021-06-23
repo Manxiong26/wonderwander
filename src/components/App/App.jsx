@@ -28,6 +28,7 @@ import WelcomePage4 from '../WelcomePage/WelcomePage4';
 import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
 
 import SeePage from '../SeePage/SeePage';
+import ArtistDetail from '../ArtistDetail/ArtistDetail'
 
 
 import './App.css';
@@ -83,6 +84,12 @@ function App() {
               path="/map"
             >
                 <MapView />
+            </Route>
+            <Route
+              exact
+              path="/artist_detail/:id"
+              >
+                <ArtistDetail />
             </Route>
 
             {/* This is where the collection detail is */}
