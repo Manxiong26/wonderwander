@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 const ArtistDetail = () => {
     const {id} = useParams()
     console.log(id)
+    const classes = useStyles();
+    const dispatch = useDispatch();
 
     useEffect(() => {
 
@@ -31,12 +33,10 @@ const ArtistDetail = () => {
 
 
     const artist = useSelector(store => store.artistDetail);
+    const artistInfo = artist[0];
     console.log('Artist Detail: ', artist)
 
-    const artwork = []
-
-    const classes = useStyles();
-    const dispatch = useDispatch();
+    
 
     const toWebsite = () => {
         console.log(artist[0].site_link)
@@ -44,19 +44,20 @@ const ArtistDetail = () => {
 
     return(
         <>
+        {artistInfo === undefined ? ('Loading...') : (
         <div className={classes.name}>
-        <Typography variant="h5">{artist[0].name}</Typography>
+        <Typography variant="h5">{artistInfo.name}</Typography>
         <div>
-            <img className={classes.pic} src={artist[0].image}/>
+            <img className={classes.pic} src={artistInfo.image}/>
         </div>
         <div>
-           <Typography>{artist[0].bio}</Typography>
+           <Typography>{artistInfo.bio}</Typography>
         </div>
         <div>
-            <Button onClick={toWebsite}>Website</Button>
+            <Button variant="outlined" onClick={toWebsite}><a href={artistInfo.site_link}>Artist Website</a></Button>
         </div>
         <div>
-            <Typography variant="h6">Art by {artist[0].name}</Typography>
+            <Typography variant="h6">Art by {artistInfo.name}</Typography>
             <Divider />
             <List>
             {artist.map((item, i) => {
@@ -78,6 +79,7 @@ const ArtistDetail = () => {
             </List>
         </div>
         </div>
+        )}
         </>
     )
 }
