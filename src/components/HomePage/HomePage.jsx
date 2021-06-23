@@ -19,13 +19,16 @@ function HomePage() {
   
 //initialize to the DOM
 useEffect(() => {
-  dispatch({type: 'FETCH_RANDOM_ART'})
+  dispatch({type: 'FETCH_RANDOM_ART'});
+  dispatch({type: 'FETCH_THREE_COLLECTION'});
 }, []);
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
 //randomArt Store reducer
   const randomArt = useSelector((store) => store.randomArt);
+//collection Store reducer
+  const collectionThreeList = useSelector((store) => store.collectionThree);
   return (
     <>
       <div className="art">
@@ -36,9 +39,18 @@ useEffect(() => {
         <p>Title:{randomArt.name}</p>
       </div>
       <div className="art">
-        <h4 >Find Local Art:<Link to='/browse-collection' className="browse">Browse All</Link></h4>
+        <h4 >Find Local Art:<Link to='/collection' className="browse">Browse All</Link></h4>
       </div>
+      <div className="collectionList">
+            {collectionThreeList.map(collection =>{
+                
+       return( <Box component="span" m={1} key={collection.id}>
+        <Divider/>
+        <p className="logo"><img className="logo2" src={collection.image}/> {collection.name} {collection.city}, {collection.state} xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
+      </Box >) })}
       <Divider/>
+      </div>
+      {/* <Divider/>
       <Box component="span" m={1} >
         <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
       </Box >
@@ -50,7 +62,7 @@ useEffect(() => {
       <Box component="span" m={1} >
         <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
       </Box >
-      <Divider/>
+      <Divider/> */}
       <div className="weekly"><Link to="/email" className="wonder"> <MailOutlineIcon className="mail"/> Get Weekly Wonder News</Link></div>
       <Divider/>
       <div className="art">

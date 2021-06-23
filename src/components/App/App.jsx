@@ -25,7 +25,7 @@ import WelcomePage1 from '../WelcomePage/WelcomePage1';
 import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
-
+import Collection from '../Collection/Collection';
 
 
 import './App.css';
@@ -94,7 +94,11 @@ function App() {
             >
               <HomePage />
             </Route>
-
+              <Route
+              exact
+              path='/collection'>
+                <Collection />
+              </Route>
             <Route
               // logged in shows InfoPage else shows LoginPage
               exact

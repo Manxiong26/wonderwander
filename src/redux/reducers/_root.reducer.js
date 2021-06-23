@@ -4,6 +4,8 @@ import user from './user.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
+import collection from './collection.reducer';
+import collectionThree from './collection.3.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   artworkReducer,
   randomQuote,
   randomArt,
+  collection,
+  collectionThree,
 });
 
 export default rootReducer;
