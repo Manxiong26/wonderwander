@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, makeStyles, CardMedia, CardContent, Typography,  } from '@material-ui/core';
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
     cardmedia: {
@@ -9,16 +11,27 @@ const useStyles = makeStyles({
 
 function ImageHeader() {
     const classes = useStyles();
+    const list = useSelector((store) => store.artworkDetailReducer);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log('In useEffect param:');
+        dispatch({type: 'FETCH_ART_DETAIL', payload: id})
+    }, []);
+
+    const {id} = useParams();
+
+
     return (
         <Card className={classes.cardmedia}>
             <CardMedia
             component="img" 
-            image="https://st.depositphotos.com/1428083/2946/i/600/depositphotos_29460297-stock-photo-bird-cage.jpg"
+            image={list.artwork_image}
             >
             </CardMedia>
             <CardContent>
                 <Typography>
-                    Title: MAP THIS
+                    Title: {list.artwork_name}
                 </Typography>
             </CardContent>
         </Card>
