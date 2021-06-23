@@ -16,6 +16,10 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
 
   const classes = useStyles();
 
+  const handleApiLoaded = (map, maps) => {
+      
+  }
+
   // Balloon marker
   const BalloonMarker = () => (
     <div className="mapMarker" onClick={toArtDetail}></div>
@@ -44,6 +48,8 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
             bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
             defaultCenter={locationVars.center}
             defaultZoom={locationVars.zoom}
+            yesIWantToUseGoogleMapApiInternals
+            onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
           >
             {reducer.map((item, i) => (
               <BalloonMarker key={i} lat={item.lat} lng={item.long} />
