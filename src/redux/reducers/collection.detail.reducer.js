@@ -1,4 +1,4 @@
-const collectionDetail = (state={}, action) => {
+const collectionDetail = (state=[], action) => {
     // set book list with data from server
     if (action.type === 'SET_COLLECTION_DETAIL') {
       // The action payload is a new array from the server 

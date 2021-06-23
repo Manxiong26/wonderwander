@@ -67,7 +67,7 @@ useEffect(() => {
         <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
       </Box >
       <Divider/> */}
-      <div className="weekly"><Link to="/email" className="wonder"> <MailOutlineIcon className="mail"/> Get Weekly Wonder News</Link></div>
+      <div className="weekly"><Link to="/email" className="wonder"> <MailOutlineIcon className="email"/> Get Weekly Wonder News</Link></div>
       <Divider/>
       <div className="art">
         <h4>Other Art Adventures</h4>
