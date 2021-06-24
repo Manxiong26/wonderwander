@@ -177,7 +177,7 @@ function App() {
             path="/do"
             >
               <DoPage />
-
+            </Route>
             {/* this is temporary until we can get the log in working */}
             <Route
               // shows AdminArtist Page at all times (logged in or not)
