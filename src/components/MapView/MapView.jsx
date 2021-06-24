@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Map from "../Map/Map";
-import { makeStyles, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar, Divider  } from "@material-ui/core";
+import { makeStyles, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar, Divider, Button  } from "@material-ui/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "auto",
     marginBottom: "auto",
   },
+  toggle: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  }
 }));
 
 const MapView = ({userLat, userLng}) => {
@@ -71,7 +75,9 @@ const MapView = ({userLat, userLng}) => {
     <>
       {!toggle ? (
         <div>
-          <Typography onClick={toggleViews}>List View</Typography>
+        <div className={classes.toggle}>
+          <Button onClick={toggleViews}>List View</Button>
+        </div>
           <div className={classes.mapContainer}>
             <Map
               mapLat={center.lat}
@@ -88,7 +94,9 @@ const MapView = ({userLat, userLng}) => {
       ) : (
         <div>
           <div>
-            <Typography onClick={toggleViews}>Map View</Typography>
+            <div className={classes.toggle}>
+                <Button className={classes.toggle} onClick={toggleViews}>Map View</Button>
+            </div>
             <List>
             <Divider />
             {artwork.map((item, i) => {
