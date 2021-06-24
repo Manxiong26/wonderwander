@@ -54,7 +54,7 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
             {reducer.map((item, i) => (
               <BalloonMarker key={i} lat={item.lat} lng={item.long} />
             ))}
-            {geoAvailable ? (
+            {userLat !== null && userLng !== null ? (
             <UserLocation lat={userLat} lng={userLng} />
             ) : ('')}
           </GoogleMapReact>
