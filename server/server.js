@@ -19,6 +19,9 @@ const artworkDetailRouter = require('./routes/artworkdetail.router')
 const collectionRouter = require('./routes/collection.router');
 const artistRouter = require('./routes/artist.router');
 
+const seesaydoRouter = require('./routes/seesaydo.router');
+
+
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,6 +45,7 @@ app.use('/api/sponsor', sponsorDetailsRouter);
 app.use('/api/artworkdetail', artworkDetailRouter);
 app.use('/api/collection', collectionRouter);
 app.use('/api/artist', artistRouter);
+app.use('/api/do', seesaydoRouter);
 
 // Serve static files
 app.use(express.static('build'));

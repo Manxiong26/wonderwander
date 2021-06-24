@@ -38,7 +38,8 @@ import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
 
 import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
-
+import SayPage from '../SayPage/SayPage';
+import DoPage from '../DoPage/DoPage';
 
 
 import './App.css';
@@ -163,6 +164,20 @@ function App() {
               <SeePage />
             </Route>
 
+
+            <Route
+            exact
+            path="/say/:id"
+            >
+              <SayPage />
+            </Route>
+
+            <Route
+            exact
+            path="/do"
+            >
+              <DoPage />
+
             {/* this is temporary until we can get the log in working */}
             <Route
               // shows AdminArtist Page at all times (logged in or not)
@@ -170,6 +185,7 @@ function App() {
               path="/admin/artist"
             >
               <AdminArtist />
+
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.

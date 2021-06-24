@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, } from "@material-ui/core";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import CardActionArea from '@material-ui/core/CardActionArea';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
     cardmedia: {
@@ -21,10 +22,20 @@ const useStyles = makeStyles({
     },
   });
 
-function DoPrompt() {
+function DoPrompt({list}) {
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
+    // const doDetail = useSelector((store) => store.seesaydoReducer.doReducer);
+    const {id} = useParams();
 
+    useEffect(() => {
+        dispatch({type: 'FETCH_DO', payload: id})
+    }, []);
+
+    console.log('in do prompt looking for art detail information', list);
+
+       
     return (
         <Card className={classes.card}>
             <CardContent >
@@ -41,7 +52,7 @@ function DoPrompt() {
                         </Typography>
                     </CardContent>
                 </div>
-                <CardActionArea onClick={() => history.push('/do')}>
+                <CardActionArea onClick={(event) => history.push('/do')}>
                     <CardContent>
                         <IconButton>
                             <ArrowForwardIosIcon />
