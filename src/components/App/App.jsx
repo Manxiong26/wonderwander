@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -70,29 +71,48 @@ function App() {
     }
   })
 
-     // --- Geo Location --- //
-     let geo = navigator.geolocation;
+    //  // --- Geo Location --- //
+    //  let geo = navigator.geolocation;
 
-     geo.getCurrentPosition((position) => {
-       setUserLat(position.coords.latitude);
-       setUserLng(position.coords.longitude);
-     });
-     // Load if location is available 
-     useEffect(() => {
-       if ("geolocation" in navigator) {
-         console.log("Available");
-         setGeoAvailable(true);
-       } else {
-         console.log("Not Available");
-         setGeoAvailable(false);
-       }
-     }, []);
+    //  geo.getCurrentPosition((position) => {
+    //    setUserLat(position.coords.latitude);
+    //    setUserLng(position.coords.longitude);
+    //  });
+    //  // Load if location is available 
+    //  useEffect(() => {
+    //    if ("geolocation" in navigator) {
+    //      console.log("Available");
+    //      setGeoAvailable(true);
+    //    } else {
+    //      console.log("Not Available");
+    //      setGeoAvailable(false);
+    //    }
+    //  }, []);
+
+
+    // Grab users location and store it
+    // in local state
+    useEffect(() => {
+      axios({
+          method: 'POST',
+          url: `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_GOOGLE_KEY}`,
+      })
+      .then(res => {
+          console.log(res.data)
+          setUserLat(res.data.location.lat)
+          setUserLng(res.data.location.lng)
+
+      }, (err => {
+          console.log(err)
+      }))
+    }, []);
+  
    
-     const [userLat, setUserLat] = useState(0);
+     const [userLat, setUserLat] = useState(null);
      console.log("user lat: ", userLat);
-     const [userLng, setUserLng] = useState(0);
+     const [userLng, setUserLng] = useState(null);
      console.log("user lng: ", userLng);
-     const [geoAvailable, setGeoAvailable] = useState(false);
+    //  const [geoAvailable, setGeoAvailable] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -117,7 +137,7 @@ function App() {
               exact
               path="/map"
             >
-                <MapView userLat={userLat} userLng={userLng} geoAvailable={geoAvailable}/>
+                <MapView userLat={userLat} userLng={userLng}/>
             </Route>
             <Route
               exact
