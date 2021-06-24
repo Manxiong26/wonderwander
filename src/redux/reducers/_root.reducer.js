@@ -6,6 +6,8 @@ import adminArtistInfoReducer from './adminArtist.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
+import sponsorArt from './sponsorArt.reducer';
+import sponsorDetails from './sponsorDetails.reducer';
 import artworkDetailReducer from './artworkDetail.reducer';
 import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
@@ -28,6 +30,8 @@ const rootReducer = combineReducers({
   artworkReducer,
   randomQuote,
   randomArt,
+  sponsorArt,
+  sponsorDetails,
   artworkDetailReducer,
   collection,
   collectionThree,

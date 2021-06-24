@@ -27,6 +27,8 @@ import WelcomePage1 from '../WelcomePage/WelcomePage1';
 import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
+import SponsorDetail from '../SponsorDetail/SponsorDetail';
+import EmailPage from '../EmailPage/EmailPage';
 
 import Collection from '../Collection/Collection';
 import CollectionDetail from '../CollectionDetail/CollectionDetail';
@@ -39,6 +41,7 @@ import ArtistDetail from '../ArtistDetail/ArtistDetail'
 
 
 import './App.css';
+import { Email } from '@material-ui/icons';
 
 import Menu from '../Menu/Menu'
 
@@ -249,6 +252,16 @@ function App() {
             exact path='/welcome4'
           >
             <WelcomePage4></WelcomePage4>
+          </Route>
+          <Route
+            exact path='/sponsor/:id'
+          >
+            <SponsorDetail />
+          </Route>
+          <Route
+            exact path='/email'  
+          >
+            <EmailPage />
           </Route>
         <Footer />
         </div>
