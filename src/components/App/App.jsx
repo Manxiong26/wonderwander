@@ -68,25 +68,6 @@ function App() {
     }
   })
 
-    //  // --- Geo Location --- //
-    //  let geo = navigator.geolocation;
-
-    //  geo.getCurrentPosition((position) => {
-    //    setUserLat(position.coords.latitude);
-    //    setUserLng(position.coords.longitude);
-    //  });
-    //  // Load if location is available 
-    //  useEffect(() => {
-    //    if ("geolocation" in navigator) {
-    //      console.log("Available");
-    //      setGeoAvailable(true);
-    //    } else {
-    //      console.log("Not Available");
-    //      setGeoAvailable(false);
-    //    }
-    //  }, []);
-
-
     // Grab users location and store it
     // in local state
     useEffect(() => {
@@ -110,6 +91,8 @@ function App() {
      const [userLng, setUserLng] = useState(null);
      console.log("user lng: ", userLng);
     //  const [geoAvailable, setGeoAvailable] = useState(false);
+
+    
 
   return (
     <ThemeProvider theme={theme}>
