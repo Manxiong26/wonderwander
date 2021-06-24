@@ -33,7 +33,8 @@ import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
 
 import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
-
+import SayPage from '../SayPage/SayPage';
+import DoPage from '../DoPage/DoPage';
 
 
 import './App.css';
@@ -112,6 +113,20 @@ function App() {
             path="/see"
             >
               <SeePage />
+            </Route>
+
+            <Route
+            exact
+            path="/say/:id"
+            >
+              <SayPage />
+            </Route>
+
+            <Route
+            exact
+            path="/do"
+            >
+              <DoPage />
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.

@@ -10,6 +10,7 @@ import artDetailSaga from './artworkdetail.saga';
 import collectionSaga from './collection.saga';
 import threeCollectionSaga from './collection.3.saga';
 import getCollectionDetailSaga from './collection.detail.saga';
+import seesaydoSaga from './seesaydo.saga';
 
 import artistSaga from './artist.saga'
 
@@ -38,6 +39,7 @@ export default function* rootSaga() {
     getCollectionDetailSaga(),
 
     artistSaga(),
+    seesaydoSaga(),
 
   ]);
 }
