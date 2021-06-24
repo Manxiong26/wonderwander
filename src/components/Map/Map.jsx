@@ -21,8 +21,8 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
   }
 
   // Balloon marker
-  const BalloonMarker = () => (
-    <div className="mapMarker" onClick={toArtDetail}></div>
+  const BalloonMarker = ({item}) => (
+    <div className="mapMarker" onClick={() => toArtDetail(item)}></div>
   );
   // User location marker
   const UserLocation = () => <div className="userMarker"></div>;
@@ -38,8 +38,8 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
   };
 
   // TODO: take user to art detail on click
-  const toArtDetail = () => {
-    console.log("Balloon clicked!!");
+  const toArtDetail = (item) => {
+    console.log("Balloon ID = ", item.id);
   };
 
   return (
@@ -52,7 +52,7 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
           >
             {reducer.map((item, i) => (
-              <BalloonMarker key={i} lat={item.lat} lng={item.long} />
+              <BalloonMarker  item={item} key={i} lat={item.lat} lng={item.long} />
             ))}
             {userLat !== null && userLng !== null ? (
             <UserLocation lat={userLat} lng={userLng} />

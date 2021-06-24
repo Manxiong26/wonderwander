@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Map from "../Map/Map";
 import { makeStyles, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar, Divider, Button  } from "@material-ui/core";
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
@@ -26,8 +27,6 @@ const MapView = ({userLat, userLng}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-
-  
   // --- LOCAL STATE -- //
   const [toggle, setToggle] = useState(false);
   //   console.log(toggle);
@@ -71,6 +70,10 @@ const MapView = ({userLat, userLng}) => {
     setToggle(!toggle);
   };
 
+  const toDetail = (item) => {
+      console.log('artwork ID = ', item.id)
+  }
+
   return (
     <>
       {!toggle ? (
@@ -113,6 +116,7 @@ const MapView = ({userLat, userLng}) => {
                         <ListItemText
                             secondary={distance(Number(item.lat), Number(item.long), userLat, userLng)}
                         />
+                        <ArrowForwardIosIcon onClick={() => toDetail(item)}/>
                     </ListItem>
                     <Divider />
                     </>
