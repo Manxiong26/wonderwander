@@ -3,6 +3,8 @@ import Map from "../Map/Map";
 import { makeStyles, Typography, List, ListItem, ListItemText, ListItemAvatar, Avatar, Divider  } from "@material-ui/core";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
+import env from "react-dotenv";
 
 const useStyles = makeStyles((theme) => ({
   mapContainer: {
@@ -11,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MapView = () => {
+const MapView = ({userLat, userLng}) => {
+
   useEffect(() => {
     dispatch({ type: "FETCH_ARTWORK" });
   }, []);
@@ -19,6 +22,7 @@ const MapView = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  
   // --- LOCAL STATE -- //
   const [toggle, setToggle] = useState(false);
   //   console.log(toggle);
@@ -54,6 +58,8 @@ const MapView = () => {
               height={500}
               width={"90%"}
               reducer={artwork}
+              userLat={userLat}
+              userLng={userLng}
             />
           </div>
         </div>

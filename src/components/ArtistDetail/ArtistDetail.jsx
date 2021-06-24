@@ -20,27 +20,24 @@ const useStyles = makeStyles((theme) => ({
 
 
 const ArtistDetail = () => {
+
+    // Grabs id of specific artist from URL
     const {id} = useParams()
     console.log(id)
+
+
     const classes = useStyles();
     const dispatch = useDispatch();
-
+    // Loads artist detail info
     useEffect(() => {
-
     dispatch({ type: 'FETCH_ARTIST_DETAIL', payload: id })
-
     }, [])
 
-
+    // artist detail reducer
     const artist = useSelector(store => store.artistDetail);
     const artistInfo = artist[0];
-    console.log('Artist Detail: ', artist)
+    // console.log('Artist Detail: ', artist)
 
-    
-
-    const toWebsite = () => {
-        console.log(artist[0].site_link)
-    }
 
     return(
         <>
@@ -54,7 +51,7 @@ const ArtistDetail = () => {
            <Typography>{artistInfo.bio}</Typography>
         </div>
         <div>
-            <Button variant="outlined" onClick={toWebsite}><a href={artistInfo.site_link}>Artist Website</a></Button>
+            <Button variant="outlined"><a href={artistInfo.site_link}>Artist Website</a></Button>
         </div>
         <div>
             <Typography variant="h6">Art by {artistInfo.name}</Typography>

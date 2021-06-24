@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 router.get('/', (req, res) => {
     const queryText = `SELECT artist."name" AS artist_name, artwork."name", artwork.image
     FROM  (
-       SELECT DISTINCT 1 + trunc(random() * 5)::integer AS id
+       SELECT DISTINCT 1 + trunc(random() * 10)::integer AS id
        FROM   generate_series(1,10) g
        ) r
     JOIN   artwork USING (id)
