@@ -2,10 +2,17 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
+import adminArtistSaga from './adminArtist.saga';
+import artworkSaga from './artwork.saga'
 import randomQuoteSaga from './randomQuote.saga';
 import randomArtSaga from './randomArt.saga';
 import sponsorDetailsSaga from './sponsorDetails.saga';
 import sponsorArtSaga from './sponsorArt.saga';
+import artDetailSaga from './artworkdetail.saga';
+import collectionSaga from './collection.saga';
+import threeCollectionSaga from './collection.3.saga';
+import getCollectionDetailSaga from './collection.detail.saga';
+import artistSaga from './artist.saga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -19,9 +26,16 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    adminArtistSaga(),
+    artworkSaga(),
     randomQuoteSaga(),
     randomArtSaga(),
     sponsorDetailsSaga(),
     sponsorArtSaga(),
+    artDetailSaga(),
+    collectionSaga(),
+    threeCollectionSaga(),
+    getCollectionDetailSaga(),
+    artistSaga(),
   ]);
 }
