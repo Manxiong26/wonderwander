@@ -25,8 +25,10 @@ import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
 import SponsorDetail from '../SponsorDetail/SponsorDetail';
+import EmailPage from '../EmailPage/EmailPage';
 
 import './App.css';
+import { Email } from '@material-ui/icons';
 
 function App() {
   const dispatch = useDispatch();
@@ -156,6 +158,11 @@ function App() {
             exact path='/sponsor/:id'
           >
             <SponsorDetail />
+          </Route>
+          <Route
+            exact path='/email'  
+          >
+            <EmailPage />
           </Route>
         <Footer />
         </div>

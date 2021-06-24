@@ -12,10 +12,6 @@ function SponsorDetail(){
     const sponsorArt = useSelector(store => store.sponsorArt);
     const dispatch = useDispatch();
 
-    const goWebsite = () => {
-        console.log('click!');
-    }
-    
     const {id} = useParams();
 
     useEffect (() => {
@@ -28,11 +24,15 @@ function SponsorDetail(){
     return (
         <div>
             <img src={details.logo}></img>
-            <button onClick={goWebsite}>Visit Website</button>
+            <button onClick={(event) => {
+                event.preventDefault();
+                window.location.href=`${details.site_link}`
+            }}>Visit Website</button>
             <h3>MAP HERE</h3>
             <Grid container spacing={2}>
-                <Grid item>
-                    {sponsorArt.map((art, index) => {
+                {sponsorArt.map((art, index) => {
+                    return (
+                    <Grid item>
                         <Card className="artCard">
                             <CardMedia>
                                 <img src={art.image}></img>
@@ -41,8 +41,9 @@ function SponsorDetail(){
                                 <p>{art.description}</p>
                             </CardContent>
                         </Card>
-                    })}
-                </Grid>
+                    </Grid>
+                    )
+                })}   
             </Grid>
         </div>
 
