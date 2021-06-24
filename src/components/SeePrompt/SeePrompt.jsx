@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, } from "@material-ui/core";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import CardActionArea from '@material-ui/core/CardActionArea';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles({
@@ -22,6 +23,16 @@ const useStyles = makeStyles({
 function SeePrompt() {
     const classes = useStyles();
     const history = useHistory();
+    const list = useSelector((store) => store.artworkDetailReducer);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log('In useEffect param:');
+        dispatch({type: 'FETCH_ART_DETAIL', payload: id})
+    }, []);
+
+    const {id} = useParams();
+
 
     return (
         <Card>
@@ -29,7 +40,7 @@ function SeePrompt() {
                 <CardMedia
                 className={classes.cardmedia}
                 component="img" 
-                image="https://st.depositphotos.com/1428083/2946/i/600/depositphotos_29460297-stock-photo-bird-cage.jpg"
+                image={list.artwork_image}
                 >
 
                 </CardMedia>

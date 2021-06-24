@@ -19,16 +19,23 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AdminArtist from '../AdminArtist/AdminArtist';
 import MapView from '../MapView/MapView'
+
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import WelcomePage1 from '../WelcomePage/WelcomePage1';
 import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
+
+import Collection from '../Collection/Collection';
+import CollectionDetail from '../CollectionDetail/CollectionDetail';
+
 import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
 
 import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
+
 
 
 import './App.css';
@@ -120,7 +127,7 @@ function App() {
             <Route
             exact
             // Add in id
-            path="/artworkdetail"
+            path="/artworkdetail/:id"
             >
               <ArtworkDetail />
             </Route>
@@ -131,6 +138,15 @@ function App() {
             path="/see"
             >
               <SeePage />
+            </Route>
+
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminArtist Page at all times (logged in or not)
+              exact
+              path="/admin/artist"
+            >
+              <AdminArtist />
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.
@@ -144,7 +160,16 @@ function App() {
             >
               <HomePage />
             </Route>
-
+              <Route
+              exact
+              path='/collection'>
+                <Collection />
+              </Route>
+              <Route
+              exact
+              path='/collectionDetail/:id'>
+                <CollectionDetail />
+              </Route>
             <Route
               // logged in shows InfoPage else shows LoginPage
               exact
@@ -188,6 +213,17 @@ function App() {
             >
               <LandingPage />
             </Route>
+
+            {/* <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/admin/artist"
+              // - else shows LandingPage at "/home" ***Need to change this to WELCOME ***
+              exact
+              path="/home"
+              authRedirect="/admin/artist"
+            >
+              <AdminArtist />
+            </ProtectedRoute> */}
 
             {/* If none of the other routes matched, we will show a 404. */}
             {/* <Route>
