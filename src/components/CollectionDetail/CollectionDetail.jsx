@@ -6,14 +6,10 @@ import GoogleMapReact from "google-map-react";
 import Map from '../Map/Map'
 
 import { makeStyles } from "@material-ui/core";
-//Google map material UI
-// const useStyles = makeStyles((theme) => ({
-//     map: {
-//         marginRight: 'auto',
-//         marginLeft: 'auto',
-//         border: '1px solid black',
-//         }
-// }));
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
 function CollectionDetail(){
@@ -22,8 +18,11 @@ function CollectionDetail(){
     const dispatch = useDispatch();
     const history = useHistory();
 // collection detail reducer
+
     const collectionDet = useSelector(store => store.collectionDetail)
     console.log('CHECKING COLLECTDET STORE_____________',collectionDet);
+    
+
 // using id to grab detail 
     let { id } = useParams();
 
@@ -31,30 +30,15 @@ function CollectionDetail(){
     useEffect(() => {
        console.log('In useEffect param', id);
       dispatch({ type: 'FETCH_COLLECTION_DETAIL', payload: id })
+      dispatch({type: 'FETCH_ART_DETAIL', payload: id})
     }, [])
 
-//Google map balloon
-  // --IDEA: May need to map this component with the values
-  // of the artwork locations once server route and reducer is set up.
-//   const BalloonMarker = () => (
-//     <div className="mapMarker" onClick={toArtDetail}></div>
-//   );
-
-  // Props values for map
-  // center and zoom
-//   let locationVars = {
-//     center: {
-//       lat: mapLat,
-//       lng: mapLng,
-//     },
-//     zoom: zoom,
-//   };
-
-  // TODO: take user to art detail on click
-//   const toArtDetail = () => {
-//     console.log("Balloon clicked!!");
-//   };
-
+const viewArtworkDetail = (event, artDet) => {  //artDet
+console.log('HELLLLLLLLLLPPPPPPPPPPPP',artDet);    
+     event.preventDefault();
+    history.push(`/artworkdetail/${artDet}`) //artDet.id
+    console.log('CLICKING');
+}
 
     return(
         <>
@@ -76,8 +60,7 @@ function CollectionDetail(){
             {/* Need to change to Number for lat & long for map to show */}
     <Map  mapLat={Number(collectionDet[0].lat)} mapLng={Number(collectionDet[0].long)} zoom={10} 
     reducer={collectionDet} height={300} width={'90%'} />
-        </div>
-       </> )}
+        
         {/* <div style={{height: height, width: width}} className={classes.map}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
@@ -91,15 +74,29 @@ function CollectionDetail(){
     </div> */}
    <div>
             <h3>ArtWork</h3>
-        <section>
+        {/* <section>
         <ul>
             {collectionDet.map(collection => {
               return( <li key={collection.id}>{collection.artwork_name}</li>)
             })}
             </ul>
-            </section>
+            </section> */}
         </div>
+        <div className="collectionList">
+            {collectionDet.map(artDet =>{
+                
+       return( <Box component="span" m={1} key={artDet.id}>
+        <Divider/>
+        <p className="logo"><img className="logo2" src={artDet.artwork_image}/> {artDet.artwork_name}
+        <Link onClick={(event) => viewArtworkDetail(event, artDet.art_work_id)} className="arrow"> 
+        <ArrowForwardIosIcon/> </Link></p>
+      </Box >) })}
+      <Divider/>
+      </div>
+      </div>
+       </> )}
         </>
+
     )
 }
 
