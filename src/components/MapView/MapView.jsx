@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Map from "../Map/Map";
+import {useStyles} from '../classes.js'
 import {
-  makeStyles,
   Typography,
   List,
   ListItem,
@@ -22,24 +22,24 @@ import axios from "axios";
 import env from "react-dotenv";
 import { useHistory } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  mapContainer: {
-    marginTop: "auto",
-    marginBottom: "auto",
-  },
-  toggle: {
-    display: "flex",
-    justifyContent: "flex-end",
-    marginRight: "5%",
-    marginBottom: "1%",
-  },
-  thumbnail: {
-    width: '60px',
-    height: '60px',
-    marginRight: 10,
-    border: "1px solid black"
-  }
-}));
+// const useStyles = makeStyles((theme) => ({
+//   mapContainer: {
+//     marginTop: "auto",
+//     marginBottom: "auto",
+//   },
+//   toggle: {
+//     display: "flex",
+//     justifyContent: "flex-end",
+//     marginRight: "5%",
+//     marginBottom: "1%",
+//   },
+//   thumbnail: {
+//     width: '60px',
+//     height: '60px',
+//     marginRight: 10,
+//     border: "1px solid black"
+//   }
+// }));
 
 const MapView = ({ userLat, userLng }) => {
   useEffect(() => {

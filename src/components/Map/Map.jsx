@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from "react";
 import env from "react-dotenv";
-import { makeStyles } from "@material-ui/core";
+import {useStyles} from '../classes.js'
 import GoogleMapReact from "google-map-react";
 import "./Map.css";
 import { useHistory } from "react-router-dom";
-
-const useStyles = makeStyles((theme) => ({
-  map: {
-    marginRight: "auto",
-    marginLeft: "auto",
-    border: "1px solid black",
-  },
-}));
 
 const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, geoAvailable }) => {
 
@@ -20,6 +12,7 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
   const handleApiLoaded = (map, maps) => {
       
   }
+
 
   // Balloon marker
   const BalloonMarker = ({item}) => (
@@ -44,7 +37,7 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
   };
 
   return (
-        <div style={{ height: height, width: width }} className={classes.map}>
+        <div style={{ height: height, width: width }} id="map" className={classes.map}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
             defaultCenter={locationVars.center}
