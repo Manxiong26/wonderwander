@@ -3,6 +3,9 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import adminArtistSaga from './adminArtist.saga';
+import adminArtworkSaga from './adminArtwork.saga';
+import adminCollectionSaga from './adminCollection.saga';
+import adminSponsorSaga from './adminSponsor.saga';
 import artworkSaga from './artwork.saga'
 import randomQuoteSaga from './randomQuote.saga';
 import randomArtSaga from './randomArt.saga';
@@ -30,6 +33,9 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     adminArtistSaga(),
+    adminArtworkSaga(),
+    adminCollectionSaga(),
+    adminSponsorSaga(),
     artworkSaga(),
     randomQuoteSaga(),
     randomArtSaga(),

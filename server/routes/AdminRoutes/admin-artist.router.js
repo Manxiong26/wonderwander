@@ -54,7 +54,7 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
         res.sendStatus(500)
     })
   
-});//end add new client POST route
+});//end add new artist POST route
 
 //PUT route to edit an artist's information 
 router.put('/:id',  (req, res) => { //rejectUnauthenticated,
@@ -73,7 +73,7 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
         res.sendStatus(500)
     })
   
-});//end PUT route
+});//end artist PUT route
   
 //DELETE route to delete an artist
 router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
@@ -87,6 +87,6 @@ router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
         res.sendStatus(500);
     })
   
-});//end DELETE route
+});//end artist DELETE route
 
 module.exports = router;

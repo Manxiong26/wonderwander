@@ -37,7 +37,7 @@ function* updateArtist(action) {
     console.log('in edit saga', action.payload);
     try{
         yield axios.put(`/api/admin/artist/${action.payload.id}`, action.payload); 
-        yield put({type: 'FETCH_ARTIST_LIST'}); // payload: action.payload.id does this payload need to be here?
+        yield put({type: 'FETCH_ARTIST_LIST'}); 
         yield put({type: 'CLEAR_ARTIST'});
       } catch (error) {
         alert(`Sorry things aren't working at the moment. Please try again later.`);
