@@ -1,9 +1,9 @@
 import { put, takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
-function* fetchDo(){
+function* fetchDo(action){
     try {
-        const response = yield axios.get('/api/do');
+        const response = yield axios.get(`/api/do/${action.payload}`);
         console.log(response.data);
         yield put ({type: 'SET_DO', payload: response.data});
     } catch {
@@ -23,7 +23,7 @@ function* fetchSay(){
 
 function* fetchSee(){
     try{
-        const response = yield axios.get('/api/see'
+        const response = yield axios.get('/api/see/'
         // , action.payload
         );
         console.log(response.data);

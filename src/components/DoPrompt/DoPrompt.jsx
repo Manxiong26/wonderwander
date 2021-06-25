@@ -52,7 +52,7 @@ function DoPrompt({list}) {
                         </Typography>
                     </CardContent>
                 </div>
-                <CardActionArea onClick={(event) => history.push('/do')}>
+                <CardActionArea onClick={(event) => history.push(`/do/${id}`)}>
                     <CardContent>
                         <IconButton>
                             <ArrowForwardIosIcon />

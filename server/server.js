@@ -25,7 +25,7 @@ const collectionRouter = require('./routes/collection.router');
 const artistRouter = require('./routes/artist.router');
 const seesaydoRouter = require('./routes/seesaydo.router');
 const seeRouter = require('./routes/see.router');
-
+const sayRouter = require('./routes/say.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -56,6 +56,7 @@ app.use('/api/collection', collectionRouter);
 app.use('/api/artist', artistRouter);
 app.use('/api/do', seesaydoRouter);
 app.use('/api/see', seeRouter);
+app.use('/api/say', sayRouter);
 
 // Serve static files
 app.use(express.static('build'));
