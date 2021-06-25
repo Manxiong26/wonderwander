@@ -18,12 +18,13 @@ const adminArtAdventureRouter = require('./routes/AdminRoutes/admin-artAdventure
 const artworkRouter = require('./routes/artwork.router');
 const randomQuoteRouter = require('./routes/random.quote.router');
 const randomArtRouter = require('./routes/random.art.router');
+const artworkDetailRouter = require('./routes/artworkdetail.router');
 const sponsorArtRouter = require('./routes/sponsor.art.router');
 const sponsorDetailsRouter = require('./routes/sponsor.details.router');
-const artworkDetailRouter = require('./routes/artworkdetail.router')
 const collectionRouter = require('./routes/collection.router');
 const artistRouter = require('./routes/artist.router');
 const seesaydoRouter = require('./routes/seesaydo.router');
+const seeRouter = require('./routes/see.router');
 
 
 // Body parser middleware
@@ -54,6 +55,7 @@ app.use('/api/artworkdetail', artworkDetailRouter);
 app.use('/api/collection', collectionRouter);
 app.use('/api/artist', artistRouter);
 app.use('/api/do', seesaydoRouter);
+app.use('/api/see', seeRouter);
 
 // Serve static files
 app.use(express.static('build'));

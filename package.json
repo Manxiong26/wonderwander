@@ -36,6 +36,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@types/google-map-react": "^2.1.1",
     "nodemon": "^2.0.4"
   },
   "browserslist": [

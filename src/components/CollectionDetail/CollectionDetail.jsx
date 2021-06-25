@@ -12,7 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
-function CollectionDetail(){
+function CollectionDetail({userLat, userLng}){
    
     // const classes = useStyles();
     const dispatch = useDispatch();
@@ -59,7 +59,7 @@ console.log('HELLLLLLLLLLPPPPPPPPPPPP',artDet);
             <p>Map Goes Here</p>
             {/* Need to change to Number for lat & long for map to show */}
     <Map  mapLat={Number(collectionDet[0].lat)} mapLng={Number(collectionDet[0].long)} zoom={10} 
-    reducer={collectionDet} height={300} width={'90%'} />
+    reducer={collectionDet} height={300} width={'90%'} userLat={userLat} userLng={userLng}/>
         
         {/* <div style={{height: height, width: width}} className={classes.map}>
       <GoogleMapReact

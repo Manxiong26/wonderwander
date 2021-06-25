@@ -11,13 +11,21 @@ function DoPage() {
         console.log('In useEffect param:');
         dispatch({type: 'FETCH_DO'})
     }, []);
-    console.log("hello", list.doprompts);
 
 
     return (
         <div>
-            <h2>To do this task! {list.doprompts}</h2>
+            {list[0] === undefined ? 
+            ''
+            :
+            (
+            <>
+            <h2>To do this task! {list[0].doprompts}</h2>
             <button>Take Picture</button>
+            </>
+            )
+            }
+
         </div>
     );
 }

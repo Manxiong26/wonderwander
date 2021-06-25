@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import env from "react-dotenv";
 import { makeStyles } from "@material-ui/core";
 import GoogleMapReact from "google-map-react";
 import "./Map.css";

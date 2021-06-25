@@ -20,15 +20,16 @@ const useStyles = makeStyles({
       },
   });
 
-function SeePrompt() {
+function SeePrompt({list}) {
     const classes = useStyles();
     const history = useHistory();
-    const list = useSelector((store) => store.artworkDetailReducer);
+    // const list = useSelector((store) => store.artworkDetailReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
         console.log('In useEffect param:');
-        dispatch({type: 'FETCH_ART_DETAIL', payload: id})
+        dispatch({type: 'FETCH_ART_DETAIL', payload: id});
+        dispatch({type: 'FETCH_SEE_DETAIL', payload: id});
     }, []);
 
     const {id} = useParams();

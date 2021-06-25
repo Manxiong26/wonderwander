@@ -12,11 +12,12 @@ function SayPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('In useEffect param:');
-        dispatch({type: 'FETCH_SAY_DETAIL', payload: id})
+        console.log('In useEffect param:', list);
+        dispatch({type: 'FETCH_SAY_DETAIL'})
     }, []);
-
-    const {id} = useParams();
+    console.log('In useEffect param:', list);
+    // const {id} = useParams();
+    console.log(list);
 
     return (
         <div>
