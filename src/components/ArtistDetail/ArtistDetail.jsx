@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         border: '1px solid black',
         marginBottom: '2%',
-        padding: '2%'
+        padding: '2%',
+        backgroundColor: '#d3d3d3'
     },
     btn: {
         margin: '4%'
