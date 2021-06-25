@@ -3,6 +3,12 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import adminArtistListReducer from './adminArtistList.reducer';
 import adminArtistInfoReducer from './adminArtist.reducer';
+import adminArtworkListReducer from './adminArtworkList.reducer';
+import adminArtworkInfoReducer from './adminArtwork.reducer';
+import adminCollectionListReducer from './adminCollectionList.reducer';
+import adminCollectionInfoReducer from './adminCollection.reducer';
+import adminSponsorListReducer from './adminSponsorList.reducer';
+import adminSponsorInfoReducer from './adminSponsor.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
@@ -25,6 +31,12 @@ const rootReducer = combineReducers({
 
   adminArtistListReducer,
   adminArtistInfoReducer,
+  adminArtworkListReducer,
+  adminArtworkInfoReducer,
+  adminCollectionListReducer,
+  adminCollectionInfoReducer,
+  adminSponsorListReducer,
+  adminSponsorInfoReducer,
   artworkReducer,
   randomQuote,
   randomArt,
