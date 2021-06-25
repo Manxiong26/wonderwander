@@ -64,11 +64,8 @@ function App() {
       }
     },
     typography: {
-      fontFamily: [
-        'pacifico',
-        'lato',
-        'lato-bold',
-      ]
+      Pacifico: 'Pacifico',
+      Lato: 'Lato',
     }
   })
 

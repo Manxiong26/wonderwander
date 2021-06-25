@@ -6,6 +6,7 @@ import {makeStyles, Typography, Button, Divider, List, ListItem, ListItemAvatar,
 const useStyles = makeStyles((theme) => ({
     name: {
         textAlign: 'center',
+        fontFamily: theme.typography.fontFamily,
     },
     pic: {
         width: '300px',
