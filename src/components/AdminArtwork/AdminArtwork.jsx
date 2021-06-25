@@ -230,12 +230,12 @@ function AdminArtwork() {
                     value={year}
                     onChange={(event) => setYear(event.target.value)}
                 />
-                <TextField type="text"
+                <TextField type="number"
                     placeholder="Latitude"
                     value={lat}
                     onChange={(event) => setLat(event.target.value)}
                 />
-                <TextField type="text"
+                <TextField type="number"
                     placeholder="Longitude"
                     value={long}
                     onChange={(event) => setLong(event.target.value)}
@@ -293,12 +293,12 @@ function AdminArtwork() {
                     value={year}
                     onChange={(event) => setYear(event.target.value)}
                 />
-                <TextField type="text"
+                <TextField type="number"
                     placeholder="Latitude"
                     value={lat}
                     onChange={(event) => setLat(event.target.value)}
                 />
-                <TextField type="text"
+                <TextField type="number"
                     placeholder="Longitude"
                     value={long}
                     onChange={(event) => setLong(event.target.value)}
