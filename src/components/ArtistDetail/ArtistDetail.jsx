@@ -1,11 +1,14 @@
 import React, {useEffect} from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import {makeStyles, Typography, Button, Divider, List, ListItem, ListItemAvatar, Avatar, ListItemText} from '@material-ui/core';
+import {makeStyles, Typography, Button, Divider, List, ListItem, ListItemAvatar, Avatar, ListItemText, Card} from '@material-ui/core';
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     name: {
         textAlign: 'center',
+        fontFamily: theme.typography.fontFamily,
     },
     pic: {
         width: '300px',
@@ -13,6 +16,18 @@ const useStyles = makeStyles((theme) => ({
         marginRight: 'auto',
         marginLeft: 'auto',
         border: '1px solid black'
+    },
+    bio: {
+        width: '300px',
+        maxHeight: '500px',
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        border: '1px solid black',
+        marginBottom: '2%',
+        padding: '2%'
+    },
+    btn: {
+        margin: '4%'
     }
     
   }));
@@ -28,6 +43,8 @@ const ArtistDetail = () => {
 
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
+
     // Loads artist detail info
     useEffect(() => {
     dispatch({ type: 'FETCH_ARTIST_DETAIL', payload: id })
@@ -38,6 +55,10 @@ const ArtistDetail = () => {
     const artistInfo = artist[0];
     // console.log('Artist Detail: ', artist)
 
+    const toArtDetail = (item) => {
+        history.push(`/artworkdetail/${item.art_id}`)
+    }
+
 
     return(
         <>
@@ -47,10 +68,10 @@ const ArtistDetail = () => {
         <div>
             <img className={classes.pic} src={artistInfo.image}/>
         </div>
-        <div>
-           <Typography>{artistInfo.bio}</Typography>
+        <div className={classes.bio}>
+           <Typography variant="body1">{artistInfo.bio}</Typography>
         </div>
-        <div>
+        <div className={classes.btn}>
             <Button variant="outlined"><a href={artistInfo.site_link}>Artist Website</a></Button>
         </div>
         <div>
@@ -68,6 +89,7 @@ const ArtistDetail = () => {
                             primary={item.title}
                             secondary={item.name}
                             />
+                        <ArrowForwardIosIcon onClick={() => toArtDetail(item)} />
                     </ListItem>
                     <Divider />
                     </>

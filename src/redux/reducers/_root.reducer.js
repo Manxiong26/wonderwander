@@ -20,7 +20,7 @@ import collectionThree from './collection.3.reducer';
 import collectionDetail from './collection.detail.reducer';
 
 
-import artistDetail from './artist.reducer';
+// import artistDetail from './artist.reducer';
 
 import seesaydoReducer from './seesaydo.reducer';
 
@@ -56,7 +56,6 @@ const rootReducer = combineReducers({
   collectionThree,
   collectionDetail,
   artistDetail,
-
   seesaydoReducer,
 
 

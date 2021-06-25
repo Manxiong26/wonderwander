@@ -38,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
+  title: {
+    fontFamily: theme.typography.Pacifico,
+    marginRight: 'auto',
+    marginLeft: 'auto'
+  },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -52,9 +57,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
+  // menuButton: {
+  //   marginRight: theme.spacing(2),
+  // },
   hide: {
     display: 'none',
   },
@@ -75,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -137,7 +142,7 @@ function Menu(){
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap>
+        <Typography className={classes.title} variant="h6" noWrap>
           Wonder Wander
         </Typography>
       </Toolbar>
