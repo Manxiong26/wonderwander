@@ -12,11 +12,20 @@ import adminSponsorInfoReducer from './adminSponsor.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
+import sponsorArt from './sponsorArt.reducer';
+import sponsorDetails from './sponsorDetails.reducer';
 import artworkDetailReducer from './artworkDetail.reducer';
 import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
 import collectionDetail from './collection.detail.reducer';
+
+
+import artistDetail from './artist.reducer';
+
+import seesaydoReducer from './seesaydo.reducer';
+
 import artistDetail from './artist.reducer'
+
 
 
 // rootReducer is the primary reducer for our entire project
@@ -40,11 +49,17 @@ const rootReducer = combineReducers({
   artworkReducer,
   randomQuote,
   randomArt,
+  sponsorArt,
+  sponsorDetails,
   artworkDetailReducer,
   collection,
   collectionThree,
   collectionDetail,
   artistDetail,
+
+  seesaydoReducer,
+
+
 });
 
 export default rootReducer;
