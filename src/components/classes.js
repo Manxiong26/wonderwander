@@ -22,6 +22,30 @@ const useStyles = makeStyles((theme) => ({
         height: '60px',
         marginRight: 10,
         border: "1px solid black"
+      },
+      title: {
+          textAlign: 'center',
+          fontFamily: theme.typography.Pacifico,
+          textDecoration: 'underline'
+      },
+      image: {
+          maxWidth: '280px',
+          maxHeight: '280px',
+          marginRight: 'auto',
+          marginLeft: 'auto',
+          display: 'block',
+          border: '1px solid black'
+      },
+      imageInfo: {
+          textAlign: 'center'
+      },
+      pageMargin: {
+        marginLeft: '6%',
+        marginRight: '6%'
+      },
+      nextBtn: {
+          float: 'right',
+          
       }
   }));
 

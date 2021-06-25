@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Map from "../Map/Map";
-import {useStyles} from '../classes.js'
+import {useStyles} from '../classes'
 import {
   Typography,
   List,
@@ -10,6 +10,7 @@ import {
   Avatar,
   Divider,
   Button,
+  IconButton,
 } from "@material-ui/core";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
@@ -101,6 +102,7 @@ const MapView = ({ userLat, userLng }) => {
 
   return (
     <>
+    <div className={classes.pageMargin}>
       <ToggleButtonGroup
         exclusive
         className={classes.toggle}
@@ -124,14 +126,13 @@ const MapView = ({ userLat, userLng }) => {
       </ToggleButtonGroup>
       {toggle ? (
         <div>
-          <div className={classes.toggle}></div>
           <div className={classes.mapContainer}>
             <Map
               mapLat={center.lat}
               mapLng={center.lng}
               zoom={10}
               height={500}
-              width={"90%"}
+              width={"100%"}
               reducer={artwork}
               userLat={userLat}
               userLng={userLng}
@@ -141,7 +142,6 @@ const MapView = ({ userLat, userLng }) => {
       ) : (
         <div>
           <div>
-            <div className={classes.toggle}></div>
             <List>
               <Divider />
               {artwork.map((item, i) => {
@@ -163,7 +163,9 @@ const MapView = ({ userLat, userLng }) => {
                           userLng
                         )}
                       />
-                      <ArrowForwardIosIcon onClick={() => toArtDetail(item)} />
+                      <IconButton>
+                      <ArrowForwardIosIcon className={classes.nextBtn} onClick={() => toArtDetail(item)} />
+                      </IconButton>
                     </ListItem>
                     <Divider />
                   </>
@@ -173,6 +175,7 @@ const MapView = ({ userLat, userLng }) => {
           </div>
         </div>
       )}
+      </div>
     </>
   );
 };
