@@ -18,7 +18,17 @@ const sayReducer = (state = {}, action) => {
     }
 };
 
+const seeReducer = (state = {}, action) => {
+    switch (action.type) {
+        case 'SET_SEE_DETAIL':
+            return action.payload;
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
     doReducer,
     sayReducer,
+    seeReducer,
 });

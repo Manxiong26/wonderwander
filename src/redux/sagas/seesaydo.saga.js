@@ -11,11 +11,23 @@ function* fetchDo(){
     }
 }
 
-function* fetchSay(action){
+function* fetchSay(){
     try{
-        const response = yield axios.get(`/api/say/${action.payload}`);
+        const response = yield axios.get(`/api/say`);
         console.log(response.data);
         yield put({type: 'SET_SAY_DETAIL', payload: response.data})
+    } catch (error) {
+        console.log('error in fetchSay');
+    }
+}
+
+function* fetchSee(){
+    try{
+        const response = yield axios.get('/api/see'
+        // , action.payload
+        );
+        console.log(response.data);
+        yield put({type: 'SET_SEE_DETAIL', payload: response.data})
     } catch (error) {
         console.log('error in fetchSay');
     }
@@ -24,6 +36,7 @@ function* fetchSay(action){
 function* seesaydoSaga(){
     yield takeLatest('FETCH_DO', fetchDo);
     yield takeLatest('FETCH_SAY_DETAIL', fetchSay);
+    yield takeLatest('FETCH_SEE_DETAIL', fetchSee);
 }
 
 export default seesaydoSaga;
