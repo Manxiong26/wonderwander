@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-const doReducer = (state = {}, action) => {
+const doReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_DO':
             return action.payload;
@@ -9,7 +9,7 @@ const doReducer = (state = {}, action) => {
     }
 };
 
-const sayReducer = (state = {}, action) => {
+const sayReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_SAY_DETAIL':
             return action.payload;

@@ -150,14 +150,14 @@ function App() {
             {/* ------------ADMIN PAGES----------------- */}
             <Route
             exact
-            path="/say/:id"
+            path="/say"
             >
               <SayPage />
             </Route>
 
             <Route
             exact
-            path="/do"
+            path="/do/:id"
             >
               <DoPage />
             </Route>

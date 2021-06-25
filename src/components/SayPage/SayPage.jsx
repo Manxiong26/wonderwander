@@ -24,16 +24,19 @@ function SayPage() {
             <Container>
                 <Grid>
                     <CardActionArea>
+                        {list.map((lists, i) => {
+                            return(
                         <Card>
                             <CardMedia>
                                 IMAGE GOES HERE
                             <CardContent>
-                                <Typography>
-                                {list.prompts}
+                                <Typography key={i}>
+                                {lists.prompts}
                                 </Typography>
                             </CardContent>    
                             </CardMedia>
                         </Card>
+                        )})}
                     </CardActionArea>
                 </Grid>
             </Container>
