@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -20,6 +21,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AdminArtist from '../AdminArtist/AdminArtist';
+import AdminArtwork from '../AdminArtwork/AdminArtwork';
+import AdminCollection from '../AdminCollection/AdminCollection';
+import AdminSponsor from '../AdminSponsor/AdminSponsor';
 import MapView from '../MapView/MapView'
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
@@ -37,7 +41,8 @@ import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
 
 import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
-
+import SayPage from '../SayPage/SayPage';
+import DoPage from '../DoPage/DoPage';
 
 
 import './App.css';
@@ -62,37 +67,36 @@ function App() {
       }
     },
     typography: {
-      fontFamily: [
-        'pacifico',
-        'lato',
-        'lato-bold',
-      ]
+      Pacifico: 'Pacifico',
+      Lato: 'Lato',
     }
   })
 
-     // --- Geo Location --- //
-     let geo = navigator.geolocation;
+    // Grab users location and store it
+    // in local state
+    useEffect(() => {
+      axios({
+          method: 'POST',
+          url: `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_GOOGLE_KEY}`,
+      })
+      .then(res => {
+          console.log(res.data)
+          setUserLat(res.data.location.lat)
+          setUserLng(res.data.location.lng)
 
-     geo.getCurrentPosition((position) => {
-       setUserLat(position.coords.latitude);
-       setUserLng(position.coords.longitude);
-     });
-     // Load if location is available 
-     useEffect(() => {
-       if ("geolocation" in navigator) {
-         console.log("Available");
-         setGeoAvailable(true);
-       } else {
-         console.log("Not Available");
-         setGeoAvailable(false);
-       }
-     }, []);
+      }, (err => {
+          console.log(err)
+      }))
+    }, []);
+  
    
-     const [userLat, setUserLat] = useState(0);
+     const [userLat, setUserLat] = useState(null);
      console.log("user lat: ", userLat);
-     const [userLng, setUserLng] = useState(0);
+     const [userLng, setUserLng] = useState(null);
      console.log("user lng: ", userLng);
-     const [geoAvailable, setGeoAvailable] = useState(false);
+    //  const [geoAvailable, setGeoAvailable] = useState(false);
+
+    
 
   return (
     <ThemeProvider theme={theme}>
@@ -117,7 +121,7 @@ function App() {
               exact
               path="/map"
             >
-                <MapView userLat={userLat} userLng={userLng} geoAvailable={geoAvailable}/>
+                <MapView userLat={userLat} userLng={userLng}/>
             </Route>
             <Route
               exact
@@ -143,6 +147,20 @@ function App() {
               <SeePage />
             </Route>
 
+            {/* ------------ADMIN PAGES----------------- */}
+            <Route
+            exact
+            path="/say/:id"
+            >
+              <SayPage />
+            </Route>
+
+            <Route
+            exact
+            path="/do"
+            >
+              <DoPage />
+            </Route>
             {/* this is temporary until we can get the log in working */}
             <Route
               // shows AdminArtist Page at all times (logged in or not)
@@ -150,6 +168,31 @@ function App() {
               path="/admin/artist"
             >
               <AdminArtist />
+
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminArtwork Page at all times (logged in or not)
+              exact
+              path="/admin/artwork"
+            >
+              <AdminArtwork />
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminCollection Page at all times (logged in or not)
+              exact
+              path="/admin/collection"
+            >
+              <AdminCollection />
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminSponsor Page at all times (logged in or not)
+              exact
+              path="/admin/sponsor"
+            >
+              <AdminSponsor />
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.

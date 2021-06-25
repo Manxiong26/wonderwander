@@ -9,17 +9,17 @@ const useStyles = makeStyles({
     },
 })
 
-function ImageHeader() {
+function ImageHeader({list}) {
     const classes = useStyles();
-    const list = useSelector((store) => store.artworkDetailReducer);
-    const dispatch = useDispatch();
+    // const list = useSelector((store) => store.artworkDetailReducer);
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log('In useEffect param:');
-        dispatch({type: 'FETCH_ART_DETAIL', payload: id})
-    }, []);
+    // useEffect(() => {
+    //     console.log('In useEffect param:');
+    //     dispatch({type: 'FETCH_ART_DETAIL', payload: id})
+    // }, []);
 
-    const {id} = useParams();
+    // const {id} = useParams();
 
 
     return (

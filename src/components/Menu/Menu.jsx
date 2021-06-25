@@ -38,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
+  title: {
+    fontFamily: theme.typography.Pacifico,
+    marginRight: 'auto',
+    marginLeft: 'auto'
+  },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -52,9 +57,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
+  // menuButton: {
+  //   marginRight: theme.spacing(2),
+  // },
   hide: {
     display: 'none',
   },
@@ -75,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -137,7 +142,7 @@ function Menu(){
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap>
+        <Typography className={classes.title} variant="h6" noWrap>
           Wonder Wander
         </Typography>
       </Toolbar>
@@ -158,49 +163,49 @@ function Menu(){
         </IconButton>
       </div>
       <Divider />
-      <Link to='/home' style={styles.link}>
+      <Link to='/home' style={styles.link} onClick={handleDrawerClose}>
       <List>
           <ListItem button key={'Home'}>
             <ListItemText primary={'Home'} />
           </ListItem>
       </List>
       </Link>
-      <Link to='/map' style={styles.link}>
+      <Link to='/map' style={styles.link} onClick={handleDrawerClose}>
       <List>
           <ListItem button key={'View Map/List'}>
             <ListItemText primary={'View Map/List'} />
           </ListItem>
       </List>
       </Link>
-      <Link to='/about' style={styles.link}>
+      <Link to='/about' style={styles.link} onClick={handleDrawerClose}>
       <List>
           <ListItem button key={'About Us'}>
             <ListItemText primary={'About Us'} />
           </ListItem>
       </List>
       </Link>
-      <Link to='/ContactWonderWander' style={styles.link}>
+      <Link to='/ContactWonderWander' style={styles.link} onClick={handleDrawerClose}>
       <List>
           <ListItem button key={'Contact Wonder Wander'}>
             <ListItemText primary={'Contact Wonder Wander'} />
           </ListItem>
       </List>
       </Link>
-      <Link to='/AddArt' style={styles.link}>
+      <Link to='/AddArt' style={styles.link} onClick={handleDrawerClose}>
       <List>
           <ListItem button key={'Add an Art Collection'}>
             <ListItemText primary={'Add an Art Collection'} />
           </ListItem>
       </List>
       </Link>
-      <Link to='/Sponsor' style={styles.link}>
+      <Link to='/Sponsor' style={styles.link} onClick={handleDrawerClose}>
       <List>
           <ListItem button key={'Become a Sponsor'}>
             <ListItemText primary={'Become a Sponsor'} />
           </ListItem>
       </List>
       </Link>
-      <Link to={loginLinkData.path} style={styles.link}>
+      <Link to={loginLinkData.path} style={styles.link} onClick={handleDrawerClose}>
       
       <List>
           <ListItem button key={'Sign In/Out'}>
