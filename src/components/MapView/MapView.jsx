@@ -79,7 +79,7 @@ const MapView = ({ userLat, userLng }) => {
       dist = dist * 60 * 1.1515;
 
       let miles = dist.toFixed(1);
-      return miles + " miles away";
+      return miles + " mi";
     }
   }
 
