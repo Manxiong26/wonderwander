@@ -23,7 +23,7 @@ function CollectionDetail() {
     return (
         <div>
             <ImageHeader list={list}/>
-            <ArtworkLinks />
+            <ArtworkLinks list={list}/>
             <Typography>
                 See. Say. Do.
             </Typography>

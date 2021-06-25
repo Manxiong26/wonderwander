@@ -4,12 +4,12 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Link } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
-function CollectionLinks() {
+function CollectionLinks({list}) {
     const history = useHistory();
 
     return (
         <Card>
-            <CardActionArea onClick={() => history.push('/artistdetail')}>  
+            <CardActionArea onClick={() => history.push(`/artist_detail/${list.artist_id}`)}>  
                 <CardContent>
                     <Typography>
                         Artist
