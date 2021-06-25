@@ -214,7 +214,7 @@ function App() {
               <Route
               exact
               path='/collectionDetail/:id'>
-                <CollectionDetail />
+                <CollectionDetail userLat={userLat} userLng={userLng}/>
               </Route>
             <Route
               // logged in shows InfoPage else shows LoginPage
