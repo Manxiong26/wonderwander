@@ -21,6 +21,11 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AdminArtist from '../AdminArtist/AdminArtist';
+import AdminArtwork from '../AdminArtwork/AdminArtwork';
+import AdminCollection from '../AdminCollection/AdminCollection';
+import AdminSponsor from '../AdminSponsor/AdminSponsor';
+import AdminQuote from '../AdminQuote/AdminQuote';
+import AdminArtAdventure from '../AdminArtAdventure/AdminArtAdventure';
 import MapView from '../MapView/MapView'
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
@@ -46,6 +51,7 @@ import './App.css';
 import { Email } from '@material-ui/icons';
 
 import Menu from '../Menu/Menu'
+
 
 function App() {
   const dispatch = useDispatch();
@@ -144,17 +150,17 @@ function App() {
               <SeePage />
             </Route>
 
-
+            {/* ------------ADMIN PAGES----------------- */}
             <Route
             exact
-            path="/say/:id"
+            path="/say"
             >
               <SayPage />
             </Route>
 
             <Route
             exact
-            path="/do"
+            path="/do/:id"
             >
               <DoPage />
             </Route>
@@ -166,6 +172,46 @@ function App() {
             >
               <AdminArtist />
 
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminArtwork Page at all times (logged in or not)
+              exact
+              path="/admin/artwork"
+            >
+              <AdminArtwork />
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminCollection Page at all times (logged in or not)
+              exact
+              path="/admin/collection"
+            >
+              <AdminCollection />
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminSponsor Page at all times (logged in or not)
+              exact
+              path="/admin/sponsor"
+            >
+              <AdminSponsor />
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminQuote Page at all times (logged in or not)
+              exact
+              path="/admin/quote"
+            >
+              <AdminQuote />
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminArtAdventure Page at all times (logged in or not)
+              exact
+              path="/admin/art-adventure"
+            >
+              <AdminArtAdventure />
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.
@@ -187,7 +233,7 @@ function App() {
               <Route
               exact
               path='/collectionDetail/:id'>
-                <CollectionDetail />
+                <CollectionDetail userLat={userLat} userLng={userLng}/>
               </Route>
             <Route
               // logged in shows InfoPage else shows LoginPage
