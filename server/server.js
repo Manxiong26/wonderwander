@@ -13,10 +13,11 @@ const adminArtistRouter = require('./routes/AdminRoutes/admin-artist.router');
 const adminArtworkRouter = require('./routes/AdminRoutes/admin-artwork.router');
 const adminCollectionRouter = require('./routes/AdminRoutes/admin-collection.router');
 const adminSponsorRouter = require('./routes/AdminRoutes/admin-sponsor.router');
+const adminQuoteRouter = require('./routes/AdminRoutes/admin-quote.router');
+const adminArtAdventureRouter = require('./routes/AdminRoutes/admin-artAdventures.router');
 const artworkRouter = require('./routes/artwork.router');
 const randomQuoteRouter = require('./routes/random.quote.router');
 const randomArtRouter = require('./routes/random.art.router');
-const artworkDetailRouter = require('./routes/artworkdetail.router');
 const sponsorArtRouter = require('./routes/sponsor.art.router');
 const sponsorDetailsRouter = require('./routes/sponsor.details.router');
 const artworkDetailRouter = require('./routes/artworkdetail.router')
@@ -42,10 +43,11 @@ app.use('/api/admin/artist', adminArtistRouter);
 app.use('/api/admin/artwork', adminArtworkRouter);
 app.use('/api/admin/collection', adminCollectionRouter);
 app.use('/api/admin/sponsor', adminSponsorRouter);
-app.use('/api/artwork', artworkRouter)
+app.use('/api/admin/quote', adminQuoteRouter);
+app.use('/api/admin/art-adventure', adminArtAdventureRouter);
+app.use('/api/artwork', artworkRouter);
 app.use('/api/random-quote', randomQuoteRouter);
 app.use('/api/random-art', randomArtRouter);
-
 app.use('/api/sponsor-art', sponsorArtRouter);
 app.use('/api/sponsor', sponsorDetailsRouter);
 app.use('/api/artworkdetail', artworkDetailRouter);

@@ -6,6 +6,8 @@ import adminArtistSaga from './adminArtist.saga';
 import adminArtworkSaga from './adminArtwork.saga';
 import adminCollectionSaga from './adminCollection.saga';
 import adminSponsorSaga from './adminSponsor.saga';
+import adminQuoteSaga from './adminQuote.saga';
+import adminArtAdventureSaga from './adminArtAdventure.saga';
 import artworkSaga from './artwork.saga'
 import randomQuoteSaga from './randomQuote.saga';
 import randomArtSaga from './randomArt.saga';
@@ -36,6 +38,8 @@ export default function* rootSaga() {
     adminArtworkSaga(),
     adminCollectionSaga(),
     adminSponsorSaga(),
+    adminQuoteSaga(),
+    adminArtAdventureSaga(),
     artworkSaga(),
     randomQuoteSaga(),
     randomArtSaga(),
