@@ -6,10 +6,15 @@ import adminArtistSaga from './adminArtist.saga';
 import artworkSaga from './artwork.saga'
 import randomQuoteSaga from './randomQuote.saga';
 import randomArtSaga from './randomArt.saga';
+import sponsorDetailsSaga from './sponsorDetails.saga';
+import sponsorArtSaga from './sponsorArt.saga';
 import artDetailSaga from './artworkdetail.saga';
 import collectionSaga from './collection.saga';
 import threeCollectionSaga from './collection.3.saga';
 import getCollectionDetailSaga from './collection.detail.saga';
+
+import seesaydoSaga from './seesaydo.saga';
+
 import artistSaga from './artist.saga'
 
 // rootSaga is the primary saga.
@@ -28,10 +33,15 @@ export default function* rootSaga() {
     artworkSaga(),
     randomQuoteSaga(),
     randomArtSaga(),
+    sponsorDetailsSaga(),
+    sponsorArtSaga(),
     artDetailSaga(),
     collectionSaga(),
     threeCollectionSaga(),
     getCollectionDetailSaga(),
     artistSaga(),
+
+    seesaydoSaga(),
+
   ]);
 }

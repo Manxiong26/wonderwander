@@ -3,6 +3,7 @@ import env from "react-dotenv";
 import { makeStyles } from "@material-ui/core";
 import GoogleMapReact from "google-map-react";
 import "./Map.css";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   map: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, geoAvailable }) => {
 
   const classes = useStyles();
-
+  const history = useHistory();
   const handleApiLoaded = (map, maps) => {
       
   }
@@ -39,7 +40,7 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
 
   // TODO: take user to art detail on click
   const toArtDetail = (item) => {
-    console.log("Balloon ID = ", item.id);
+    history.push(`/artworkdetail/${item.id}`)
   };
 
   return (

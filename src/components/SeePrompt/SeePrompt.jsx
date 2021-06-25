@@ -35,6 +35,7 @@ function SeePrompt() {
 
 
     return (
+        // {list && list.name && editMode?}
         <Card>
             <CardContent>
                 <CardMedia
@@ -42,12 +43,11 @@ function SeePrompt() {
                 component="img" 
                 image={list.artwork_image}
                 >
-
                 </CardMedia>
                 <div className={classes.details}>
                     <CardContent>
                         <Typography className={classes.content}>
-                            Sample Text here
+                            Click here to watch a video about {list.artwork_name}
                         </Typography>
                     </CardContent>
                 </div>

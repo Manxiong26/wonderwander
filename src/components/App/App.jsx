@@ -28,6 +28,8 @@ import WelcomePage1 from '../WelcomePage/WelcomePage1';
 import WelcomePage2 from '../WelcomePage/WelcomePage2';
 import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
+import SponsorDetail from '../SponsorDetail/SponsorDetail';
+import EmailPage from '../EmailPage/EmailPage';
 
 import Collection from '../Collection/Collection';
 import CollectionDetail from '../CollectionDetail/CollectionDetail';
@@ -36,10 +38,12 @@ import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
 
 import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
-
+import SayPage from '../SayPage/SayPage';
+import DoPage from '../DoPage/DoPage';
 
 
 import './App.css';
+import { Email } from '@material-ui/icons';
 
 import Menu from '../Menu/Menu'
 
@@ -143,6 +147,20 @@ function App() {
               <SeePage />
             </Route>
 
+
+            <Route
+            exact
+            path="/say/:id"
+            >
+              <SayPage />
+            </Route>
+
+            <Route
+            exact
+            path="/do"
+            >
+              <DoPage />
+            </Route>
             {/* this is temporary until we can get the log in working */}
             <Route
               // shows AdminArtist Page at all times (logged in or not)
@@ -150,6 +168,7 @@ function App() {
               path="/admin/artist"
             >
               <AdminArtist />
+
             </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.
@@ -252,6 +271,16 @@ function App() {
             exact path='/welcome4'
           >
             <WelcomePage4></WelcomePage4>
+          </Route>
+          <Route
+            exact path='/sponsor/:id'
+          >
+            <SponsorDetail />
+          </Route>
+          <Route
+            exact path='/email'  
+          >
+            <EmailPage />
           </Route>
         <Footer />
         </div>
