@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
 import "./HomePage.css";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 
 //matierl UI
 import {
@@ -28,11 +28,12 @@ function HomePage() {
   //this dispatch the saga
   const dispatch = useDispatch();
   const classes = useStyles();
-
+  const {id} = useParams();
   //initialize to the DOM
   useEffect(() => {
     dispatch({ type: "FETCH_RANDOM_ART" });
     dispatch({ type: "FETCH_THREE_COLLECTION" });
+    dispatch({type: 'FETCH_ADVENTURE_DETAIL', payload: id});
   }, []);
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -51,7 +52,7 @@ function HomePage() {
   };
   // pushes to adventure info page
   const toAdventure = () => {
-    history.push("/adventure");
+    history.push(`/adventure/${id}`);
   };
   // function to render collection location text
   const collectionText = (collection) => (

@@ -21,7 +21,7 @@ import getCollectionDetailSaga from './collection.detail.saga';
 import seesaydoSaga from './seesaydo.saga';
 
 import artistSaga from './artist.saga'
-
+import adventureSaga from './artAdventure.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -52,6 +52,6 @@ export default function* rootSaga() {
     artistSaga(),
 
     seesaydoSaga(),
-
+    adventureSaga(),
   ]);
 }

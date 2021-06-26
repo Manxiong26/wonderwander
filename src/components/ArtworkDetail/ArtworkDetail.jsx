@@ -28,9 +28,9 @@ function CollectionDetail() {
             <Typography>
                 See. Say. Do.
             </Typography>
-            <SeePrompt list={list}/>
+            <SeePrompt/>
             <SayPrompt />
-            <DoPrompt list={list}/>
+            <DoPrompt />
             <ArtworkDescription />
         </div>
     );
