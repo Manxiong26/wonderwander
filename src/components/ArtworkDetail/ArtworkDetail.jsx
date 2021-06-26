@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 
-function CollectionDetail() {
+function CollectionDetail({userLat, userLng}) {
     const list = useSelector((store) => store.artworkDetailReducer);
     const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ function CollectionDetail() {
     return (
         <div>
             <ImageHeader list={list}/>
-            <ArtworkLinks list={list}/>
+            <ArtworkLinks userLat={userLat} userLng={userLng} list={list}/>
             <Typography>
                 See. Say. Do.
             </Typography>
