@@ -22,18 +22,18 @@ const useStyles = makeStyles({
     },
   });
 
-function DoPrompt({list}) {
+function DoPrompt() {
     const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
-    // const doDetail = useSelector((store) => store.seesaydoReducer.doReducer);
+    const doDetail = useSelector((store) => store.seesaydoReducer.doReducer);
     const {id} = useParams();
 
     useEffect(() => {
         dispatch({type: 'FETCH_DO', payload: id})
     }, []);
 
-    console.log('in do prompt looking for art detail information', list);
+    console.log('in do prompt looking for art detail information', doDetail);
 
        
     return (
@@ -46,11 +46,16 @@ function DoPrompt({list}) {
                 >
                 </CardMedia>
                 <div className={classes.details}>
-                    <CardContent>
-                        <Typography className={classes.content}>
-                            THIS IS THE PROMPT TO TAKE AN IMAGE (DO)
+                    {doDetail.map((dolist, i) => {
+                        return (
+                            <CardContent>
+                        <Typography className={classes.content} key={i}>
+                            {dolist.prompts}
                         </Typography>
                     </CardContent>
+                        )
+                    })}
+                    
                 </div>
                 <CardActionArea onClick={(event) => history.push(`/do/${id}`)}>
                     <CardContent>

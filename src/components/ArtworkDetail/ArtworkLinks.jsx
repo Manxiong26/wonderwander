@@ -30,6 +30,13 @@ function CollectionLinks({list}) {
                     </Typography>
                 </CardContent>
             </CardActionArea>
+            <CardActionArea onClick={() => history.push('/')}>
+                <CardContent>
+                    <Typography>
+                        Directions miles xx
+                    </Typography>
+                </CardContent>
+            </CardActionArea>
         </Card>
     );
 }

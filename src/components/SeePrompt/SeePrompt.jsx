@@ -20,10 +20,11 @@ const useStyles = makeStyles({
       },
   });
 
-function SeePrompt({list}) {
+function SeePrompt() {
     const classes = useStyles();
     const history = useHistory();
-    // const list = useSelector((store) => store.artworkDetailReducer);
+    const list = useSelector((store) => store.artworkDetailReducer);
+    const seelist = useSelector((store) => store.seesaydoReducer.seeReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,7 +34,9 @@ function SeePrompt({list}) {
     }, []);
 
     const {id} = useParams();
+    
 
+    console.log('IN SEE PROMPT', seelist);
 
     return (
         // {list && list.name && editMode?}
@@ -46,11 +49,16 @@ function SeePrompt({list}) {
                 >
                 </CardMedia>
                 <div className={classes.details}>
-                    <CardContent>
-                        <Typography className={classes.content}>
-                            Click here to watch a video about {list.artwork_name}
+                    {seelist.map((seel, i) => {
+                        return (
+                            <CardContent>
+                        <Typography className={classes.content} key={i}>
+                            {seel.prompts}
                         </Typography>
                     </CardContent>
+                        )
+                    })}
+                    
                 </div>
                 <CardActionArea onClick={(event) => history.push(`/see/${id}`)}>
                     <CardContent>

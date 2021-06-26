@@ -143,6 +143,13 @@ function App() {
             </Route>
 
             <Route
+            exact
+            path="/adventure/:id"
+            >
+
+            </Route>
+
+            <Route
             // Add in id
             exact
             path="/see/:id"
