@@ -23,21 +23,23 @@ function SayPage() {
         <div>
             <Container>
                 <Grid>
+                {list.map((lists, i) => (
+                    <Grid item key={i}>
                     <CardActionArea>
-                        {list.map((lists, i) => {
-                            return(
                         <Card>
+                        
                             <CardMedia>
                                 IMAGE GOES HERE
                             <CardContent>
-                                <Typography key={i}>
+                                <Typography>
                                 {lists.prompts}
                                 </Typography>
                             </CardContent>    
                             </CardMedia>
                         </Card>
-                        )})}
                     </CardActionArea>
+                    </Grid>
+                    ))}
                 </Grid>
             </Container>
             <Button  variant="contained" color="primary">
