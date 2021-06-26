@@ -21,11 +21,9 @@ function* fetchSay(){
     }
 }
 
-function* fetchSee(){
+function* fetchSee(action){
     try{
-        const response = yield axios.get('/api/see/'
-        // , action.payload
-        );
+        const response = yield axios.get(`/api/see/${action.payload}`);
         console.log(response.data);
         yield put({type: 'SET_SEE_DETAIL', payload: response.data})
     } catch (error) {

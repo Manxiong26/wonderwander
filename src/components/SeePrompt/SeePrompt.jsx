@@ -52,7 +52,7 @@ function SeePrompt({list}) {
                         </Typography>
                     </CardContent>
                 </div>
-                <CardActionArea onClick={() => history.push('/see')}>
+                <CardActionArea onClick={(event) => history.push(`/see/${id}`)}>
                     <CardContent>
                         <IconButton>
                             <ArrowForwardIosIcon />
