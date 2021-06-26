@@ -5,18 +5,22 @@ import GoogleMapReact from "google-map-react";
 import "./Map.css";
 import { useHistory } from "react-router-dom";
 
-const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, geoAvailable }) => {
+const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng }) => {
 
   const classes = useStyles();
   const history = useHistory();
   const handleApiLoaded = (map, maps) => {
-      
+      console.log(maps.geometry.spherical)
   }
+
+  // ROUTE to direct user to directions
+//   onClick={() => location.href="https://www.google.com/maps/dir/?api=1&origin="+userLat+","+userLng+"&destination="+item.lat+","+item.long+"&dir_action=navigate"}></div>
 
 
   // Balloon marker
   const BalloonMarker = ({item}) => (
     <div className="mapMarker" onClick={() => toArtDetail(item)}></div>
+
   );
   // User location marker
   const UserLocation = () => <div className="userMarker"></div>;
@@ -31,7 +35,7 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
     zoom: zoom,
   };
 
-  // TODO: take user to art detail on click
+  // takes user to art detail on click
   const toArtDetail = (item) => {
     history.push(`/artworkdetail/${item.id}`)
   };
@@ -39,7 +43,9 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng, g
   return (
         <div style={{ height: height, width: width }} id="map" className={classes.map}>
           <GoogleMapReact
-            bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_KEY }}
+            bootstrapURLKeys={{ 
+                key: process.env.REACT_APP_GOOGLE_KEY,
+                libraries: ['geometry'] }}
             defaultCenter={locationVars.center}
             defaultZoom={locationVars.zoom}
             yesIWantToUseGoogleMapApiInternals

@@ -136,6 +136,7 @@ const MapView = ({ userLat, userLng }) => {
               reducer={artwork}
               userLat={userLat}
               userLng={userLng}
+              
             />
           </div>
         </div>
