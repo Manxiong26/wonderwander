@@ -44,9 +44,36 @@ const useStyles = makeStyles((theme) => ({
         marginRight: '6%'
       },
       nextBtn: {
-          float: 'right',
-          
+          float: 'right',    
+      },
+      card: {
+        width: '60%',
+        height: 750,
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        paddingRight: '10%',
+        paddingLeft: '10%',
+        
+
+      },
+      cardContent: {
+        marginTop: '20%',
+        marginBottom: '10%',
+    
+      },
+      form: {
+        marginTop: '10%',  
+        
+      },
+      inputs: {
+        marginTop: '5%',
+        marginBottom: '2%',
+      },
+      formBtn: {
+          marginRight: 'auto',
+          marginLeft: 'auto'
       }
+
   }));
 
 export { useStyles }

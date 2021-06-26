@@ -11,13 +11,20 @@ import { Button,
         Avatar,
         Divider,
         Input,
-        Box  
+        Box,
+        Grid,
+        Card,
+        makeStyles  
         } from "@material-ui/core";
+
+import { useStyles } from '../classes'
 
 function AdminArtist() {
 
     let {id} = useParams();
     //console.log(id);
+
+    const classes = useStyles()
 
     //functionality to route to a page
     const history = useHistory();
@@ -188,12 +195,16 @@ function AdminArtist() {
     }
 
     return (
-      <div>
+      <Grid container spacing={2} direction="row" justify="space-around">
           
           {editMode ?
-          <div>
+          
+              <Grid item lg={4} className={classes.grid}>
+                  <Card className={classes.card}>
+                    <div className={classes.cardContent}>
               <Typography variant="h4">Edit Artist</Typography>
-              <form className="admin-form" onSubmit={updateArtistInfo}>
+
+              <form className={classes.form} onSubmit={updateArtistInfo}>
                 <TextField type="text"
                     placeholder="Artist Name"
                     value={name}
@@ -217,38 +228,61 @@ function AdminArtist() {
                 <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Update">Update</Button>
                 <Button className="admin-btn" variant="outlined" onClick={renderToInfo}>Cancel</Button>
               </form>
-          </div>
+              </div>
+              </Card>
+              </Grid>
+          
           :    
-          <div>
+              <Grid item lg={4} className={classes.grid}>
+                  <Card className={classes.card}>
+                      <div className={classes.cardContent}>
               <Typography variant="h4">Add Artist</Typography>
-              <form className="admin-form" onSubmit={addArtist}>
+              <form className={classes.form} onSubmit={addArtist}>
                 <TextField type="text"
+                    className={classes.inputs}
                     placeholder="Artist Name"
+                    label="Artist Name"
+                    variant="outlined"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
                     placeholder="Image URL"
+                    label="Image URL"
+                    variant="outlined"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
                     placeholder="Website URL"
+                    label="Website URL"
+                    variant="outlined"
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
                     placeholder="Artist Bio"
+                    variant="outlined"
+                    label="Artist Bio"
+                    multiline
+                    rows={6}
                     value={bio}
                     onChange={(event) => setBio(event.target.value)}
                 />
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
-          </div>}
+              </div>
+              </Card>
+              </Grid>}
           
           {/* Artist List. Always shows. */}
           {/* Edit clickability renders a specific artist's details in the edit form */}
-          <div>
+         
+          <Grid item lg={8}>
+              <Card>
               <Typography variant="h5">Artist List</Typography>
             <List>
                 {artistList.map((item, i) =>
@@ -274,9 +308,10 @@ function AdminArtist() {
                    </div>
                 )}
             </List>
-          </div>
+            </Card>
+            </Grid>
 
-      </div>
+      </Grid>
     );
 }
 
