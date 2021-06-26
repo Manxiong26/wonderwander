@@ -37,12 +37,23 @@ function* updateArtist(action) {
     console.log('in edit saga', action.payload);
     try{
         yield axios.put(`/api/admin/artist/${action.payload.id}`, action.payload); 
-        yield put({type: 'FETCH_ARTIST_LIST'}); // payload: action.payload.id does this payload need to be here?
+        yield put({type: 'FETCH_ARTIST_LIST'}); 
         yield put({type: 'CLEAR_ARTIST'});
       } catch (error) {
         alert(`Sorry things aren't working at the moment. Please try again later.`);
         console.log('Error updating artist info: ', error);
     }
+}
+
+function* updatePublish(action) {
+  console.log('in update artist publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/artist/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_ARTIST_LIST'}); 
+    yield put({type: 'CLEAR_ARTIST'});
+  } catch (error) {
+    console.log('Error updating publish: ', error);
+  }
 }
 
 function* deleteArtist(action) {
@@ -58,7 +69,8 @@ function* adminArtistSaga() {
   yield takeEvery('FETCH_ARTIST_LIST', getArtistList);
   yield takeEvery('FETCH_ARTIST', getArtist);
   yield takeEvery('ADD_ARTIST', addArtist);
-  yield takeEvery('UPDATE_ARTIST_INFO', updateArtist); 
+  yield takeEvery('UPDATE_ARTIST_INFO', updateArtist);
+  yield takeEvery('UPDATE_PUBLISH', updatePublish); 
   yield takeEvery('DELETE_ARTIST', deleteArtist);
 }
 

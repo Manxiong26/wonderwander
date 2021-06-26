@@ -2,6 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useHistory, useParams } from 'react-router-dom';
 
+import { Button, 
+        Typography, 
+        TextField, 
+        List, 
+        ListItem, 
+        ListItemAvatar, 
+        Avatar,
+        Divider,
+        Input,
+        Box  
+        } from "@material-ui/core";
+
 function AdminArtist() {
 
     let {id} = useParams();
@@ -67,7 +79,7 @@ function AdminArtist() {
         console.log('clicking edit for Artist = ', item);
 
         //sets specific artist in artist reducer 
-        dispatch({type: 'SET_ARTIST_INFO', payload: item}); // 
+        dispatch({type: 'SET_ARTIST_INFO', payload: item});  
 
         //renders form view from add to edit mode
         setEditMode(true);
@@ -84,7 +96,7 @@ function AdminArtist() {
         
         //create updated artist object
         const updatedArtistInfo = {
-            id: artist.id, //may need to change this value depending on redux store and if we use Params
+            id: artist.id, 
             name: name,
             image: image,
             bio: bio,
@@ -93,7 +105,7 @@ function AdminArtist() {
 
         console.log('updated artist info:', updatedArtistInfo);
 
-        //send updated artist info to artist or editArtist saga
+        //send updated artist info to artist saga
         dispatch({type: 'UPDATE_ARTIST_INFO', payload: updatedArtistInfo});
 
         //swal success indicator
@@ -151,78 +163,117 @@ function AdminArtist() {
           }
         });
     }
-  
+
+    //changes db boolean to true which "publishes" item on public facing pages
+    const publish = (event, item) => {
+        console.log('clicking publish for Artist = ', item);
+
+        //sets specific artist in artist reducer 
+        dispatch({type: 'SET_ARTIST_INFO', payload: item}); 
+
+        //changes item boolean to true
+        const publishedTrue = {
+            id: item.id, 
+            published: true,
+        }
+        
+        //sends updated artist info (published boolean true) to artist saga
+        dispatch({type: 'UPDATE_PUBLISH', payload: publishedTrue});
+
+        //swal success indicator
+        swal({
+            text: "This artist's information has been published!",
+            icon: "success" 
+        });
+    }
+
     return (
       <div>
-          <header>ADMIN</header>
-          <button>Add New Admin</button>
           
           {editMode ?
           <div>
-              <h2>Edit Artist</h2>
+              <Typography variant="h4">Edit Artist</Typography>
               <form className="admin-form" onSubmit={updateArtistInfo}>
-                <input type="text"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                />
-                <input type="text"
-                    value={image}
-                    onChange={(event) => setImage(event.target.value)}
-                />
-                <input type="text"
-                    value={site_link}
-                    onChange={(event) => setSiteLink(event.target.value)}
-                />
-                <input type="text"
-                    value={bio}
-                    onChange={(event) => setBio(event.target.value)}
-                />
-                <input type="submit" name="submit" value="Update" />
-                <button onClick={renderToInfo}>Cancel</button>
-              </form>
-          </div>
-          :    
-          <div>
-              <h2>Add Artist</h2>
-              <form className="admin-form" onSubmit={addArtist}>
-                <input type="text"
+                <TextField type="text"
                     placeholder="Artist Name"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
-                <input type="text"
+                <TextField type="text"
                     placeholder="Image URL"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
-                <input type="text"
+                <TextField type="text"
                     placeholder="Website URL"
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
                 />
-                <input type="text"
+                <TextField type="text"
                     placeholder="Artist Bio"
                     value={bio}
                     onChange={(event) => setBio(event.target.value)}
                 />
-                <input type="submit" name="submit" value="Submit" />
+                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Update">Update</Button>
+                <Button className="admin-btn" variant="outlined" onClick={renderToInfo}>Cancel</Button>
+              </form>
+          </div>
+          :    
+          <div>
+              <Typography variant="h4">Add Artist</Typography>
+              <form className="admin-form" onSubmit={addArtist}>
+                <TextField type="text"
+                    placeholder="Artist Name"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                />
+                <TextField type="text"
+                    placeholder="Image URL"
+                    value={image}
+                    onChange={(event) => setImage(event.target.value)}
+                />
+                <TextField type="text"
+                    placeholder="Website URL"
+                    value={site_link}
+                    onChange={(event) => setSiteLink(event.target.value)}
+                />
+                <TextField type="text"
+                    placeholder="Artist Bio"
+                    value={bio}
+                    onChange={(event) => setBio(event.target.value)}
+                />
+                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
           </div>}
           
           {/* Artist List. Always shows. */}
-          {/* Edit clickability renders a specific artist's details in the form to edit or delete */}
+          {/* Edit clickability renders a specific artist's details in the edit form */}
           <div>
-              <h2>Artist List</h2>
-            <ul>
-                {artistList.map((item, i) => 
-                    <li key={i} > 
-                        <img src={item.image} alt="Artist Image" width="50" height="50" /> 
-                        {item.name} 
-                        <button onClick={(event) => renderArtistDetail(event, item)}>Edit</button>
-                        <button onClick={() => deleteValidation(item.id)}>Delete</button>
-                    </li>
+              <Typography variant="h5">Artist List</Typography>
+            <List>
+                {artistList.map((item, i) =>
+                    <div>
+                    <ListItem key={i} > 
+                        <ListItemAvatar>
+                        <Typography variant="h6">
+                            <img src={item.image} alt="Artist Image" width="50" height="50" /> 
+                            {item.name} 
+                        </Typography>
+                        </ListItemAvatar>
+                        <Box m={.5}>
+                            <Button className="admin-btn" variant="outlined" onClick={(event) => publish(event, item)}>Publish</Button>
+                        </Box>
+                        <Box m={.5}>
+                            <Button className="admin-btn" variant="outlined" onClick={(event) => renderArtistDetail(event, item)}>Edit</Button>
+                        </Box> 
+                        <Box m={.5}>  
+                            <Button className="admin-btn" variant="outlined" onClick={() => deleteValidation(item.id)}>Delete</Button>
+                        </Box>
+                    </ListItem>
+                    <Divider/>
+                   </div>
                 )}
-            </ul>
+            </List>
           </div>
 
       </div>

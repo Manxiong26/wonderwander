@@ -5,12 +5,43 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import {useParams} from 'react-router-dom';
+import Map from "../Map/Map";
+
+import { makeStyles } from "@material-ui/core";
 
 
-function SponsorDetail(){
+
+function SponsorDetail({userLat, userLng, geoAvailable }) {
     const details = useSelector(store => store.sponsorDetails);
     const sponsorArt = useSelector(store => store.sponsorArt);
     const dispatch = useDispatch();
+
+    const useStyles = makeStyles((theme) => ({
+        mapContainer: {
+            marginTop: "auto",
+            marginBottom: "auto",
+        },
+    }));
+
+    const classes = useStyles();
+
+    const center = {
+        lat: 44.9681,
+        lng: -93.2886,
+    };
+
+
+    const BalloonMarker = () => {
+        <div className="mapMarker" onClick={toArt}></div>
+    }
+
+    const UserLocation = () => <div className="userMarker"></div>;
+
+    const toArt = () => {
+        console.log('Click');
+    };
+
+
 
     const {id} = useParams();
 
@@ -28,7 +59,21 @@ function SponsorDetail(){
                 event.preventDefault();
                 window.location.href=`${details.site_link}`
             }}>Visit Website</button>
-            <h3>MAP HERE</h3>
+
+            <div className={classes.mapContainer}>
+                <Map
+                    mapLat={center.lat}
+                    mapLng={center.lng}
+                    zoom={10}
+                    height={500}
+                    width={"90%"}
+                    reducer={sponsorArt}
+                    userLat={userLat}
+                    userLng={userLng}
+                    geoAvailable={geoAvailable}
+                />
+            </div>
+            
             <Grid container spacing={2}>
                 {sponsorArt.map((art, index) => {
                     return (

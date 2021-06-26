@@ -6,17 +6,22 @@ function DoPage() {
     // const classes = useStyles();
     const list = useSelector((store) => store.seesaydoReducer.doReducer);
     const dispatch = useDispatch();
+    const {id} = useParams();
 
     useEffect(() => {
         console.log('In useEffect param:');
-        dispatch({type: 'FETCH_DO'})
+        dispatch({type: 'FETCH_DO', payload: id})
     }, []);
-    console.log("hello", list.doprompts);
 
 
     return (
         <div>
-            <h2>To do this task! {list.doprompts}</h2>
+            {list.map((lists, i) => {
+                return (
+                <h2 key={i}>To do this task! {lists.prompts}</h2>    
+                )
+            })}
+            
             <button>Take Picture</button>
         </div>
     );

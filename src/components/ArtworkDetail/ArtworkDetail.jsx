@@ -20,6 +20,7 @@ function CollectionDetail() {
     }, []);
 
     const {id} = useParams();
+    
     return (
         <div>
             <ImageHeader list={list}/>
@@ -27,9 +28,9 @@ function CollectionDetail() {
             <Typography>
                 See. Say. Do.
             </Typography>
-            <SeePrompt />
+            <SeePrompt/>
             <SayPrompt />
-            <DoPrompt list={list}/>
+            <DoPrompt />
             <ArtworkDescription />
         </div>
     );

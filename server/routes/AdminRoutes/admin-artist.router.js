@@ -26,7 +26,7 @@ router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
     console.log(`in one artist's info get, id:`, req.params.id);
     
     //returns a specific artist's info to reducer
-    const query = `SELECT name, image, bio, site_link FROM "artist" WHERE id=$1;`;
+    const query = `SELECT * FROM "artist" WHERE id=$1;`;
     pool.query(query, [req.params.id])
     .then(result => {
         res.send(result.rows);
@@ -54,7 +54,7 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
         res.sendStatus(500)
     })
   
-});//end add new client POST route
+});//end add new artist POST route
 
 //PUT route to edit an artist's information 
 router.put('/:id',  (req, res) => { //rejectUnauthenticated,
@@ -73,7 +73,25 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
         res.sendStatus(500)
     })
   
-});//end PUT route
+});//end artist PUT route
+
+//PUT route to publish an artist's information 
+router.put('/publish/:id',  (req, res) => { //rejectUnauthenticated,
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let artist = req.body;
+    
+    const query = `UPDATE "artist" SET published=$2 WHERE id=$1;`;
+    pool.query(query, [req.params.id, artist.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating artist in server:', error);
+        res.sendStatus(500)
+    })
+  
+});//end artist PUT route
   
 //DELETE route to delete an artist
 router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
@@ -87,6 +105,6 @@ router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
         res.sendStatus(500);
     })
   
-});//end DELETE route
+});//end artist DELETE route
 
 module.exports = router;
