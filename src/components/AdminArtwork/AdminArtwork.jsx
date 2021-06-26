@@ -30,16 +30,23 @@ function AdminArtwork() {
     const artwork = useSelector((store) => store.adminArtworkInfoReducer);
     console.log('artwork reducer id:', artwork.id);
 
-    //retrieves artworks' info from DB
+    const artistList = useSelector((store) => store.adminArtistListReducer);
+    const sponsorList = useSelector((store) => store.adminSponsorListReducer);
+    const collectionList = useSelector((store) => store.adminCollectionListReducer);
+
+    //retrieves info from DB
     useEffect(() => {
         dispatch({ type: 'FETCH_ARTWORK_LIST' });
+        dispatch({ type: 'FETCH_ARTIST_LIST' });
+        dispatch({ type: 'FETCH_SPONSOR_LIST' });
+        dispatch({ type: 'FETCH_COLLECTION_LIST' });
     }, []);
 
     //sets local state for post request
     const [name, setName] = useState('');
     const [year, setYear] = useState('');
     const [lat, setLat] = useState('');
-    const [long, setLong] = useState('');
+    const [lng, setLng] = useState('');
     const [image, setImage] = useState('');
     const [description, setDescription] = useState('');
     const [vid_link, setVidLink] = useState('');
@@ -59,7 +66,7 @@ function AdminArtwork() {
             name: name,
             year: year,
             lat: lat,
-            long: long,
+            lng: lng,
             image: image,
             description: description,
             vid_link: vid_link,
@@ -71,6 +78,9 @@ function AdminArtwork() {
         
         //dispatch to artworkList saga
         dispatch({ type: 'ADD_ARTWORK', payload: newArtwork });
+
+        //updates artwork list on DOM
+        dispatch({ type: 'FETCH_ARTWORK_LIST' });
         
         //alert successful post
         swal({
@@ -78,14 +88,13 @@ function AdminArtwork() {
             icon: "success"
         });
 
-        //updates artwork list on DOM
-        dispatch({ type: 'FETCH_ARTWORK_LIST' });
+        //TODO - Reset dropdown to default values (artis, sponsor, collection)
 
         //clears input fields
         setName('');
         setYear('');
         setLat('');
-        setLong('');
+        setLng('');
         setImage('');
         setDescription('');
         setVidLink('');
@@ -109,7 +118,7 @@ function AdminArtwork() {
         setName(item.name);
         setYear(item.year);
         setLat(item.lat);
-        setLong(item.long);
+        setLng(item.lng);
         setImage(item.image);
         setDescription(item.description);
         setVidLink(item.vid_link);
@@ -128,7 +137,7 @@ function AdminArtwork() {
             name: name,
             year: year,
             lat: lat,
-            long: long,
+            lng: lng,
             image: image,
             description: description,
             vid_link: vid_link,
@@ -149,6 +158,8 @@ function AdminArtwork() {
             icon: "success" 
         });
 
+        //TODO - Reset dropdown to default values (artis, sponsor, collection)
+
         //turn editMode off
         setEditMode(false);
 
@@ -156,7 +167,7 @@ function AdminArtwork() {
         setName('');
         setYear('');
         setLat('');
-        setLong('');
+        setLng('');
         setImage('');
         setDescription('');
         setVidLink('');
@@ -174,7 +185,7 @@ function AdminArtwork() {
         setName('');
         setYear('');
         setLat('');
-        setLong('');
+        setLng('');
         setImage('');
         setDescription('');
         setVidLink('');
@@ -237,8 +248,8 @@ function AdminArtwork() {
                 />
                 <TextField type="number"
                     placeholder="Longitude"
-                    value={long}
-                    onChange={(event) => setLong(event.target.value)}
+                    value={lng}
+                    onChange={(event) => setLng(event.target.value)}
                 />
                 <TextField type="text"
                     placeholder="Image URL"
@@ -260,21 +271,33 @@ function AdminArtwork() {
                     value={vid_description}
                     onChange={(event) => setVidDescription(event.target.value)}
                 />
-                <TextField type="text"
-                    placeholder="Artist"
-                    value={artist_id}
+                {/* generates artist options dynamically */}
+                <select type="text"
                     onChange={(event) => setArtistId(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Sponsor"
-                    value={sponsor_id}
+                    >
+                    <option value="Default">Artist</option>
+                    {artistList.map((artist) => {
+                        return (<option key={artist.id} value={artist.id}>{artist.name}</option>);
+                    })}
+                </select>
+                {/* generates sponsor options dynamically */}
+                <select type="text"
                     onChange={(event) => setSponsorId(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Collection"
-                    value={collection_id}
+                    >
+                    <option value="Default">Sponsor</option>
+                    {sponsorList.map((sponsor) => {
+                        return (<option key={sponsor.id} value={sponsor.id}>{sponsor.name}</option>);
+                    })}
+                </select>
+                {/* generates collection options dynamically */}
+                <select type="text"
                     onChange={(event) => setCollectionId(event.target.value)}
-                />
+                    >
+                    <option value="Default">Collection</option>
+                    {collectionList.map((collection) => {
+                        return (<option key={collection.id} value={collection.id}>{collection.name}</option>);
+                    })}
+                </select>
                 <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Update">Update</Button>
                 <Button className="admin-btn" variant="outlined" onClick={renderToInfo}>Cancel</Button>
               </form>
@@ -300,8 +323,8 @@ function AdminArtwork() {
                 />
                 <TextField type="number"
                     placeholder="Longitude"
-                    value={long}
-                    onChange={(event) => setLong(event.target.value)}
+                    value={lng}
+                    onChange={(event) => setLng(event.target.value)}
                 />
                 <TextField type="text"
                     placeholder="Image URL"
@@ -323,21 +346,33 @@ function AdminArtwork() {
                     value={vid_description}
                     onChange={(event) => setVidDescription(event.target.value)}
                 />
-                <TextField type="text"
-                    placeholder="Artist"
-                    value={artist_id}
+                {/* generates artist options dynamically */}
+                <select type="text"
                     onChange={(event) => setArtistId(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Sponsor"
-                    value={sponsor_id}
+                    >
+                    <option value="Default">Artist</option>
+                    {artistList.map((artist) => {
+                        return (<option key={artist.id} value={artist.id}>{artist.name}</option>);
+                    })}
+                </select>
+                {/* generates sponsor options dynamically */}
+                <select type="text"
                     onChange={(event) => setSponsorId(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Collection"
-                    value={collection_id}
+                    >
+                    <option value="Default">Sponsor</option>
+                    {sponsorList.map((sponsor) => {
+                        return (<option key={sponsor.id} value={sponsor.id}>{sponsor.name}</option>);
+                    })}
+                </select>
+                {/* generates collection options dynamically */}
+                <select type="text"
                     onChange={(event) => setCollectionId(event.target.value)}
-                />
+                    >
+                    <option value="Default">Collection</option>
+                    {collectionList.map((collection) => {
+                        return (<option key={collection.id} value={collection.id}>{collection.name}</option>);
+                    })}
+                </select>
                 <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
           </div>}

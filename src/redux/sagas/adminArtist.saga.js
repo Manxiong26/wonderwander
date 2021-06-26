@@ -45,6 +45,17 @@ function* updateArtist(action) {
     }
 }
 
+function* updatePublish(action) {
+  console.log('in update artist publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/artist/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_ARTIST_LIST'}); 
+    yield put({type: 'CLEAR_ARTIST'});
+  } catch (error) {
+    console.log('Error updating publish: ', error);
+  }
+}
+
 function* deleteArtist(action) {
     try{
         yield axios.delete(`/api/admin/artist/${action.payload}`); 
@@ -58,7 +69,8 @@ function* adminArtistSaga() {
   yield takeEvery('FETCH_ARTIST_LIST', getArtistList);
   yield takeEvery('FETCH_ARTIST', getArtist);
   yield takeEvery('ADD_ARTIST', addArtist);
-  yield takeEvery('UPDATE_ARTIST_INFO', updateArtist); 
+  yield takeEvery('UPDATE_ARTIST_INFO', updateArtist);
+  yield takeEvery('UPDATE_PUBLISH', updatePublish); 
   yield takeEvery('DELETE_ARTIST', deleteArtist);
 }
 
