@@ -43,11 +43,11 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
 
     let artwork = req.body;
     
-    const query  = `INSERT INTO "artwork" ("name", "year", "lat", "long", "image", 
+    const query  = `INSERT INTO "artwork" ("name", "year", "lat", "lng", "image", 
                     "description", "vid_link", "vid_description", "artist_id", 
                     "sponsor_id", "collection_id")
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
-    pool.query(query, [artwork.name, artwork.year, artwork.lat, artwork.long, 
+    pool.query(query, [artwork.name, artwork.year, artwork.lat, artwork.lng, 
                     artwork.image, artwork.description, artwork.vid_link, 
                     artwork.vid_description, artwork.artist_id, artwork.sponsor_id, 
                     artwork.collection_id])
@@ -68,11 +68,11 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
 
     let artwork = req.body;
     
-    const query = `UPDATE "artwork" SET name=$2, year=$3, lat=$4, long=$5, image=$6,
+    const query = `UPDATE "artwork" SET name=$2, year=$3, lat=$4, lng=$5, image=$6,
         description=$7, vid_link=$8, vid_description=$9, artist_id=$10, 
         sponsor_id=$11, collection_id=$12 WHERE id=$1;`;
     pool.query(query, [req.params.id, artwork.name, artwork.year, artwork.lat, 
-                    artwork.long, artwork.image, artwork.description, 
+                    artwork.lng, artwork.image, artwork.description, 
                     artwork.vid_link, artwork.vid_description, artwork.artist_id, 
                     artwork.sponsor_id, artwork.collection_id])
     .then(response => {

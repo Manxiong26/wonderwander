@@ -43,9 +43,9 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
 
     let sponsor = req.body;
     
-    const query  = `INSERT INTO "sponsor" ("name", "logo", "description", "site_link", "donate_link")
-        VALUES ($1, $2, $3, $4, $5);`;
-    pool.query(query, [sponsor.name, sponsor.logo, sponsor.description, sponsor.site_link, sponsor.donate_link])
+    const query  = `INSERT INTO "sponsor" ("name", "logo", "description", "site_link")
+        VALUES ($1, $2, $3, $4);`;
+    pool.query(query, [sponsor.name, sponsor.logo, sponsor.description, sponsor.site_link])
     .then(result => {
         console.log('new sponsor object POST', result.rows);
         res.sendStatus(201);
@@ -64,9 +64,9 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
     let sponsor = req.body;
     
     const query = `UPDATE "sponsor" SET name=$2, logo=$3, description=$4, 
-        site_link=$5, donate_link=$6 WHERE id=$1;`;
+        site_link=$5 WHERE id=$1;`;
     pool.query(query, [req.params.id, sponsor.name, sponsor.logo, sponsor.description, 
-        sponsor.site_link, sponsor.donate_link])
+        sponsor.site_link])
     .then(response => {
         res.sendStatus(200);
     }).catch(error => {
