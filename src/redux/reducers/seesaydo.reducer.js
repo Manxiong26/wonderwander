@@ -18,7 +18,7 @@ const sayReducer = (state = [], action) => {
     }
 };
 
-const seeReducer = (state = {}, action) => {
+const seeReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_SEE_DETAIL':
             return action.payload;

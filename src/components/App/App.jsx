@@ -145,7 +145,7 @@ function App() {
             <Route
             // Add in id
             exact
-            path="/see"
+            path="/see/:id"
             >
               <SeePage />
             </Route>

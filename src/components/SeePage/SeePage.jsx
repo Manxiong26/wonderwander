@@ -26,14 +26,12 @@ const YoutubeEmbed = ({ embedId }) => (
 function SeePage() {
     const list = useSelector((store) => store.seesaydoReducer.seeReducer);
     const dispatch = useDispatch();
-    // const {id} = useParams();
+    const {id} = useParams();
     
     
     useEffect(() => {
         console.log('In useEffect param:');
-        dispatch({type: 'FETCH_SEE_DETAIL'
-        // , payload: id
-    })
+        dispatch({type: 'FETCH_SEE_DETAIL', payload: id})
     }, []);
 
     
@@ -42,21 +40,21 @@ console.log('TESTING', list);
 
     return (
         <div>
-        {list[0] === undefined ? 
-        ''
-        :
-        (
-        <section>
-            <Card>
-                <CardMedia>
-                <YoutubeEmbed embedId="GyT1wPQSER8"/>
-                </CardMedia>
-            </Card>
-            <h3>
-            {list[0].prompts}
-            </h3>
-        </section>
-        )}
+            {list.map((lists, i) => {
+                return (
+                    <section>
+                    <Card>
+                        <CardMedia>
+                        <YoutubeEmbed embedId="GyT1wPQSER8"/>
+                        </CardMedia>
+                    </Card>
+                    <h3 key={i}>
+                        {lists.prompts}
+                    </h3>
+                </section>
+                )
+            })}
+        
         </div>
     );
 }
