@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
       nextBtn: {
           float: 'right',    
       },
-      card: {
+      cardForm: {
         width: '60%',
         height: 750,
         marginRight: 'auto',
@@ -56,13 +56,44 @@ const useStyles = makeStyles((theme) => ({
         
 
       },
+      cardTable: {
+        width: '80%',
+        height: 750,
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        paddingRight: '10%',
+        paddingLeft: '10%',
+        
+        
+
+      },
+      btnGroup: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        marginLeft: '15%'
+      },
+      btn: {
+        
+      },
+      table: {
+        overflow: 'hidden',
+        marginTop: '10%', 
+        
+        
+      },
       cardContent: {
-        marginTop: '20%',
-        marginBottom: '10%',
+        marginTop: '10%',
+    
+        
     
       },
+      tableContent: {
+        marginTop: '5%',
+      },
       form: {
-        marginTop: '10%',  
+        marginTop: '10%', 
+        display: 'flex',
+        flexDirection: 'column'
         
       },
       inputs: {
@@ -70,8 +101,8 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '2%',
       },
       formBtn: {
-          marginRight: 'auto',
-          marginLeft: 'auto'
+          marginLeft: '25%',
+          marginRight: '25%'
       }
 
   }));
