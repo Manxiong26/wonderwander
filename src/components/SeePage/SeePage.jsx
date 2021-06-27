@@ -3,24 +3,8 @@ import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, } fro
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import PropTypes from "prop-types";
+import ReactPlayer from 'react-player';
 
-const YoutubeEmbed = ({ embedId }) => (
-    <div className="video-responsive">
-      <iframe
-        width="411"
-        height="480"
-        src={`https://www.youtube.com/embed/${embedId}`}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title="Embedded youtube"
-      />
-    </div>
-  );
-  
-  YoutubeEmbed.propTypes = {
-    embedId: PropTypes.string.isRequired
-  };
 
 
 function SeePage() {
@@ -45,12 +29,12 @@ console.log('TESTING', list);
                     <section>
                     <Card>
                         <CardMedia>
-                        <YoutubeEmbed embedId="GyT1wPQSER8"/>
+                            <ReactPlayer url={lists.link} controls="true" width="100" />
                         </CardMedia>
                     </Card>
-                    <h3 key={i}>
+                    <Typography key={i} align="center" gutterBottom variant="h5">
                         {lists.prompts}
-                    </h3>
+                    </Typography>
                 </section>
                 )
             })}
