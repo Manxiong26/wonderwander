@@ -39,7 +39,7 @@ router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
 });//end one collection's info GET route
 
 //adds new collection to the DB from admin collection page
-router.post('/',  (req, res) => {  //rejectUnauthenticated,
+router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     let collection = req.body;
     
@@ -60,7 +60,7 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
 });//end add new collection POST route
 
 //PUT route to edit an collection's information 
-router.put('/:id',  (req, res) => { //rejectUnauthenticated,
+router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -81,7 +81,7 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
 });//end collection PUT route
   
 //DELETE route to delete a collection
-router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
+router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "collection" WHERE id=$1;`;
     pool.query(query, [req.params.id]) 

@@ -3,22 +3,38 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import AdminNav from '../AdminNav/AdminNav';
 
-import { Button, 
-        Typography, 
-        TextField, 
-        List, 
-        ListItem, 
-        ListItemAvatar, 
-        Avatar,
-        Divider,
-        Input,
-        Box  
-        } from "@material-ui/core";
+import { Button,
+    Typography,
+    TextField,
+    List,
+    ListItem,
+    ListItemAvatar,
+    Avatar,
+    Divider,
+    Input,
+    Box,
+    Grid,
+    Card,
+    makeStyles,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+  } from "@material-ui/core";
+  import DeleteIcon from "@material-ui/icons/Delete";
+  import EditIcon from "@material-ui/icons/Edit";
+
+  import {useStyles} from '../classes'
 
 function AdminArtwork() {
 
     let {id} = useParams();
     //console.log(id);
+
+    const classes = useStyles();
 
     //functionality to route to a page
     const history = useHistory();
@@ -228,48 +244,79 @@ function AdminArtwork() {
     return (
         <div>
       <AdminNav />
+      <Grid container spacing={1} direction="row">
           {editMode ?
-          <div>
-              <Typography variant="h4">Edit Artwork</Typography>
-              <form className="admin-form" onSubmit={updateArtworkInfo}>
+          <Grid item lg={5} className={classes.grid}>
+          <Card elevation={6} className={classes.cardForm}>
+          <div className={classes.cardContent}>
+              <Typography className={classes.title} align="center" variant="h4">Edit Artwork</Typography>
+              <form className={classes.form} onSubmit={updateArtworkInfo}>
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Artwork Title"
+                    label="Artwork Title"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Year"
+                    label="Year"
                     value={year}
                     onChange={(event) => setYear(event.target.value)}
                 />
                 <TextField type="number"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Latitude"
+                    label="Latitude"
                     value={lat}
                     onChange={(event) => setLat(event.target.value)}
                 />
                 <TextField type="number"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Longitude"
+                    label="Longitude"
                     value={lng}
                     onChange={(event) => setLng(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Image URL"
+                    label="Image URL"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Description"
+                    label="Description"
                     value={description}
+                    multiline
+                    rows={6}
                     onChange={(event) => setDescription(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Video URL"
+                    label="Video URL"
                     value={vid_link}
                     onChange={(event) => setVidLink(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Video Description"
+                    label="Video Description"
                     value={vid_description}
+                    multiline
+                    rows={6}
                     onChange={(event) => setVidDescription(event.target.value)}
                 />
                 {/* generates artist options dynamically */}
@@ -299,51 +346,83 @@ function AdminArtwork() {
                         return (<option key={collection.id} value={collection.id}>{collection.name}</option>);
                     })}
                 </select>
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Update">Update</Button>
-                <Button className="admin-btn" variant="outlined" onClick={renderToInfo}>Cancel</Button>
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
+                <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
               </form>
           </div>
+          </Card>
+          </Grid>
           :    
-          <div>
-              <Typography variant="h4">Add Artwork</Typography>
-              <form className="admin-form" onSubmit={addArtwork}>
+              <Grid item lg={5} className={classes.grid}>
+                <Card elevation={6} className={classes.cardForm}>
+                <div className={classes.cardContent}>
+              <Typography className={classes.title} align="center" variant="h4">Add Artwork</Typography>
+              <form className={classes.form} onSubmit={addArtwork}>
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Artwork Title"
+                    label="Artwork Title"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Year"
+                    label="Year"
                     value={year}
                     onChange={(event) => setYear(event.target.value)}
                 />
                 <TextField type="number"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Latitude"
+                    label="Latitude"
                     value={lat}
                     onChange={(event) => setLat(event.target.value)}
                 />
                 <TextField type="number"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Longitude"
+                    label="Longitude"
                     value={lng}
                     onChange={(event) => setLng(event.target.value)}
                 />
                 <TextField type="text"
-                    placeholder="Image URL"
+                className={classes.inputs}
+                variant="outlined"
+                    placeholder="Longitude"
+                    label="Longitude"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Description"
+                    label="Description"
+                    multiline
+                    rows={6}
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Video URL"
+                    label="Video URL"
                     value={vid_link}
                     onChange={(event) => setVidLink(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Video Description"
+                    label="Video Description"
+                    multiline
+                    rows={6}
                     value={vid_description}
                     onChange={(event) => setVidDescription(event.target.value)}
                 />
@@ -374,37 +453,64 @@ function AdminArtwork() {
                         return (<option key={collection.id} value={collection.id}>{collection.name}</option>);
                     })}
                 </select>
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
-          </div>}
+              </div>
+              </Card>
+              </Grid>
+          }
           
           {/* Artwork List. Always shows. */}
           {/* Edit clickability renders a specific artwork's details in the edit form */}
-          <div>
-              <Typography variant="h5">Artwork List</Typography>
-            <List>
+          <Grid item lg={7}>
+        <TableContainer
+          elevation={6}
+          component={Card}
+          className={classes.cardTable}
+        >
+          <div className={classes.tableContent}>
+              <Typography className={classes.title} align="center" variant="h4">Artwork List</Typography>
+              <Table className={classes.table}>
+              <TableBody>
                 {artworkList.map((item, i) =>
-                    <div>
-                    <ListItem key={i} > 
-                        <ListItemAvatar>
-                        <Typography variant="h6">
-                            <img src={item.image} alt="Artwork Image" width="50" height="50" /> 
-                            {item.name} 
-                        </Typography>
-                        </ListItemAvatar>
-                        <Box m={.5}>
-                            <Button className="admin-btn" variant="outlined" onClick={(event) => renderArtworkDetail(event, item)}>Edit</Button>
-                        </Box> 
-                        <Box m={.5}>  
-                            <Button className="admin-btn" variant="outlined" onClick={() => deleteValidation(item.id)}>Delete</Button>
-                        </Box>
-                    </ListItem>
-                    <Divider/>
-                   </div>
+                    <TableRow alignItems="flex-start" key={i}>
+                    <TableCell>
+                      <img
+                        src={item.image}
+                        alt="Artist Image"
+                        className={classes.thumbnail}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body1">{item.name}</Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <EditIcon
+                          className={classes.btn}
+                          variant="outlined"
+                          onClick={(event) => renderArtworkDetail(event, item)}
+                        />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <DeleteIcon
+                          color="primary"
+                          className={classes.btn}
+                          variant="outlined"
+                          onClick={() => deleteValidation(item.id)}
+                        />
+                      </IconButton>
+                    </TableCell>
+                    </TableRow>
                 )}
-            </List>
+            </TableBody>
+            </Table>
           </div>
-
+          </TableContainer>
+          </Grid>
+          </Grid>
       </div>
     );
 }

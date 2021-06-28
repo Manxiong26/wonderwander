@@ -56,7 +56,6 @@ export default function* rootSaga() {
     threeCollectionSaga(),
     getCollectionDetailSaga(),
     artistSaga(),
-
     seesaydoSaga(),
 
     addTaskSeenSaga(),
