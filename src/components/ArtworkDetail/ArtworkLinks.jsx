@@ -23,7 +23,7 @@ function CollectionLinks({list}) {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActionArea onClick={() => history.push('/sponsor')}>
+            <CardActionArea onClick={() => history.push(`/sponsor/${list.sponsor_id}`)}>
                 <CardContent>
                     <Typography>
                         Sponsor

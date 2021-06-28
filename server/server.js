@@ -19,7 +19,6 @@ const randomArtRouter = require('./routes/random.art.router');
 const artworkDetailRouter = require('./routes/artworkdetail.router');
 const sponsorArtRouter = require('./routes/sponsor.art.router');
 const sponsorDetailsRouter = require('./routes/sponsor.details.router');
-const artworkDetailRouter = require('./routes/artworkdetail.router')
 const collectionRouter = require('./routes/collection.router');
 const artistRouter = require('./routes/artist.router');
 const seesaydoRouter = require('./routes/seesaydo.router');

@@ -106,7 +106,7 @@ function App() {
           {/* <Nav /> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/welcome1" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route
@@ -299,7 +299,7 @@ function App() {
           <Route
             exact path='/sponsor/:id'
           >
-            <SponsorDetail />
+            <SponsorDetail userLat={userLat} userLng={userLng}/>
           </Route>
           <Route
             exact path='/email'  

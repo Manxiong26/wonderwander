@@ -43,7 +43,7 @@ useEffect(() => {
         <p>Title:{randomArt.name}</p>
       </div>
       <div className="art">
-        <h4 >Find Local Art:<Link to='/collection' className="browse">Browse All</Link></h4>
+        <h4 >Find Local Art:<Link to="/collection" className="browse">Browse All</Link></h4>
       </div>
       <div className="collectionList">
             {collectionThreeList.map(collection =>{
@@ -71,7 +71,7 @@ useEffect(() => {
       <Divider/>
       <div className="art">
         <h4>Other Art Adventures</h4>
-        <div>At the Museum <Link to='/adventure' className="arrow"> <ArrowForwardIosIcon/> </Link></div>
+        <div>At the Museum <Link to="/adventure" className="arrow"> <ArrowForwardIosIcon/> </Link></div>
       </div>
       <div className="container">
         <h2>Welcome, {user.username}!</h2>
