@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import AdminNav from '../AdminNav/AdminNav'
 
 import {
   Button,
@@ -202,6 +203,8 @@ function AdminArtist() {
   };
 
   return (
+    <>
+    <AdminNav />
     <Grid container spacing={1} direction="row">
       {editMode ? (
         <Grid item lg={5} className={classes.grid}>
@@ -380,6 +383,7 @@ function AdminArtist() {
         </TableContainer>
       </Grid>
     </Grid>
+    </>
   );
 }
 

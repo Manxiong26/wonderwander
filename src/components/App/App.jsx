@@ -157,7 +157,6 @@ function App() {
               <SeePage />
             </Route>
 
-            {/* ------------ADMIN PAGES----------------- */}
             <Route
             exact
             path="/say"
@@ -171,6 +170,8 @@ function App() {
             >
               <DoPage />
             </Route>
+            {/* ------------ADMIN PAGES----------------- */}
+
             {/* this is temporary until we can get the log in working */}
             <Route
               // shows AdminArtist Page at all times (logged in or not)

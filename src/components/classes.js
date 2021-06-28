@@ -103,6 +103,10 @@ const useStyles = makeStyles((theme) => ({
       formBtn: {
           marginLeft: '25%',
           marginRight: '25%'
+      },
+      adminNav: {
+        display: 'flex',
+        justifyContent: 'center',
       }
 
   }));
