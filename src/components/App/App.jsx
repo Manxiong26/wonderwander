@@ -45,7 +45,7 @@ import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
 import SayPage from '../SayPage/SayPage';
 import DoPage from '../DoPage/DoPage';
-
+import Adventure from '../Adventure/Adventure';
 
 import './App.css';
 import { Email } from '@material-ui/icons';
@@ -146,7 +146,7 @@ function App() {
             exact
             path="/adventure/:id"
             >
-
+              <Adventure />
             </Route>
 
             <Route

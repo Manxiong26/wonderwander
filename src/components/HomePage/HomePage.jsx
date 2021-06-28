@@ -38,7 +38,7 @@ function HomePage() {
 
 
   //Adventure reducer
-  const adventure = useSelector((store) => store.adventureReducer);
+  const adventure = useSelector((store) => store.adventureReducer.adventureReducer);
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);

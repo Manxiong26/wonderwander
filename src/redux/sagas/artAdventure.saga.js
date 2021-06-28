@@ -13,9 +13,20 @@ function* getAdventureDetail() {
     }
 }
 
+function* fetchAdventure(action){
+    try {
+        let id = action.payload;
+        const response = yield axios.get(`/api/artworkdetail/${id}`);
+        yield put ({type: 'SET_ADVENTURE', payload: response.data});
+        console.log('error in fetchArtdetail under yield put', response.data);
+    } catch {
+        console.log('Error with getting Artwork detail');
+    }
+}
 
 function* adventureSaga() {
     yield takeLatest('FETCH_ADVENTURE_DETAIL', getAdventureDetail);
+    yield takeLatest('FETCH_ADVENTURE', fetchAdventure);
 }
 
 export default adventureSaga;
