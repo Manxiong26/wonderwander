@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
             res.send(result.rows[0]);
         })
         .catch(error => {
-            console.log('Error with getting random quote', error);
+            console.log('Error with getting random art', error);
             res.sendStatus(500);
         })
 })

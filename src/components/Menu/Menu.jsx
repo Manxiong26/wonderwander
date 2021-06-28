@@ -21,6 +21,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const drawerWidth = 240;
 
+const email = `shannon@wonderwander.art`
+const goEmail = () => {
+  window.location.href = `mailto:${email}`;
+}
+
 const styles = {
   sideNav: {
     marginTop: '-60px',
@@ -57,9 +62,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  // menuButton: {
-  //   marginRight: theme.spacing(2),
-  // },
+
   hide: {
     display: 'none',
   },
@@ -185,23 +188,20 @@ function Menu(){
           </ListItem>
       </List>
       </Link>
-      <Link to='/ContactWonderWander' style={styles.link} onClick={handleDrawerClose}>
       <List>
-          <ListItem button key={'Contact Wonder Wander'}>
+          <ListItem button onClick={function(){handleDrawerClose(); goEmail();}} key={'Contact Wonder Wander'}>
             <ListItemText primary={'Contact Wonder Wander'} />
           </ListItem>
       </List>
-      </Link>
-      <Link to='/AddArt' style={styles.link} onClick={handleDrawerClose}>
+     
       <List>
-          <ListItem button key={'Add an Art Collection'}>
+          <ListItem button onClick={function(){handleDrawerClose(); goEmail();}} key={'Add an Art Collection'}>
             <ListItemText primary={'Add an Art Collection'} />
           </ListItem>
       </List>
-      </Link>
-      <Link to='/Sponsor' style={styles.link} onClick={handleDrawerClose}>
+      
       <List>
-          <ListItem button key={'Become a Sponsor'}>
+          <ListItem button onClick={function(){handleDrawerClose(); goEmail();}} key={'Become a Sponsor'}>
             <ListItemText primary={'Become a Sponsor'} />
           </ListItem>
       </List>
