@@ -4,8 +4,10 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { Link } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
-function CollectionLinks({list}) {
+function CollectionLinks({list, userLat, userLng}) {
     const history = useHistory();
+    console.log('In ArtworkLinks...', list);
+    // ROUTE to direct user to directions
 
     return (
         <Card>
@@ -23,14 +25,14 @@ function CollectionLinks({list}) {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActionArea onClick={() => history.push('/sponsor')}>
+            <CardActionArea onClick={() => history.push(`/sponsor/${list.sponsor_id}`)}>
                 <CardContent>
                     <Typography>
                         Sponsor
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActionArea onClick={() => history.push('/')}>
+            <CardActionArea onClick={() => location.href="https://www.google.com/maps/dir/?api=1&origin="+userLat+","+userLng+"&destination="+list.lat+","+list.long+"&dir_action=navigate"}>
                 <CardContent>
                     <Typography>
                         Directions miles xx

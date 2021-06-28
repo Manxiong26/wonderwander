@@ -55,7 +55,7 @@ router.get('/:id/see',  (req, res) => {  //rejectUnauthenticated, ***Should we u
 });//end art adventure GET route
 
 //adds new art adventure to the DB from admin art adventure page
-router.post('/',  (req, res) => {  //rejectUnauthenticated,
+router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     let artAdventure = req.body;
     
@@ -109,7 +109,7 @@ router.post('/do',  (req, res) => {  //rejectUnauthenticated,
 });//end add new 'Do' for adventure POST route
 
 //PUT route to edit an art adventure's information 
-router.put('/:id',  (req, res) => { //rejectUnauthenticated,
+router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -129,7 +129,7 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
 });//end art adventure PUT route
   
 //DELETE route to delete an art adventure
-router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
+router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "activities" WHERE id=$1;`;
     pool.query(query, [req.params.id]) 

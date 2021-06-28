@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-function RegisterForm() {
+function AdminRegister() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
+  const [name, setName] = useState('');
+
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -13,19 +14,20 @@ function RegisterForm() {
     event.preventDefault();
 
     dispatch({
-      type: 'REGISTER',
+      type: 'REGISTER_ADMIN',
       payload: {
         username: username,
         password: password,
         email: email,
-        first_name: firstName,
+        first_name: name,
+
       },
     });
   }; // end registerUser
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <h2>Register Admin</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -54,28 +56,24 @@ function RegisterForm() {
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
-        </div>
-        <div>
-        <label htmlFor="email">
-          Email:
-          <input
-            type="email"
+        <label htmlFor="password">
+            Email:
+        <input
+            type="text"
             name="email"
             value={email}
             required
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
-      </div>
-      <div>
-        <label htmlFor="firstName">
-          First Name:
+        <label htmlFor="name">
+            First Name
           <input
-            type="firstName"
-            name="firstName"
-            value={firstName}
+            type="text"
+            name="name"
+            value={name}
             required
-            onChange={(event) => setFirstName(event.target.value)}
+            onChange={(event) => setName(event.target.value)}
           />
         </label>
       </div>
@@ -86,4 +84,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default AdminRegister;

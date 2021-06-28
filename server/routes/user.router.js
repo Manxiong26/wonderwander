@@ -5,6 +5,7 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+// const adminStrategy = require('../strategies/admin.strategy')
 
 const router = express.Router();
 
@@ -20,11 +21,32 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
+  const email = req.body.email
+  const firstName = req.body.first_name;
+  
 
-  const queryText = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id`;
+  const queryText = `INSERT INTO "users" (username, password, email, first_name)
+    VALUES ($1, $2, $3, $4) RETURNING id`;
   pool
-    .query(queryText, [username, password])
+    .query(queryText, [username, password, email, firstName])
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log('User registration failed: ', err);
+      res.sendStatus(500);
+    });
+});
+
+router.post('/admin/register', (req, res, next) => {
+  const username = req.body.username;
+  const password = encryptLib.encryptPassword(req.body.password);
+  const email = req.body.email;
+  const first_name = req.body.first_name;
+  const admin = 'true';
+
+  const queryText = `INSERT INTO "users" (username, password, email, first_name, admin)
+    VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+  pool
+    .query(queryText, [username, password, email, first_name, admin])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);

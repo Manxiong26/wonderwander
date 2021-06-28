@@ -24,14 +24,14 @@ import artworkDetailReducer from './artworkDetail.reducer';
 import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
 import collectionDetail from './collection.detail.reducer';
-
+import adventureSeeDo from './adventureSeeDo.reducer';
 
 // import artistDetail from './artist.reducer';
 
 import seesaydoReducer from './seesaydo.reducer';
 
 import artistDetail from './artist.reducer';
-import adventureReducer from './adventure.saga';
+import adventureReducer from './adventure.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -70,6 +70,7 @@ const rootReducer = combineReducers({
   artistDetail,
   seesaydoReducer,
   adventureReducer,
+  adventureSeeDo,
 });
 
 export default rootReducer;

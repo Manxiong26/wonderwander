@@ -42,6 +42,13 @@ console.log('HELLLLLLLLLLPPPPPPPPPPPP',artDet);
 
     return(
         <>
+        <button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                Go back
+            </button>
         <div>
             <h1>Collection Detail</h1>
         </div>
@@ -88,7 +95,7 @@ console.log('HELLLLLLLLLLPPPPPPPPPPPP',artDet);
        return( <Box component="span" m={1} key={artDet.id}>
         <Divider/>
         <p className="logo"><img className="logo2" src={artDet.artwork_image}/> {artDet.artwork_name}
-        <Link onClick={(event) => viewArtworkDetail(event, artDet.art_work_id)} className="arrow"> 
+         <Link onClick={(event) => viewArtworkDetail(event, artDet.art_work_id)} className="arrow"> 
         <ArrowForwardIosIcon/> </Link></p>
       </Box >) })}
       <Divider/>

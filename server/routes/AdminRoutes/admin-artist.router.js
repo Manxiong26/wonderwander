@@ -39,7 +39,7 @@ router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
 });//end one artist's info GET route
 
 //adds new artist to the DB from admin artist page
-router.post('/',  (req, res) => {  //rejectUnauthenticated,
+router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     let artist = req.body;
     
@@ -57,7 +57,7 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
 });//end add new artist POST route
 
 //PUT route to edit an artist's information 
-router.put('/:id',  (req, res) => { //rejectUnauthenticated,
+router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -76,7 +76,7 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
 });//end artist PUT route
 
 //PUT route to publish an artist's information 
-router.put('/publish/:id',  (req, res) => { //rejectUnauthenticated,
+router.put('/publish/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -94,7 +94,7 @@ router.put('/publish/:id',  (req, res) => { //rejectUnauthenticated,
 });//end artist PUT route
   
 //DELETE route to delete an artist
-router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
+router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "artist" WHERE id=$1;`;
     pool.query(query, [req.params.id]) 

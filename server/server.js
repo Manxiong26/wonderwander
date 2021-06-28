@@ -9,6 +9,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+// const adminRouter = require('./routes/user.admin.router')
 const adminArtistRouter = require('./routes/AdminRoutes/admin-artist.router');
 const adminArtworkRouter = require('./routes/AdminRoutes/admin-artwork.router');
 const adminCollectionRouter = require('./routes/AdminRoutes/admin-collection.router');
@@ -27,6 +28,8 @@ const seesaydoRouter = require('./routes/seesaydo.router');
 const seeRouter = require('./routes/see.router');
 const sayRouter = require('./routes/say.router');
 const otherRouter = require('./routes/otheradventures.router');
+const adventureSeeRouter = require('./routes/adventuresee.router');
+const adventureDoRouter = require('./routes/adventuredo.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -41,6 +44,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+// app.use('/api/admin', adminRouter)
 app.use('/api/admin/artist', adminArtistRouter);
 app.use('/api/admin/artwork', adminArtworkRouter);
 app.use('/api/admin/collection', adminCollectionRouter);
@@ -59,6 +63,8 @@ app.use('/api/do', seesaydoRouter);
 app.use('/api/see', seeRouter);
 app.use('/api/say', sayRouter);
 app.use('/api/adventure', otherRouter);
+app.use('/api/adventure/see', adventureSeeRouter);
+app.use('/api/adventure/do', adventureDoRouter);
 
 // Serve static files
 app.use(express.static('build'));

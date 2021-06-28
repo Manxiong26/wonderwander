@@ -13,9 +13,7 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
       console.log(maps.geometry.spherical)
   }
 
-  // ROUTE to direct user to directions
-//   onClick={() => location.href="https://www.google.com/maps/dir/?api=1&origin="+userLat+","+userLng+"&destination="+item.lat+","+item.long+"&dir_action=navigate"}></div>
-
+  
 
   // Balloon marker
   const BalloonMarker = ({item}) => (
