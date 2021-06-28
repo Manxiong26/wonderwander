@@ -3,9 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-router.get('/:id', (req, res) => {
-    const query = `SELECT "activities".id, "activities".image, "activities".description, "activities".title FROM "activities" WHERE "activities".id = $1;`;
-    pool.query(query, [req.params.id])
+router.get('/', (req, res) => {
+    const query = `SELECT "activities".id, "activities".image, "activities".description, "activities".title FROM "activities" WHERE "activities".published = true;`;
+    pool.query(query)
       .then(result => {
         // console.log(result.rows);
         res.send(result.rows)

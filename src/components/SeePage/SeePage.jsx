@@ -27,11 +27,11 @@ console.log('TESTING', list);
             {list.map((lists, i) => {
                 return (
                     <section>
-                    <Card>
-                        <CardMedia>
+                    
+                      
                             <ReactPlayer url={lists.link} controls="true" width="100" />
-                        </CardMedia>
-                    </Card>
+                        
+            
                     <Typography key={i} align="center" gutterBottom variant="h5">
                         {lists.prompts}
                     </Typography>

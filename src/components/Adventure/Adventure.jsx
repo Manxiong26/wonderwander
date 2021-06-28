@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
+import AdventureHeader from "./AdventureHeader";
 
 
 function Adventure() {
@@ -17,8 +18,9 @@ function Adventure() {
     console.log("hello", list);
 
     return (
+        
         <div>
-            <h2>{list.image}</h2>
+            <AdventureHeader />
         </div>
     );
 }

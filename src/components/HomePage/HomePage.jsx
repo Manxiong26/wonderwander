@@ -36,6 +36,10 @@ function HomePage() {
     dispatch({type: 'FETCH_ADVENTURE_DETAIL', payload: id});
   }, []);
 
+
+  //Adventure reducer
+  const adventure = useSelector((store) => store.adventureReducer);
+
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   //randomArt Store reducer
@@ -51,9 +55,14 @@ function HomePage() {
     history.push("/email");
   };
   // pushes to adventure info page
-  const toAdventure = () => {
-    history.push(`/adventure/${id}`);
+  const toAdventure = (event, advDet) => {
+    console.log('Adventure', advDet);
+      event.preventDefault();
+      history.push(`/adventure/${advDet.id}`);
+      console.log('clicking to adventure');
   };
+
+
   // function to render collection location text
   const collectionText = (collection) => (
     <>
@@ -132,17 +141,22 @@ function HomePage() {
         <div>
           <h4>Other Art Adventures:</h4>
           <List>
+          {adventure.map((advDet, i) => {
+              return (
+                <>  
             <Divider />
-            <ListItem>
-              <ListItemText>At the Museum</ListItemText>
-              <IconButton>
-              <ArrowForwardIosIcon
-                onClick={toAdventure}
-                className={classes.nextBtn}
-              />
+            <ListItem key={i}>
+              <ListItemText>{advDet.title}</ListItemText>
+              <IconButton >
+                    <ArrowForwardIosIcon
+                    onClick={(event) => toAdventure(event, advDet)}
+                    className={classes.nextBtn}
+                    />
               </IconButton>
             </ListItem>
             <Divider />
+            </>
+            )})}
           </List>
         </div>
       </div>

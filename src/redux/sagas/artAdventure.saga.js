@@ -3,9 +3,9 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 // GET request for artist detail
 // Response sets reducer
-function* getAdventureDetail(action) {
+function* getAdventureDetail() {
     try{
-        const response = yield axios.get(`/api/adventure/${action.payload}`)
+        const response = yield axios.get(`/api/adventure/`)
         console.log('Adventure from server: ', response.data)
         yield put({ type: 'SET_ADVENTURE_DETAIL', payload: response.data })
     } catch (err) {
