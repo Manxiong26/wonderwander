@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import AdventureHeader from "./AdventureHeader";
 
 
 function Adventure() {
-    const list = useSelector((store) => store.adventureReducer);
+    const list = useSelector((store) => store.adventureReducer.adventureDetailReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({type: 'FETCH_ADVENTURE_DETAIL', payload: id})
+        dispatch({type: 'FETCH_ADVENTURE', payload: id})
         console.log('In useEffect param: artwork detail', list);
     }, []);
 
@@ -17,8 +18,9 @@ function Adventure() {
     console.log("hello", list);
 
     return (
+
         <div>
-            <h2>{list.image}</h2>
+            <AdventureHeader list={list}/>
         </div>
     );
 }

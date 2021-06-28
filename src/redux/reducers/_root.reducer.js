@@ -29,7 +29,7 @@ import collectionDetail from './collection.detail.reducer';
 import seesaydoReducer from './seesaydo.reducer';
 
 import artistDetail from './artist.reducer';
-import adventureReducer from './adventure.saga';
+import adventureReducer from './adventure.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
