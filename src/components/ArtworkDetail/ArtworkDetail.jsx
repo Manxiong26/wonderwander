@@ -8,11 +8,12 @@ import DoPrompt from "../DoPrompt/DoPrompt";
 import ArtworkDescription from "./ArtworkDescription";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 
 function CollectionDetail() {
     const list = useSelector((store) => store.artworkDetailReducer);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch({type: 'FETCH_ART_DETAIL', payload: id})
@@ -22,6 +23,13 @@ function CollectionDetail() {
     const {id} = useParams();
     return (
         <div>
+            <button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                Go back
+            </button>
             <ImageHeader list={list}/>
             <ArtworkLinks list={list}/>
             <Typography>
