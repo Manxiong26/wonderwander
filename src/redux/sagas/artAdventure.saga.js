@@ -3,9 +3,9 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 // GET request for artist detail
 // Response sets reducer
-function* getAdventureDetail(action) {
+function* getAdventureDetail() {
     try{
-        const response = yield axios.get(`/api/adventure/${action.payload}`)
+        const response = yield axios.get(`/api/adventure/`)
         console.log('Adventure from server: ', response.data)
         yield put({ type: 'SET_ADVENTURE_DETAIL', payload: response.data })
     } catch (err) {
@@ -13,9 +13,20 @@ function* getAdventureDetail(action) {
     }
 }
 
+function* fetchAdventure(action){
+    try {
+        let id = action.payload;
+        const response = yield axios.get(`/api/adventure/${id}`);
+        yield put ({type: 'SET_ADVENTURE', payload: response.data});
+        console.log('error in fetchArtdetail under yield put', response.data);
+    } catch {
+        console.log('Error with getting Artwork detail');
+    }
+}
 
 function* adventureSaga() {
     yield takeLatest('FETCH_ADVENTURE_DETAIL', getAdventureDetail);
+    yield takeLatest('FETCH_ADVENTURE', fetchAdventure);
 }
 
 export default adventureSaga;

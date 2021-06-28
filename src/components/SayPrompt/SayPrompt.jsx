@@ -43,7 +43,7 @@ function SayPrompt() {
                 <div className={classes.details}>
                     <CardContent>
                         <Typography className={classes.content}>
-                            THIS IS THE VOTING PROMPT (SAY)
+                            What did you think of this piece? Vote!
                         </Typography>
                     </CardContent>
                 </div>

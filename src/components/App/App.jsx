@@ -45,7 +45,9 @@ import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
 import SayPage from '../SayPage/SayPage';
 import DoPage from '../DoPage/DoPage';
-
+import Adventure from '../Adventure/Adventure';
+import AdventureSeePage from '../AdventureSeePage/AdventureSeePage';
+import AdventureDoPage from '../AdventureDoPage/AdventureDoPage';
 
 import './App.css';
 import { Email } from '@material-ui/icons';
@@ -109,7 +111,7 @@ function App() {
           {/* <Nav /> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/welcome1" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route
@@ -146,7 +148,7 @@ function App() {
             exact
             path="/adventure/:id"
             >
-
+              <Adventure />
             </Route>
 
             <Route
@@ -155,6 +157,14 @@ function App() {
             path="/see/:id"
             >
               <SeePage />
+            </Route>
+
+            {/* Thi is for the adventure see */}
+            <Route
+            exact
+            path="/adventure/see/:id"
+            >
+              <AdventureSeePage />
             </Route>
 
             <Route
@@ -170,8 +180,13 @@ function App() {
             >
               <DoPage />
             </Route>
-            {/* ------------ADMIN PAGES----------------- */}
 
+            <Route
+            exact
+            path="/adventure/do/:id"
+            >
+              <AdventureDoPage />
+            </Route>
             {/* this is temporary until we can get the log in working */}
             <Route
               // shows AdminArtist Page at all times (logged in or not)
@@ -326,7 +341,7 @@ function App() {
           <Route
             exact path='/sponsor/:id'
           >
-            <SponsorDetail />
+            <SponsorDetail userLat={userLat} userLng={userLng}/>
           </Route>
           <Route
             exact path='/email'  

@@ -3,7 +3,6 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
 import "./HomePage.css";
 import { useHistory, Link, useParams } from "react-router-dom";
-
 //matierl UI
 import {
   List,
@@ -21,7 +20,6 @@ import {
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-
 function HomePage() {
   //this pushes to the next page
   const history = useHistory();
@@ -35,7 +33,8 @@ function HomePage() {
     dispatch({ type: "FETCH_THREE_COLLECTION" });
     dispatch({type: 'FETCH_ADVENTURE_DETAIL', payload: id});
   }, []);
-
+  //Adventure reducer
+  const adventure = useSelector((store) => store.adventureReducer.adventureReducer);
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   //randomArt Store reducer
@@ -51,8 +50,11 @@ function HomePage() {
     history.push("/email");
   };
   // pushes to adventure info page
-  const toAdventure = () => {
-    history.push(`/adventure/${id}`);
+  const toAdventure = (event, advDet) => {
+    console.log('Adventure', advDet);
+      event.preventDefault();
+      history.push(`/adventure/${advDet.id}`);
+      console.log('clicking to adventure');
   };
   // function to render collection location text
   const collectionText = (collection) => (
@@ -132,17 +134,22 @@ function HomePage() {
         <div>
           <h4>Other Art Adventures:</h4>
           <List>
+          {adventure.map((advDet, i) => {
+              return (
+                <>  
             <Divider />
-            <ListItem>
-              <ListItemText>At the Museum</ListItemText>
-              <IconButton>
-              <ArrowForwardIosIcon
-                onClick={toAdventure}
-                className={classes.nextBtn}
-              />
+            <ListItem key={i}>
+              <ListItemText>{advDet.title}</ListItemText>
+              <IconButton >
+                    <ArrowForwardIosIcon
+                    onClick={(event) => toAdventure(event, advDet)}
+                    className={classes.nextBtn}
+                    />
               </IconButton>
             </ListItem>
             <Divider />
+            </>
+            )})}
           </List>
         </div>
       </div>
@@ -151,6 +158,6 @@ function HomePage() {
     </>
   );
 }
-
 // this allows us to use <App /> in index.js
 export default HomePage;
+

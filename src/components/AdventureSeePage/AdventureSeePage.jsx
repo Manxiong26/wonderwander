@@ -7,15 +7,15 @@ import ReactPlayer from 'react-player';
 
 
 
-function SeePage() {
-    const list = useSelector((store) => store.seesaydoReducer.seeReducer);
+function AdventureSeePage() {
+    const list = useSelector((store) => store.adventureSeeDo.seeAdventureReducer);
     const dispatch = useDispatch();
     const {id} = useParams();
     
     
     useEffect(() => {
         console.log('In useEffect param:');
-        dispatch({type: 'FETCH_SEE_DETAIL', payload: id})
+        dispatch({type: 'FETCH_SEE_ADVENTURE', payload: id})
     }, []);
 
     
@@ -45,4 +45,4 @@ console.log('TESTING', list);
 
 
 // artwork_vidlink
-export default SeePage;
+export default AdventureSeePage;

@@ -63,6 +63,13 @@ const ArtistDetail = () => {
 
     return(
         <>
+        <button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                Go back
+            </button>
         {artistInfo === undefined ? ('Loading...') : (
         <div className={classes.name}>
         <Typography variant="h5">{artistInfo.name}</Typography>
