@@ -6,13 +6,14 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import AdminRoute from '../AdminRoute/AdminRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
 import HomePage from '../HomePage/HomePage';
@@ -27,6 +28,7 @@ import AdminSponsor from '../AdminSponsor/AdminSponsor';
 import AdminQuote from '../AdminQuote/AdminQuote';
 import AdminArtAdventure from '../AdminArtAdventure/AdminArtAdventure';
 import MapView from '../MapView/MapView'
+import AdminRegister from '../AdminRegister/AdminRegister'
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import WelcomePage1 from '../WelcomePage/WelcomePage1';
@@ -98,6 +100,9 @@ function App() {
      const [userLng, setUserLng] = useState(null);
      console.log("user lng: ", userLng);
     //  const [geoAvailable, setGeoAvailable] = useState(false);
+
+    const user = useSelector(store => store.user);
+    console.log('Logged in user: ', user)
 
     
 
@@ -171,56 +176,66 @@ function App() {
               <DoPage />
             </Route>
             {/* ------------ADMIN PAGES----------------- */}
+            <AdminRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LoginPage at /login
+              exact
+              path="/admin/register"
+              authRedirect="/admin/register"
+            >
+              <AdminRegister />
+            </AdminRoute>
 
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <AdminRoute
               // shows AdminArtist Page at all times (logged in or not)
               exact
               path="/admin/artist"
             >
               <AdminArtist />
 
-            </Route>
+            </AdminRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <AdminRoute
               // shows AdminArtwork Page at all times (logged in or not)
               exact
               path="/admin/artwork"
             >
               <AdminArtwork />
-            </Route>
+            </AdminRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <AdminRoute
               // shows AdminCollection Page at all times (logged in or not)
               exact
               path="/admin/collection"
             >
               <AdminCollection />
-            </Route>
+            </AdminRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <AdminRoute
               // shows AdminSponsor Page at all times (logged in or not)
               exact
               path="/admin/sponsor"
             >
               <AdminSponsor />
-            </Route>
+            </AdminRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <AdminRoute
               // shows AdminQuote Page at all times (logged in or not)
               exact
               path="/admin/quote"
             >
               <AdminQuote />
-            </Route>
+            </AdminRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <AdminRoute
               // shows AdminArtAdventure Page at all times (logged in or not)
               exact
               path="/admin/art-adventure"
             >
               <AdminArtAdventure />
-            </Route>
+            </AdminRoute>
 
             {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/user will show the UserPage if the user is logged in.

@@ -213,6 +213,18 @@ function Menu(){
           </ListItem>
       </List>
       </Link>
+      {user.admin ?
+      (
+      <Link to='/admin/artist' style={styles.link} onClick={handleDrawerClose}>
+      
+      <List>
+          <ListItem button key={'Admin'}>
+            <ListItemText primary={'Admin'} />
+          </ListItem>
+      </List>
+      </Link>
+      ): (<></>) 
+      }
     </Drawer>
     <main
       className={clsx(classes.content, {

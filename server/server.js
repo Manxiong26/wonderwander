@@ -9,6 +9,7 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+// const adminRouter = require('./routes/user.admin.router')
 const adminArtistRouter = require('./routes/AdminRoutes/admin-artist.router');
 const adminArtworkRouter = require('./routes/AdminRoutes/admin-artwork.router');
 const adminCollectionRouter = require('./routes/AdminRoutes/admin-collection.router');
@@ -41,6 +42,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+// app.use('/api/admin', adminRouter)
 app.use('/api/admin/artist', adminArtistRouter);
 app.use('/api/admin/artwork', adminArtworkRouter);
 app.use('/api/admin/collection', adminCollectionRouter);
