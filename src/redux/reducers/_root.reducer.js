@@ -13,6 +13,8 @@ import adminQuoteListReducer from './adminQuoteList.reducer';
 import adminQuoteInfoReducer from './adminQuote.reducer';
 import adminArtAdventureListReducer from './adminArtAdventureList.reducer';
 import adminArtAdventureInfoReducer from './adminArtAdventure.reducer';
+import adminSeeListReducer from './adminSeeList.reducer';
+import adminSeeInfoReducer from './adminSee.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
@@ -54,6 +56,8 @@ const rootReducer = combineReducers({
   adminQuoteInfoReducer,
   adminArtAdventureListReducer,
   adminArtAdventureInfoReducer,
+  adminSeeListReducer,
+  adminSeeInfoReducer,
   artworkReducer,
   randomQuote,
   randomArt,
