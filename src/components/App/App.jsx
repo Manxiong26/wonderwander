@@ -141,7 +141,7 @@ function App() {
             // Add in id
             path="/artworkdetail/:id"
             >
-              <ArtworkDetail />
+              <ArtworkDetail userLat={userLat} userLng={userLng} />
             </Route>
 
             <Route
