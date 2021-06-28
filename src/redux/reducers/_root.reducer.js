@@ -22,7 +22,7 @@ import artworkDetailReducer from './artworkDetail.reducer';
 import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
 import collectionDetail from './collection.detail.reducer';
-
+import adventureSeeDo from './adventureSeeDo.reducer';
 
 // import artistDetail from './artist.reducer';
 
@@ -66,6 +66,7 @@ const rootReducer = combineReducers({
   artistDetail,
   seesaydoReducer,
   adventureReducer,
+  adventureSeeDo,
 });
 
 export default rootReducer;

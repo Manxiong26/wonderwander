@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, makeStyles, CardMedia, CardContent, Typography, } from '@material-ui/core';
+import { Card, makeStyles, CardMedia, CardContent, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import VisibilityIcon from '@material-ui/icons/Visibility';
@@ -37,9 +37,10 @@ function ImageHeader({ list }) {
         alert('Please Login or Signup to access feature')
     }
 
+
     const [selected, setSelected] = React.useState(false);
-    //const [disable, setDisable] = React.useState(false)
-    const user = useSelector(store => store.collectionDetail)
+    const user = useSelector(store => store.user)
+
     return (
         <>
 
@@ -49,33 +50,28 @@ function ImageHeader({ list }) {
                     image={list.artwork_image}
                 >
                 </CardMedia>
-                {user === null ?
+                {user.id !== undefined ?
+
                     <div className="center">
-
-
                         {list.has_seen === true ?
                             <ToggleButton
-                                //disabled={disable}
                                 value="check"
                                 disabled
                                 selected={selected}
                                 onClick={seen}
                                 onChange={() => {
                                     setSelected(!selected)
-                                    //setDisable(true);
                                 }}
                             >Already Seen
                             </ToggleButton> : (
                                 <Button
                                     color="secondary"
                                     variant="contained"
-                                    //disabled={disable}
                                     value="check"
                                     selected={selected}
                                     onClick={function () { refreshPage(); seen(); }}
                                     onChange={() => {
                                         setSelected(!selected)
-                                        //setDisable(true);
                                     }}
                                 ><VisibilityIcon />
                                 </Button>)
@@ -85,13 +81,11 @@ function ImageHeader({ list }) {
                             <Button
                                 color="secondary"
                                 variant="contained"
-                                //disabled={disable}
                                 value="check"
                                 selected={selected}
                                 onClick={alertLogin}
                                 onChange={() => {
                                     setSelected(!selected)
-                                    //setDisable(true);
                                 }}
                             ><VisibilityIcon />
                             </Button>

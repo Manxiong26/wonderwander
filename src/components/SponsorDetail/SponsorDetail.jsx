@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core";
 
 
 
-function SponsorDetail({userLat, userLng, geoAvailable }) {
+function SponsorDetail({userLat, userLng}) {
     const details = useSelector(store => store.sponsorDetails);
     const sponsorArt = useSelector(store => store.sponsorArt);
     const dispatch = useDispatch();
@@ -70,7 +70,6 @@ function SponsorDetail({userLat, userLng, geoAvailable }) {
                     reducer={sponsorArt}
                     userLat={userLat}
                     userLng={userLng}
-                    geoAvailable={geoAvailable}
                 />
             </div>
             
