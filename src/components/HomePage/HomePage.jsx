@@ -3,7 +3,6 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
 import "./HomePage.css";
 import { useHistory, Link, useParams } from "react-router-dom";
-
 //matierl UI
 import {
   List,
@@ -21,7 +20,6 @@ import {
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-
 function HomePage() {
   //this pushes to the next page
   const history = useHistory();
@@ -35,11 +33,8 @@ function HomePage() {
     dispatch({ type: "FETCH_THREE_COLLECTION" });
     dispatch({type: 'FETCH_ADVENTURE_DETAIL', payload: id});
   }, []);
-
-
   //Adventure reducer
   const adventure = useSelector((store) => store.adventureReducer.adventureReducer);
-
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   //randomArt Store reducer
@@ -61,8 +56,6 @@ function HomePage() {
       history.push(`/adventure/${advDet.id}`);
       console.log('clicking to adventure');
   };
-
-
   // function to render collection location text
   const collectionText = (collection) => (
     <>
@@ -71,38 +64,67 @@ function HomePage() {
   );
   return (
     <>
-      <div className="art">
-        <h1>Welcome!!</h1>
-        <h2>Art of the Day!</h2>
-        <p key={randomArt.id}><img src={randomArt.image} /></p>
-        <p>Artist:{randomArt.artist_name}</p>
-        <p>Title:{randomArt.name}</p>
-      </div>
-      <div className="art">
-        <h4 >Find Local Art:<Link to="/collection" className="browse">Browse All</Link></h4>
-      </div>
-      <div className="collectionList">
-            {collectionThreeList.map(collection =>{
-                
-       return( <Box component="span" m={1} key={collection.id}>
-        <Divider/>
-        <p className="logo"><img className="logo2" src={collection.image}/> {collection.name} {collection.city}, {collection.state} xx.miles <Link onClick={(event) => viewCollectionDetail(event, collection)} className="arrow"> <ArrowForwardIosIcon/> </Link></p>
-      </Box >) })}
+    <Grid container direction="column">
+      <Grid item xs={12} sm={12} lg={12}>
+      <div className={classes.pageMargin}>
+        <Typography variant="h5" className={classes.title}>
+          Art of the Day
+        </Typography>
+        <p key={randomArt.id}>
+          <img className={classes.image} src={randomArt.image} />
+        </p>
+        <Typography variant="body2" className={classes.imageInfo}>
+          "{randomArt.name}" by {randomArt.artist_name}
+        </Typography>
+        <h4>
+          Find Local Art:
+          <Link to="/collection" className={classes.nextBtn}>
+            Browse All
+          </Link>
+        </h4>
+        <div>
+          <List>
+            {collectionThreeList.map((collection, i) => {
+              return (
+                <>
+                  <Divider />
+                  <ListItem key={i}>
+                    <ListItemAvatar>
+                      <Avatar className={classes.thumbnail} src={collection.image} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={collection.name}
+                      secondary={collectionText(collection)}
+                    />
+                    <ListItemText secondary="miles" />
+                    <IconButton>
+                    <ArrowForwardIosIcon
+                      onClick={(event) =>
+                        viewCollectionDetail(event, collection)
+                      }
+                      className={classes.nextBtn}
+                    />
+                    </IconButton>
+                  </ListItem>
+                </>
+              );
+            })}
+            <Divider />
+          </List>
+        </div>
+        {/* <Divider/>
+      <Box component="span" m={1} >
+        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
+      </Box >
       <Divider/>
-      </div>
-    
-    <Grid>
-      <Grid>
-      <div className="weekly"><Link to="/email" className="wonder"> <MailOutlineIcon className="email"/> Get Weekly Wonder News</Link></div>
+      <Box component="span" m={1} >
+        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
+      </Box >
       <Divider/>
-      <div className="art">
-        <h4>Other Art Adventures</h4>
-        <div>At the Museum <Link to="/adventure" className="arrow"> <ArrowForwardIosIcon/> </Link></div>
-      </div>
-      <div className="container">
-        <h2>Welcome, {user.username}!</h2>
-        <p>Your ID is: {user.id}</p>
-        <LogOutButton className="btn" />
+      <Box component="span" m={1} >
+        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
+      </Box >
+      <Divider/> */}
         <div className="weekly">
           <Button onClick={toEmail} variant="outlined">
             {" "}
@@ -136,6 +158,6 @@ function HomePage() {
     </>
   );
 }
-
 // this allows us to use <App /> in index.js
 export default HomePage;
+
