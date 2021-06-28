@@ -46,6 +46,8 @@ import ArtistDetail from '../ArtistDetail/ArtistDetail'
 import SayPage from '../SayPage/SayPage';
 import DoPage from '../DoPage/DoPage';
 import Adventure from '../Adventure/Adventure';
+import AdventureSeePage from '../AdventureSeePage/AdventureSeePage';
+import AdventureDoPage from '../AdventureDoPage/AdventureDoPage';
 
 import './App.css';
 import { Email } from '@material-ui/icons';
@@ -157,6 +159,14 @@ function App() {
               <SeePage />
             </Route>
 
+            {/* Thi is for the adventure see */}
+            <Route
+            exact
+            path="/adventure/see/:id"
+            >
+              <AdventureSeePage />
+            </Route>
+
             {/* ------------ADMIN PAGES----------------- */}
             <Route
             exact
@@ -170,6 +180,13 @@ function App() {
             path="/do/:id"
             >
               <DoPage />
+            </Route>
+
+            <Route
+            exact
+            path="/adventure/do/:id"
+            >
+              <AdventureDoPage />
             </Route>
             {/* this is temporary until we can get the log in working */}
             <Route
