@@ -42,6 +42,13 @@ console.log('HELLLLLLLLLLPPPPPPPPPPPP',artDet);
 
     return(
         <>
+        <button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                Go back
+            </button>
         <div>
             <h1>Collection Detail</h1>
         </div>

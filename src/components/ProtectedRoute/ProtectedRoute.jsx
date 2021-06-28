@@ -47,6 +47,8 @@ function ProtectedRoute(props) {
     ComponentToShow = ComponentToProtect;
   }
 
+  
+
   // We return a Route component that gets added to our list of routes
   return (
     <Route
