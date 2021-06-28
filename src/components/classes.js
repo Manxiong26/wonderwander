@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         paddingRight: '10%',
         paddingLeft: '10%',
+        overflow: 'auto'
         
 
       },
@@ -93,7 +94,8 @@ const useStyles = makeStyles((theme) => ({
       form: {
         marginTop: '10%', 
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        
         
       },
       inputs: {
@@ -103,7 +105,8 @@ const useStyles = makeStyles((theme) => ({
       formBtn: {
           marginLeft: '25%',
           marginRight: '25%',
-          marginTop: '4%'
+          marginTop: '4%',
+          marginBottom: '4%'
       },
       adminNav: {
         display: 'flex',

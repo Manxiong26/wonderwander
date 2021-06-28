@@ -2,18 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useHistory, useParams } from 'react-router-dom';
 import AdminNav from '../AdminNav/AdminNav'
+import { useStyles } from '../classes'
 
-import { Button, 
-        Typography, 
-        TextField, 
-        List, 
-        ListItem, 
-        ListItemAvatar, 
-        Avatar,
-        Divider,
-        Input,
-        Box  
+import {
+    Button,
+    Typography,
+    TextField,
+    List,
+    ListItem,
+    ListItemAvatar,
+    Avatar,
+    Divider,
+    Input,
+    Box,
+    Grid,
+    Card,
+    makeStyles,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
         } from "@material-ui/core";
+
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 
 function AdminCollection() {
 
@@ -25,6 +40,8 @@ function AdminCollection() {
 
     //functionality to dispatch information to a saga or reducer
     const dispatch = useDispatch();
+
+    const classes = useStyles()
 
     //redux store instances 
     const collectionList = useSelector((store) => store.adminCollectionListReducer);
@@ -194,133 +211,221 @@ function AdminCollection() {
     }
   
     return (
-      <div>
+      <>
           <AdminNav/>
-          
+          <Grid container spacing={1} direction="row">
           {editMode ?
-          <div>
-              <Typography variant="h4">Edit Collection</Typography>
-              <form className="admin-form" onSubmit={updateCollectionInfo}>
-                <TextField type="text"
+            <Grid item lg={5} className={classes.grid}>
+            <Card elevation={6} className={classes.cardForm}>
+                <div className={classes.cardContent}>
+              <Typography align="center" variant="h4">Edit Collection</Typography>
+              <form className={classes.form} onSubmit={updateCollectionInfo}>
+                <TextField
+                    className={classes.inputs} 
+                    type="text"
                     placeholder="Collection Name"
+                    label="Collection Name"
+                    variant="outlined"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                />
+                <TextField 
+                    className={classes.inputs}
+                    type="text"
+                    placeholder="Image URL"
+                    label="Image URL"
+                    variant="outlined"
+                    value={image}
+                    onChange={(event) => setImage(event.target.value)}
+                />
+                <TextField 
+                    className={classes.inputs}
+                    type="text"
+                    placeholder="City"
+                    label="City"
+                    variant="outlined"
+                    value={city}
+                    onChange={(event) => setCity(event.target.value)}
+                />
+                <TextField 
+                    className={classes.inputs}
+                    type="text"
+                    placeholder="State"
+                    label="State"
+                    variant="outlined"
+                    value={state}
+                    onChange={(event) => setState(event.target.value)}
+                />
+                <TextField 
+                    className={classes.inputs}
+                    type="text"
+                    placeholder="Collection Bio"
+                    label="Collection Bio"
+                    variant="outlined"
+                    multiline
+                    rows={6}
+                    value={bio}
+                    onChange={(event) => setBio(event.target.value)}
+                />
+                <TextField 
+                    className={classes.inputs}
+                    type="text"
+                    placeholder="Donation URL"
+                    label="Donation URL"
+                    variant="outlined"
+                    value={donate_link}
+                    onChange={(event) => setDonateLink(event.target.value)}
+                />
+                <TextField 
+                    className={classes.inputs}
+                    type="text"
+                    placeholder="Website URL"
+                    label="Website URL"
+                    variant="outlined"
+                    value={site_link}
+                    onChange={(event) => setSiteLink(event.target.value)}
+                />
+                <TextField 
+                    className={classes.inputs}
+                    type="text"
+                    placeholder="Search Text"
+                    label="Search Text"
+                    variant="outlined"
+                    value={search_text}
+                    onChange={(event) => setSearchText(event.target.value)}
+                />
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
+                <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
+              </form>
+              </div>
+              </Card>
+          </Grid>
+          : 
+          <Grid item lg={5} className={classes.grid}>
+          <Card elevation={6} className={classes.cardForm}>   
+          <div className={classes.cardContent}>
+              <Typography align="center" variant="h4">Add Collection</Typography>
+              <form className={classes.form} onSubmit={addCollection}>
+                <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
+                    placeholder="Collection Name"
+                    label="Collection Name"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Image URL"
+                    label="Image URL"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="City"
+                    label="City"
                     value={city}
                     onChange={(event) => setCity(event.target.value)}
                 />
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="State"
+                    label="State"
                     value={state}
                     onChange={(event) => setState(event.target.value)}
                 />
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Collection Bio"
+                    label="Collection Bio"
+                    multiline
+                    rows={6}
                     value={bio}
                     onChange={(event) => setBio(event.target.value)}
                 />
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Donation URL"
+                    label="Donation URL"
                     value={donate_link}
                     onChange={(event) => setDonateLink(event.target.value)}
                 />
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Website URL"
+                    label="Website URL"
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
                 />
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Search Text"
+                    label="Search Text"
                     value={search_text}
                     onChange={(event) => setSearchText(event.target.value)}
                 />
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Update">Update</Button>
-                <Button className="admin-btn" variant="outlined" onClick={renderToInfo}>Cancel</Button>
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
           </div>
-          :    
-          <div>
-              <Typography variant="h4">Add Collection</Typography>
-              <form className="admin-form" onSubmit={addCollection}>
-                <TextField type="text"
-                    placeholder="Collection Name"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Image URL"
-                    value={image}
-                    onChange={(event) => setImage(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="City"
-                    value={city}
-                    onChange={(event) => setCity(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="State"
-                    value={state}
-                    onChange={(event) => setState(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Collection Bio"
-                    value={bio}
-                    onChange={(event) => setBio(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Donation URL"
-                    value={donate_link}
-                    onChange={(event) => setDonateLink(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Website URL"
-                    value={site_link}
-                    onChange={(event) => setSiteLink(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Search Text"
-                    value={search_text}
-                    onChange={(event) => setSearchText(event.target.value)}
-                />
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
-              </form>
-          </div>}
+          </Card>
+          </Grid>}
           
           {/* Collection List. Always shows. */}
           {/* Edit clickability renders a specific collections's details in the edit form */}
-          <div>
-              <Typography variant="h5">Collection List</Typography>
-            <List>
+          <Grid item lg={7}>
+          <TableContainer
+          elevation={6}
+          component={Card}
+          className={classes.cardTable}
+        >
+            <div className={classes.tableContent}>
+              <Typography align="center" variant="h4">Collection List</Typography>
+              <Table className={classes.table}>
+                  <TableBody>
                 {collectionList.map((item, i) =>
-                    <div>
-                    <ListItem key={i} > 
-                        <ListItemAvatar>
-                        <Typography variant="h6">
-                            <img src={item.image} alt="Collection Image" width="50" height="50" /> 
-                            {item.name} 
-                        </Typography>
-                        </ListItemAvatar>
-                        <Box m={.5}>
-                            <Button className="admin-btn" variant="outlined" onClick={(event) => renderCollectionDetail(event, item)}>Edit</Button>
-                        </Box> 
-                        <Box m={.5}>  
-                            <Button className="admin-btn" variant="outlined" onClick={() => deleteValidation(item.id)}>Delete</Button>
-                        </Box>
-                    </ListItem>
-                    <Divider/>
-                   </div>
+                    <TableRow alignItems="flex-start" key={i}>        
+                        <TableCell>
+                            <img src={item.image} alt="Collection Image" className={classes.thumbnail}/> 
+                        </TableCell>
+                        <TableCell>
+                        <Typography variant="body1">{item.name}</Typography>
+                        </TableCell>
+                        
+                        <TableCell align="right">
+                      <IconButton>
+                        <EditIcon
+                          className={classes.btn}
+                          variant="outlined"
+                          onClick={(event) => renderCollectionDetail(event, item)}
+                        />
+                      </IconButton>
+                    </TableCell> 
+                    <TableCell align="right">
+                      <IconButton>
+                        <DeleteIcon
+                          className={classes.btn}
+                          variant="outlined"
+                          onClick={() => deleteValidation(item.id)}
+                        />
+                      </IconButton>
+                    </TableCell>
+                   </TableRow>
                 )}
-            </List>
-          </div>
-
-      </div>
+                </TableBody>
+            </Table>
+            </div>
+            </TableContainer>
+          </Grid>
+        </Grid>
+      </>
     );
 }
 
