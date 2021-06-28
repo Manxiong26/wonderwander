@@ -21,6 +21,7 @@ function CollectionDetail() {
     }, []);
 
     const {id} = useParams();
+    
     return (
         <div>
             <button
@@ -35,9 +36,9 @@ function CollectionDetail() {
             <Typography>
                 See. Say. Do.
             </Typography>
-            <SeePrompt />
+            <SeePrompt/>
             <SayPrompt />
-            <DoPrompt list={list}/>
+            <DoPrompt />
             <ArtworkDescription />
         </div>
     );

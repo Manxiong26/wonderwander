@@ -6,6 +6,8 @@ import adminArtistSaga from './adminArtist.saga';
 import adminArtworkSaga from './adminArtwork.saga';
 import adminCollectionSaga from './adminCollection.saga';
 import adminSponsorSaga from './adminSponsor.saga';
+import adminQuoteSaga from './adminQuote.saga';
+import adminArtAdventureSaga from './adminArtAdventure.saga';
 import artworkSaga from './artwork.saga'
 import randomQuoteSaga from './randomQuote.saga';
 import randomArtSaga from './randomArt.saga';
@@ -19,7 +21,11 @@ import getCollectionDetailSaga from './collection.detail.saga';
 import seesaydoSaga from './seesaydo.saga';
 
 import artistSaga from './artist.saga'
+
 import addTaskSeenSaga from './addTaskSeen.saga';
+
+import adventureSaga from './artAdventure.saga';
+
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -36,6 +42,8 @@ export default function* rootSaga() {
     adminArtworkSaga(),
     adminCollectionSaga(),
     adminSponsorSaga(),
+    adminQuoteSaga(),
+    adminArtAdventureSaga(),
     artworkSaga(),
     randomQuoteSaga(),
     randomArtSaga(),
@@ -48,6 +56,10 @@ export default function* rootSaga() {
     artistSaga(),
 
     seesaydoSaga(),
+
     addTaskSeenSaga(),
+
+    adventureSaga(),
+
   ]);
 }

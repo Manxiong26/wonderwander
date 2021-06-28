@@ -2,36 +2,44 @@ import React, { useEffect } from 'react';
 import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, } from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import PropTypes from "prop-types";
+import ReactPlayer from 'react-player';
+
+
 
 function SeePage() {
-    // const list = useSelector((store) => store.artworkDetailReducer);
-    // const dispatch = useDispatch();
+    const list = useSelector((store) => store.seesaydoReducer.seeReducer);
+    const dispatch = useDispatch();
+    const {id} = useParams();
+    
+    
+    useEffect(() => {
+        console.log('In useEffect param:');
+        dispatch({type: 'FETCH_SEE_DETAIL', payload: id})
+    }, []);
 
-    // useEffect(() => {
-    //     console.log('In useEffect param:');
-    //     dispatch({type: 'FETCH_ART_DETAIL', payload: id})
-    // }, []);
-
-    // const {id} = useParams();
-
+    
+console.log('TESTING', list);
 
 
     return (
-
-        <section>
-            {/* <Card>
-                <CardMedia
-                component="video" 
-                image={list.artwork_vidlink}
-                >
-                </CardMedia>
-            </Card> */}
-            <img src="https://lh6.ggpht.com/HlgucZ0ylJAfZgusynnUwxNIgIp5htNhShF559x3dRXiuy_UdP3UQVLYW6c=s1200">
-            </img>
-            <h3>
-                text goes here
-            </h3>
-        </section>
+        <div>
+            {list.map((lists, i) => {
+                return (
+                    <section>
+                    
+                      
+                            <ReactPlayer url={lists.link} controls="true" width="100" />
+                        
+            
+                    <Typography key={i} align="center" gutterBottom variant="h5">
+                        {lists.prompts}
+                    </Typography>
+                </section>
+                )
+            })}
+        
+        </div>
     );
 }
 

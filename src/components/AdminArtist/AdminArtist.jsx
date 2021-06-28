@@ -79,7 +79,7 @@ function AdminArtist() {
         console.log('clicking edit for Artist = ', item);
 
         //sets specific artist in artist reducer 
-        dispatch({type: 'SET_ARTIST_INFO', payload: item}); // 
+        dispatch({type: 'SET_ARTIST_INFO', payload: item});  
 
         //renders form view from add to edit mode
         setEditMode(true);
@@ -163,7 +163,30 @@ function AdminArtist() {
           }
         });
     }
-  
+
+    //changes db boolean to true which "publishes" item on public facing pages
+    const publish = (event, item) => {
+        console.log('clicking publish for Artist = ', item);
+
+        //sets specific artist in artist reducer 
+        dispatch({type: 'SET_ARTIST_INFO', payload: item}); 
+
+        //changes item boolean to true
+        const publishedTrue = {
+            id: item.id, 
+            published: true,
+        }
+        
+        //sends updated artist info (published boolean true) to artist saga
+        dispatch({type: 'UPDATE_PUBLISH', payload: publishedTrue});
+
+        //swal success indicator
+        swal({
+            text: "This artist's information has been published!",
+            icon: "success" 
+        });
+    }
+
     return (
       <div>
           
@@ -237,6 +260,9 @@ function AdminArtist() {
                             {item.name} 
                         </Typography>
                         </ListItemAvatar>
+                        <Box m={.5}>
+                            <Button className="admin-btn" variant="outlined" onClick={(event) => publish(event, item)}>Publish</Button>
+                        </Box>
                         <Box m={.5}>
                             <Button className="admin-btn" variant="outlined" onClick={(event) => renderArtistDetail(event, item)}>Edit</Button>
                         </Box> 
