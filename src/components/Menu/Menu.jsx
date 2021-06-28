@@ -205,7 +205,6 @@ function Menu(){
             <ListItemText primary={'Become a Sponsor'} />
           </ListItem>
       </List>
-      </Link>
       <Link to='/login' style={styles.link} onClick={handleDrawerClose,
       () => dispatch({ type: 'LOGOUT' })}>
       
