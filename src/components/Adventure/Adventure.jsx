@@ -8,14 +8,16 @@ function Adventure() {
     const list = useSelector((store) => store.adventureReducer.adventureDetailReducer);
     const dispatch = useDispatch();
 
+    console.log('test1', list);
+
     useEffect(() => {
         dispatch({type: 'FETCH_ADVENTURE', payload: id})
-        console.log('In useEffect param: artwork detail', list);
+        console.log('In useEffect param: adventure: ', list);
     }, []);
 
     const {id} = useParams();
 
-    console.log("hello", list);
+    console.log("test2", list);
 
     return (
 

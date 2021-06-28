@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
   JOIN "do" ON "do".activity_id = "activities".id WHERE "activities".id = $1 AND "activities".published = TRUE;`;
   pool.query(query, [req.params.id])
   .then(result => {
-    res.send(result.rows)
+    res.send(result.rows[0])
   })
   .catch(error => {
     console.log('Something went wrong with getting id of adventures', error);
