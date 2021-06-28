@@ -90,68 +90,9 @@ function HomePage() {
       </Box >) })}
       <Divider/>
       </div>
-      {/* <Divider/>
-    <Grid container direction="column">
-      <Grid item xs={12} sm={12} lg={12}>
-      <div className={classes.pageMargin}>
-        <Typography variant="h5" className={classes.title}>
-          Art of the Day
-        </Typography>
-        <p key={randomArt.id}>
-          <img className={classes.image} src={randomArt.image} />
-        </p>
-        <Typography variant="body2" className={classes.imageInfo}>
-          "{randomArt.name}" by {randomArt.artist_name}
-        </Typography>
-        <h4>
-          Find Local Art:
-          <Link to="/collection" className={classes.nextBtn}>
-            Browse All
-          </Link>
-        </h4>
-        <div>
-          <List>
-            {collectionThreeList.map((collection, i) => {
-              return (
-                <>
-                  <Divider />
-                  <ListItem key={i}>
-                    <ListItemAvatar>
-                      <Avatar className={classes.thumbnail} src={collection.image} />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={collection.name}
-                      secondary={collectionText(collection)}
-                    />
-                    <ListItemText secondary="miles" />
-                    <IconButton>
-                    <ArrowForwardIosIcon
-                      onClick={(event) =>
-                        viewCollectionDetail(event, collection)
-                      }
-                      className={classes.nextBtn}
-                    />
-                    </IconButton>
-                  </ListItem>
-                </>
-              );
-            })}
-            <Divider />
-          </List>
-        </div>
-        {/* <Divider/>
-      <Box component="span" m={1} >
-        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
-      </Box >
-      <Divider/>
-      <Box component="span" m={1} >
-        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
-      </Box >
-      <Divider/>
-      <Box component="span" m={1} >
-        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
-      </Box >
-      <Divider/> */}
+    
+    <Grid>
+      <Grid>
       <div className="weekly"><Link to="/email" className="wonder"> <MailOutlineIcon className="email"/> Get Weekly Wonder News</Link></div>
       <Divider/>
       <div className="art">
