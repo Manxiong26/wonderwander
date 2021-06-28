@@ -211,7 +211,7 @@ function Menu(){
       
       <List>
           <ListItem button key={'Sign In/Out'}>
-            <ListItemText primary={'Sign In/Out'} />
+            <ListItemText primary={'Sign In/Out'} onClick={handleDrawerClose}/>
           </ListItem>
       </List>
       </Link>
