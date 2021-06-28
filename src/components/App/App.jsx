@@ -27,6 +27,7 @@ import AdminCollection from '../AdminCollection/AdminCollection';
 import AdminSponsor from '../AdminSponsor/AdminSponsor';
 import AdminQuote from '../AdminQuote/AdminQuote';
 import AdminArtAdventure from '../AdminArtAdventure/AdminArtAdventure';
+import AdminLanding from '../AdminLanding/AdminLanding'
 import MapView from '../MapView/MapView'
 import AdminRegister from '../AdminRegister/AdminRegister'
 
@@ -176,6 +177,13 @@ function App() {
               <DoPage />
             </Route>
             {/* ------------ADMIN PAGES----------------- */}
+            <AdminRoute
+
+            exact
+            path="/admin/landing"
+            >
+              <AdminLanding />
+            </AdminRoute>
             <AdminRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
