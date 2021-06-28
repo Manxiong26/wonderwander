@@ -39,7 +39,7 @@ router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
 });//end one artwork's info GET route
 
 //adds new artwork to the DB from admin artwork page
-router.post('/',  (req, res) => {  //rejectUnauthenticated,
+router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     let artwork = req.body;
     
@@ -62,7 +62,7 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
 });//end add new artwork POST route
 
 //PUT route to edit an artwork's information 
-router.put('/:id',  (req, res) => { //rejectUnauthenticated,
+router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -85,7 +85,7 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
 });//end artwork PUT route
   
 //DELETE route to delete an artwork
-router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
+router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "artwork" WHERE id=$1;`;
     pool.query(query, [req.params.id]) 

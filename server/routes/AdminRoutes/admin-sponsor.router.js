@@ -39,7 +39,7 @@ router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
 });//end one sponsor's info GET route
 
 //adds new sponsor to the DB from admin sponsor page
-router.post('/',  (req, res) => {  //rejectUnauthenticated,
+router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     let sponsor = req.body;
     
@@ -57,7 +57,7 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
 });//end add new sponsor POST route
 
 //PUT route to edit a sponsor's information 
-router.put('/:id',  (req, res) => { //rejectUnauthenticated,
+router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -77,7 +77,7 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
 });//end sponsor PUT route
   
 //DELETE route to delete a sponsor
-router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
+router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "sponsor" WHERE id=$1;`;
     pool.query(query, [req.params.id]) 

@@ -13,7 +13,7 @@ import {useSelector} from 'react-redux';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-function ProtectedRoute(props) {
+function AdminRoute(props) {
   const user = useSelector((store) => store.user);
 
   // Using destructuring, this takes ComponentToProtect from component
@@ -29,8 +29,8 @@ function ProtectedRoute(props) {
 
   let ComponentToShow;
 
-  if (user.id) {
-    // if the user is logged in (only logged in users have ids)
+  if (user.id && user.admin ) {
+    // if the user is logged in (only logged in users have ids) and user is an admin
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
   } else {
@@ -41,13 +41,11 @@ function ProtectedRoute(props) {
 
 
   // redirect a logged in user if an authRedirect prop has been provided
-  if (user.id && authRedirect != null) {
+  if (user.id && user.admin && authRedirect != null) {
     return <Redirect exact from={otherProps.path} to={authRedirect} />;
   } else if (!user.id && authRedirect != null) {
     ComponentToShow = ComponentToProtect;
   }
-
-  
 
   // We return a Route component that gets added to our list of routes
   return (
@@ -62,4 +60,4 @@ function ProtectedRoute(props) {
   );
 }
 
-export default ProtectedRoute;
+export default AdminRoute;

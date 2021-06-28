@@ -39,7 +39,7 @@ router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
 });//end one quote's info GET route
 
 //adds new quote to the DB from admin quote page
-router.post('/',  (req, res) => {  //rejectUnauthenticated,
+router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     let quote = req.body;
     
@@ -57,7 +57,7 @@ router.post('/',  (req, res) => {  //rejectUnauthenticated,
 });//end add new quote POST route
 
 //PUT route to edit a quote's information 
-router.put('/:id',  (req, res) => { //rejectUnauthenticated,
+router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -75,7 +75,7 @@ router.put('/:id',  (req, res) => { //rejectUnauthenticated,
 });//end quote PUT route
   
 //DELETE route to delete a quote
-router.delete('/:id',  (req, res) => { //rejectUnauthenticated,
+router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "quotes" WHERE id=$1;`;
     pool.query(query, [req.params.id]) 

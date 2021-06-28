@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useHistory, useParams } from 'react-router-dom';
+import AdminNav from '../AdminNav/AdminNav';
 
 import { Button, 
         Typography, 
@@ -166,7 +167,7 @@ function AdminSponsor() {
   
     return (
       <div>
-          
+          <AdminNav />
           {editMode ?
           <div>
               <Typography variant="h4">Edit Sponsor</Typography>
