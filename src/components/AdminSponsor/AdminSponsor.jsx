@@ -40,7 +40,6 @@ function AdminSponsor() {
     const [logo, setLogo] = useState('');
     const [description, setDescription] = useState('');
     const [site_link, setSiteLink] = useState('');
-    const [donate_link, setDonateLink] = useState('');
 
     //edit mode
     const [editMode, setEditMode] = useState(false);
@@ -54,7 +53,6 @@ function AdminSponsor() {
             logo: logo,
             description: description,
             site_link: site_link,
-            donate_link: donate_link,
         }
         
         //dispatch to sponsorList saga
@@ -74,7 +72,6 @@ function AdminSponsor() {
         setLogo('');
         setDescription('');
         setSiteLink('');
-        setDonateLink('');
     }
 
     //renders specific sponsor's details in input feilds to edit
@@ -92,7 +89,6 @@ function AdminSponsor() {
         setLogo(item.logo);
         setDescription(item.description);
         setSiteLink(item.site_link);
-        setDonateLink(item.donate_link);
     }
 
     //update (edit) sponsor information
@@ -105,7 +101,6 @@ function AdminSponsor() {
             logo: logo,
             description: description,
             site_link: site_link,
-            donate_link: donate_link,
         }
 
         console.log('updated sponsor info:', updatedSponsorInfo);
@@ -127,7 +122,6 @@ function AdminSponsor() {
         setLogo('');
         setDescription('');
         setSiteLink('');
-        setDonateLink('');
     }
 
     //cancel (editMode) button - returns to add sponsor form
@@ -139,7 +133,6 @@ function AdminSponsor() {
         setLogo('');
         setDescription('');
         setSiteLink('');
-        setDonateLink('');
     }
 
     //delete sponsor 
@@ -198,11 +191,6 @@ function AdminSponsor() {
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
                 />
-                <TextField type="text"
-                    placeholder="Donation URL"
-                    value={donate_link}
-                    onChange={(event) => setDonateLink(event.target.value)}
-                />
                 <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Update">Update</Button>
                 <Button className="admin-btn" variant="outlined" onClick={renderToInfo}>Cancel</Button>
               </form>
@@ -230,11 +218,6 @@ function AdminSponsor() {
                     placeholder="Website URL"
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Donation URL"
-                    value={donate_link}
-                    onChange={(event) => setDonateLink(event.target.value)}
                 />
                 <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>

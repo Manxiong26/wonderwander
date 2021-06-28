@@ -9,6 +9,10 @@ import adminCollectionListReducer from './adminCollectionList.reducer';
 import adminCollectionInfoReducer from './adminCollection.reducer';
 import adminSponsorListReducer from './adminSponsorList.reducer';
 import adminSponsorInfoReducer from './adminSponsor.reducer';
+import adminQuoteListReducer from './adminQuoteList.reducer';
+import adminQuoteInfoReducer from './adminQuote.reducer';
+import adminArtAdventureListReducer from './adminArtAdventureList.reducer';
+import adminArtAdventureInfoReducer from './adminArtAdventure.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
@@ -18,14 +22,14 @@ import artworkDetailReducer from './artworkDetail.reducer';
 import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
 import collectionDetail from './collection.detail.reducer';
-
+import adventureSeeDo from './adventureSeeDo.reducer';
 
 // import artistDetail from './artist.reducer';
 
 import seesaydoReducer from './seesaydo.reducer';
 
-import artistDetail from './artist.reducer'
-
+import artistDetail from './artist.reducer';
+import adventureReducer from './adventure.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -46,6 +50,10 @@ const rootReducer = combineReducers({
   adminCollectionInfoReducer,
   adminSponsorListReducer,
   adminSponsorInfoReducer,
+  adminQuoteListReducer,
+  adminQuoteInfoReducer,
+  adminArtAdventureListReducer,
+  adminArtAdventureInfoReducer,
   artworkReducer,
   randomQuote,
   randomArt,
@@ -57,8 +65,8 @@ const rootReducer = combineReducers({
   collectionDetail,
   artistDetail,
   seesaydoReducer,
-
-
+  adventureReducer,
+  adventureSeeDo,
 });
 
 export default rootReducer;

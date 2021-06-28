@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         border: '1px solid black',
         marginBottom: '2%',
-        padding: '2%'
+        padding: '2%',
+        backgroundColor: '#d3d3d3'
     },
     btn: {
         margin: '4%'
@@ -62,6 +63,13 @@ const ArtistDetail = () => {
 
     return(
         <>
+        <button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                Go back
+            </button>
         {artistInfo === undefined ? ('Loading...') : (
         <div className={classes.name}>
         <Typography variant="h5">{artistInfo.name}</Typography>

@@ -24,6 +24,8 @@ import AdminArtist from '../AdminArtist/AdminArtist';
 import AdminArtwork from '../AdminArtwork/AdminArtwork';
 import AdminCollection from '../AdminCollection/AdminCollection';
 import AdminSponsor from '../AdminSponsor/AdminSponsor';
+import AdminQuote from '../AdminQuote/AdminQuote';
+import AdminArtAdventure from '../AdminArtAdventure/AdminArtAdventure';
 import MapView from '../MapView/MapView'
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
@@ -43,12 +45,15 @@ import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
 import SayPage from '../SayPage/SayPage';
 import DoPage from '../DoPage/DoPage';
-
+import Adventure from '../Adventure/Adventure';
+import AdventureSeePage from '../AdventureSeePage/AdventureSeePage';
+import AdventureDoPage from '../AdventureDoPage/AdventureDoPage';
 
 import './App.css';
 import { Email } from '@material-ui/icons';
 
 import Menu from '../Menu/Menu'
+
 
 function App() {
   const dispatch = useDispatch();
@@ -136,30 +141,52 @@ function App() {
             // Add in id
             path="/artworkdetail/:id"
             >
-              <ArtworkDetail />
+              <ArtworkDetail userLat={userLat} userLng={userLng} />
+            </Route>
+
+            <Route
+            exact
+            path="/adventure/:id"
+            >
+              <Adventure />
             </Route>
 
             <Route
             // Add in id
             exact
-            path="/see"
+            path="/see/:id"
             >
               <SeePage />
+            </Route>
+
+            {/* Thi is for the adventure see */}
+            <Route
+            exact
+            path="/adventure/see/:id"
+            >
+              <AdventureSeePage />
             </Route>
 
             {/* ------------ADMIN PAGES----------------- */}
             <Route
             exact
-            path="/say/:id"
+            path="/say"
             >
               <SayPage />
             </Route>
 
             <Route
             exact
-            path="/do"
+            path="/do/:id"
             >
               <DoPage />
+            </Route>
+
+            <Route
+            exact
+            path="/adventure/do/:id"
+            >
+              <AdventureDoPage />
             </Route>
             {/* this is temporary until we can get the log in working */}
             <Route
@@ -194,6 +221,22 @@ function App() {
             >
               <AdminSponsor />
             </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminQuote Page at all times (logged in or not)
+              exact
+              path="/admin/quote"
+            >
+              <AdminQuote />
+            </Route>
+            {/* this is temporary until we can get the log in working */}
+            <Route
+              // shows AdminArtAdventure Page at all times (logged in or not)
+              exact
+              path="/admin/art-adventure"
+            >
+              <AdminArtAdventure />
+            </Route>
 
             {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -214,7 +257,7 @@ function App() {
               <Route
               exact
               path='/collectionDetail/:id'>
-                <CollectionDetail />
+                <CollectionDetail userLat={userLat} userLng={userLng}/>
               </Route>
             <Route
               // logged in shows InfoPage else shows LoginPage

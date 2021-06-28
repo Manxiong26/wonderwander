@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 //material ui drawer
 import clsx from 'clsx';
@@ -101,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Menu(){
 
+  const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
 
     let loginLinkData = {
@@ -204,8 +205,10 @@ function Menu(){
             <ListItemText primary={'Become a Sponsor'} />
           </ListItem>
       </List>
-
-      <Link to={loginLinkData.path} style={styles.link} onClick={handleDrawerClose}>
+      </Link>
+      <Link to='/login' style={styles.link} onClick={handleDrawerClose,
+      () => dispatch({ type: 'LOGOUT' })}>
+      
       <List>
           <ListItem button key={'Sign In/Out'}>
             <ListItemText primary={'Sign In/Out'} />
