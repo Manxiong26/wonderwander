@@ -208,39 +208,52 @@ function AdminArtist() {
     <Grid container spacing={1} direction="row">
       {editMode ? (
         <Grid item lg={5} className={classes.grid}>
-          <Card elevation={6} className={classes.card}>
+          <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography align="center" variant="h4">
                 <u>Edit Artist</u>
               </Typography>
-              <div className={classes.form}>
-                <form onSubmit={updateArtistInfo}>
+                <form className={classes.form} onSubmit={updateArtistInfo}>
                   <TextField
+                    className={classes.inputs}
                     type="text"
+                    variant="outlined"
                     placeholder="Artist Name"
+                    label="Artist Name"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                   />
                   <TextField
+                    className={classes.inputs}
                     type="text"
+                    variant="outlined"
                     placeholder="Image URL"
+                    label="Image URL"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                   />
                   <TextField
+                    className={classes.inputs}
                     type="text"
+                    variant="outlined"
                     placeholder="Website URL"
+                    label="Website URL"
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
                   />
                   <TextField
+                    className={classes.inputs}
                     type="text"
+                    variant="outlined"
                     placeholder="Artist Bio"
+                    label="Artist Bio"
+                    multiline
+                    rows={6}
                     value={bio}
                     onChange={(event) => setBio(event.target.value)}
                   />
                   <Button
-                    className="admin-btn"
+                    className={classes.formBtn}
                     type="submit"
                     name="submit"
                     variant="outlined"
@@ -249,14 +262,13 @@ function AdminArtist() {
                     Update
                   </Button>
                   <Button
-                    className="admin-btn"
+                    className={classes.formBtn}
                     variant="outlined"
                     onClick={renderToInfo}
                   >
                     Cancel
                   </Button>
                 </form>
-              </div>
             </div>
           </Card>
         </Grid>
