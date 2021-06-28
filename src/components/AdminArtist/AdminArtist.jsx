@@ -210,7 +210,7 @@ function AdminArtist() {
         <Grid item lg={5} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
-              <Typography align="center" variant="h4">
+              <Typography className={classes.title} align="center" variant="h4">
                 <u>Edit Artist</u>
               </Typography>
                 <form className={classes.form} onSubmit={updateArtistInfo}>
@@ -276,7 +276,7 @@ function AdminArtist() {
         <Grid item lg={5} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
-              <Typography align="center" variant="h4">
+              <Typography className={classes.title} align="center" variant="h4">
                 <u>Add Artist</u>
               </Typography>
               <form className={classes.form} onSubmit={addArtist}>
@@ -343,7 +343,7 @@ function AdminArtist() {
           className={classes.cardTable}
         >
           <div className={classes.tableContent}>
-            <Typography align="center" variant="h4">
+            <Typography className={classes.title} align="center" variant="h4">
               <u>Artist List</u>
             </Typography>
             <Table className={classes.table}>
@@ -381,6 +381,7 @@ function AdminArtist() {
                     <TableCell align="right">
                       <IconButton>
                         <DeleteIcon
+                          color="primary"
                           className={classes.btn}
                           variant="outlined"
                           onClick={() => deleteValidation(item.id)}

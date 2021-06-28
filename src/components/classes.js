@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
       title: {
           textAlign: 'center',
           fontFamily: theme.typography.Pacifico,
-          textDecoration: 'underline'
+          textDecoration: 'underline',
+          color: theme.palette.primary.main
       },
       image: {
           maxWidth: '280px',

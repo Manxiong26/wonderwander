@@ -218,7 +218,7 @@ function AdminCollection() {
             <Grid item lg={5} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
-              <Typography align="center" variant="h4">Edit Collection</Typography>
+              <Typography className={classes.title} align="center" variant="h4">Edit Collection</Typography>
               <form className={classes.form} onSubmit={updateCollectionInfo}>
                 <TextField
                     className={classes.inputs} 
@@ -304,7 +304,7 @@ function AdminCollection() {
           <Grid item lg={5} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>   
           <div className={classes.cardContent}>
-              <Typography align="center" variant="h4">Add Collection</Typography>
+              <Typography className={classes.title} align="center" variant="h4">Add Collection</Typography>
               <form className={classes.form} onSubmit={addCollection}>
                 <TextField type="text"
                     className={classes.inputs}
@@ -387,7 +387,7 @@ function AdminCollection() {
           className={classes.cardTable}
         >
             <div className={classes.tableContent}>
-              <Typography align="center" variant="h4">Collection List</Typography>
+              <Typography className={classes.title} align="center" variant="h4">Collection List</Typography>
               <Table className={classes.table}>
                   <TableBody>
                 {collectionList.map((item, i) =>
@@ -411,6 +411,7 @@ function AdminCollection() {
                     <TableCell align="right">
                       <IconButton>
                         <DeleteIcon
+                          color="primary"
                           className={classes.btn}
                           variant="outlined"
                           onClick={() => deleteValidation(item.id)}
