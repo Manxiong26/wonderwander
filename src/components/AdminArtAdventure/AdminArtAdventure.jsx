@@ -3,17 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import AdminNav from '../AdminNav/AdminNav'
 
-import { Button, 
-        Typography, 
-        TextField, 
-        List, 
-        ListItem, 
-        ListItemAvatar, 
-        Avatar,
-        Divider,
-        Input,
-        Box  
-        } from "@material-ui/core";
+import {
+    Button,
+    Typography,
+    TextField,
+    Grid,
+    Card,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+  } from "@material-ui/core";
+  import DeleteIcon from "@material-ui/icons/Delete";
+  import EditIcon from "@material-ui/icons/Edit";
+  
+  import { useStyles } from "../classes";
 
 function AdminArtAdventure() {
 
@@ -22,6 +28,8 @@ function AdminArtAdventure() {
 
     //functionality to route to a page
     const history = useHistory();
+
+    const classes = useStyles();
 
     //functionality to dispatch information to a saga or reducer
     const dispatch = useDispatch();
@@ -161,80 +169,146 @@ function AdminArtAdventure() {
     return (        
       <div>
       <AdminNav />
+      <Grid container spacing={1} direction="row">
           {editMode ?
-          <div>
-              <Typography variant="h4">Edit Adventure</Typography>
-              <form className="admin-form" onSubmit={updateArtAdventureInfo}>
+          <Grid item lg={5} className={classes.grid}>
+          <Card elevation={6} className={classes.cardForm}>
+            <div className={classes.cardContent}>
+              <Typography className={classes.title} align="center" variant="h4">Edit Adventure</Typography>
+              <form className={classes.form} onSubmit={updateArtAdventureInfo}>
                 <TextField type="text"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Title"
+                    label="Title"
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Description"
+                    label="Description"
                     value={description}
+                    multiline
+                    rows={6}
                     onChange={(event) => setDescription(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Image URL"
+                    label="Image URL"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Update">Update</Button>
-                <Button className="admin-btn" variant="outlined" onClick={renderToInfo}>Cancel</Button>
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
+                <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
+              </form>
+                </div>
+          </Card>
+          </Grid>
+          : 
+          <Grid item lg={5} className={classes.grid}>
+          <Card elevation={6} className={classes.cardForm}>
+            <div className={classes.cardContent}>  
+              <Typography className={classes.title} align="center" variant="h4">Add Adventure</Typography>
+              <form className={classes.form} onSubmit={addArtAdventure}>
+                <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
+                    placeholder="Title"
+                    label="Title"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
+                />
+                <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
+                    placeholder="Description"
+                    label="Description"
+                    value={description}
+                    multiline
+                    rows={6}
+                    onChange={(event) => setDescription(event.target.value)}
+                />
+                <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
+                    placeholder="Image URL"
+                    label="Image URL"
+                    value={image}
+                    onChange={(event) => setImage(event.target.value)}
+                />
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
           </div>
-          :    
-          <div>
-              <Typography variant="h4">Add Adventure</Typography>
-              <form className="admin-form" onSubmit={addArtAdventure}>
-                <TextField type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={(event) => setTitle(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Description"
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}
-                />
-                <TextField type="text"
-                    placeholder="Image URL"
-                    value={image}
-                    onChange={(event) => setImage(event.target.value)}
-                />
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
-              </form>
-          </div>}
+          </Card>
+          </Grid>}
           
           {/* Adventure List. Always shows. */}
           {/* Edit clickability renders a specific art adventure's details in the edit form */}
-          <div>
-              <Typography variant="h5">Adventure List</Typography>
-            <List>
-                {artAdventureList.map((item, i) =>
-                    <div>
-                    <ListItem key={i} > 
-                        <ListItemAvatar>
-                        <Typography variant="h6">
-                            <img src={item.image} alt="Adventure Image" width="50" height="50" /> 
-                            {item.title} 
-                        </Typography>
-                        </ListItemAvatar>
-                        <Box m={.5}>
-                            <Button className="admin-btn" variant="outlined" onClick={(event) => renderArtAdventureDetail(event, item)}>Edit</Button>
-                        </Box> 
-                        <Box m={.5}>  
-                            <Button className="admin-btn" variant="outlined" onClick={() => deleteValidation(item.id)}>Delete</Button>
-                        </Box>
-                    </ListItem>
-                    <Divider/>
-                   </div>
-                )}
-            </List>
+          <Grid item lg={7}>
+        <TableContainer
+          elevation={6}
+          component={Card}
+          className={classes.cardTable}
+        >
+          <div className={classes.tableContent}>
+            <Typography className={classes.title} align="center" variant="h4">
+              <u>Artist List</u>
+            </Typography>
+            <Table className={classes.table}>
+              <TableBody>
+                {artAdventureList.map((item, i) => (
+                  <TableRow alignItems="flex-start" key={i}>
+                    <TableCell>
+                      <img
+                        src={item.image}
+                        alt="Artist Image"
+                        className={classes.thumbnail}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="body1">{item.title}</Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Button
+                        className={classes.btn}
+                        variant="outlined"
+                        onClick={(event) => publish(event, item)}
+                      >
+                        Publish
+                      </Button>
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <EditIcon
+                          className={classes.btn}
+                          variant="outlined"
+                          onClick={(event) => renderArtAdventureDetail(event, item)}
+                        />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <DeleteIcon
+                          color="primary"
+                          className={classes.btn}
+                          variant="outlined"
+                          onClick={() => deleteValidation(item.id)}
+                        />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
-
-      </div>
+        </TableContainer>
+      </Grid>
+         </Grid>  
+         </div>         
     );
 }
 

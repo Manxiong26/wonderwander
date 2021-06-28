@@ -3,18 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import AdminNav from '../AdminNav/AdminNav'
 
-import { Button, 
-        Typography, 
-        TextField, 
-        List, 
-        ListItem, 
-        ListItemAvatar, 
-        Avatar,
-        Divider,
-        Input,
-        Box  
-        } from "@material-ui/core";
-
+import {
+    Button,
+    Typography,
+    TextField,
+    Grid,
+    Card,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+    List,
+    ListItem,
+    Box,
+    Divider,
+  } from "@material-ui/core";
+  import DeleteIcon from "@material-ui/icons/Delete";
+  import EditIcon from "@material-ui/icons/Edit";
+  
+  import { useStyles } from "../classes";
+  
 function AdminQuote() {
 
     let {id} = useParams();
@@ -22,6 +32,8 @@ function AdminQuote() {
 
     //functionality to route to a page
     const history = useHistory();
+
+    const classes = useStyles();
 
     //functionality to dispatch information to a saga or reducer
     const dispatch = useDispatch();
@@ -155,68 +167,102 @@ function AdminQuote() {
     return (
       <div>
           <AdminNav />
+          <Grid container spacing={1} direction="row">
           {editMode ?
-          <div>
-              <Typography variant="h4">Edit Quote</Typography>
-              <form className="admin-form" onSubmit={updateQuoteInfo}>
+          <Grid item lg={5} className={classes.grid}>
+          <Card elevation={6} className={classes.cardForm}>
+            <div className={classes.cardContent}>
+              <Typography className={classes.title} align="center" variant="h4">Edit Quote</Typography>
+              <form className={classes.form} onSubmit={updateQuoteInfo}>
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Quote"
+                    label="Quote"
                     value={quote}
                     onChange={(event) => setQuote(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Author"
+                    label="Author"
                     value={quote_by}
                     onChange={(event) => setQuoteBy(event.target.value)}
                 />
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Update">Update</Button>
-                <Button className="admin-btn" variant="outlined" onClick={renderToInfo}>Cancel</Button>
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
+                <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
               </form>
           </div>
+          </Card>
+          </Grid>
           :    
-          <div>
-              <Typography variant="h4">Add Quote</Typography>
-              <form className="admin-form" onSubmit={addQuote}>
+          <Grid item lg={5} className={classes.grid}>
+          <Card elevation={6} className={classes.cardForm}>
+            <div className={classes.cardContent}>
+              <Typography className={classes.title} align="center" variant="h4">Add Quote</Typography>
+              <form className={classes.form} onSubmit={addQuote}>
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Quote"
+                    label="Quote"
                     value={quote}
                     onChange={(event) => setQuote(event.target.value)}
                 />
                 <TextField type="text"
+                className={classes.inputs}
+                variant="outlined"
                     placeholder="Author"
+                    label="Author"
                     value={quote_by}
                     onChange={(event) => setQuoteBy(event.target.value)}
                 />
-                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
-          </div>}
+          </div>
+          </Card>
+          </Grid>}
           
           {/* Quote List. Always shows. */}
           {/* Edit clickability renders a specific quote's details in the edit form */}
-          <div>
-              <Typography variant="h5">Quote List</Typography>
-            <List>
+          <Grid item lg={7}>
+              <Card elevation={6}
+          
+                className={classes.cardTable}>
+                <div>
+              <Typography className={classes.title} align="center" variant="h4">Quote List</Typography>
+            <List className={classes.table}>
                 {quoteList.map((item, i) =>
                     <div>
                     <ListItem key={i} > 
-                        <ListItemAvatar>
-                        <Typography variant="h6">
-                            {item.quote} {item.quote_by} 
+                        <Typography variant="body1">
+                            "{item.quote}" by <b>{item.quote_by}</b>
                         </Typography>
-                        </ListItemAvatar>
-                        <Box m={.5}>
-                            <Button className="admin-btn" variant="outlined" onClick={(event) => renderQuoteDetail(event, item)}>Edit</Button>
-                        </Box> 
-                        <Box m={.5}>  
-                            <Button className="admin-btn" variant="outlined" onClick={() => deleteValidation(item.id)}>Delete</Button>
-                        </Box>
+                      <IconButton align="right">
+                        <EditIcon
+                          className={classes.btn}
+                          variant="outlined"
+                          onClick={(event) => renderQuoteDetail(event, item)}
+                        />
+                      </IconButton>
+                      <IconButton align="right">
+                        <DeleteIcon
+                          color="primary"
+                          className={classes.btn}
+                          variant="outlined"
+                          onClick={() => deleteValidation(item.id)}
+                        />
+                      </IconButton>
                     </ListItem>
                     <Divider/>
                    </div>
                 )}
             </List>
           </div>
-
+          </Card>
+          </Grid>
+                </Grid>
       </div>
     );
 }
