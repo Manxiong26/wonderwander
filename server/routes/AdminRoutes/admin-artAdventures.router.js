@@ -40,13 +40,13 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticat
 
 //adds new art adventure to the DB from admin art adventure page
 router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
-
+    console.log('User: ', req.user)
     let artAdventure = req.body;
     
     const query  = `INSERT INTO "activities" ("title", "description", "image")
         VALUES ($1, $2, $3);`;
 
-    if(req.isAuthenticated() === true) {
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [artAdventure.title, artAdventure.description, artAdventure.image])
     .then(result => {
         console.log('new art adventure object POST', result.rows);
@@ -56,7 +56,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
         res.sendStatus(500)
     })
 } else {
-    alert(`I'm sorry but you are not an authorized to complete this action.`)
+    res.sendStatus(403)
 }
   
 });//end add new art adventure POST route
@@ -70,6 +70,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
     
     const query = `UPDATE "activities" SET title=$2, description=$3, image=$4 
         WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id, artAdventure.title, artAdventure.description, 
         artAdventure.image])
     .then(response => {
@@ -78,6 +79,9 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
         console.log('Error updating art adventure in server:', error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end art adventure PUT route
   
@@ -85,6 +89,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
 router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "activities" WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id]) 
     .then(result => {
         res.sendStatus(200);
@@ -92,7 +97,9 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthentic
         console.log('error in delete', error);
         res.sendStatus(500);
     })
-  
+} else {
+    res.sendStatus(403)
+}
 });//end art adventure DELETE route
 
 module.exports = router;

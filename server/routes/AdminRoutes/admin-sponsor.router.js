@@ -45,6 +45,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
     
     const query  = `INSERT INTO "sponsor" ("name", "logo", "description", "site_link")
         VALUES ($1, $2, $3, $4);`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [sponsor.name, sponsor.logo, sponsor.description, sponsor.site_link])
     .then(result => {
         console.log('new sponsor object POST', result.rows);
@@ -53,6 +54,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
         console.log(error);
         res.sendStatus(500)
     })
+} else {
+
+}
   
 });//end add new sponsor POST route
 
@@ -65,6 +69,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
     
     const query = `UPDATE "sponsor" SET name=$2, logo=$3, description=$4, 
         site_link=$5 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id, sponsor.name, sponsor.logo, sponsor.description, 
         sponsor.site_link])
     .then(response => {
@@ -73,6 +78,9 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
         console.log('Error updating sponsor in server:', error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end sponsor PUT route
 
@@ -84,6 +92,7 @@ router.put('/publish/:id', rejectUnauthenticated, (req, res) => { //rejectUnauth
     let sponsor = req.body;
     
     const query = `UPDATE "sponsor" SET published=$2 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id, sponsor.published])
     .then(response => {
         res.sendStatus(200);
@@ -91,6 +100,9 @@ router.put('/publish/:id', rejectUnauthenticated, (req, res) => { //rejectUnauth
         console.log('Error updating sponsor publish in server:', error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end sponsor PUT route
   
@@ -98,6 +110,7 @@ router.put('/publish/:id', rejectUnauthenticated, (req, res) => { //rejectUnauth
 router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "sponsor" WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id]) 
     .then(result => {
         res.sendStatus(200);
@@ -105,6 +118,9 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthentic
         console.log('error in delete', error);
         res.sendStatus(500);
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end sponsor DELETE route
 

@@ -45,6 +45,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
     
     const query  = `INSERT INTO "quotes" ("quote", "quote_by")
         VALUES ($1, $2);`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [quote.quote, quote.quote_by])
     .then(result => {
         console.log('new quote object POST', result.rows);
@@ -53,6 +54,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
         console.log(error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end add new quote POST route
 
@@ -64,6 +68,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
     let quote = req.body;
     
     const query = `UPDATE "quotes" SET quote=$2, quote_by=$3 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id, quote.quote, quote.quote_by])
     .then(response => {
         res.sendStatus(200);
@@ -71,6 +76,9 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
         console.log('Error updating quote in server:', error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end quote PUT route
   
@@ -78,6 +86,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
 router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "quotes" WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id]) 
     .then(result => {
         res.sendStatus(200);
@@ -85,6 +94,9 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthentic
         console.log('error in delete', error);
         res.sendStatus(500);
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end quoute DELETE route
 
