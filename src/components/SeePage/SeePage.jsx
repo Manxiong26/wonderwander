@@ -26,19 +26,18 @@ console.log('TESTING', list);
         <div>
             {list.map((lists, i) => {
                 return (
-                    <section>
+                    <section key={lists.id}>
                     
                       
                             <ReactPlayer url={lists.link} controls="true" width="100" />
-                        
+                            <img src={lists.link} />
             
-                    <Typography key={i} align="center" gutterBottom variant="h5">
+                    <Typography  align="center" gutterBottom variant="h5">
                         {lists.prompts}
                     </Typography>
                 </section>
                 )
             })}
-        
         </div>
     );
 }
