@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from '@material-ui/core';
+import {Button, Grid} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useStyles } from '../classes'
 
@@ -34,16 +34,16 @@ const AdminNav = () => {
 
 
     return(
-        <>
-        <div className={classes.adminNav}>
+        <Grid container>
+        <Grid direction="row" xs={12} item className={classes.adminNav}>
         <Button onClick={() => toArtist()}>Artist</Button>
         <Button onClick={() => toCollection()}>Collection</Button>
         <Button onClick={() => toSponsor()}>Sponsor</Button>
         <Button onClick={() => toArtwork()}>Artwork</Button>
         <Button onClick={() => toAdventure()}>Art Adventure</Button>
         <Button onClick={() => toQuote()}>Quotes</Button>
-        </div>
-        </>
+        </Grid>
+        </Grid>
     )
 }
 

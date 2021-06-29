@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       },
       thumbnail: {
         border: "1px solid black",
-             
+
       },
       title: {
           textAlign: 'center',
@@ -110,7 +110,9 @@ const useStyles = makeStyles((theme) => ({
       adminNav: {
         display: 'flex',
         justifyContent: 'center',
-        marginBottom: '2%'
+        marginBottom: '2%',
+        flexWrap: 'wrap'
+
       }
 
   }));
