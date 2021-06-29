@@ -196,14 +196,16 @@ function App() {
             </Route>
 
             {/* ------------ADMIN PAGES----------------- */}
-            <AdminRoute
+            
+            <ProtectedRoute
 
             exact
             path="/admin/landing"
             >
               <AdminLanding />
-            </AdminRoute>
-            <AdminRoute
+            </ProtectedRoute>
+
+            <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LoginPage at /login
@@ -211,59 +213,59 @@ function App() {
               path="/admin/register"
             >
               <AdminRegister />
-            </AdminRoute>
+            </ProtectedRoute>
 
 
             
             {/* this is temporary until we can get the log in working */}
-            <AdminRoute
+            <ProtectedRoute
               // shows AdminArtist Page at all times (logged in or not)
               exact
               path="/admin/artist"
             >
               <AdminArtist />
 
-            </AdminRoute>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <AdminRoute
+            <ProtectedRoute
               // shows AdminArtwork Page at all times (logged in or not)
               exact
               path="/admin/artwork"
             >
               <AdminArtwork />
-            </AdminRoute>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <AdminRoute
+            <ProtectedRoute
               // shows AdminCollection Page at all times (logged in or not)
               exact
               path="/admin/collection"
             >
               <AdminCollection />
-            </AdminRoute>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <AdminRoute
+            <ProtectedRoute
               // shows AdminSponsor Page at all times (logged in or not)
               exact
               path="/admin/sponsor"
             >
               <AdminSponsor />
-            </AdminRoute>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <AdminRoute
+            <ProtectedRoute
               // shows AdminQuote Page at all times (logged in or not)
               exact
               path="/admin/quote"
             >
               <AdminQuote />
-            </AdminRoute>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <AdminRoute
+            <ProtectedRoute
               // shows AdminArtAdventure Page at all times (logged in or not)
               exact
               path="/admin/art-adventure"
             >
               <AdminArtAdventure />
-            </AdminRoute>
+            </ProtectedRoute>
 
             {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -273,6 +275,7 @@ function App() {
               // logged in shows HomePage else shows LoginPage
               exact
               path="/home"
+              
             >
               <HomePage />
             </Route>
@@ -297,13 +300,15 @@ function App() {
             {/* When a value is supplied for the authRedirect prop the user will
               be redirected to the path supplied when logged in, otherwise they will
               be taken to the component and path supplied. */}
+
             <Route
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LoginPage at /login
               exact
               path="/login"
-              authRedirect="/user"
+              authRedirect="/user"  
+                       
             >
               <LoginPage />
             </Route>
@@ -318,6 +323,7 @@ function App() {
             >
               <RegisterPage />
             </Route>
+
 
             <Route
               // with authRedirect:

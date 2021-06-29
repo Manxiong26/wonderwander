@@ -434,8 +434,8 @@ function AdminArtwork() {
                 <TextField type="text"
                 className={classes.inputs}
                 variant="outlined"
-                    placeholder="Longitude"
-                    label="Longitude"
+                    placeholder="Image URL"
+                    label="Image URL"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
