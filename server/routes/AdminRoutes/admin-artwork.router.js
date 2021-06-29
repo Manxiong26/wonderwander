@@ -6,7 +6,7 @@ const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all artwork from DB to display on admin artwork page as li's
-router.get('/',  (req, res) => {  //rejectUnauthenticated,
+router.get('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     //returns all artwork info to reducer
     const query = `SELECT * FROM "artwork" ORDER BY "name" ASC;`;
@@ -22,7 +22,7 @@ router.get('/',  (req, res) => {  //rejectUnauthenticated,
 });//end artwork GET route
 
 //gets one specific artwork from DB to display on admin artwork page for editing
-router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
+router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
     console.log(`in one artwork's info get, id:`, req.params.id);
     
     //returns a specific artwork's info to reducer
@@ -79,6 +79,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
                     "description", "vid_link", "vid_description", "artist_id", 
                     "sponsor_id", "collection_id")
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [artwork.name, artwork.year, artwork.lat, artwork.lng, 
                     artwork.image, artwork.description, artwork.vid_link, 
                     artwork.vid_description, artwork.artist_id, artwork.sponsor_id, 
@@ -90,6 +91,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
         console.log(error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end add new artwork POST route
 
@@ -139,6 +143,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
     const query = `UPDATE "artwork" SET name=$2, year=$3, lat=$4, lng=$5, image=$6,
         description=$7, vid_link=$8, vid_description=$9, artist_id=$10, 
         sponsor_id=$11, collection_id=$12 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id, artwork.name, artwork.year, artwork.lat, 
                     artwork.lng, artwork.image, artwork.description, 
                     artwork.vid_link, artwork.vid_description, artwork.artist_id, 
@@ -149,6 +154,31 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
         console.log('Error updating artist in server:', error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end artwork PUT route
+
+//PUT route to publish an artwork's information 
+router.put('/publish/:id', rejectUnauthenticated, (req, res) => { 
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let artwork = req.body;
+    
+    const query = `UPDATE "artwork" SET published=$2 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id, artwork.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating artwork publish in server:', error);
+        res.sendStatus(500)
+    })
+} else {
+    res.sendStatus(403)
+}
   
 });//end artwork PUT route
   
@@ -156,6 +186,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
 router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "artwork" WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id]) 
     .then(result => {
         res.sendStatus(200);
@@ -163,6 +194,9 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthentic
         console.log('error in delete', error);
         res.sendStatus(500);
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end artwork DELETE route
 

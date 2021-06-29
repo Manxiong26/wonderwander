@@ -45,6 +45,17 @@ function* updateSponsor(action) {
     }
 }
 
+function* updatePublish(action) {
+  console.log('in update sponsor publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/sponsor/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_SPONSOR_LIST'}); 
+    yield put({type: 'CLEAR_SPONSOR'});
+  } catch (error) {
+    console.log('Error updating publish in sponsor saga: ', error);
+  }
+}
+
 function* deleteSponsor(action) {
     try{
         yield axios.delete(`/api/admin/sponsor/${action.payload}`); 
@@ -59,6 +70,7 @@ function* adminSponsorSaga() {
   yield takeEvery('FETCH_SPONSOR', getSponsor);
   yield takeEvery('ADD_SPONSOR', addSponsor);
   yield takeEvery('UPDATE_SPONSOR_INFO', updateSponsor); 
+  yield takeEvery('UPDATE_PUBLISH_SPONSOR', updatePublish)
   yield takeEvery('DELETE_SPONSOR', deleteSponsor);
 }
 

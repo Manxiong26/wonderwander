@@ -70,7 +70,7 @@ function* adminArtistSaga() {
   yield takeEvery('FETCH_ARTIST', getArtist);
   yield takeEvery('ADD_ARTIST', addArtist);
   yield takeEvery('UPDATE_ARTIST_INFO', updateArtist);
-  yield takeEvery('UPDATE_PUBLISH', updatePublish); 
+  yield takeEvery('UPDATE_PUBLISH_ARTIST', updatePublish); 
   yield takeEvery('DELETE_ARTIST', deleteArtist);
 }
 

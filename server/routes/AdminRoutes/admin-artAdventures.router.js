@@ -8,6 +8,7 @@ const router = express.Router();
 //gets all art adventures' info from DB to display on admin art adventure page as li's
 router.get('/', rejectUnauthenticated, (req, res) => {  
 
+
     //returns all adventure info to reducer
     const query = `SELECT * FROM "activities" ORDER BY "title" ASC;`;
     pool.query(query)
@@ -23,6 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 //gets one specific art adventure's info from DB to display on admin art adventure page for editing
 router.get('/:id', rejectUnauthenticated, (req, res) => {  
+
     console.log(`in one art adventure's info get, id:`, req.params.id);
     
     //returns a specific art adventure's info to reducer
@@ -77,6 +79,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     
     const query  = `INSERT INTO "activities" ("title", "description", "image")
         VALUES ($1, $2, $3);`;
+
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [artAdventure.title, artAdventure.description, artAdventure.image])
     .then(result => {
         console.log('new art adventure object POST', result.rows);
@@ -85,6 +89,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         console.log(error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end add new art adventure POST route
 
@@ -133,6 +140,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     
     const query = `UPDATE "activities" SET title=$2, description=$3, image=$4 
         WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id, artAdventure.title, artAdventure.description, 
         artAdventure.image])
     .then(response => {
@@ -141,6 +149,9 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         console.log('Error updating art adventure in server:', error);
         res.sendStatus(500)
     })
+} else {
+    res.sendStatus(403)
+}
   
 });//end art adventure PUT route
   
@@ -148,6 +159,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 router.delete('/:id', rejectUnauthenticated, (req, res) => { 
   
     const query = `DELETE FROM "activities" WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id]) 
     .then(result => {
         res.sendStatus(200);
@@ -155,7 +167,9 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         console.log('error in delete', error);
         res.sendStatus(500);
     })
-  
+} else {
+    res.sendStatus(403)
+}
 });//end art adventure DELETE route
 
 module.exports = router;
