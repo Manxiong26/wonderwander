@@ -79,17 +79,29 @@ function* addSee(action) {
   try{
       console.log('New See for Adventure:', action.payload);
       yield axios.post('/api/admin/art-adventure/see', action.payload);
-      yield put({type: 'FETCH_SEE_LIST' }); //Double check on this action, etc.
+      yield put({type: 'FETCH_SEE_LIST' }); //Double check if this needs payload
   } catch (error) {
       console.log(`Error adding 'See' to adventure: `, error);
   }
 }
 
+function* getDoList(action) {
+  try {
+    const dos = yield axios.get(`/api/admin/art-adventure/${action.payload}/do`); 
+    console.log('get all dos for adventure:', dos.data);
+    yield put({ type: 'SET_DO', payload: dos.data });
+  } catch (error) {
+    console.log('Art adventure DO List get request failed', error);
+  }
+}
+
+// TODO - Add getDo function for specific do
+
 function* addDo(action) {
   try{
       console.log('New Do for Adventure:', action.payload);
       yield axios.post('/api/admin/art-adventure/do', action.payload);
-      //yield put({ }) TODO - Does this need to be added to a list reducer for any reason?
+      yield put({type: 'FETCH_DO_LIST' }); //Double check if this needs payload
   } catch (error) {
       console.log(`Error adding 'Do' to adventure: `, error);
   }
@@ -104,6 +116,7 @@ function* adminArtAdventureSaga() {
   yield takeEvery('FETCH_SEE_LIST', getSeeList);
   yield takeEvery('FETCH_SEE', getSee);
   yield takeEvery('ADD_SEE', addSee);
+  yield takeEvery('FETCH_DO_LIST', getDoList);
   yield takeEvery('ADD_DO', addDo);
 }
 
