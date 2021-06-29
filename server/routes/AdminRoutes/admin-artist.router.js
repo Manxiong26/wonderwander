@@ -39,7 +39,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticat
 });//end one artist's info GET route
 
 //adds new artist to the DB from admin artist page
-router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
+router.post('/', rejectUnauthenticated, (req, res) => { 
 
     let artist = req.body;
     

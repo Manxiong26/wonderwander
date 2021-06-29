@@ -51,9 +51,13 @@ function AdminArtwork() {
 
   const artistList = useSelector((store) => store.adminArtistListReducer);
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
-  const collectionList = useSelector(
-    (store) => store.adminCollectionListReducer
-  );
+  const collectionList = useSelector((store) => store.adminCollectionListReducer);
+  const seeList = useSelector((store) => store.adminSeeListArtworkReducer);
+  console.log('seeList reducer: ', seeList)
+    const see = useSelector ((store) => store.adminSeeInfoReducer);
+    const doList = useSelector((store) => store.adminDoListArtworkReducer);
+    const doItem = useSelector((store) => store.adminDoReducer);
+
 
   //retrieves info from DB
   useEffect(() => {
@@ -130,6 +134,10 @@ function AdminArtwork() {
 
     //sets specific artwork in artwork reducer
     dispatch({ type: "SET_ARTWORK_INFO", payload: item }); //
+
+    // sets see/do list for specific artwork in seeList/doList reducers
+    dispatch({ type: "FETCH_SEE_LIST_ARTWORK", payload: item.id });
+    dispatch({ type: "FETCH_DO_LIST_ARTWORK", payload: item.id });
 
     //renders form view from add to edit mode
     setEditMode(true);
@@ -505,9 +513,15 @@ function AdminArtwork() {
               </Card>
             </Grid>
 
+            {/* EDIT SEE CARD */}
+
             <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
-              <Card elevation={6} className={classes.cardForm}>
-                <div className={classes.cardContent}>
+            <TableContainer
+                elevation={6}
+                component={Card}
+                className={classes.cardTable}
+              >
+                <div className={classes.tableContent}>
                   <Typography
                     className={classes.title}
                     align="center"
@@ -515,11 +529,51 @@ function AdminArtwork() {
                   >
                     Edit See
                   </Typography>
-                  <form className={classes.form}></form>
+                  <form className={classes.form}>
+                  <Table className={classes.table}>
+                    <TableBody >
+                        {seeList.map((item, i) => (
+                            <TableRow alignItems="flex-start" key={i}>
+                           <TableCell className={classes.thumbnailContainer}>
+                               <img
+                              src={item.link}
+                              alt="See Prompt Image"
+                              className={classes.thumbnail}
+                            />
+                           </TableCell> 
+                           <TableCell>
+                           <Typography noWrap="true" variant="body1">{item.prompts}</Typography>
+                         </TableCell>
+                         <TableCell align="right">
+                            <IconButton>
+                              <EditIcon
+                                className={classes.btn}
+                                variant="outlined"
+                                onClick={() => alert('CREATE A FUNCTION FOR ME!!!')}
+                              />
+                            </IconButton>
+                          </TableCell>
+                          <TableCell align="right">
+                            <IconButton>
+                              <DeleteIcon
+                                color="primary"
+                                className={classes.btn}
+                                variant="outlined"
+                                onClick={() => alert('CREATE A FUNCTION FOR ME!!!')}
+                              />
+                            </IconButton>
+                          </TableCell>
+                         </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table> 
+                  </form>
                 </div>
-              </Card>
+              </TableContainer>
             </Grid>
 
+            {/* EDIT DO CARD */}
+            
             <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
               <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>

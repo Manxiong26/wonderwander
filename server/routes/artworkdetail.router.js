@@ -56,7 +56,7 @@ router.get('/:id', (req, res) => {
   });
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   const users_id = req.user.id
   const artwork_id = req.body.artworkdetail_id
   console.log('CHECKING REQSSSSSSSS', req.body, users_id, artwork_id);

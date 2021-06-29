@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
           textAlign: 'center',
           fontFamily: theme.typography.Pacifico,
           textDecoration: 'underline',
-          color: theme.palette.primary.main
+          color: theme.palette.primary.main,
       },
       image: {
           maxWidth: '280px',
