@@ -249,7 +249,7 @@ function AdminCollection() {
           <AdminNav/>
           <Grid container spacing={1} direction="row">
           {editMode ?
-            <Grid item lg={5} className={classes.grid}>
+            <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Edit Collection</Typography>
@@ -335,7 +335,7 @@ function AdminCollection() {
               </Card>
           </Grid>
           : 
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>   
           <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Add Collection</Typography>
@@ -414,7 +414,7 @@ function AdminCollection() {
           
           {/* Collection List. Always shows. */}
           {/* Edit clickability renders a specific collections's details in the edit form */}
-          <Grid item lg={7}>
+          <Grid item lg={7} sm={12} xs={12}>
           <TableContainer
           elevation={6}
           component={Card}

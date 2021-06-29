@@ -169,7 +169,7 @@ function AdminQuote() {
           <AdminNav />
           <Grid container spacing={1} direction="row">
           {editMode ?
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Edit Quote</Typography>
@@ -197,7 +197,7 @@ function AdminQuote() {
           </Card>
           </Grid>
           :    
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Add Quote</Typography>
@@ -226,7 +226,7 @@ function AdminQuote() {
           
           {/* Quote List. Always shows. */}
           {/* Edit clickability renders a specific quote's details in the edit form */}
-          <Grid item lg={7}>
+          <Grid item lg={7} sm={12} xs={12}>
               <Card elevation={6}
           
                 className={classes.cardTable}>

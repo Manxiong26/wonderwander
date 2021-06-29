@@ -218,7 +218,7 @@ function AdminArtist() {
     <AdminNav />
     <Grid container spacing={1} direction="row">
       {editMode ? (
-        <Grid item lg={5} className={classes.grid}>
+        <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">
@@ -284,7 +284,7 @@ function AdminArtist() {
           </Card>
         </Grid>
       ) : (
-        <Grid item lg={5} className={classes.grid}>
+        <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">
@@ -347,7 +347,7 @@ function AdminArtist() {
       {/* Artist List. Always shows. */}
       {/* Edit clickability renders a specific artist's details in the edit form */}
 
-      <Grid item lg={7}>
+      <Grid item lg={7} sm={12} xs={12} >
         <TableContainer
           elevation={6}
           component={Card}

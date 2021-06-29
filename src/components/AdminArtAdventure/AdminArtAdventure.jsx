@@ -256,7 +256,7 @@ function AdminArtAdventure() {
         >
           <div className={classes.tableContent}>
             <Typography className={classes.title} align="center" variant="h4">
-              <u>Artist List</u>
+              <u>Adventure List</u>
             </Typography>
             <Table className={classes.table}>
               <TableBody>

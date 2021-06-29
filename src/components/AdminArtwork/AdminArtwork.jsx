@@ -246,7 +246,7 @@ function AdminArtwork() {
       <AdminNav />
       <Grid container spacing={1} direction="row">
           {editMode ?
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
           <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Edit Artwork</Typography>
@@ -353,7 +353,7 @@ function AdminArtwork() {
           </Card>
           </Grid>
           :    
-              <Grid item lg={5} className={classes.grid}>
+              <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
                 <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Add Artwork</Typography>
@@ -462,7 +462,7 @@ function AdminArtwork() {
           
           {/* Artwork List. Always shows. */}
           {/* Edit clickability renders a specific artwork's details in the edit form */}
-          <Grid item lg={7}>
+          <Grid item lg={7} sm={12} xs={12} >
         <TableContainer
           elevation={6}
           component={Card}
