@@ -68,7 +68,8 @@ function App() {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#DC0100'
+        main: '#DC0100',
+        white: 'white'
       },
       secondary: {
         main: '#118ADA'
@@ -208,7 +209,6 @@ function App() {
               // - else shows LoginPage at /login
               exact
               path="/admin/register"
-              authRedirect="/admin/register"
             >
               <AdminRegister />
             </AdminRoute>

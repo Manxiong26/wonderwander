@@ -27,7 +27,7 @@ function AdminRegister() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register Admin</h2>
+      <h2>Add Admin</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
