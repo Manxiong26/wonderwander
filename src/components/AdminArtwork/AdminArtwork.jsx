@@ -26,17 +26,35 @@ import {
   TableRow,
   FormControlLabel,
   Switch,
+  Popper,
+  Modal,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
 import { useStyles } from "../classes";
 
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
 function AdminArtwork() {
   let { id } = useParams();
   //console.log(id);
 
   const classes = useStyles();
+  const [modalStyle] = React.useState(getModalStyle);
 
   //functionality to route to a page
   const history = useHistory();
@@ -51,13 +69,14 @@ function AdminArtwork() {
 
   const artistList = useSelector((store) => store.adminArtistListReducer);
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
-  const collectionList = useSelector((store) => store.adminCollectionListReducer);
+  const collectionList = useSelector(
+    (store) => store.adminCollectionListReducer
+  );
   const seeList = useSelector((store) => store.adminSeeListArtworkReducer);
-  console.log('seeList reducer: ', seeList)
-    const see = useSelector ((store) => store.adminSeeInfoReducer);
-    const doList = useSelector((store) => store.adminDoListArtworkReducer);
-    const doItem = useSelector((store) => store.adminDoReducer);
-
+  console.log("seeList reducer: ", seeList);
+  const see = useSelector((store) => store.adminSeeInfoReducer);
+  const doList = useSelector((store) => store.adminDoListArtworkReducer);
+  const doItem = useSelector((store) => store.adminDoReducer);
 
   //retrieves info from DB
   useEffect(() => {
@@ -355,6 +374,18 @@ function AdminArtwork() {
     dispatch({ type: "UPDATE_PUBLISH_ARTWORK", payload: pubObject });
   };
 
+  const [open, setOpen] = useState(false);
+
+  const body = (
+    <div className={classes.modal} style={modalStyle}>
+      The Prompt to edit will go here!!!
+    </div>
+  );
+
+  const modalToggle = () => {
+    setOpen(!open);
+  };
+
   return (
     <div>
       <AdminNav />
@@ -516,7 +547,7 @@ function AdminArtwork() {
             {/* EDIT SEE CARD */}
 
             <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
-            <TableContainer
+              <TableContainer
                 elevation={6}
                 component={Card}
                 className={classes.cardTable}
@@ -530,50 +561,57 @@ function AdminArtwork() {
                     Edit See
                   </Typography>
                   <form className={classes.form}>
-                  <Table className={classes.table}>
-                    <TableBody >
+                    <Table className={classes.table}>
+                      <TableBody>
                         {seeList.map((item, i) => (
-                            <TableRow alignItems="flex-start" key={i}>
-                           <TableCell className={classes.thumbnailContainer}>
-                               <img
-                              src={item.link}
-                              alt="See Prompt Image"
-                              className={classes.thumbnail}
-                            />
-                           </TableCell> 
-                           <TableCell>
-                           <Typography noWrap="true" variant="body1">{item.prompts}</Typography>
-                         </TableCell>
-                         <TableCell align="right">
-                            <IconButton>
-                              <EditIcon
-                                className={classes.btn}
-                                variant="outlined"
-                                onClick={() => alert('CREATE A FUNCTION FOR ME!!!')}
+                          <TableRow alignItems="flex-start" key={i}>
+                            <TableCell className={classes.thumbnailContainer}>
+                              <img
+                                src={item.link}
+                                alt="See Prompt Image"
+                                className={classes.thumbnail}
                               />
-                            </IconButton>
-                          </TableCell>
-                          <TableCell align="right">
-                            <IconButton>
-                              <DeleteIcon
-                                color="primary"
-                                className={classes.btn}
-                                variant="outlined"
-                                onClick={() => alert('CREATE A FUNCTION FOR ME!!!')}
-                              />
-                            </IconButton>
-                          </TableCell>
-                         </TableRow>
+                            </TableCell>
+                            <TableCell>
+                              <Typography noWrap="true" variant="body1">
+                                {item.prompts}
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                              <IconButton>
+                                <EditIcon
+                                  className={classes.btn}
+                                  variant="outlined"
+                                  onClick={modalToggle}
+                                />
+                              </IconButton>
+                            </TableCell>
+                            <TableCell align="right">
+                              <IconButton>
+                                <DeleteIcon
+                                  color="primary"
+                                  className={classes.btn}
+                                  variant="outlined"
+                                  onClick={() =>
+                                    alert("CREATE A FUNCTION FOR ME!!!")
+                                  }
+                                />
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
                         ))}
-                    </TableBody>
-                  </Table> 
+                      </TableBody>
+                    </Table>
                   </form>
                 </div>
               </TableContainer>
+              <Modal open={open} onClose={modalToggle}>
+                {body}
+              </Modal>
             </Grid>
 
             {/* EDIT DO CARD */}
-            
+
             <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
               <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
