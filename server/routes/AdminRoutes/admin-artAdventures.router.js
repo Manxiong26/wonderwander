@@ -45,6 +45,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
     
     const query  = `INSERT INTO "activities" ("title", "description", "image")
         VALUES ($1, $2, $3);`;
+
+    if(req.isAuthenticated() === true) {
     pool.query(query, [artAdventure.title, artAdventure.description, artAdventure.image])
     .then(result => {
         console.log('new art adventure object POST', result.rows);
@@ -53,6 +55,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
         console.log(error);
         res.sendStatus(500)
     })
+} else {
+    alert(`I'm sorry but you are not an authorized to complete this action.`)
+}
   
 });//end add new art adventure POST route
 
