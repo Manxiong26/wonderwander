@@ -216,7 +216,7 @@ function Menu(){
       </Link>
       {user.admin ?
       (
-      <Link to='/admin/artist' style={styles.link} onClick={handleDrawerClose}>
+      <Link to='/admin/landing' style={styles.link} onClick={handleDrawerClose}>
       
       <List>
           <ListItem button key={'Admin'}>

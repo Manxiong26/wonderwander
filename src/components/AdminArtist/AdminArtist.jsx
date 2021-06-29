@@ -15,6 +15,10 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  TableHead,
+  FormGroup,
+  FormControlLabel,
+  Switch,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -48,6 +52,7 @@ function AdminArtist() {
   const [image, setImage] = useState("");
   const [bio, setBio] = useState("");
   const [site_link, setSiteLink] = useState("");
+  // const [publishItem, setPublishItem] = useState(false)
 
   //edit mode
   const [editMode, setEditMode] = useState(false);
@@ -177,20 +182,35 @@ function AdminArtist() {
     //sets specific artist in artist reducer
     dispatch({ type: "SET_ARTIST_INFO", payload: item });
 
+    let pubObject
+
+    if( item.published === true) {
     //changes item boolean to true
-    const publishedTrue = {
+    pubObject = {
+      id: item.id,
+      published: false,
+    };
+    //swal success indicator
+    swal({
+      text: "This artist's information is now unpublished!",
+      icon: "success",
+    });
+  } else {
+    pubObject = {
       id: item.id,
       published: true,
-    };
-
-    //sends updated artist info (published boolean true) to artist saga
-    dispatch({ type: "UPDATE_PUBLISH", payload: publishedTrue });
-
+    }
     //swal success indicator
     swal({
       text: "This artist's information has been published!",
       icon: "success",
     });
+  }
+
+    //sends updated artist info (published boolean true) to artist saga
+    dispatch({ type: "UPDATE_PUBLISH_ARTIST", payload: pubObject });
+
+    
   };
 
   return (
@@ -198,7 +218,7 @@ function AdminArtist() {
     <AdminNav />
     <Grid container spacing={1} direction="row">
       {editMode ? (
-        <Grid item lg={5} className={classes.grid}>
+        <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">
@@ -264,7 +284,7 @@ function AdminArtist() {
           </Card>
         </Grid>
       ) : (
-        <Grid item lg={5} className={classes.grid}>
+        <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">
@@ -327,7 +347,7 @@ function AdminArtist() {
       {/* Artist List. Always shows. */}
       {/* Edit clickability renders a specific artist's details in the edit form */}
 
-      <Grid item lg={7}>
+      <Grid item lg={7} sm={12} xs={12} >
         <TableContainer
           elevation={6}
           component={Card}
@@ -341,7 +361,7 @@ function AdminArtist() {
               <TableBody>
                 {artistList.map((item, i) => (
                   <TableRow alignItems="flex-start" key={i}>
-                    <TableCell>
+                    <TableCell className={classes.thumbnailContainer}>
                       <img
                         src={item.image}
                         alt="Artist Image"
@@ -352,13 +372,19 @@ function AdminArtist() {
                       <Typography variant="body1">{item.name}</Typography>
                     </TableCell>
                     <TableCell align="right">
-                      <Button
-                        className={classes.btn}
-                        variant="outlined"
-                        onClick={(event) => publish(event, item)}
-                      >
-                        Publish
-                      </Button>
+                      
+                        <FormControlLabel 
+                        control={
+                          <Switch
+                          size="small"
+                          checked={item.published}
+                          onChange={(event) => publish(event, item)}
+                          name="publish"
+                          color="primary"
+                        /> }
+                        labelPlacement="top"
+                        label="Publish"
+                        />
                     </TableCell>
                     <TableCell align="right">
                       <IconButton>

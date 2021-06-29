@@ -245,7 +245,7 @@ function AdminArtAdventure() {
       <AdminNav />
       <Grid container spacing={1} direction="row">
           {editMode ?
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5}  sm={12} xs={12}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Edit Adventure</Typography>
@@ -305,7 +305,7 @@ function AdminArtAdventure() {
           </Card>
           </Grid>
           : 
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5} sm={12} xs={12} >
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>  
               <Typography className={classes.title} align="center" variant="h4">Add Adventure</Typography>
@@ -391,7 +391,7 @@ function AdminArtAdventure() {
           
           {/* Adventure List. Always shows. */}
           {/* Edit clickability renders a specific art adventure's details in the edit form */}
-          <Grid item lg={7}>
+          <Grid item lg={7} xs={12}>
         <TableContainer
           elevation={6}
           component={Card}
@@ -399,13 +399,13 @@ function AdminArtAdventure() {
         >
           <div className={classes.tableContent}>
             <Typography className={classes.title} align="center" variant="h4">
-              <u>Artist List</u>
+              <u>Adventure List</u>
             </Typography>
             <Table className={classes.table}>
               <TableBody>
                 {artAdventureList.map((item, i) => (
                   <TableRow alignItems="flex-start" key={i}>
-                    <TableCell>
+                    <TableCell className={classes.thumbnailContainer}>
                       <img
                         src={item.image}
                         alt="Artist Image"

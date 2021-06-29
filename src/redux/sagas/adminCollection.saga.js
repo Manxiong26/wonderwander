@@ -45,6 +45,17 @@ function* updateCollection(action) {
     }
 }
 
+function* updatePublish(action) {
+  console.log('in update collection publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/collection/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_COLLECTION_LIST'}); 
+    yield put({type: 'CLEAR_COLLECTION'});
+  } catch (error) {
+    console.log('Error updating publish in collection saga: ', error);
+  }
+}
+
 function* deleteCollection(action) {
     try{
         yield axios.delete(`/api/admin/collection/${action.payload}`); 
@@ -58,7 +69,8 @@ function* adminCollectionSaga() {
   yield takeEvery('FETCH_COLLECTION_LIST', getCollectionList);
   yield takeEvery('FETCH_COLLECTION', getCollection);
   yield takeEvery('ADD_COLLECTION', addCollection);
-  yield takeEvery('UPDATE_COLLECTION_INFO', updateCollection); 
+  yield takeEvery('UPDATE_COLLECTION_INFO', updateCollection);
+  yield takeEvery('UPDATE_PUBLISH_COLLECTION', updatePublish)
   yield takeEvery('DELETE_COLLECTION', deleteCollection);
 }
 

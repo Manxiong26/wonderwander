@@ -17,11 +17,14 @@ const useStyles = makeStyles((theme) => ({
         marginRight: "5%",
         marginBottom: "1%",
       },
-      thumbnail: {
-        width: '60px',
+      thumbnailContainer: {
+        width: '25%',
         height: '60px',
         marginRight: 10,
-        border: "1px solid black"
+      },
+      thumbnail: {
+        border: "1px solid black",
+
       },
       title: {
           textAlign: 'center',
@@ -107,7 +110,9 @@ const useStyles = makeStyles((theme) => ({
       adminNav: {
         display: 'flex',
         justifyContent: 'center',
-        marginBottom: '2%'
+        marginBottom: '2%',
+        flexWrap: 'wrap'
+
       }
 
   }));
