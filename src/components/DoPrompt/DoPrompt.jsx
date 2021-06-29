@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         flexDirection: 'column',
       },
     card: {
-        // background: 'red',
+        margin: '5px',
     },
   });
 
@@ -37,25 +37,24 @@ function DoPrompt() {
 
        
     return (
+        <div>
+            {doDetail.map((dolist, i) => {
+                        return (
         <Card className={classes.card}>
             <CardContent >
                 <CardMedia
                 className={classes.cardmedia}
                 component="img" 
-                image="http://simpleicon.com/wp-content/uploads/camera.png"
+                image={dolist.image}
                 >
                 </CardMedia>
                 <div className={classes.details}>
-                    {doDetail.map((dolist, i) => {
-                        return (
+                    
                             <CardContent>
                         <Typography className={classes.content} key={i}>
                             {dolist.prompts}
                         </Typography>
                     </CardContent>
-                        )
-                    })}
-                    
                 </div>
                 <CardActionArea onClick={(event) => history.push(`/do/${id}`)}>
                     <CardContent>
@@ -66,6 +65,9 @@ function DoPrompt() {
                 </CardActionArea>
             </CardContent>
         </Card>
+           )
+        })}
+        </div>
     );
 }
 

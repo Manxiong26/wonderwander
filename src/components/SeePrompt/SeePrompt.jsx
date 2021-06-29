@@ -40,24 +40,25 @@ function SeePrompt() {
 
     return (
         // {list && list.name && editMode?}
+        <div>
+            {seelist.map((seel, i) => {
+                        return (
+        
         <Card>
             <CardContent>
                 <CardMedia
                 className={classes.cardmedia}
                 component="img" 
-                image={list.artwork_image}
-                >
-                </CardMedia>
+                image={seel.link}
+                 />
                 <div className={classes.details}>
-                    {seelist.map((seel, i) => {
-                        return (
+                    
                             <CardContent>
-                        <Typography className={classes.content} key={i}>
+                        <Typography className={classes.content} key={seel.id}>
                             {seel.prompts}
                         </Typography>
                     </CardContent>
-                        )
-                    })}
+                     
                     
                 </div>
                 <CardActionArea onClick={(event) => history.push(`/see/${id}`)}>
@@ -69,6 +70,9 @@ function SeePrompt() {
                 </CardActionArea>
             </CardContent>
         </Card>
+           )
+        })}
+        </div>
     );
 }
 
