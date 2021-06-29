@@ -9,6 +9,7 @@ function LoginForm() {
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector(store => store.user)
   const login = (event) => {
     event.preventDefault();
 
@@ -25,6 +26,7 @@ function LoginForm() {
     }
     
     history.push('/home')
+    
   }; // end login
 
   return (
