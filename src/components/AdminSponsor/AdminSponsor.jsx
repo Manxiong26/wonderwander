@@ -8,23 +8,16 @@ import {
   Button,
   Typography,
   TextField,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  Divider,
-  Input,
-  Box,
   Grid,
   Card,
-  makeStyles,
   IconButton,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
+  FormControlLabel,
+  Switch
 } from "@material-ui/core";
 
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -178,6 +171,45 @@ function AdminSponsor() {
       }
     });
   };
+
+    //changes db boolean to true which "publishes" item on public facing pages
+    const publish = (event, item) => {
+        console.log("clicking publish for Sponsor = ", item);
+    
+        //sets specific artist in artist reducer
+        dispatch({ type: "SET_SPONSOR_INFO", payload: item });
+    
+        let pubObject
+        // Sets putObject as opposite of current
+        // value to send as payload
+        if( item.published === true) {
+        pubObject = {
+          id: item.id,
+          published: false,
+        };
+        //swal success indicator
+        swal({
+          text: "This sponsor's information is now unpublished!",
+          icon: "success",
+        });
+      } else {
+        pubObject = {
+          id: item.id,
+          published: true,
+        }
+        //swal success indicator
+        swal({
+          text: "This sponsor's information has been published!",
+          icon: "success",
+        });
+      }
+    
+        //sends updated sponsor info 
+        // (published boolean true/false) to sponsor saga
+        dispatch({ type: "UPDATE_PUBLISH_SPONSOR", payload: pubObject });
+    
+        
+      };
 
   return (
     <div>
@@ -345,7 +377,20 @@ function AdminSponsor() {
                       <TableCell>
                         <Typography variant="body1">{item.name}</Typography>
                       </TableCell>
-                      
+                      <TableCell align="right">
+                      <FormControlLabel 
+                        control={
+                          <Switch
+                          size="small"
+                          checked={item.published}
+                          onChange={(event) => publish(event, item)}
+                          name="publish"
+                          color="primary"
+                        /> }
+                        labelPlacement="top"
+                        label="Publish"
+                        />
+                      </TableCell>
                       <TableCell align="right">
                         <IconButton>
                           <EditIcon

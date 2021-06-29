@@ -8,13 +8,8 @@ import {
     Button,
     Typography,
     TextField,
-    List,
-    ListItem,
-    ListItemAvatar,
-    Avatar,
-    Divider,
-    Input,
-    Box,
+    FormControlLabel,
+    Switch,
     Grid,
     Card,
     makeStyles,
@@ -209,6 +204,45 @@ function AdminCollection() {
           }
         });
     }
+
+    //changes db boolean to true which "publishes" item on public facing pages
+  const publish = (event, item) => {
+    console.log("clicking publish for Collection = ", item);
+
+    //sets specific artist in artist reducer
+    dispatch({ type: "SET_COLLECTION_INFO", payload: item });
+
+    let pubObject
+
+    if( item.published === true) {
+    //changes item boolean to true
+    pubObject = {
+      id: item.id,
+      published: false,
+    };
+    //swal success indicator
+    swal({
+      text: "This collection's information is now unpublished!",
+      icon: "success",
+    });
+  } else {
+    pubObject = {
+      id: item.id,
+      published: true,
+    }
+    //swal success indicator
+    swal({
+      text: "This collection's information has been published!",
+      icon: "success",
+    });
+  }
+
+    //sends updated artist info 
+    // (published boolean true/false) to collection saga
+    dispatch({ type: "UPDATE_PUBLISH_COLLECTION", payload: pubObject });
+
+    
+  };
   
     return (
       <>
@@ -398,7 +432,20 @@ function AdminCollection() {
                         <TableCell>
                         <Typography variant="body1">{item.name}</Typography>
                         </TableCell>
-                        
+                        <TableCell>
+                        <FormControlLabel 
+                        control={
+                          <Switch
+                          size="small"
+                          checked={item.published}
+                          onChange={(event) => publish(event, item)}
+                          name="publish"
+                          color="primary"
+                        /> }
+                        labelPlacement="top"
+                        label="Publish"
+                        />
+                        </TableCell>
                         <TableCell align="right">
                       <IconButton>
                         <EditIcon

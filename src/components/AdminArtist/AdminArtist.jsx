@@ -15,6 +15,7 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  TableHead,
   FormGroup,
   FormControlLabel,
   Switch,
@@ -207,7 +208,7 @@ function AdminArtist() {
   }
 
     //sends updated artist info (published boolean true) to artist saga
-    dispatch({ type: "UPDATE_PUBLISH", payload: pubObject });
+    dispatch({ type: "UPDATE_PUBLISH_ARTIST", payload: pubObject });
 
     
   };
@@ -375,14 +376,14 @@ function AdminArtist() {
                         <FormControlLabel 
                         control={
                           <Switch
-                          
+                          size="small"
                           checked={item.published}
                           onChange={(event) => publish(event, item)}
                           name="publish"
                           color="primary"
                         /> }
                         labelPlacement="top"
-                        label="Published"
+                        label="Publish"
                         />
                     </TableCell>
                     <TableCell align="right">

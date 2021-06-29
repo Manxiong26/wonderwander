@@ -75,6 +75,24 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
     })
   
 });//end sponsor PUT route
+
+//PUT route to publish a sponsor's information 
+router.put('/publish/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let sponsor = req.body;
+    
+    const query = `UPDATE "sponsor" SET published=$2 WHERE id=$1;`;
+    pool.query(query, [req.params.id, sponsor.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating sponsor publish in server:', error);
+        res.sendStatus(500)
+    })
+  
+});//end sponsor PUT route
   
 //DELETE route to delete a sponsor
 router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,

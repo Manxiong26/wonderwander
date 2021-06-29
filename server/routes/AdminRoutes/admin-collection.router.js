@@ -78,6 +78,24 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
         res.sendStatus(500)
     })
   
+});//end collection PUT route'
+
+//PUT route to publish a collection's information 
+router.put('/publish/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let collection = req.body;
+    
+    const query = `UPDATE "collection" SET published=$2 WHERE id=$1;`;
+    pool.query(query, [req.params.id, collection.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating collection publish in server:', error);
+        res.sendStatus(500)
+    })
+  
 });//end collection PUT route
   
 //DELETE route to delete a collection
