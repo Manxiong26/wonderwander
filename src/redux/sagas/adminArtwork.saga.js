@@ -54,12 +54,70 @@ function* deleteArtwork(action) {
     }
 }
 
+function* getSeeList(action) {
+  try {
+    const sees = yield axios.get(`/api/admin/artwork/${action.payload}/see`); 
+    console.log('get all sees for artwork:', sees.data);
+    yield put({ type: 'SET_SEE_ARTWORK', payload: sees.data });
+  } catch (error) {
+    console.log('Artwork SEE List get request failed', error);
+  }
+}
+
+function* getSee(action) {
+  try {
+    const see = yield axios.get(`/api/admin/artwork/see/${action.payload}`); 
+    console.log('get one specific SEE for artwork:', see.data[0]);
+    yield put({ type: 'SET_SEE_INFO_ARTWORK', payload: see.data[0] });
+    
+  } catch (error) {
+    console.log('Artwork SEE get request failed: ', error);
+  }
+}
+
+function* addSee(action) {
+  try{
+      console.log('New See for Artwork:', action.payload);
+      yield axios.post('/api/admin/artwork/see', action.payload);
+      yield put({type: 'FETCH_SEE_LIST_ARTWORK' }); //Double check if this needs payload
+  } catch (error) {
+      console.log(`Error adding 'See' to artwork: `, error);
+  }
+}
+
+function* getDoList(action) {
+  try {
+    const dos = yield axios.get(`/api/admin/artwork/${action.payload}/do`); 
+    console.log('get all dos for artwork:', dos.data);
+    yield put({ type: 'SET_DO_ARTWORK', payload: dos.data });
+  } catch (error) {
+    console.log('Artwork DO List get request failed', error);
+  }
+}
+
+// TODO - Add getDo function for specific do
+
+function* addDo(action) {
+  try{
+      console.log('New Do for Artwork:', action.payload);
+      yield axios.post('/api/admin/artwork/do', action.payload);
+      yield put({type: 'FETCH_DO_LIST_ARTWORK' }); //Double check if this needs payload
+  } catch (error) {
+      console.log(`Error adding 'Do' to adventure: `, error);
+  }
+}
+
 function* adminArtworkSaga() {
   yield takeEvery('FETCH_ARTWORK_LIST', getArtworkList);
   yield takeEvery('FETCH_ARTWORK', getArtwork);
   yield takeEvery('ADD_ARTWORK', addArtwork);
   yield takeEvery('UPDATE_ARTWORK_INFO', updateArtwork); 
   yield takeEvery('DELETE_ARTWORK', deleteArtwork);
+  yield takeEvery('FETCH_SEE_LIST_ARTWORK', getSeeList);
+  yield takeEvery('FETCH_SEE_ARTWORK', getSee);
+  yield takeEvery('ADD_SEE_ARTWORK', addSee);
+  yield takeEvery('FETCH_DO_LIST_ARTWORK', getDoList);
+  yield takeEvery('ADD_DO_ARTWORK', addDo);
 }
 
 export default adminArtworkSaga;

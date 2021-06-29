@@ -240,6 +240,74 @@ function AdminArtwork() {
           }
         });
     }
+
+    //sets local state for See/Do post request
+    const [do_prompts, setDoPrompts] = useState('');
+    const [see_prompts, setSeePrompts] = useState('');
+    const [link, setLink] = useState('');
+    const [artwork_id, setArtworkId] = useState('');
+    const [seeId, setSeeId] = useState('');
+    const [doId, setDoId] = useState('');
+
+    const addSee = () => {
+        console.log('Add See Clicked.');
+
+        //create object to send
+        const newSee = {
+            prompts: see_prompts,
+            link: link,
+            artwork_id: artwork_id,
+            activity_id: null,
+        }
+        console.log('Adding see object: ', newSee);
+
+        //TODO - double check this //dispatch to artAdventure saga
+        dispatch({ type: 'ADD_SEE_ARTWORK', payload: newSee });
+
+        //updates see list on DOM (where/are we listing the see prompts ?)
+
+        //alert successful post
+        swal({
+            text: `This 'See' has been added to your artwork!`,
+            icon: "success"
+        });
+
+        //TODO - Reset dropdown to default value
+
+        //clears input fields
+        setSeePrompts('');
+        setLink('');
+        setArtworkId('');
+    }
+
+    const addDo = () => {
+        console.log('Add Do Clicked.');
+
+        //create object to send
+        const newDo = {
+            prompts: do_prompts,
+            artwork_id: artwork_id,
+            activity_id: null,
+        }
+        console.log('Adding do object: ', newDo);
+
+        // TODO - Double check this //dispatch to artAdventure saga
+        dispatch({ type: 'ADD_DO_ARTWORK', payload: newDo });
+
+        //updates do list on DOM (where/are we listing the do prompts ?)
+
+        //alert successful post
+        swal({
+            text: `This 'Do' has been added to your artwork!`,
+            icon: "success"
+        });
+
+        //TODO - Reset dropdown to default value
+
+        //clears input fields
+        setDoPrompts('');
+        setArtworkId('');
+    }
   
     return (
         <div>
@@ -455,6 +523,52 @@ function AdminArtwork() {
                 </select>
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
+
+              {/* Add See Form */}
+              <Typography variant="h4">Add See</Typography>
+              <form className="admin-form" onSubmit={addSee}>
+                <TextField type="text"
+                    placeholder="Prompt"
+                    value={see_prompts}
+                    onChange={(event) => setSeePrompts(event.target.value)}
+                />
+                <TextField type="text"
+                    placeholder="Image/Video URL"
+                    value={link}
+                    onChange={(event) => setLink(event.target.value)}
+                />
+                {/* generates artwork options dynamically */}
+                <select type="text"
+                    onChange={(event) => setArtworkId(event.target.value)}
+                    >
+                    <option value="Default">Artwork</option>
+                    {artworkList.map((artwork) => {
+                        return (<option key={artwork.id} value={artwork.id}>{artwork.name}</option>);
+                    })}
+                </select>
+                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+              </form>
+              
+              {/* Add Do Form */}
+              <Typography variant="h4">Add Do</Typography>
+              <form className="admin-form" onSubmit={addDo}>
+                <TextField type="text"
+                    placeholder="Prompt"
+                    value={do_prompts}
+                    onChange={(event) => setDoPrompts(event.target.value)}
+                />
+                {/* generates artwork options dynamically */}
+                <select type="text"
+                    onChange={(event) => setArtworkId(event.target.value)}
+                    >
+                    <option value="Default">Artwork</option>
+                    {artworkList.map((artwork) => {
+                        return (<option key={artwork.id} value={artwork.id}>{artwork.name}</option>);
+                    })}
+                </select>
+                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+              </form>
+
               </div>
               </Card>
               </Grid>

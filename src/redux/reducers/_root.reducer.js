@@ -15,6 +15,12 @@ import adminArtAdventureListReducer from './adminArtAdventureList.reducer';
 import adminArtAdventureInfoReducer from './adminArtAdventure.reducer';
 import adminSeeListReducer from './adminSeeList.reducer';
 import adminSeeInfoReducer from './adminSee.reducer';
+import adminDoListReducer from './adminDoList.reducer';
+import adminDoInfoReducer from './adminDo.reducer';
+import adminSeeListArtworkReducer from './adminSeeListArtwork.reducer';
+import adminSeeInfoArtworkReducer from './adminSeeArtwork.reducer';
+import adminDoListArtworkReducer from './adminDoListArtwork.reducer';
+import adminDoInfoArtworkReducer from './adminDoArtwork.reducer';
 import artworkReducer from './artwork.reducer'
 import randomQuote from './randomQuote.reducer';
 import randomArt from './randomArt.reducer';
@@ -58,6 +64,12 @@ const rootReducer = combineReducers({
   adminArtAdventureInfoReducer,
   adminSeeListReducer,
   adminSeeInfoReducer,
+  adminDoListReducer,
+  adminDoInfoReducer,
+  adminSeeListArtworkReducer,
+  adminSeeInfoArtworkReducer,
+  adminDoListArtworkReducer,
+  adminDoInfoArtworkReducer,
   artworkReducer,
   randomQuote,
   randomArt,
