@@ -15,11 +15,11 @@ import {
     TableCell,
     TableContainer,
     TableRow,
-  } from "@material-ui/core";
-  import DeleteIcon from "@material-ui/icons/Delete";
-  import EditIcon from "@material-ui/icons/Edit";
+    } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
   
-  import { useStyles } from "../classes";
+import { useStyles } from "../classes";
 
 function AdminArtAdventure() {
 
@@ -37,7 +37,11 @@ function AdminArtAdventure() {
     //redux store instances 
     const artAdventureList = useSelector((store) => store.adminArtAdventureListReducer);
     const artAdventure = useSelector((store) => store.adminArtAdventureInfoReducer);
-    console.log('artAdventure reducer id:', artAdventure.id);
+        console.log('artAdventure reducer id:', artAdventure.id);
+    const seeList = useSelector((store) => store.adminSeeListReducer);
+    const see = useSelector ((store) => store.adminSeeInfoReducer);
+    const doList = useSelector((store) => store.adminDoListReducer);
+    const doItem = useSelector((store) => store.adminDoReducer);
 
     //retrieves art adventures' info from DB
     useEffect(() => {
@@ -85,7 +89,11 @@ function AdminArtAdventure() {
         console.log('clicking edit for Art Adventure = ', item);
 
         //sets specific art adventure in art adventure reducer 
-        dispatch({type: 'SET_ADVENTURE_INFO', payload: item}); // 
+        dispatch({type: 'SET_ADVENTURE_INFO', payload: item});
+
+        //sets see/do lists for specific adventure in seeList/doList reducers
+        dispatch({type: 'FETCH_SEE_LIST', payload: item.id}); 
+        dispatch({type: 'FETCH_DO_LIST', payload: item.id});
 
         //renders form view from add to edit mode
         setEditMode(true);
@@ -165,6 +173,74 @@ function AdminArtAdventure() {
           }
         });
     }
+
+    //sets local state for See/Do post request
+    const [do_prompts, setDoPrompts] = useState('');
+    const [see_prompts, setSeePrompts] = useState('');
+    const [link, setLink] = useState('');
+    const [adventure_id, setAdventureId] = useState('');
+    const [seeId, setSeeId] = useState('');
+    const [doId, setDoId] = useState('');
+
+    const addSee = () => {
+        console.log('Add See Clicked.');
+
+        //create object to send
+        const newSee = {
+            prompts: see_prompts,
+            link: link,
+            artwork_id: null,
+            activity_id: adventure_id,
+        }
+        console.log('Adding see object: ', newSee);
+
+        //dispatch to artAdventure saga
+        dispatch({ type: 'ADD_SEE', payload: newSee });
+
+        //updates see list on DOM (where/are we listing the see prompts ?)
+
+        //alert successful post
+        swal({
+            text: `This 'See' has been added to your activity!`,
+            icon: "success"
+        });
+
+        //TODO - Reset dropdown to default value
+
+        //clears input fields
+        setSeePrompts('');
+        setLink('');
+        setAdventureId('');
+    }
+
+    const addDo = () => {
+        console.log('Add Do Clicked.');
+
+        //create object to send
+        const newDo = {
+            prompts: do_prompts,
+            artwork_id: null,
+            activity_id: adventure_id,
+        }
+        console.log('Adding do object: ', newDo);
+
+        //dispatch to artAdventure saga
+        dispatch({ type: 'ADD_DO', payload: newDo });
+
+        //updates do list on DOM (where/are we listing the do prompts ?)
+
+        //alert successful post
+        swal({
+            text: `This 'Do' has been added to your activity!`,
+            icon: "success"
+        });
+
+        //TODO - Reset dropdown to default value
+
+        //clears input fields
+        setDoPrompts('');
+        setAdventureId('');
+    }
   
     return (        
       <div>
@@ -185,8 +261,8 @@ function AdminArtAdventure() {
                     onChange={(event) => setTitle(event.target.value)}
                 />
                 <TextField type="text"
-                className={classes.inputs}
-                variant="outlined"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Description"
                     label="Description"
                     value={description}
@@ -195,17 +271,54 @@ function AdminArtAdventure() {
                     onChange={(event) => setDescription(event.target.value)}
                 />
                 <TextField type="text"
-                className={classes.inputs}
-                variant="outlined"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Image URL"
                     label="Image URL"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
+
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
                 <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
               </form>
-                </div>
+            </div>
+
+            {/* TODO - ADD EDIT FORMS FOR SEE & DO HERE */}
+            {/* <Grid item lg={5} className={classes.grid}>
+            <Card elevation={6} className={classes.cardForm}>
+            <div className={classes.cardContent}> */}
+            <Typography className={classes.title} align="center" variant="h4">Edit See</Typography>
+                {/* generates 'See' options dynamically */}
+                <select type="text"
+                    onChange={(event) => setSeeId(event.target.value)}
+                    >
+                    <option value="Default">See</option>
+                    {seeList.map((see) => {
+                        return (<option key={see.id} value={see.id}>{see.prompts}</option>);
+                    })}
+                </select>
+            {/* </div>
+            </Card>
+            </Grid> */}
+
+            {/* <Grid item lg={5} className={classes.grid}>
+            <Card elevation={6} className={classes.cardForm}>
+            <div className={classes.cardContent}> */}
+            <Typography className={classes.title} align="center" variant="h4">Edit Do</Typography>
+                {/* generates 'Do' options dynamically */}
+                <select type="text"
+                    onChange={(event) => setDoId(event.target.value)}
+                    >
+                    <option value="Default">Do</option>
+                    {doList.map((doItem) => {
+                        return (<option key={doItem.id} value={doItem.id}>{doItem.prompts}</option>);
+                    })}
+                </select>
+            {/* </div>
+            </Card>
+            </Grid> */}
+
           </Card>
           </Grid>
           : 
@@ -242,18 +355,66 @@ function AdminArtAdventure() {
                 />
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
+
+
+              {/* Add See Form */}
+              <Typography variant="h4">Add See</Typography>
+              <form className="admin-form" onSubmit={addSee}>
+                <TextField type="text"
+                    placeholder="Prompt"
+                    value={see_prompts}
+                    onChange={(event) => setSeePrompts(event.target.value)}
+                />
+                <TextField type="text"
+                    placeholder="Image/Video URL"
+                    value={link}
+                    onChange={(event) => setLink(event.target.value)}
+                />
+                {/* generates adventure options dynamically */}
+                <select type="text"
+                    onChange={(event) => setAdventureId(event.target.value)}
+                    >
+                    <option value="Default">Adventure</option>
+                    {artAdventureList.map((adventure) => {
+                        return (<option key={adventure.id} value={adventure.id}>{adventure.title}</option>);
+                    })}
+                </select>
+                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+              </form>
+
+              {/* Add Do Form */}
+              <Typography variant="h4">Add Do</Typography>
+              <form className="admin-form" onSubmit={addDo}>
+                <TextField type="text"
+                    placeholder="Prompt"
+                    value={do_prompts}
+                    onChange={(event) => setDoPrompts(event.target.value)}
+                />
+                {/* generates adventure options dynamically */}
+                <select type="text"
+                    onChange={(event) => setAdventureId(event.target.value)}
+                    >
+                    <option value="Default">Adventure</option>
+                    {artAdventureList.map((adventure) => {
+                        return (<option key={adventure.id} value={adventure.id}>{adventure.title}</option>);
+                    })}
+                </select>
+                <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+              </form>
           </div>
           </Card>
           </Grid>}
+
           
           {/* Adventure List. Always shows. */}
           {/* Edit clickability renders a specific art adventure's details in the edit form */}
+
           <Grid item lg={7} xs={12}>
         <TableContainer
           elevation={6}
           component={Card}
           className={classes.cardTable}
-        >
+          >
           <div className={classes.tableContent}>
             <Typography className={classes.title} align="center" variant="h4">
               <u>Adventure List</u>

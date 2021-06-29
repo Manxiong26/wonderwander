@@ -38,6 +38,38 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticat
   
 });//end one artwork's info GET route
 
+//gets all SEEs' info for a specific artwork from DB to store in seeListArtwork reducer
+router.get('/:id/see', rejectUnauthenticated, (req, res) => {  
+
+    //returns all SEE info to reducer
+    const query = `SELECT * FROM "see" WHERE "artwork_id" = $1;`; 
+    pool.query(query, [req.params.id])
+    .then(result => {
+        res.send(result.rows);
+    })
+    .catch(error => {
+        console.log('Error see GET', error);
+        res.sendStatus(500)
+    })
+
+});//end GET all SEEs for a specific artwork
+
+//gets all DOs' info for a specific artwork from DB to store in doListArtwork reducer
+router.get('/:id/do', rejectUnauthenticated, (req, res) => {  
+
+    //returns all DO info to reducer
+    const query = `SELECT * FROM "do" WHERE "artwork_id" = $1;`; 
+    pool.query(query, [req.params.id])
+    .then(result => {
+        res.send(result.rows);
+    })
+    .catch(error => {
+        console.log('Error do GET', error);
+        res.sendStatus(500)
+    })
+
+});//end GET all DOs for a specific artwork
+
 //adds new artwork to the DB from admin artwork page
 router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
@@ -64,6 +96,42 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
 }
   
 });//end add new artwork POST route
+
+//adds new 'See' for artwork to the DB from admin artwork page
+router.post('/see', rejectUnauthenticated, (req, res) => {  
+
+    let newSee = req.body;
+    
+    const query  = `INSERT INTO "see" ("prompts", "link", "artwork_id", "activity_id")
+        VALUES ($1, $2, $3, $4);`;
+    pool.query(query, [newSee.prompts, newSee.link, newSee.artwork_id, newSee.activity_id])
+    .then(result => {
+        console.log(`new 'See' for artwork object POST`, result.rows);
+        res.sendStatus(201);
+    }).catch (error => {
+        console.log(error);
+        res.sendStatus(500)
+    })
+  
+});//end add new 'See' for artwork POST route
+
+//adds new 'Do' for artwork to the DB from admin artwork page
+router.post('/do', rejectUnauthenticated, (req, res) => {  
+
+    let newDo = req.body;
+    
+    const query  = `INSERT INTO "do" ("prompts", "artwork_id", "activity_id")
+        VALUES ($1, $2, $3);`;
+    pool.query(query, [newDo.prompts, newDo.artwork_id, newDo.activity_id])
+    .then(result => {
+        console.log(`new 'Do' for artwork object POST`, result.rows);
+        res.sendStatus(201);
+    }).catch (error => {
+        console.log(error);
+        res.sendStatus(500)
+    })
+  
+});//end add new 'Do' for artwork POST route
 
 //PUT route to edit an artwork's information 
 router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
