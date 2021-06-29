@@ -361,7 +361,7 @@ function AdminArtist() {
               <TableBody>
                 {artistList.map((item, i) => (
                   <TableRow alignItems="flex-start" key={i}>
-                    <TableCell>
+                    <TableCell className={classes.thumbnailContainer}>
                       <img
                         src={item.image}
                         alt="Artist Image"

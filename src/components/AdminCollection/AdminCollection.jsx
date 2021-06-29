@@ -426,7 +426,7 @@ function AdminCollection() {
                   <TableBody>
                 {collectionList.map((item, i) =>
                     <TableRow alignItems="flex-start" key={i}>        
-                        <TableCell>
+                        <TableCell className={classes.thumbnailContainer}>
                             <img src={item.image} alt="Collection Image" className={classes.thumbnail}/> 
                         </TableCell>
                         <TableCell>

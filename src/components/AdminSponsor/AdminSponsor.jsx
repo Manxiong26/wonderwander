@@ -366,7 +366,7 @@ function AdminSponsor() {
                 <TableBody>
                   {sponsorList.map((item, i) => (
                     <TableRow alignItems="flex-start" key={i}>
-                      <TableCell>
+                      <TableCell className={classes.thumbnailContainer}>
                         <img
                           src={item.logo}
                           alt="Sponsor Logo"
