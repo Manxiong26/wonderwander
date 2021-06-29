@@ -45,6 +45,17 @@ function* updateArtwork(action) {
     }
 }
 
+function* updatePublish(action) {
+  console.log('in update artwork publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/artwork/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_ARTWORK_LIST'}); 
+    yield put({type: 'CLEAR_ARTWORK'});
+  } catch (error) {
+    console.log('Error updating publish: ', error);
+  }
+}
+
 function* deleteArtwork(action) {
     try{
         yield axios.delete(`/api/admin/artwork/${action.payload}`); 
@@ -59,6 +70,7 @@ function* adminArtworkSaga() {
   yield takeEvery('FETCH_ARTWORK', getArtwork);
   yield takeEvery('ADD_ARTWORK', addArtwork);
   yield takeEvery('UPDATE_ARTWORK_INFO', updateArtwork); 
+  yield takeEvery('UPDATE_PUBLISH_ARTWORK', updatePublish);
   yield takeEvery('DELETE_ARTWORK', deleteArtwork);
 }
 

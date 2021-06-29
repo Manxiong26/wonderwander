@@ -29,6 +29,9 @@ function HomePage() {
   const {id} = useParams();
   //initialize to the DOM
   useEffect(() => {
+    if(user.admin === true) {
+      history.push('/admin/landing')
+    }
     dispatch({ type: "FETCH_RANDOM_ART" });
     dispatch({ type: "FETCH_THREE_COLLECTION" });
     dispatch({type: 'FETCH_ADVENTURE_DETAIL', payload: id});

@@ -23,6 +23,8 @@ import { Button,
     TableContainer,
     TableHead,
     TableRow,
+    FormControlLabel,
+    Switch,
   } from "@material-ui/core";
   import DeleteIcon from "@material-ui/icons/Delete";
   import EditIcon from "@material-ui/icons/Edit";
@@ -240,6 +242,45 @@ function AdminArtwork() {
           }
         });
     }
+
+      //changes db boolean to true which "publishes" item on public facing pages
+  const publish = (event, item) => {
+    console.log("clicking publish for Artwork = ", item);
+
+    //sets specific artwork in artwork reducer
+    dispatch({ type: "SET_ARTWORK_INFO", payload: item });
+
+    let pubObject
+
+    if( item.published === true) {
+    //changes item boolean to true
+    pubObject = {
+      id: item.id,
+      published: false,
+    };
+    //swal success indicator
+    swal({
+      text: "This artwork's information is now unpublished!",
+      icon: "success",
+    });
+  } else {
+    pubObject = {
+      id: item.id,
+      published: true,
+    }
+    //swal success indicator
+    swal({
+      text: "This artwork's information has been published!",
+      icon: "success",
+    });
+  }
+
+    //sends updated artwork info 
+    // (published boolean true/false) to artwork saga
+    dispatch({ type: "UPDATE_PUBLISH_ARTWORK", payload: pubObject });
+
+    
+  };
   
     return (
         <div>
@@ -484,6 +525,20 @@ function AdminArtwork() {
                     <TableCell>
                       <Typography variant="body1">{item.name}</Typography>
                     </TableCell>
+                    <TableCell>
+                        <FormControlLabel 
+                        control={
+                          <Switch
+                          size="small"
+                          checked={item.published}
+                          onChange={(event) => publish(event, item)}
+                          name="publish"
+                          color="primary"
+                        /> }
+                        labelPlacement="top"
+                        label="Publish"
+                        />
+                        </TableCell>
                     <TableCell align="right">
                       <IconButton>
                         <EditIcon

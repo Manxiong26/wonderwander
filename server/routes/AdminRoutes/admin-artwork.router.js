@@ -91,6 +91,28 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
 }
   
 });//end artwork PUT route
+
+//PUT route to publish an artwork's information 
+router.put('/publish/:id', rejectUnauthenticated, (req, res) => { 
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let artwork = req.body;
+    
+    const query = `UPDATE "artwork" SET published=$2 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id, artwork.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating artwork publish in server:', error);
+        res.sendStatus(500)
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end artwork PUT route
   
 //DELETE route to delete an artwork
 router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
