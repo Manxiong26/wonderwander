@@ -6,7 +6,7 @@ const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all collections' info from DB to display on admin collection page as li's
-router.get('/',  (req, res) => {  //rejectUnauthenticated,
+router.get('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     //returns all collection info to reducer
     const query = `SELECT * FROM "collection" ORDER BY "name" ASC;`;
@@ -22,7 +22,7 @@ router.get('/',  (req, res) => {  //rejectUnauthenticated,
 });//end collection GET route
 
 //gets one specific collection's info from DB to display on admin collection page for editing
-router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
+router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
     console.log(`in one collection's info get, id:`, req.params.id);
     
     //returns a specific collection's info to reducer

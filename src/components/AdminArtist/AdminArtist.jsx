@@ -15,6 +15,9 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  FormGroup,
+  FormControlLabel,
+  Switch,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -48,6 +51,7 @@ function AdminArtist() {
   const [image, setImage] = useState("");
   const [bio, setBio] = useState("");
   const [site_link, setSiteLink] = useState("");
+  // const [publishItem, setPublishItem] = useState(false)
 
   //edit mode
   const [editMode, setEditMode] = useState(false);
@@ -177,20 +181,35 @@ function AdminArtist() {
     //sets specific artist in artist reducer
     dispatch({ type: "SET_ARTIST_INFO", payload: item });
 
+    let pubObject
+
+    if( item.published === true) {
     //changes item boolean to true
-    const publishedTrue = {
+    pubObject = {
+      id: item.id,
+      published: false,
+    };
+    //swal success indicator
+    swal({
+      text: "This artist's information is now unpublished!",
+      icon: "success",
+    });
+  } else {
+    pubObject = {
       id: item.id,
       published: true,
-    };
-
-    //sends updated artist info (published boolean true) to artist saga
-    dispatch({ type: "UPDATE_PUBLISH", payload: publishedTrue });
-
+    }
     //swal success indicator
     swal({
       text: "This artist's information has been published!",
       icon: "success",
     });
+  }
+
+    //sends updated artist info (published boolean true) to artist saga
+    dispatch({ type: "UPDATE_PUBLISH", payload: pubObject });
+
+    
   };
 
   return (
@@ -352,13 +371,19 @@ function AdminArtist() {
                       <Typography variant="body1">{item.name}</Typography>
                     </TableCell>
                     <TableCell align="right">
-                      <Button
-                        className={classes.btn}
-                        variant="outlined"
-                        onClick={(event) => publish(event, item)}
-                      >
-                        Publish
-                      </Button>
+                      
+                        <FormControlLabel 
+                        control={
+                          <Switch
+                          
+                          checked={item.published}
+                          onChange={(event) => publish(event, item)}
+                          name="publish"
+                          color="primary"
+                        /> }
+                        labelPlacement="top"
+                        label="Published"
+                        />
                     </TableCell>
                     <TableCell align="right">
                       <IconButton>

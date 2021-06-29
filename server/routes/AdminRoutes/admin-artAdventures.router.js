@@ -6,7 +6,7 @@ const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all art adventures' info from DB to display on admin art adventure page as li's
-router.get('/',  (req, res) => {  //rejectUnauthenticated,
+router.get('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     //returns all adventure info to reducer
     const query = `SELECT * FROM "activities" ORDER BY "title" ASC;`;
@@ -22,7 +22,7 @@ router.get('/',  (req, res) => {  //rejectUnauthenticated,
 });//end art adventure GET route
 
 //gets one specific art adventure's info from DB to display on admin art adventure page for editing
-router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
+router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
     console.log(`in one art adventure's info get, id:`, req.params.id);
     
     //returns a specific art adventure's info to reducer

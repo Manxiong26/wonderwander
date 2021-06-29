@@ -6,7 +6,7 @@ const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all sponsors' info from DB to display on admin sponsor page as li's
-router.get('/',  (req, res) => {  //rejectUnauthenticated,
+router.get('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     //returns all sponsor info to reducer
     const query = `SELECT * FROM "sponsor" ORDER BY "name" ASC;`;
@@ -22,7 +22,7 @@ router.get('/',  (req, res) => {  //rejectUnauthenticated,
 });//end sponsor GET route
 
 //gets one specific sponsor's info from DB to display on admin sponsor page for editing
-router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
+router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
     console.log(`in one sponsor's info get, id:`, req.params.id);
     
     //returns a specific sponsor's info to reducer

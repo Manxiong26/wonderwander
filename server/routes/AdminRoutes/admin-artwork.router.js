@@ -6,7 +6,7 @@ const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all artwork from DB to display on admin artwork page as li's
-router.get('/',  (req, res) => {  //rejectUnauthenticated,
+router.get('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 
     //returns all artwork info to reducer
     const query = `SELECT * FROM "artwork" ORDER BY "name" ASC;`;
@@ -22,7 +22,7 @@ router.get('/',  (req, res) => {  //rejectUnauthenticated,
 });//end artwork GET route
 
 //gets one specific artwork from DB to display on admin artwork page for editing
-router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
+router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
     console.log(`in one artwork's info get, id:`, req.params.id);
     
     //returns a specific artwork's info to reducer

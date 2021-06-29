@@ -6,7 +6,7 @@ const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all quotes' info from DB to display on admin quote page as li's
-router.get('/',  (req, res) => {  //rejectUnauthenticated,
+router.get('/', rejectUnauthenticated,  (req, res) => {  //rejectUnauthenticated,
 
     //returns all quote info to reducer
     const query = `SELECT * FROM "quotes" ORDER BY "quote_by" ASC;`;
@@ -22,7 +22,7 @@ router.get('/',  (req, res) => {  //rejectUnauthenticated,
 });//end quote GET route
 
 //gets one specific quote's info from DB to display on admin quote page for editing
-router.get('/:id',  (req, res) => {  //rejectUnauthenticated,
+router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
     console.log(`in one quote's info get, id:`, req.params.id);
     
     //returns a specific quotes's info to reducer

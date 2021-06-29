@@ -230,7 +230,7 @@ function AdminQuote() {
               <Card elevation={6}
           
                 className={classes.cardTable}>
-                <div>
+                <div className={classes.tableContent}>
               <Typography className={classes.title} align="center" variant="h4">Quote List</Typography>
             <List className={classes.table}>
                 {quoteList.map((item, i) =>
