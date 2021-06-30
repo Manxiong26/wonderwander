@@ -56,6 +56,11 @@ const useStyles = makeStyles((theme) => ({
       center: {
         textAlign: 'center',
       },
+      pageCenter: {
+        textAlign: 'center',
+        padding: '5%',
+        marginTop: '30%',
+      },
       card: {
         background: 'red',
     },
@@ -74,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
       color: '#DC0100',
       textAlign: 'center',
       fontFamily: theme.typography.Pacifico,
-      textDecoration: 'underline'
+      
     },
     black:{
       color: 'black',

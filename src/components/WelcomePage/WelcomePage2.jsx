@@ -50,7 +50,7 @@ function WelcomePage2() {
 
                         <Typography
                             variant="h3"
-                            className={classes.title}
+                            className={classes.red}
                         >
                             Why
                         </Typography>
@@ -72,7 +72,7 @@ function WelcomePage2() {
                         <Divider />
                         <Typography
                             variant="h3"
-                            className={classes.title}
+                            className={classes.red}
                         > What 
                         
                         </Typography>
@@ -94,7 +94,7 @@ function WelcomePage2() {
                         <Divider />
                         <Typography
                             variant="h3"
-                            className={classes.title}>
+                            className={classes.red}>
                             Benefits
                         </Typography>
                         <Divider />

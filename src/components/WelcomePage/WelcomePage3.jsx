@@ -12,7 +12,6 @@ import {
     Button,
     Divider,
     Typography,
-    IconButton,
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -55,25 +54,28 @@ function WelcomePage3(){
             <div className={classes.pageMargin}>
             <Typography
                             variant="h3"
-                            className={classes.title}
+                            className={classes.red}
                         >
                             See
                         </Typography>
+                        <Divider />
                 <p>The See button will prompt you to experience a specific element of the artwork. 
                     You will be asked to observe a visual component and be provided materials that will explain the creation or background of the artwork.</p>
                     <Typography
                             variant="h3"
-                            className={classes.title}
+                            className={classes.red}
                         >
                             Say
                         </Typography>
+                        <Divider />
                 <p>The Say button will prompt you to vote on how the piece of artwork made you feel; what emotions the artwork evoked in you.</p>
                 <Typography
                             variant="h3"
-                            className={classes.title}
+                            className={classes.red}
                         >
                             Do
                         </Typography>
+                        <Divider />
                 <p>The Do button will prompt you to take a picture of either the artwork or you with the artwork.</p>
         </div>
         </Grid>
