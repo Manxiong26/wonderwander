@@ -36,8 +36,11 @@ const useStyles = makeStyles((theme) => ({
     gamesHeader: {
       color: '#000000',
     },
-    cardAction: {
-
+    button: {
+      justifyContent: 'center',
+    },
+    cardClicker: {
+      mouseEvent: 'onClick',
     },
   }));
 
@@ -56,6 +59,22 @@ function SayPage() {
       console.log(handleVote);
       setVoteMode(true);
     }
+
+    const [clickedVote, setClickedVote] = useState(null);
+    const [bgColor, setBgColor] = useState(null);
+
+    const voteClick = function(key) {
+      setClickedVote(key);
+      setBgColor(light.palette.secondary.main);
+    }
+
+    const[isLike, setIsLike] = useState(false);
+
+const colorStyle = {color:"blue"}
+
+const handleClick = () => {
+    setIsLike(!isLike);
+}
     
     // // This is where we update and insert into the db
     // const [say_id, setSay_Id] = useState('');
@@ -86,14 +105,14 @@ function SayPage() {
         <div>
           {voteMode === false ?
           <Container className={classes.cardGrid} maxWidth="md">
-                <Grid container spacing={10}>
+                <Grid container spacing={2} >
                 {list.map((lists, i) => (
-                    <Grid item key={i}  >
-                    <CardActionArea>
-                        <Card className={classes.card}>
+                    <Grid item  key={i} alignItems='center' >
+                    <CardActionArea honClick={handleClick} style={isLike ? colorStyle : null}>
+                        <Card className={classes.card} >
                             <CardMedia image={lists.image} className={classes.cardMedia}/>
                             <CardContent className={classes.cardContent}>
-                                <Typography className={classes.gamesHeader} gutterBottom variant="h5" component="h2" align='center'>
+                                <Typography className={classes.gamesHeader}  gutterBottom variant="h5" component="h5" align='center'>
                                 {lists.prompts}
                                 </Typography>
                             </CardContent>    
@@ -105,15 +124,15 @@ function SayPage() {
             </Container>
           :
           (<Container className={classes.cardGrid} maxWidth="md">
-          <Grid container spacing={10}>
+          <Grid container spacing={2}>
           {list.map((lists, i) => (
-              <Grid item key={i}>
+              <Grid item key={i} alignItems='center'>
               <CardActionArea>
                   <Card className={classes.card}>
                       <CardMedia image={lists.image} className={classes.cardMedia}/>
                       <CardContent className={classes.cardContent}>
-                          <Typography className={classes.gamesHeader} gutterBottom variant="h5" component="h2" align='center'>
-                          vote: 
+                          <Typography className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
+                          Vote Count: 
                           </Typography>
                       </CardContent>    
                   </Card>
@@ -124,15 +143,13 @@ function SayPage() {
       </Container>)  
           }
             {voteMode === false ?
-            <Button  variant="contained" color="primary" onClick={handleVote}>
+            <Button className={classes.button} variant="contained" color="primary" onClick={handleVote} >
                 Vote!
             </Button>
             :
-            (<Button>Back</Button>)
+            (<Button variant="contained" color="primary" >Back</Button>)
             }
-            
-            
-           
+
         </div>
     );
 }
