@@ -54,7 +54,7 @@ function ImageHeader({ list }) {
 
                     <div className="center">
                         {list.has_seen === true ?
-                            <ToggleButton
+                            <Button
                                 value="check"
                                 disabled
                                 selected={selected}
@@ -63,7 +63,7 @@ function ImageHeader({ list }) {
                                     setSelected(!selected)
                                 }}
                             >Already Seen
-                            </ToggleButton> : (
+                            </Button> : (
                                 <Button
                                     color="secondary"
                                     variant="contained"

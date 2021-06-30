@@ -26,12 +26,12 @@ function HomePage() {
   //this dispatch the saga
   const dispatch = useDispatch();
   const classes = useStyles();
-  const {id} = useParams();
+  const { id } = useParams();
   //initialize to the DOM
   useEffect(() => {
     dispatch({ type: "FETCH_RANDOM_ART" });
     dispatch({ type: "FETCH_THREE_COLLECTION" });
-    dispatch({type: 'FETCH_ADVENTURE_DETAIL', payload: id});
+    dispatch({ type: 'FETCH_ADVENTURE_DETAIL', payload: id });
   }, []);
   //Adventure reducer
   const adventure = useSelector((store) => store.adventureReducer.adventureReducer);
@@ -52,9 +52,9 @@ function HomePage() {
   // pushes to adventure info page
   const toAdventure = (event, advDet) => {
     console.log('Adventure', advDet);
-      event.preventDefault();
-      history.push(`/adventure/${advDet.id}`);
-      console.log('clicking to adventure');
+    event.preventDefault();
+    history.push(`/adventure/${advDet.id}`);
+    console.log('clicking to adventure');
   };
   // function to render collection location text
   const collectionText = (collection) => (
@@ -64,97 +64,85 @@ function HomePage() {
   );
   return (
     <>
-    <Grid container direction="column">
-      <Grid item xs={12} sm={12} lg={12}>
-      <div className={classes.pageMargin}>
-        <Typography variant="h5" className={classes.title}>
-          Art of the Day
-        </Typography>
-        <p key={randomArt.id}>
-          <img className={classes.image} src={randomArt.image} />
-        </p>
-        <Typography variant="body2" className={classes.imageInfo}>
-          "{randomArt.name}" by {randomArt.artist_name}
-        </Typography>
-        <h4>
-          Find Local Art:
-          <Link to="/collection" className={classes.nextBtn}>
-            Browse All
-          </Link>
-        </h4>
-        <div>
-          <List>
-            {collectionThreeList.map((collection, i) => {
-              return (
-                <>
-                  <Divider />
-                  <ListItem key={i}>
-                    <ListItemAvatar>
-                      <Avatar className={classes.thumbnail} src={collection.image} />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={collection.name}
-                      secondary={collectionText(collection)}
-                    />
-                    <ListItemText secondary="miles" />
-                    <IconButton>
-                    <ArrowForwardIosIcon
-                      onClick={(event) =>
-                        viewCollectionDetail(event, collection)
-                      }
-                      className={classes.nextBtn}
-                    />
-                    </IconButton>
-                  </ListItem>
-                </>
-              );
-            })}
-            <Divider />
-          </List>
-        </div>
-        {/* <Divider/>
-      <Box component="span" m={1} >
-        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
-      </Box >
-      <Divider/>
-      <Box component="span" m={1} >
-        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
-      </Box >
-      <Divider/>
-      <Box component="span" m={1} >
-        <p className="logo">Logo City, State xx.miles <Link to='/collection-detail' className="arrow"> <ArrowForwardIosIcon/> </Link></p>
-      </Box >
-      <Divider/> */}
-        <div className="weekly">
-          <Button onClick={toEmail} variant="outlined">
-            {" "}
-            <MailOutlineIcon className="email" /> Get Weekly Wonder News
-          </Button>
-        </div>
-        <div>
-          <h4>Other Art Adventures:</h4>
-          <List>
-          {adventure.map((advDet, i) => {
-              return (
-                <>  
-            <Divider />
-            <ListItem key={i}>
-              <ListItemText>{advDet.title}</ListItemText>
-              <IconButton >
-                    <ArrowForwardIosIcon
-                    onClick={(event) => toAdventure(event, advDet)}
-                    className={classes.nextBtn}
-                    />
-              </IconButton>
-            </ListItem>
-            <Divider />
-            </>
-            )})}
-          </List>
-        </div>
-      </div>
+      <Grid container direction="column">
+        <Grid item xs={12} sm={12} lg={12}>
+          <div className={classes.pageMargin}>
+            <Typography variant="h5" className={classes.title}>
+              Art of the Day
+            </Typography>
+            <p key={randomArt.id}>
+              <img className={classes.image} src={randomArt.image} />
+            </p>
+            <Typography variant="body2" className={classes.imageInfo}>
+              "{randomArt.name}" by {randomArt.artist_name}
+            </Typography>
+            <h4>
+              Find Local Art:
+              <Link to="/collection" className={classes.nextBtn}>
+                Browse All
+              </Link>
+            </h4>
+            <div>
+              <List>
+                {collectionThreeList.map((collection, i) => {
+                  return (
+                    <>
+                      <Divider />
+                      <ListItem key={i}>
+                        <ListItemAvatar>
+                          <Avatar className={classes.thumbnail} src={collection.image} />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={collection.name}
+                          secondary={collectionText(collection)}
+                        />
+                        <ListItemText secondary="miles" />
+                        <IconButton>
+                          <ArrowForwardIosIcon
+                            onClick={(event) =>
+                              viewCollectionDetail(event, collection)
+                            }
+                            className={classes.nextBtn}
+                          />
+                        </IconButton>
+                      </ListItem>
+                    </>
+                  );
+                })}
+                <Divider />
+              </List>
+            </div>
+            <div className="weekly">
+              <Button onClick={toEmail} variant="outlined">
+                {" "}
+                <MailOutlineIcon className="email" /> Get Weekly Wonder News
+              </Button>
+            </div>
+            <div>
+              <h4>Other Art Adventures:</h4>
+              <List>
+                {adventure.map((advDet, i) => {
+                  return (
+                    <>
+                      <Divider />
+                      <ListItem key={i}>
+                        <ListItemText>{advDet.title}</ListItemText>
+                        <IconButton >
+                          <ArrowForwardIosIcon
+                            onClick={(event) => toAdventure(event, advDet)}
+                            className={classes.nextBtn}
+                          />
+                        </IconButton>
+                      </ListItem>
+                      <Divider />
+                    </>
+                  )
+                })}
+              </List>
+            </div>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
     </>
   );
 }
