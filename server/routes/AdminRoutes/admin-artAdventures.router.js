@@ -1,12 +1,12 @@
 const express = require('express');
 const {
-  rejectUnauthenticated,
+  rejectUnauthenticated, rejectNonAdmin
 } = require('../../modules/authentication-middleware');
 const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all art adventures' info from DB to display on admin art adventure page as li's
-router.get('/', rejectUnauthenticated, (req, res) => {  
+router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
 
     //returns all adventure info to reducer
@@ -23,7 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });//end art adventure GET route
 
 //gets one specific art adventure's info from DB to display on admin art adventure page for editing
-router.get('/:id', rejectUnauthenticated, (req, res) => {  
+router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
     console.log(`in one art adventure's info get, id:`, req.params.id);
     
@@ -41,7 +41,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 });//end one art adventure's info GET route
 
 //gets all SEEs' info for a specific adventure from DB to store in seeList reducer
-router.get('/:id/see', rejectUnauthenticated, (req, res) => {  
+router.get('/:id/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
     //returns all SEE info to reducer
     const query = `SELECT * FROM "see" WHERE "activity_id" = $1;`; 
@@ -57,7 +57,7 @@ router.get('/:id/see', rejectUnauthenticated, (req, res) => {
 });//end GET all SEEs for a specific art adventure
 
 //gets all DOs' info for a specific adventure from DB to store in doList reducer
-router.get('/:id/do', rejectUnauthenticated, (req, res) => {  
+router.get('/:id/do', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
     //returns all DO info to reducer
     const query = `SELECT * FROM "do" WHERE "activity_id" = $1;`; 
@@ -73,14 +73,14 @@ router.get('/:id/do', rejectUnauthenticated, (req, res) => {
 });//end GET all DOs for a specific art adventure
 
 //adds new art adventure to the DB from admin art adventure page
-router.post('/', rejectUnauthenticated, (req, res) => {  
+router.post('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
     let artAdventure = req.body;
     
     const query  = `INSERT INTO "activities" ("title", "description", "image")
         VALUES ($1, $2, $3);`;
 
-    if(req.isAuthenticated() && req.user.admin) {
+    
     pool.query(query, [artAdventure.title, artAdventure.description, artAdventure.image])
     .then(result => {
         console.log('new art adventure object POST', result.rows);
@@ -89,14 +89,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         console.log(error);
         res.sendStatus(500)
     })
-} else {
-    res.sendStatus(403)
-}
+
   
 });//end add new art adventure POST route
 
 //adds new 'See' for adventure to the DB from admin art adventure page
-router.post('/see', rejectUnauthenticated, (req, res) => {  
+router.post('/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
     let newSee = req.body;
     
@@ -114,7 +112,7 @@ router.post('/see', rejectUnauthenticated, (req, res) => {
 });//end add new 'See' for adventure POST route
 
 //adds new 'Do' for adventure to the DB from admin art adventure page
-router.post('/do', rejectUnauthenticated, (req, res) => {  
+router.post('/do', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
     let newDo = req.body;
     
@@ -132,7 +130,7 @@ router.post('/do', rejectUnauthenticated, (req, res) => {
 });//end add new 'Do' for adventure POST route
 
 //PUT route to edit an art adventure's information 
-router.put('/:id', rejectUnauthenticated, (req, res) => { 
+router.put('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -140,7 +138,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     
     const query = `UPDATE "activities" SET title=$2, description=$3, image=$4 
         WHERE id=$1;`;
-    if(req.isAuthenticated() && req.user.admin) {
+    
     pool.query(query, [req.params.id, artAdventure.title, artAdventure.description, 
         artAdventure.image])
     .then(response => {
@@ -149,17 +147,15 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         console.log('Error updating art adventure in server:', error);
         res.sendStatus(500)
     })
-} else {
-    res.sendStatus(403)
-}
+
   
 });//end art adventure PUT route
   
 //DELETE route to delete an art adventure
-router.delete('/:id', rejectUnauthenticated, (req, res) => { 
+router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
   
     const query = `DELETE FROM "activities" WHERE id=$1;`;
-    if(req.isAuthenticated() && req.user.admin) {
+   
     pool.query(query, [req.params.id]) 
     .then(result => {
         res.sendStatus(200);
@@ -167,9 +163,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         console.log('error in delete', error);
         res.sendStatus(500);
     })
-} else {
-    res.sendStatus(403)
-}
+
 });//end art adventure DELETE route
 
 module.exports = router;
