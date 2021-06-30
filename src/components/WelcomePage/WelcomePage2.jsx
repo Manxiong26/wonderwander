@@ -2,17 +2,10 @@ import { useHistory } from 'react-router-dom';
 
 //material UI
 import {
-    List,
-    ListItem,
-    ListItemAvatar,
     ListItemText,
-    Avatar,
     Grid,
-    Box,
-    Button,
     Divider,
     Typography,
-    IconButton,
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -35,14 +28,24 @@ function WelcomePage2() {
 
     return (
         <>
+        <div className={classes.pageMargin}>
+                        <ArrowBackIosIcon
+                            onClick={goBack}
+                            className={classes.backBtn}
+                        /> 
+                        <ArrowForwardIosIcon
+                            onClick={goNext}
+                            className={classes.nextBtn}
+                        />
+                        <div className={classes.center}>
+                        <SkipNextIcon
+                            
+                            onClick={skipWelcome}
+                        /></div>
+                    </div>
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
-                        <SkipNextIcon
-                            className={classes.nextBtn}
-                            onClick={skipWelcome}
-                        />
-                    </div>
+                    
                     <div className={classes.pageMargin}>
 
                         <Typography
@@ -52,10 +55,20 @@ function WelcomePage2() {
                             Why
                         </Typography>
                         <Divider />
-                        <ListItemText 
-                            className={classes.center}
-                            primary="Why this App!"
-                            secondary="Why this App!!"/>
+                        <p> Generating random paragraphs can be an excellent way 
+                        for writers to get their creative flow going at the 
+                        beginning of the day. The writer has no idea what 
+                        topic the random paragraph will be about when it 
+                        appears. This forces the writer to use creativity 
+                        to complete one of three common writing challenges. 
+                        The writer can use the paragraph as the first one 
+                        of a short story and build upon it. A second option 
+                        is to use the random paragraph somewhere in a short 
+                        story they create. The third option is to have the 
+                        random paragraph be the ending paragraph in a short 
+                        story. No matter which of these challenges is 
+                        undertaken, the writer is forced to use creativity 
+                        to incorporate the paragraph into their writing.</p>
                         <Divider />
                         <Typography
                             variant="h3"
@@ -63,19 +76,21 @@ function WelcomePage2() {
                         > What 
                         
                         </Typography>
-                        <ArrowBackIosIcon
-                            onClick={goBack}
-                            className={classes.backBtn}
-                        /> 
-                        <ArrowForwardIosIcon
-                            onClick={goNext}
-                            className={classes.nextBtn}
-                        />
                         <Divider />
-                        <ListItemText 
-                            className={classes.center}
-                            primary="What is This App!"
-                            secondary="What is This App!!"/>
+                        <p> Generating random paragraphs can be an excellent way 
+                        for writers to get their creative flow going at the 
+                        beginning of the day. The writer has no idea what 
+                        topic the random paragraph will be about when it 
+                        appears. This forces the writer to use creativity 
+                        to complete one of three common writing challenges. 
+                        The writer can use the paragraph as the first one 
+                        of a short story and build upon it. A second option 
+                        is to use the random paragraph somewhere in a short 
+                        story they create. The third option is to have the 
+                        random paragraph be the ending paragraph in a short 
+                        story. No matter which of these challenges is 
+                        undertaken, the writer is forced to use creativity 
+                        to incorporate the paragraph into their writing.</p>
                         <Divider />
                         <Typography
                             variant="h3"
@@ -83,10 +98,20 @@ function WelcomePage2() {
                             Benefits
                         </Typography>
                         <Divider />
-                        <ListItemText 
-                            className={classes.center}
-                            primary="Benefits of This App!"
-                            secondary="Benefits of This App!!"/>
+                        <p> Generating random paragraphs can be an excellent way 
+                        for writers to get their creative flow going at the 
+                        beginning of the day. The writer has no idea what 
+                        topic the random paragraph will be about when it 
+                        appears. This forces the writer to use creativity 
+                        to complete one of three common writing challenges. 
+                        The writer can use the paragraph as the first one 
+                        of a short story and build upon it. A second option 
+                        is to use the random paragraph somewhere in a short 
+                        story they create. The third option is to have the 
+                        random paragraph be the ending paragraph in a short 
+                        story. No matter which of these challenges is 
+                        undertaken, the writer is forced to use creativity 
+                        to incorporate the paragraph into their writing.</p>
                         <Divider />
                     </div>
                 </Grid>

@@ -45,15 +45,21 @@ function WelcomePage1() {
 
     return (
         <>
-            <Grid container direction="column">
-                <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
-                        <Button onClick={logIn}>Login</Button>
+        <div className={classes.pageMargin}>
+                        <Button 
+                        className={classes.backBtn}
+                        onClick={logIn}>Login</Button>
+                        <ArrowForwardIosIcon
+                                onClick={goNext}
+                                className={classes.nextBtn}
+                            />
+                            <div className={classes.center}>
                         <SkipNextIcon
-                            className={classes.nextBtn}
                             onClick={skipWelcome}
-                        />
-                    </div>
+                        /></div>
+                        </div>
+            <Grid container direction="column">
+                <Grid item xs={12} sm={12} lg={12}> 
                     <div className={classes.pageMargin}>
                         {quote.quote === undefined ?
                             '' : (
@@ -74,10 +80,7 @@ function WelcomePage1() {
                     <div>
                         <ListItem>
                             <img className={classes.image} src={art.image} />
-                            <ArrowForwardIosIcon
-                                onClick={goNext}
-                                className={classes.nextBtn}
-                            />
+                            
                         </ListItem>
                     </div>
                 </Grid>
