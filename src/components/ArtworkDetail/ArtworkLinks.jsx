@@ -1,45 +1,70 @@
 import React from 'react';
-import { Grid, Paper, Card, CardMedia, CardContent, Typography, } from '@material-ui/core';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import { Link } from '@material-ui/icons';
+import {
+    ListItem,
+    ListItemText,
+    Grid,
+    Divider,
+    IconButton,
+} from '@material-ui/core';
+import { useStyles } from "../classes";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useHistory } from 'react-router-dom';
 
-function CollectionLinks({list, userLat, userLng}) {
+function CollectionLinks({ list, userLat, userLng }) {
     const history = useHistory();
+    const classes = useStyles();
     console.log('In ArtworkLinks...', list);
     // ROUTE to direct user to directions
 
     return (
-        <Card>
-            <CardActionArea onClick={() => history.push(`/artist_detail/${list.artist_id}`)}>  
-                <CardContent>
-                    <Typography>
-                        Artist
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActionArea onClick={() => history.push('/collection')}>
-                <CardContent>
-                    <Typography>
-                        Collections
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActionArea onClick={() => history.push(`/sponsor/${list.sponsor_id}`)}>
-                <CardContent>
-                    <Typography>
-                        Sponsor
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActionArea onClick={() => location.href="https://www.google.com/maps/dir/?api=1&origin="+userLat+","+userLng+"&destination="+list.lat+","+list.long+"&dir_action=navigate"}>
-                <CardContent>
-                    <Typography>
-                        Directions miles xx
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-        </Card>
+        <>
+            <Grid container direction="column">
+                <Grid item xs={12} sm={12} lg={12}>
+                    <div className={classes.pageMargin}>
+                        <ListItem>
+                            <ListItemText
+                                primary={'Artist'}
+                            />
+                            <IconButton>
+                                <ArrowForwardIosIcon onClick={() => history.push(`/artist_detail/${list.artist_id}`)} />
+                            </IconButton>
+                        </ListItem>
+                        <Divider />
+                        <ListItem>
+                            <ListItemText
+                                primary={'Collections'}
+                            />
+                            <IconButton>
+                                <ArrowForwardIosIcon onClick={() => history.push('/collection')} />
+                            </IconButton>
+                        </ListItem>
+                        <Divider />
+                        <ListItem>
+                            <ListItemText
+                                primary={'Sponsor'}
+                            />
+                            <IconButton>
+                                <ArrowForwardIosIcon onClick={() => history.push(`/sponsor/${list.sponsor_id}`)} />
+                            </IconButton>
+                        </ListItem>
+                        <Divider />
+                        <ListItem>
+                            <ListItemText
+                                primary={'Directions'}
+                                secondary={'Miles XX'}
+                            />
+                            <IconButton>
+                                <ArrowForwardIosIcon onClick={() =>
+                                    location.href = "https://www.google.com/maps/dir/?api=1&origin="
+                                    + userLat + "," + userLng + "&destination=" + list.lat + "," + list.long
+                                    + "&dir_action=navigate"} />
+                            </IconButton>
+                            <Divider />
+                        </ListItem>
+                    </div>
+                </Grid>
+            </Grid>
+        </>
     );
 }
 

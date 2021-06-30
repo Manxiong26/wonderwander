@@ -26,11 +26,18 @@ const useStyles = makeStyles((theme) => ({
         border: "1px solid black",
 
       },
+      thumbnailLarge: {
+        border: "1px solid black",
+        width: theme.spacing(8),
+        height: theme.spacing(8),
+        marginRight: 10,
+      },
       title: {
           textAlign: 'center',
           fontFamily: theme.typography.Pacifico,
           textDecoration: 'underline',
           color: theme.palette.primary.main,
+          marginBottom: '5%',
       },
       image: {
           maxWidth: '280px',
@@ -38,7 +45,9 @@ const useStyles = makeStyles((theme) => ({
           marginRight: 'auto',
           marginLeft: 'auto',
           display: 'block',
-          border: '1px solid black'
+          border: '1px solid black',
+          marginTop: '5%',
+          marginBottom: '5%',
       },
       imageInfo: {
           textAlign: 'center'
@@ -48,12 +57,28 @@ const useStyles = makeStyles((theme) => ({
         marginRight: '6%'
       },
       nextBtn: {
-
           float: 'right',
-          
+      },
+      backBtn: {
+        float: 'left',
+      },
+      center: {
+        textAlign: 'center',
+        marginTop: '5%',
+        marginBottom: '5%',
+      },
+      pageCenter: {
+        textAlign: 'center',
+        padding: '5%',
+        marginTop: '30%',
       },
       card: {
-        background: 'red',
+        
+        maxWidth: 300,
+        marginTop: '5%',
+    },
+    media: {
+      height: 300,
     },
       blue: {
         color: '#fff',
@@ -70,7 +95,12 @@ const useStyles = makeStyles((theme) => ({
       color: '#DC0100',
       textAlign: 'center',
       fontFamily: theme.typography.Pacifico,
-      textDecoration: 'underline'
+      
+    },
+    black:{
+      color: 'black',
+      textAlign: 'center',
+      fontFamily: theme.typography.Pacifico,
     },
     seen: {
       background: '#8C8A8C',

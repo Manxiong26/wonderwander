@@ -1,12 +1,29 @@
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import {useParams} from 'react-router-dom';
+import { useHistory, useParams} from 'react-router-dom';
 import Map from "../Map/Map";
 
+//matierl UI
+import {
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Avatar,
+    Grid,
+    Box,
+    Button,
+    Divider,
+    Typography,
+    IconButton,
+  } from "@material-ui/core";
+import { useStyles } from "../classes";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import { makeStyles } from "@material-ui/core";
 
 
@@ -15,13 +32,14 @@ function SponsorDetail({userLat, userLng}) {
     const details = useSelector(store => store.sponsorDetails);
     const sponsorArt = useSelector(store => store.sponsorArt);
     const dispatch = useDispatch();
+    const history = useHistory();
 
-    const useStyles = makeStyles((theme) => ({
-        mapContainer: {
-            marginTop: "auto",
-            marginBottom: "auto",
-        },
-    }));
+    // const useStyles = makeStyles((theme) => ({
+    //     mapContainer: {
+    //         marginTop: "auto",
+    //         marginBottom: "auto",
+    //     },
+    // }));
 
     const classes = useStyles();
 
@@ -53,44 +71,76 @@ function SponsorDetail({userLat, userLng}) {
     }, [])
 
     return (
-        <div>
-            <img src={details.logo}></img>
-            <button onClick={(event) => {
-                event.preventDefault();
-                window.location.href=`${details.site_link}`
-            }}>Visit Website</button>
-
-            <div className={classes.mapContainer}>
+        <>
+        <Button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                <ArrowBackIosIcon />
+            </Button>
+        <Grid container direction="column">
+        <Grid item xs={12} sm={12} lg={12}>
+          <div className={classes.pageMargin}>
+            <Typography variant="h5" className={classes.title}>
+              Sponsor Detail
+            </Typography>
+        
+            <img className={classes.image} src={details.logo}></img>
+            <div className={classes.center}>
+            <Button 
+            variant="outlined" 
+            color="primary"
+            href={details.site_link}>Visit Website</Button>
+        </div>
+            <div>
                 <Map
                     mapLat={center.lat}
                     mapLng={center.lng}
                     zoom={10}
-                    height={500}
+                    height={300}
                     width={"90%"}
                     reducer={sponsorArt}
                     userLat={userLat}
                     userLng={userLng}
                 />
             </div>
-            
-            <Grid container spacing={2}>
+            <div className={classes.center}>
+                <h3>ArtWork</h3>
+                </div>
+            <div>
+            <List>
                 {sponsorArt.map((art, index) => {
                     return (
-                    <Grid item>
-                        <Card className="artCard">
-                            <CardMedia>
-                                <img src={art.image}></img>
-                            </CardMedia>
-                            <CardContent>
-                                <p>{art.description}</p>
-                            </CardContent>
-                        </Card>
-                    </Grid>
+                        <>
+                    <Divider />
+                    <ListItem>
+                        <ListItemAvatar>
+                                <Avatar className={classes.thumbnailLarge} src={art.image}/>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={art.name}
+                        />
+                        <IconButton>
+                          <ArrowForwardIosIcon
+                //IAN THIS IS WHERE YOUR VIEW ARTWORKDETAIL BUTTON WILL GO 
+                            // onClick={(event) =>
+                            //   viewCollectionDetail(event, artwork)
+                            // }
+                            // className={classes.nextBtn}
+                          />
+                        </IconButton>
+                    </ListItem>
+                    <Divider />
+                  </>
                     )
                 })}   
-            </Grid>
+            </List>
+            </div>
         </div>
-
+</Grid>
+</Grid>
+</>
     )
 }
 

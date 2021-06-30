@@ -19,7 +19,7 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 function Collection() {
   const classes = useStyles();
@@ -47,6 +47,13 @@ function Collection() {
   }
   return (
     <>
+    <Button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                <ArrowBackIosIcon />
+            </Button>
       <div className={classes.pageMargin}>
         <Typography variant="h5" className={classes.title}>
           All Collections
