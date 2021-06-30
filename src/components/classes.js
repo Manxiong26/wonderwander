@@ -105,15 +105,10 @@ const useStyles = makeStyles((theme) => ({
       },
       table: {
         overflow: 'hidden',
-        marginTop: '10%', 
-        
-        
+        marginTop: '10%',  
       },
       cardContent: {
         marginTop: '10%',
-    
-        
-    
       },
       tableContent: {
         marginTop: '5%',
@@ -122,8 +117,6 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '10%', 
         display: 'flex',
         flexDirection: 'column',
-        
-        
       },
       inputs: {
         marginTop: '5%',
@@ -149,6 +142,15 @@ const useStyles = makeStyles((theme) => ({
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
+      },
+      loginForm: {
+        width: '30%',
+        height: 350,
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        paddingRight: '10%',
+        paddingLeft: '10%',
+        overflow: 'auto'
       }
 
   }));
