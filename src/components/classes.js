@@ -50,8 +50,11 @@ const useStyles = makeStyles((theme) => ({
       nextBtn: {
           float: 'right',
       },
+      backBtn: {
+        float: 'left',
+      },
       center: {
-        justifyContent: 'center',
+        textAlign: 'center',
       },
       card: {
         background: 'red',
@@ -77,7 +80,12 @@ const useStyles = makeStyles((theme) => ({
       color: 'black',
       textAlign: 'center',
       fontFamily: theme.typography.Pacifico,
-      textDecoration: 'underline'
+      
+    },
+    why: {
+      color: 'black',
+      fontFamily: theme.typography.Pacifico,
+      textDecoration: 'underline',
     },
     seen: {
       background: '#8C8A8C',

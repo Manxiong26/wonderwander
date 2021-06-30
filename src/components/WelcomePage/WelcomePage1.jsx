@@ -5,17 +5,10 @@ import { useHistory } from 'react-router-dom';
 
 //material UI
 import {
-    List,
     ListItem,
-    ListItemAvatar,
-    ListItemText,
-    Avatar,
     Grid,
-    Box,
     Button,
-    Divider,
     Typography,
-    IconButton,
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -54,38 +47,38 @@ function WelcomePage1() {
         <>
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
-                <div className={classes.pageMargin}>
-                    <Button onClick={logIn}>Login</Button>
-
-                        <SkipNextIcon 
-                        className={classes.nextBtn}
-                        onClick={skipWelcome} 
+                    <div className={classes.pageMargin}>
+                        <Button onClick={logIn}>Login</Button>
+                        <SkipNextIcon
+                            className={classes.nextBtn}
+                            onClick={skipWelcome}
                         />
                     </div>
                     <div className={classes.pageMargin}>
-
                         {quote.quote === undefined ?
                             '' : (
                                 <>
                                     <Typography variant="h3" className={classes.black}>
-                                    Welcome
-                                </Typography>
+                                        Welcome
+                                    </Typography>
                                     <Typography variant="h6" className={classes.title}>
                                         "{quote.quote}"
                                     </Typography>
                                     <Typography variant="h6" className={classes.title}>
                                         by {quote.quote_by}
-                                    </Typography></>)}
+                                    </Typography>
+                                </>
+                            )
+                        }
                     </div>
                     <div>
                         <ListItem>
-                        <img className={classes.image} src={art.image} />
-                        <ArrowForwardIosIcon
+                            <img className={classes.image} src={art.image} />
+                            <ArrowForwardIosIcon
                                 onClick={goNext}
                                 className={classes.nextBtn}
                             />
-                        
-                        </ListItem>    
+                        </ListItem>
                     </div>
                 </Grid>
             </Grid>
