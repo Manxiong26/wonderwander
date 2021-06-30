@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 
 //material ui drawer
@@ -18,6 +18,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import {Button} from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -101,7 +102,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Menu(){
 
+
   const dispatch = useDispatch();
+  const history = useHistory();
     const user = useSelector((store) => store.user);
 
     let loginLinkData = {
@@ -126,6 +129,10 @@ function Menu(){
       setOpen(false);
     };
 
+    const toAdminRegister = () => {
+      history.push('/admin/register')
+    }
+
     return(
         <>
 <div className={classes.root}>
@@ -149,6 +156,10 @@ function Menu(){
         <Typography className={classes.title} variant="h6" noWrap>
           Wonder Wander
         </Typography>
+        {user.admin &&
+        <Button variant="outlined" onClick={toAdminRegister}>
+          <Typography style={{color: 'white'}}>Add Admin</Typography>
+        </Button>}
       </Toolbar>
     </AppBar>
     <Drawer
@@ -214,6 +225,18 @@ function Menu(){
           </ListItem>
       </List>
       </Link>
+      {user.admin ?
+      (
+      <Link to='/admin/landing' style={styles.link} onClick={handleDrawerClose}>
+      
+      <List>
+          <ListItem button key={'Admin'}>
+            <ListItemText primary={'Admin'} />
+          </ListItem>
+      </List>
+      </Link>
+      ): (<></>) 
+      }
     </Drawer>
     <main
       className={clsx(classes.content, {

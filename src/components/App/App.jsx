@@ -6,13 +6,14 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import AdminRoute from '../AdminRoute/AdminRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
 import HomePage from '../HomePage/HomePage';
@@ -26,7 +27,9 @@ import AdminCollection from '../AdminCollection/AdminCollection';
 import AdminSponsor from '../AdminSponsor/AdminSponsor';
 import AdminQuote from '../AdminQuote/AdminQuote';
 import AdminArtAdventure from '../AdminArtAdventure/AdminArtAdventure';
+import AdminLanding from '../AdminLanding/AdminLanding'
 import MapView from '../MapView/MapView'
+import AdminRegister from '../AdminRegister/AdminRegister'
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import WelcomePage1 from '../WelcomePage/WelcomePage1';
@@ -65,7 +68,8 @@ function App() {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#DC0100'
+        main: '#DC0100',
+        white: 'white'
       },
       secondary: {
         main: '#118ADA'
@@ -100,6 +104,9 @@ function App() {
      const [userLng, setUserLng] = useState(null);
      console.log("user lng: ", userLng);
     //  const [geoAvailable, setGeoAvailable] = useState(false);
+
+    const user = useSelector(store => store.user);
+    console.log('Logged in user: ', user)
 
     
 
@@ -166,8 +173,14 @@ function App() {
             >
               <AdventureSeePage />
             </Route>
+            <Route
+            exact
+            path="/adventure/do/:id"
+            >
+              <AdventureDoPage />
+            </Route>
 
-            {/* ------------ADMIN PAGES----------------- */}
+        
             <Route
             exact
             path="/say"
@@ -182,61 +195,77 @@ function App() {
               <DoPage />
             </Route>
 
-            <Route
+            {/* ------------ADMIN PAGES----------------- */}
+            
+            <ProtectedRoute
+
             exact
-            path="/adventure/do/:id"
+            path="/admin/landing"
             >
-              <AdventureDoPage />
-            </Route>
+              <AdminLanding />
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LoginPage at /login
+              exact
+              path="/admin/register"
+            >
+              <AdminRegister />
+            </ProtectedRoute>
+
+
+            
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <ProtectedRoute
               // shows AdminArtist Page at all times (logged in or not)
               exact
               path="/admin/artist"
             >
               <AdminArtist />
 
-            </Route>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <ProtectedRoute
               // shows AdminArtwork Page at all times (logged in or not)
               exact
               path="/admin/artwork"
             >
               <AdminArtwork />
-            </Route>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <ProtectedRoute
               // shows AdminCollection Page at all times (logged in or not)
               exact
               path="/admin/collection"
             >
               <AdminCollection />
-            </Route>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <ProtectedRoute
               // shows AdminSponsor Page at all times (logged in or not)
               exact
               path="/admin/sponsor"
             >
               <AdminSponsor />
-            </Route>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <ProtectedRoute
               // shows AdminQuote Page at all times (logged in or not)
               exact
               path="/admin/quote"
             >
               <AdminQuote />
-            </Route>
+            </ProtectedRoute>
             {/* this is temporary until we can get the log in working */}
-            <Route
+            <ProtectedRoute
               // shows AdminArtAdventure Page at all times (logged in or not)
               exact
               path="/admin/art-adventure"
             >
               <AdminArtAdventure />
-            </Route>
+            </ProtectedRoute>
 
             {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -246,6 +275,7 @@ function App() {
               // logged in shows HomePage else shows LoginPage
               exact
               path="/home"
+              
             >
               <HomePage />
             </Route>
@@ -270,13 +300,15 @@ function App() {
             {/* When a value is supplied for the authRedirect prop the user will
               be redirected to the path supplied when logged in, otherwise they will
               be taken to the component and path supplied. */}
+
             <Route
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LoginPage at /login
               exact
               path="/login"
-              authRedirect="/user"
+              authRedirect="/user"  
+                       
             >
               <LoginPage />
             </Route>
@@ -291,6 +323,7 @@ function App() {
             >
               <RegisterPage />
             </Route>
+
 
             <Route
               // with authRedirect:

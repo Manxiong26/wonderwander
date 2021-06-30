@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 router.get('/:id', (req, res) => {
     console.log('Start of the do page', req.params);
     const queryText = `
-    SELECT "do".id, "do".prompts FROM "do" WHERE "do".artwork_id = $1;`
+    SELECT "do".id, "do".prompts, "do".image FROM "do" WHERE "do".artwork_id = $1;`
     pool.query(queryText, [req.params.id])
         .then(result => {
             console.log('END OF THE DO PAGE HELLO', req.params);

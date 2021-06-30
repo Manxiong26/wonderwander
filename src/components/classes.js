@@ -17,16 +17,20 @@ const useStyles = makeStyles((theme) => ({
         marginRight: "5%",
         marginBottom: "1%",
       },
-      thumbnail: {
-        width: '60px',
+      thumbnailContainer: {
+        width: '25%',
         height: '60px',
         marginRight: 10,
-        border: "1px solid black"
+      },
+      thumbnail: {
+        border: "1px solid black",
+
       },
       title: {
           textAlign: 'center',
           fontFamily: theme.typography.Pacifico,
-          textDecoration: 'underline'
+          textDecoration: 'underline',
+          color: theme.palette.primary.main,
       },
       image: {
           maxWidth: '280px',
@@ -44,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: '6%'
       },
       nextBtn: {
+
           float: 'right',
           
       },
@@ -70,6 +75,82 @@ const useStyles = makeStyles((theme) => ({
     seen: {
       background: '#8C8A8C',
     }
+
+          float: 'right',    
+      },
+      cardForm: {
+        width: '60%',
+        height: 750,
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        paddingRight: '10%',
+        paddingLeft: '10%',
+        overflow: 'auto'
+      },
+      cardTable: {
+        width: '80%',
+        height: 750,
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        paddingRight: '10%',
+        paddingLeft: '10%',
+      },
+      btnGroup: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        marginLeft: '15%'
+      },
+      btn: {
+        
+      },
+      table: {
+        overflow: 'hidden',
+        marginTop: '10%', 
+        
+        
+      },
+      cardContent: {
+        marginTop: '10%',
+    
+        
+    
+      },
+      tableContent: {
+        marginTop: '5%',
+      },
+      form: {
+        marginTop: '10%', 
+        display: 'flex',
+        flexDirection: 'column',
+        
+        
+      },
+      inputs: {
+        marginTop: '5%',
+        marginBottom: '2%',
+      },
+      formBtn: {
+          marginLeft: '25%',
+          marginRight: '25%',
+          marginTop: '4%',
+          marginBottom: '4%'
+      },
+      adminNav: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginBottom: '2%',
+        flexWrap: 'wrap'
+
+      },
+      modal: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+      }
+
   }));
 
 export { useStyles }

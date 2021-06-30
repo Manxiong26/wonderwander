@@ -12,13 +12,16 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: theme.spacing(2),
     },
     card: {
-      height: '50%',
-      display: 'flex',
+      height: '180px',
+      width: '180px',
+      display: 'inline-block',
       flexDirection: 'column',
     },
     cardMedia: {
-      paddingTop: '100%', // 16:9
-      height: 0,
+      // paddingTop: '100%', // 16:9
+      height: '60px',
+      width: '60px',
+      margin: 'auto',
     },
     cardContent: {
       flexGrow: 1,
@@ -47,6 +50,12 @@ function SayPage() {
     // const history = useHistory();
     const list = useSelector((store) => store.seesaydoReducer.sayReducer);
     const dispatch = useDispatch();
+    const [voteMode, setVoteMode] = useState(false);
+
+    const handleVote = () => {
+      console.log(handleVote);
+      setVoteMode(true);
+    }
     
     // // This is where we update and insert into the db
     // const [say_id, setSay_Id] = useState('');
@@ -75,10 +84,11 @@ function SayPage() {
 
     return (
         <div>
-            <Container className={classes.cardGrid} maxWidth="md">
+          {voteMode === false ?
+          <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={10}>
                 {list.map((lists, i) => (
-                    <Grid item key={i} xs={12} sm={6} md={4}>
+                    <Grid item key={i}  >
                     <CardActionArea>
                         <Card className={classes.card}>
                             <CardMedia image={lists.image} className={classes.cardMedia}/>
@@ -93,9 +103,36 @@ function SayPage() {
                     ))}
                 </Grid>
             </Container>
-            <Button  variant="contained" color="primary">
+          :
+          (<Container className={classes.cardGrid} maxWidth="md">
+          <Grid container spacing={10}>
+          {list.map((lists, i) => (
+              <Grid item key={i}>
+              <CardActionArea>
+                  <Card className={classes.card}>
+                      <CardMedia image={lists.image} className={classes.cardMedia}/>
+                      <CardContent className={classes.cardContent}>
+                          <Typography className={classes.gamesHeader} gutterBottom variant="h5" component="h2" align='center'>
+                          vote: 
+                          </Typography>
+                      </CardContent>    
+                  </Card>
+              </CardActionArea>
+              </Grid>
+              ))}
+          </Grid>
+      </Container>)  
+          }
+            {voteMode === false ?
+            <Button  variant="contained" color="primary" onClick={handleVote}>
                 Vote!
             </Button>
+            :
+            (<Button>Back</Button>)
+            }
+            
+            
+           
         </div>
     );
 }

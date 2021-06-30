@@ -29,6 +29,7 @@ function HomePage() {
   const { id } = useParams();
   //initialize to the DOM
   useEffect(() => {
+    
     dispatch({ type: "FETCH_RANDOM_ART" });
     dispatch({ type: "FETCH_THREE_COLLECTION" });
     dispatch({ type: 'FETCH_ADVENTURE_DETAIL', payload: id });
