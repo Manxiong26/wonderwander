@@ -42,7 +42,7 @@ function LoginForm() {
           {errors.loginMessage}
         </h3>
       )}
-      <div>
+      <div className={classes.loginInputs}>
           <TextField
             className={classes.inputs}
             variant="outlined"
@@ -55,8 +55,7 @@ function LoginForm() {
             onChange={(event) => setUsername(event.target.value)}
           />
         
-      </div>
-      <div>
+      
           <TextField
             className={classes.inputs}
             variant="outlined"
@@ -68,9 +67,10 @@ function LoginForm() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
+      
+      <div className={classes.btn}>
+        <Button  color="primary" variant="outlined" type="submit" name="submit">Log In</Button>
       </div>
-      <div>
-        <Button color="primary" variant="outlined" className={classes.formBtn} type="submit" name="submit">Log In</Button>
       </div>
       </div>
     </form>

@@ -101,6 +101,8 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '15%'
       },
       btn: {
+        marginTop: '2%'
+        
         
       },
       table: {
@@ -121,6 +123,14 @@ const useStyles = makeStyles((theme) => ({
       inputs: {
         marginTop: '5%',
         marginBottom: '2%',
+        
+      },
+      loginInputs: {
+        display: 'table-cell',
+        textAlign: 'center',
+        
+        
+        
       },
       formBtn: {
           marginLeft: '25%',
@@ -144,13 +154,16 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
       },
       loginForm: {
-        width: '30%',
-        height: 350,
+        width: 350,
+        height: 500,
         marginRight: 'auto',
         marginLeft: 'auto',
-        paddingRight: '10%',
-        paddingLeft: '10%',
-        overflow: 'auto'
+        paddingRight: '2%',
+        paddingLeft: '2%',
+        overflow: 'auto',
+        display: 'flex',
+        justifyContent: 'center',
+        
       }
 
   }));
