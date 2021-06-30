@@ -38,7 +38,6 @@ function WelcomePage3() {
                 />
                 <div className={classes.center}>
                     <SkipNextIcon
-
                         onClick={skipWelcome}
                     /></div>
             </div>
@@ -53,7 +52,8 @@ function WelcomePage3() {
                         </Typography>
                         <Divider />
                         <p>The See button will prompt you to experience a specific element of the artwork.
-                            You will be asked to observe a visual component and be provided materials that will explain the creation or background of the artwork.</p>
+                            You will be asked to observe a visual component and be provided materials that
+                            will explain the creation or background of the artwork.</p>
                         <Typography
                             variant="h3"
                             className={classes.red}
@@ -61,7 +61,8 @@ function WelcomePage3() {
                             Say
                         </Typography>
                         <Divider />
-                        <p>The Say button will prompt you to vote on how the piece of artwork made you feel; what emotions the artwork evoked in you.</p>
+                        <p>The Say button will prompt you to vote on how the piece of artwork made you feel;
+                            what emotions the artwork evoked in you.</p>
                         <Typography
                             variant="h3"
                             className={classes.red}
