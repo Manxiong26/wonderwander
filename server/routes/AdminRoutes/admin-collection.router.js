@@ -1,12 +1,12 @@
 const express = require('express');
 const {
-  rejectUnauthenticated,
+  rejectUnauthenticated, rejectNonAdmin
 } = require('../../modules/authentication-middleware');
 const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all collections' info from DB to display on admin collection page as li's
-router.get('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
+router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  //rejectUnauthenticated,
 
     //returns all collection info to reducer
     const query = `SELECT * FROM "collection" ORDER BY "name" ASC;`;
@@ -22,7 +22,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
 });//end collection GET route
 
 //gets one specific collection's info from DB to display on admin collection page for editing
-router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
+router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  //rejectUnauthenticated,
     console.log(`in one collection's info get, id:`, req.params.id);
     
     //returns a specific collection's info to reducer
@@ -39,14 +39,14 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticat
 });//end one collection's info GET route
 
 //adds new collection to the DB from admin collection page
-router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated,
+router.post('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  //rejectUnauthenticated,
 
     let collection = req.body;
     
     const query  = `INSERT INTO "collection" ("name", "image", "city", "state", 
         "bio", "donate_link", "site_link", "search_text")
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
-    if(req.isAuthenticated() && req.user.admin) {
+    
     pool.query(query, [collection.name, collection.image, collection.city, 
         collection.state, collection.bio, collection.donate_link, 
         collection.site_link, collection.search_text])
@@ -57,14 +57,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
         console.log(error);
         res.sendStatus(500)
     })
-} else {
-    res.sendStatus(403)
-}
+
   
 });//end add new collection POST route
 
 //PUT route to edit an collection's information 
-router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
+router.put('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -72,7 +70,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
     
     const query = `UPDATE "collection" SET name=$2, image=$3, city=$4, state=$5, 
         bio=$6, donate_link=$7, site_link=$8, search_text=$9 WHERE id=$1;`;
-    if(req.isAuthenticated() && req.user.admin) {
+    
     pool.query(query, [req.params.id, collection.name, collection.image, collection.city, 
         collection.state, collection.bio, collection.donate_link, collection.site_link,
         collection.search_text])
@@ -82,21 +80,19 @@ router.put('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticate
         console.log('Error updating collection in server:', error);
         res.sendStatus(500)
     })
-} else {
-    res.sendStatus(403)
-}
+
   
 });//end collection PUT route'
 
 //PUT route to publish a collection's information 
-router.put('/publish/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
+router.put('/publish/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { //rejectUnauthenticated,
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
     let collection = req.body;
     
     const query = `UPDATE "collection" SET published=$2 WHERE id=$1;`;
-    if(req.isAuthenticated() && req.user.admin) {
+    
     pool.query(query, [req.params.id, collection.published])
     .then(response => {
         res.sendStatus(200);
@@ -104,17 +100,15 @@ router.put('/publish/:id', rejectUnauthenticated, (req, res) => { //rejectUnauth
         console.log('Error updating collection publish in server:', error);
         res.sendStatus(500)
     })
-} else {
-    res.sendStatus(403)
-}
+
   
 });//end collection PUT route
   
 //DELETE route to delete a collection
-router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthenticated,
+router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { //rejectUnauthenticated,
   
     const query = `DELETE FROM "collection" WHERE id=$1;`;
-    if(req.isAuthenticated() && req.user.admin) {
+    
     pool.query(query, [req.params.id]) 
     .then(result => {
         res.sendStatus(200);
@@ -122,9 +116,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => { //rejectUnauthentic
         console.log('error in delete', error);
         res.sendStatus(500);
     })
-} else {
-    res.sendStatus(403)
-}
   
 });//end collection DELETE route
 
