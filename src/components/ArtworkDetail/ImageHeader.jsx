@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Card, makeStyles, CardMedia, CardContent } from '@material-ui/core';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -8,17 +7,12 @@ import { useParams } from "react-router-dom";
 //material UI
 import {
     Grid,
-    Box,
-    Button,
-    Divider,
     Typography,
     IconButton,
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import ToggleButton from '@material-ui/lab/ToggleButton';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
 // const useStyles = makeStyles({
@@ -28,7 +22,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 // })
 
 function ImageHeader({ list }) {
-    
+
     const classes = useStyles();
     // const list = useSelector((store) => store.artworkDetailReducer);
     // const dispatch = useDispatch();
@@ -59,78 +53,78 @@ function ImageHeader({ list }) {
 
     return (
         <>
-<Grid container direction="column">
-<Grid item xs={12} sm={12} lg={12}>
-<div className={classes.pageMargin}>
-<Typography variant="h5" className={classes.title}>
-              Art Detail
-            </Typography>
-            <img
-                className={classes.image}
-                    src={list.artwork_image}
-                /> 
-                
-                {user.id !== undefined ?
+            <Grid container direction="column">
+                <Grid item xs={12} sm={12} lg={12}>
+                    <div className={classes.pageMargin}>
+                        <Typography variant="h5" className={classes.title}>
+                            Art Detail
+                        </Typography>
+                        <img
+                            className={classes.image}
+                            src={list.artwork_image}
+                        />
 
-                    <div className={classes.center}>
-                        {list.has_seen === true ?
-                        <Typography variant="body1" className={classes.imageInfo}>
-                        {list.artwork_name}
-                        <IconButton>
-                        <ToggleButton
-                                value="check"
-                                disabled
-                                selected={selected}
-                                onClick={seen}
-                                onChange={() => {
-                                    setSelected(!selected)
-                                }}
-                            >
-                                Already Seen
-                            </ToggleButton>
-                            </IconButton>
-                            </Typography>
-                                 : (
-                                    <>
+                        {user.id !== undefined ?
+
+                            <div className={classes.center}>
+                                {list.has_seen === true ?
                                     <Typography variant="body1" className={classes.imageInfo}>
-                                    {list.artwork_name}
-                                    <IconButton>
-                                    <VisibilityIcon
-                                        color="secondary"
-                                        variant="contained"
-                                        value="check"
-                                        selected={selected}
-                                        onClick={function () { refreshPage(); seen(); }}
-                                        onChange={() => {
-                                            setSelected(!selected)
-                                        }}
-                                    />
-                                    </IconButton>
+                                        {list.artwork_name}
+                                        <IconButton>
+                                            <ToggleButton
+                                                value="check"
+                                                disabled
+                                                selected={selected}
+                                                onClick={seen}
+                                                onChange={() => {
+                                                    setSelected(!selected)
+                                                }}
+                                            >
+                                                Already Seen
+                                            </ToggleButton>
+                                        </IconButton>
                                     </Typography>
-                                    </>
+                                    : (
+                                        <>
+                                            <Typography variant="body1" className={classes.imageInfo}>
+                                                {list.artwork_name}
+                                                <IconButton>
+                                                    <VisibilityIcon
+                                                        color="secondary"
+                                                        variant="contained"
+                                                        value="check"
+                                                        selected={selected}
+                                                        onClick={function () { refreshPage(); seen(); }}
+                                                        onChange={() => {
+                                                            setSelected(!selected)
+                                                        }}
+                                                    />
+                                                </IconButton>
+                                            </Typography>
+                                        </>
                                     )
-                        }</div>
-                    : (
-                        <div className="center">
-                            <Typography variant="body1" className={classes.imageInfo}>
-                        {list.artwork_name}
-                        <IconButton>
-                            <VisibilityIcon
-                                color="secondary"
-                                variant="contained"
-                                value="check"
-                                selected={selected}
-                                onClick={alertLogin}
-                                onChange={() => {
-                                    setSelected(!selected)
-                                }} /></IconButton>
-                            {/* <VisibilityIcon /> */}
-                            {/* </Button> */}
-                       </Typography> 
-                       </div>
-                    )}
-            </div>
-            </Grid>
+                                }</div>
+                            : (
+                                <div className="center">
+                                    <Typography variant="body1" className={classes.imageInfo}>
+                                        {list.artwork_name}
+                                        <IconButton>
+                                            <VisibilityIcon
+                                                color="secondary"
+                                                variant="contained"
+                                                value="check"
+                                                selected={selected}
+                                                onClick={alertLogin}
+                                                onChange={() => {
+                                                    setSelected(!selected)
+                                                }} /></IconButton>
+                                        {/* <VisibilityIcon /> */}
+                                        {/* </Button> */}
+                                    </Typography>
+                                </div>
+                            )}
+                    </div>
+                </Grid>
             </Grid>
         </>
     );
