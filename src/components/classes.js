@@ -74,10 +74,10 @@ const useStyles = makeStyles((theme) => ({
     },
     seen: {
       background: '#8C8A8C',
-    }
+    },
 
-          float: 'right',    
-      },
+      //     float: 'right',    
+      // },
       cardForm: {
         width: '60%',
         height: 750,
