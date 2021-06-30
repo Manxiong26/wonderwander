@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-
+import { blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
     map: {
@@ -48,6 +48,34 @@ const useStyles = makeStyles((theme) => ({
         marginRight: '6%'
       },
       nextBtn: {
+
+          float: 'right',
+          
+      },
+      card: {
+        background: 'red',
+    },
+      blue: {
+        color: '#fff',
+        backgroundColor: blue[500],
+        width: '60px',
+        height: '60px',
+        marginRight: 10,
+        border: "1px solid black"
+    },
+    divider: {
+      border: "1px solid grey"
+    },
+    red: {
+      color: '#DC0100',
+      textAlign: 'center',
+      fontFamily: theme.typography.Pacifico,
+      textDecoration: 'underline'
+    },
+    seen: {
+      background: '#8C8A8C',
+    }
+
           float: 'right',    
       },
       cardForm: {
