@@ -11,12 +11,12 @@ const adventureReducer = (state = [], action) => {
     }
   };
 
-  const adventureDetailReducer = (state = [], action) => {
+  const adventureDetailReducer = (state = {}, action) => {
     switch (action.type) {
       case 'SET_ADVENTURE':
         return action.payload;
       case 'CLEAR_ADVENTURE':
-        return [];
+        return {};
       default:
         return state;
     }

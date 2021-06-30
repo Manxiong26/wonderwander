@@ -6,9 +6,9 @@
 CREATE TABLE "users" (
 	"id" SERIAL primary key NOT NULL,
 	"email" varchar(100) NOT NULL,
-	"password" varchar(1000) NOT NULL,
-	"username" varchar(100) UNIQUE NOT NULL,
-	"first_name" varchar(100),
+	"password" varchar(100) NOT NULL,
+	"username" varchar(100) NOT NULL,
+	"first_name" varchar(100) ,
 	"admin" BOOLEAN NOT NULL DEFAULT 'false'
 );
 
@@ -16,22 +16,22 @@ CREATE TABLE "users" (
 CREATE TABLE "sponsor" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(100) NOT NULL,
-	"logo" varchar(150),
-	"description" varchar(500),
-	"site_link" varchar(200),
-	"donate_link" varchar(200),
+	"logo" varchar(500),
+	"description" varchar(1000),
+	"site_link" varchar(1000),
+	"donate_link" varchar(1000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 	);
 	
 CREATE TABLE "collection" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(50) NOT NULL,
-	"image" varchar(255),
+	"image" varchar(1000),
 	"city" varchar(50),
 	"state" varchar(50),
-	"bio" varchar(500),
-	"donate_link" varchar(200),
-	"site_link" varchar(200),
+	"bio" varchar(1000),
+	"donate_link" varchar(1000),
+	"site_link" varchar(1000),
 	"search_text" varchar(500),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
@@ -41,9 +41,9 @@ CREATE TABLE "collection" (
 CREATE TABLE "artist" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(150) NOT NULL,
-	"image" varchar(200),
-	"bio" varchar(500),
-	"site_link" varchar(255),
+	"image" varchar(1000),
+	"bio" varchar(1000),
+	"site_link" varchar(1000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 	);
 
@@ -53,12 +53,12 @@ CREATE TABLE "artwork" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(100) NOT NULL,
 	"year" varchar(10),
-	"lat" varchar(255),
-	"long" varchar(255),
-	"image" varchar(255),
-	"description" varchar(500),
-	"vid_link" varchar(255),
-	"vid_description" varchar(500),
+	"lat" numeric(6,4),
+	"lng" numeric(7,4),
+	"image" varchar(1000),
+	"description" varchar(1000),
+	"vid_link" varchar(1000),
+	"vid_description" varchar(1000),
 	"artist_id" INT REFERENCES "artist",
 	"sponsor_id" INT REFERENCES "sponsor",
 	"collection_id" INT REFERENCES "collection",
@@ -76,7 +76,7 @@ CREATE TABLE "favorites(STRETCH)" (
 
 
 
-CREATE TABLE "artwork_seen(STRETCH)" (
+CREATE TABLE "artwork_seen" (
 	"id" SERIAL PRIMARY KEY,
 	"users_id" INT REFERENCES "users" NOT NULL,
 	"artwork_id" INT REFERENCES "artwork" NOT NULL
@@ -85,46 +85,49 @@ CREATE TABLE "artwork_seen(STRETCH)" (
 
 CREATE TABLE "quotes" (
 	"id" SERIAL PRIMARY KEY,
-	"quote" varchar(400) NOT NULL,
+	"quote" varchar(10000) NOT NULL,
 	"quote_by" varchar(100),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
 CREATE TABLE "say" (
 	"id" SERIAL PRIMARY KEY,
-	"prompts" varchar(255) NOT NULL
+	"prompts" varchar(255) NOT NULL,
+	"image" varchar(1000) NOT NULL
 );
+
 CREATE TABLE "activities" (
 	"id" SERIAL PRIMARY KEY,
 	"title" varchar(255) NOT NULL,
-	"description" varchar(500),
-	"image" varchar(250),
+	"description" varchar(1000),
+	"image" varchar(1000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
 
-
-
 CREATE TABLE "say_poll" (
 	"id" SERIAL PRIMARY KEY,
-	"say_id" integer NOT NULL,
-	"artwork_id" INT REFERENCES "artwork",
-	"activity_id" INT REFERENCES "activities"
+	"say_id" INT NOT NULL REFERENCES "say",
+	"artwork_id" INT NOT NULL REFERENCES "artwork"
 );
 
 CREATE TABLE "do" (
 	"id" SERIAL PRIMARY KEY,
-	"prompts" varchar(500) NOT NULL,
+	"prompts" varchar(1000) NOT NULL,
 	"artwork_id" INT REFERENCES "artwork",
-	"activity_id" INT REFERENCES "activities"
+	"activity_id" INT REFERENCES "activities",
+	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
-
 	
 CREATE TABLE "see" (
 	"id" SERIAL PRIMARY KEY,
-	"prompts" varchar(500) NOT NULL,
-	"link" varchar(255),
+	"prompts" varchar(1000) NOT NULL,
+	"link" varchar(1000),
+	"image" varchar(1000),
 	"artwork_id" INT REFERENCES "artwork",
-	"activity_id" INT REFERENCES "activities"
+	"activity_id" INT REFERENCES "activities",
+	"published" BOOLEAN NOT NULL DEFAULT 'false'
 ); 
+
+
 
 --- TEST DATA ---
 INSERT INTO activities ("title", "description", "image", "published")
@@ -141,7 +144,7 @@ INSERT INTO collection ("name", "image", "city", "state", "bio", "donate_link", 
 INSERT INTO artist ("name", "image", "bio", "site_link", "published")
 			VALUES ('John Doe', 'https://i.ytimg.com/vi/LguXG80DezY/maxresdefault.jpg', 'A talented but tormented artist.', 'https://en.wikipedia.org/wiki/The_Silence_of_the_Lambs_(film)', 'true');
 			
-INSERT INTO artwork ("name", "year", "lat", "long", "image", "description", "vid_link", "vid_description", "artist_id", "sponsor_id", "collection_id", "published")
+INSERT INTO artwork ("name", "year", "lat", "lng", "image", "description", "vid_link", "vid_description", "artist_id", "sponsor_id", "collection_id", "published")
 VALUES ('Mona Lisa', '1503', '44.9681', '93.2886', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg', 'A simple picture during simpler times', 'monalisa.com', 'This has literally nothing to do with the painting', 1, 1, 1, 'true'),
 		('Leap of Faith', null, '27.447635604171282', '-80.32600106994082', 'https://artstlucie.org/wp-content/uploads/2018/08/Taking-the-Dive.jpg', 'In 2009, after entering a competition for a work of art for the new downtown Ft. Pierce parking garage. Pat Cochran was awarded the commission . The piece represents our beautiful city, Ft. Pierce, the oldest city on the treasure coast, having seen its share of history, but looking into a prophetic rosy future.  Leap of Faith took four months to complete and consists of 3,000 pounds of bronze.', null, null, null, 1, 1, 'true'),
 		('Spaulding', null, '44.91189153397999', '-93.32904656902083', 'https://www.edinamn.gov/ImageRepository/Document?documentID=1216', 'A bronze sculpture of a dog.', 'https://youtu.be/sY6TXeM9PnU', 'Heidi Hoy: Foundry Dance', null, 1, 1, 'true');

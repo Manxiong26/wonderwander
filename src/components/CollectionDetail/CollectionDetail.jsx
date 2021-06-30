@@ -74,14 +74,13 @@ function CollectionDetail({ userLat, userLng }) {
                         <img className="logo3" src={collectionDet[0].collection_image} />
                     </div>
                     <div className="center">
-                        <Button><a className="web" href={collectionDet[0].site_link}>WebSite</a></Button>
-                        <Button><a className="web" href={collectionDet[0].donate_link}>$ Donate</a></Button>
+                        <Button variant="outlined"><a className="web" href={collectionDet[0].site_link}>WebSite</a></Button>
+                        <Button variant="outlined"><a className="web" href={collectionDet[0].donate_link}>$ Donate</a></Button>
                     </div>
 
                     <div className="center">
-                        <p>Map Goes Here</p>
-                        {/* Need to change to Number for lat & long for map to show */}
-                        <Map mapLat={Number(collectionDet[0].lat)} mapLng={Number(collectionDet[0].long)} zoom={10}
+                        {/* Need to change to Number for lat & lng for map to show */}
+                        <Map mapLat={Number(collectionDet[0].lat)} mapLng={Number(collectionDet[0].lng)} zoom={10}
                             reducer={collectionDet} height={300} width={'90%'} userLat={userLat} userLng={userLng} />
 
                         <div>

@@ -10,17 +10,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-function CollectionDetail({userLat, userLng}) {
+function CollectionDetail({userLat, userLng, distance}) {
     const list = useSelector((store) => store.artworkDetailReducer);
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const {id} = useParams();
+
     useEffect(() => {
         dispatch({type: 'FETCH_ART_DETAIL', payload: id})
-        console.log('In useEffect param: artwork detail', list);
     }, []);
 
-    const {id} = useParams();
+    console.log('List items: ', list)
+
+    
     
     return (
         <div>
@@ -32,7 +35,7 @@ function CollectionDetail({userLat, userLng}) {
                 Go back
             </button>
             <ImageHeader list={list}/>
-            <ArtworkLinks userLat={userLat} userLng={userLng} list={list}/>
+            <ArtworkLinks userLat={userLat} userLng={userLng} list={list} distance={distance}/>
             <Typography>
                 See. Say. Do.
             </Typography>

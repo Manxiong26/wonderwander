@@ -13,6 +13,8 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
       console.log(maps.geometry.spherical)
   }
 
+  console.log('Reducer in Map.jsx: ', reducer)
+
   
 
   // Balloon marker
@@ -50,7 +52,7 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
           >
             {reducer.map((item, i) => (
-              <BalloonMarker  item={item} key={i} lat={item.lat} lng={item.long} />
+              <BalloonMarker  item={item} key={i} lat={item.lat} lng={item.lng} />
             ))}
             {userLat !== null && userLng !== null ? (
             <UserLocation lat={userLat} lng={userLng} />

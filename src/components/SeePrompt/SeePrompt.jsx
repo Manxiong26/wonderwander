@@ -49,7 +49,7 @@ function SeePrompt() {
                 <CardMedia
                 className={classes.cardmedia}
                 component="img" 
-                image={seel.link}
+                image={seel.image}
                  />
                 <div className={classes.details}>
                     

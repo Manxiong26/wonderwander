@@ -8,6 +8,7 @@ import AdventureDo from "./AdventureDo";
 
 
 function Adventure() {
+    const {id} = useParams();
     const list = useSelector((store) => store.adventureReducer.adventureDetailReducer);
     const dispatch = useDispatch();
 
@@ -17,7 +18,7 @@ function Adventure() {
         console.log('In useEffect param: adventure: ', list);
     }, []);
 
-    const {id} = useParams();
+    
 
     return (
 

@@ -24,6 +24,7 @@ router.get('/:id', (req, res) => {
   pool.query(query, [req.params.id])
   .then(result => {
     res.send(result.rows[0])
+    console.log('Inside otheradventure.router. Checking result.rows: ', result.rows)
   })
   .catch(error => {
     console.log('Something went wrong with getting id of adventures', error);

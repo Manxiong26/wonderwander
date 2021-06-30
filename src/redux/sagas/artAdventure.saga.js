@@ -18,7 +18,6 @@ function* fetchAdventure(action){
         let id = action.payload;
         const response = yield axios.get(`/api/adventure/${id}`);
         yield put ({type: 'SET_ADVENTURE', payload: response.data});
-        console.log('error in fetchArtdetail under yield put', response.data);
     } catch {
         console.log('Error with getting Artwork detail');
     }

@@ -108,7 +108,7 @@ const handleClick = () => {
                 <Grid container spacing={2} >
                 {list.map((lists, i) => (
                     <Grid item  key={i} alignItems='center' >
-                    <CardActionArea honClick={handleClick} style={isLike ? colorStyle : null}>
+                    <CardActionArea onClick={handleClick} style={isLike ? colorStyle : null}>
                         <Card className={classes.card} >
                             <CardMedia image={lists.image} className={classes.cardMedia}/>
                             <CardContent className={classes.cardContent}>

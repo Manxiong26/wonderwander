@@ -20,7 +20,7 @@ import {
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-function HomePage() {
+function HomePage({distance, userLat, userLng}) {
   //this pushes to the next page
   const history = useHistory();
   //this dispatch the saga
@@ -43,6 +43,8 @@ function HomePage() {
   //collection Store reducer
   const collectionThreeList = useSelector((store) => store.collectionThree);
   // pushes to Collection Detail
+
+  console.log('Collection list ', collectionThreeList)
   const viewCollectionDetail = (event, collDet) => {
     history.push(`/collectionDetail/${collDet.id}`);
   };
@@ -53,9 +55,9 @@ function HomePage() {
   // pushes to adventure info page
   const toAdventure = (event, advDet) => {
     console.log('Adventure', advDet);
-    event.preventDefault();
+    // event.preventDefault();
     history.push(`/adventure/${advDet.id}`);
-    console.log('clicking to adventure');
+    // console.log('clicking to adventure');
   };
   // function to render collection location text
   const collectionText = (collection) => (
@@ -97,7 +99,12 @@ function HomePage() {
                           primary={collection.name}
                           secondary={collectionText(collection)}
                         />
-                        <ListItemText secondary="miles" />
+                        {/* <ListItemText secondary={distance(
+                          // Number(.lat),
+                          // Number(item.long),
+                          userLat,
+                          userLng
+                        )} /> */}
                         <IconButton>
                           <ArrowForwardIosIcon
                             onClick={(event) =>
