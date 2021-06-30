@@ -83,7 +83,7 @@ function SponsorDetail({userLat, userLng}) {
         <Grid item xs={12} sm={12} lg={12}>
           <div className={classes.pageMargin}>
             <Typography variant="h5" className={classes.title}>
-              Art of the Day
+              Sponsor Detail
             </Typography>
         
             <img className={classes.image} src={details.logo}></img>
@@ -105,7 +105,9 @@ function SponsorDetail({userLat, userLng}) {
                     userLng={userLng}
                 />
             </div>
-            <div>ArtWork</div>
+            <div className={classes.center}>
+                <h3>ArtWork</h3>
+                </div>
             <div>
             <List>
                 {sponsorArt.map((art, index) => {

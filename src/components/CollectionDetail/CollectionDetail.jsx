@@ -85,12 +85,12 @@ function CollectionDetail({ userLat, userLng }) {
                             href={collectionDet[0].donate_link}>$ Donate</Button>
                         </div>
 
-                        <div className="center">
+                        <div >
                             {/* Need to change to Number for lat & long for map to show */}
                             <Map mapLat={Number(collectionDet[0].lat)} mapLng={Number(collectionDet[0].long)} zoom={10}
                                 reducer={collectionDet} height={300} width={'90%'} userLat={userLat} userLng={userLng} />
 
-                            <div>
+                            <div className={classes.center}>
                                 <h3>ArtWork</h3>
                             </div>
                             <div >

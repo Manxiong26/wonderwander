@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
       },
       thumbnailLarge: {
+        border: "1px solid black",
         width: theme.spacing(8),
         height: theme.spacing(8),
         marginRight: 10,
