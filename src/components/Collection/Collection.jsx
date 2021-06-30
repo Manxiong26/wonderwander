@@ -47,13 +47,13 @@ function Collection() {
   }
   return (
     <>
-    <Button
-                onClick={() => {
-                    history.goBack();
-                }}
-            >
-                <ArrowBackIosIcon />
-            </Button>
+      <Button
+        onClick={() => {
+          history.goBack();
+        }}
+      >
+        <ArrowBackIosIcon />
+      </Button>
       <div className={classes.pageMargin}>
         <Typography variant="h5" className={classes.title}>
           All Collections
