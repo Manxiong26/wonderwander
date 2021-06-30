@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, CardActionArea, } from "@material-ui/core";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { render } from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles({
@@ -27,6 +28,15 @@ const useStyles = makeStyles({
 function SayPrompt() {
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
+    const list = useSelector((store) => store.seesaydoReducer.sayReducer);
+    
+    useEffect(() => {
+        console.log('in useEffect param: SayPrompt');
+        dispatch({type: 'FETCH_SAY_DETAIL', payload: id});
+    }, []);
+
+    const {id} = useParams();
     
 
     // Currently using red to tell the cards apart at the moment
@@ -47,7 +57,7 @@ function SayPrompt() {
                         </Typography>
                     </CardContent>
                 </div>
-                <CardActionArea onClick={() => history.push('/say')}>
+                <CardActionArea onClick={() => history.push(`/say/${id}`)}>
                     <CardContent>
                         <IconButton>
                             <ArrowForwardIosIcon />

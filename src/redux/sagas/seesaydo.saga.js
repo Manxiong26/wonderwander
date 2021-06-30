@@ -11,9 +11,9 @@ function* fetchDo(action){
     }
 }
 
-function* fetchSay(){
+function* fetchSay(action){
     try{
-        const response = yield axios.get(`/api/say`);
+        const response = yield axios.get(`/api/say/${action.payload}`);
         console.log(response.data);
         yield put({type: 'SET_SAY_DETAIL', payload: response.data})
     } catch (error) {
