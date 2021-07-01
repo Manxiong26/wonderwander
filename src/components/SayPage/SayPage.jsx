@@ -51,11 +51,13 @@ const useStyles = makeStyles((theme) => ({
     const classes = useStyles();
     // const history = useHistory();
     const list = useSelector((store) => store.seesaydoReducer.sayReducer);
-    // const voteCount = useSelector((store) => store.addVote);
+    const totalVote = useSelector((store) => store.voteNumber);
+    // const addVote = useSelector((store) => store.addVote);
     const dispatch = useDispatch();
     const [voteMode, setVoteMode] = useState(false);
  
-
+    console.log('voteCount', totalVote);
+    // console.log('Testing addVote reducer', addVote);
 
     // const handleVote = () => {
     //   console.log(handleVote);
@@ -69,14 +71,10 @@ const useStyles = makeStyles((theme) => ({
     //   console.log('testing handlevote', voteCounted);
     //   dispatch({type: 'ADDING_NEW_VOTE', payload: voteCounted});
     // }
-    
-    const selectVote = () => {
-      setSelected(('bg-disabled'));
-    }
 
     // This is where we update and insert into the db
-    const [say_id, setSay_Id] = useState('');
-    const [artwork_id, setArtwork_Id] = useState('');
+    // const [say_id, setSay_Id] = useState('');
+    // const [artwork_id, setArtwork_Id] = useState('');
 
   const [select, setSelected] = useState(null);
 
@@ -104,12 +102,14 @@ const useStyles = makeStyles((theme) => ({
   
     useEffect(() => {
         console.log('In useEffect param:');
-        dispatch({type: 'FETCH_SAY_DETAIL', payload: id})
+        dispatch({type: 'FETCH_SAY_DETAIL', payload: id});
+        dispatch({type: 'FETCH_TOTAL_VOTE', payload: id});
     }, []);
   
     console.log('In useEffect param:', list);
     const {id} = useParams();
-    
+    console.log('testing22222', totalVote);
+    // console.log('Testing addVote reducer 2222222', addVote);
   
     return (
         <div>
@@ -136,18 +136,15 @@ const useStyles = makeStyles((theme) => ({
           :
           (<Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={2}>
-          {list.map((lists, i) => (
+          {totalVote.map((lists, i) => (
               <Grid item key={i} alignItems='center'>
               <CardActionArea>
                   <Card className={classes.card}>
                       <CardMedia image={lists.image} className={classes.cardMedia}/>
                       <CardContent className={classes.cardContent}>
-                        {/* {voteCount.map((voting, i) => { */}
-                          {/* return ( */}
-                          <Typography  className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
-                          Vote Count: 
+                          <Typography item key={lists.say_id} className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
+                          Vote Count: {lists.count} 
                           </Typography>
-                        {/* )})} */}
                       </CardContent>    
                   </Card>
               </CardActionArea>
@@ -156,14 +153,14 @@ const useStyles = makeStyles((theme) => ({
           </Grid>
       </Container>)  
           }
-            {voteMode === false ?
+            {/* {voteMode === false ?
             <Button className={classes.button} variant="contained" color="primary" >
                 Vote!
             </Button>
             :
             (<Button variant="contained" color="primary" >Back</Button>)
             }
-  
+   */}
         </div>
     );
   }
