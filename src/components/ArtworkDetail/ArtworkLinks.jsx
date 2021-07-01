@@ -59,8 +59,8 @@ function CollectionLinks({ list, userLat, userLng }) {
                                     + userLat + "," + userLng + "&destination=" + list.lat + "," + list.long
                                     + "&dir_action=navigate"} />
                             </IconButton>
-                            <Divider />
                         </ListItem>
+                        <Divider />
                     </div>
                 </Grid>
             </Grid>

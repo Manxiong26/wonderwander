@@ -49,6 +49,15 @@ const useStyles = makeStyles((theme) => ({
           marginTop: '5%',
           marginBottom: '5%',
       },
+      smallImg:{
+          maxWidth: '100px',
+          maxHeight: '100px',
+          marginRight: 'auto',
+          marginLeft: 'auto',
+          display: 'block',
+          marginTop: '5%',
+          marginBottom: '5%',
+      },
       imageInfo: {
           textAlign: 'center'
       },
@@ -73,9 +82,12 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '30%',
       },
       card: {
-        
-        maxWidth: 300,
+        maxWidth: '300px',
+        maxHeight: '300px',
+        marginRight: 'auto',
+        marginLeft: 'auto',
         marginTop: '5%',
+        marginBottom: '5%',
     },
     media: {
       height: 300,

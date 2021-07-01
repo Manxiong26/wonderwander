@@ -1,24 +1,18 @@
 import { CardActionArea, IconButton, Typography } from "@material-ui/core";
-import { CardContent, CardMedia, makeStyles } from "@material-ui/core";
+import {
+    Grid,
+    ListItem,
+    ListItemText,
+    CardContent,
+    CardMedia,
+} from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import React, { useEffect } from "react";
+import { useStyles } from "../classes";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-const useStyles = makeStyles({
-    cardmedia: {
-      width: '60px',
-      height: '60px',
-    },
-    content: {
-        flex: '1 0 auto',
-      },
-    details: {
-        display: 'flex',
-        flexDirection: 'column',
-      },
-  });
 
 function AdventureSee() {
     const list = useSelector((store) => store.adventureReducer.adventureDetailReducer);
@@ -30,41 +24,48 @@ function AdventureSee() {
 
     useEffect(() => {
         console.log('In useEffect param:');
-        dispatch({type: 'FETCH_ADVENTURE', payload: id});
-        dispatch({type: 'FETCH_SEE_ADVENTURE', payload: id});
+        dispatch({ type: 'FETCH_ADVENTURE', payload: id });
+        dispatch({ type: 'FETCH_SEE_ADVENTURE', payload: id });
     }, []);
 
-    const {id} = useParams();
+    const { id } = useParams();
 
     return (
-        <Card>
-            <CardContent>
-                <CardMedia 
-                 className={classes.cardmedia}
-                 component="img" 
-                 image={list.image}
-                />
-                <div className={classes.details}>
-                    {seelist.map((seel, i) => {
-                        return (
+        <>
+            <Grid container direction="column">
+                <Grid item xs={12} sm={12} lg={12}>
+                    <div className={classes.pageMargin}>
+                        <Card className={classes.card}>
                             <CardContent>
-                        <Typography className={classes.content} key={i}>
-                            {seel.prompts}
-                        </Typography>
-                    </CardContent>
-                        )
-                    })}
-                    
-                </div>
-                <CardActionArea onClick={(event) => history.push(`/adventure/see/${id}`)}>
-                    <CardContent>
-                        <IconButton>
-                            <ArrowForwardIosIcon />
-                        </IconButton>
-                    </CardContent>
-                </CardActionArea>
-            </CardContent>
-        </Card>
+                                <CardMedia
+                                    className={classes.smallImg}
+                                    component="img"
+                                    image={list.image}
+                                />
+                                <div>
+                                    <ArrowForwardIosIcon
+                                        className={classes.nextBtn}
+                                        onClick={(event) => history.push(`/adventure/see/${id}`)} />
+                                    {seelist.map((seel, i) => {
+                                        return (
+                                            <CardContent>
+                                                <ListItem>
+                                                    <ListItemText>
+                                                        <Typography className={classes.content} key={i}>
+                                                            {seel.prompts}
+                                                        </Typography>
+                                                    </ListItemText>
+                                                </ListItem>
+                                            </CardContent>
+                                        )
+                                    })}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </Grid>
+            </Grid>
+        </>
     );
 }
 
