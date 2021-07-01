@@ -22,16 +22,15 @@ function AdventureHeader({ list }) {
                         <Typography className={classes.center}>
                             {list.title}
                         </Typography>
-                        <div className={classes.center}>
                             <img
                                 className={classes.image}
                                 src={list.image}
                             />
-                        </div>
+                        
                     </div>
                 </Grid>
             </Grid>
-            <Divider />
+
         </>
     );
 }

@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
           display: 'block',
           border: '1px solid black',
           marginTop: '5%',
-          marginBottom: '5%',
+          
       },
       smallImg:{
           maxWidth: '100px',
@@ -107,7 +107,13 @@ const useStyles = makeStyles((theme) => ({
       color: '#DC0100',
       textAlign: 'center',
       fontFamily: theme.typography.Pacifico,
-      
+    },
+    redCenter: {
+      color: '#DC0100',
+      textAlign: 'center',
+      fontFamily: theme.typography.Pacifico,
+      marginTop: '5%',
+      marginBottom: '5%',
     },
     black:{
       color: 'black',

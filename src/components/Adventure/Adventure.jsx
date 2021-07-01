@@ -40,7 +40,7 @@ function Adventure() {
                             <ArrowBackIosIcon />
                         </Button>
                         <AdventureHeader list={list} />
-                        <h2 className={classes.red}>
+                        <h2 className={classes.redCenter}>
                             See. Do.
                         </h2>
                         <Divider />

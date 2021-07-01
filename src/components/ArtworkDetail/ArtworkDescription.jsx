@@ -16,10 +16,11 @@ function ArtworkDescription() {
     const { id } = useParams();
     const classes = useStyles();
     return (
+        <>
         <Grid container direction="column">
             <Grid item xs={12} sm={12} lg={12}>
                 <div className={classes.pageMargin}>
-                    <Typography variant="h6" className={classes.red}>
+                    <Typography variant="h6" className={classes.redCenter}>
                         Description of the Art Work
                     </Typography>
                     <Divider />
@@ -30,6 +31,7 @@ function ArtworkDescription() {
                 </div>
             </Grid>
         </Grid>
+        </>
     );
 }
 
