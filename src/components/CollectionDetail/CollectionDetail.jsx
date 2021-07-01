@@ -53,16 +53,16 @@ function CollectionDetail({ userLat, userLng }) {
 
     return (
         <>
-            <Button
-                onClick={() => {
-                    history.goBack();
-                }}
-            >
-                <ArrowBackIosIcon />
-            </Button>
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
                     <div className={classes.pageMargin}>
+                        <Button
+                            onClick={() => {
+                                history.goBack();
+                            }}
+                        >
+                            <ArrowBackIosIcon />
+                        </Button>
                         <div>
                             <Typography variant="h5" className={classes.title}>
                                 Collection Detail

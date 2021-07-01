@@ -29,16 +29,16 @@ function Adventure() {
     const classes = useStyles();
     return (
         <>
-            <Button
-                onClick={() => {
-                    history.goBack();
-                }}
-            >
-                <ArrowBackIosIcon />
-            </Button>
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
                     <div className={classes.pageMargin}>
+                        <Button
+                            onClick={() => {
+                                history.goBack();
+                            }}
+                        >
+                            <ArrowBackIosIcon />
+                        </Button>
                         <AdventureHeader list={list} />
                         <h2 className={classes.red}>
                             See. Do.
@@ -51,7 +51,7 @@ function Adventure() {
                         </Typography>
                         <Divider />
                         <ListItemText
-                        className={classes.center}
+                            className={classes.center}
                             primary={list.description}
                         />
                     </div>
