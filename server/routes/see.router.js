@@ -7,7 +7,7 @@ const pool = require('../modules/pool');
 router.get('/:id', (req, res) => {
     console.log('Start of the see page', req.params);
     const queryText = `
-    SELECT "see".id, "see".prompts, "see".link FROM "see" WHERE "see".artwork_id = $1;`;
+    SELECT * FROM "see" WHERE "see".artwork_id = $1 AND published='true';`;
     pool.query(queryText, [req.params.id])
         .then(result => {
             console.log('END OF THE SEE PAGE', req.params);

@@ -32,10 +32,10 @@ function WelcomePage4() {
                         onClick={skipWelcome}
                     />
                 </div>
-            </div>
+            
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
+                    <div className={classes.cardContent}>
                         <Typography
                             variant="h3"
                             className={classes.title}
@@ -51,6 +51,7 @@ function WelcomePage4() {
                     </div>
                 </Grid>
             </Grid>
+            </div>
         </>
     )
 }

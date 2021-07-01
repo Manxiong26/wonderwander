@@ -18,8 +18,11 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
       },
-    card: {
-        background: 'red',
+    // card: {
+    //     background: 'red',
+    // },
+    nextBtn: {
+        float: 'right',
     },
   });
 
@@ -58,7 +61,7 @@ function SayPrompt() {
                     </CardContent>
                 </div>
                 <CardActionArea onClick={() => history.push(`/say/${id}`)}>
-                    <CardContent>
+                    <CardContent className={classes.nextBtn}>
                         <IconButton>
                             <ArrowForwardIosIcon />
                         </IconButton>

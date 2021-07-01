@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles({
-    cardmedia: {
+    cardMedia: {
       width: '60px',
       height: '60px',
     },
@@ -18,6 +18,9 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
       },
+      nextBtn: {
+        float: 'right',
+    },
   });
 
 function SeePrompt() {
@@ -47,9 +50,9 @@ function SeePrompt() {
         <Card>
             <CardContent>
                 <CardMedia
-                className={classes.cardmedia}
+                className={classes.cardMedia}
                 component="img" 
-                image={seel.link}
+                image={seel.image}
                  />
                 <div className={classes.details}>
                     
@@ -62,7 +65,7 @@ function SeePrompt() {
                     
                 </div>
                 <CardActionArea onClick={(event) => history.push(`/see/${id}`)}>
-                    <CardContent>
+                    <CardContent className={classes.nextBtn}>
                         <IconButton>
                             <ArrowForwardIosIcon />
                         </IconButton>

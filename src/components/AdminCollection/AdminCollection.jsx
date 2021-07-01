@@ -345,6 +345,7 @@ function AdminCollection() {
                     variant="outlined"
                     placeholder="Collection Name"
                     label="Collection Name"
+                    onClick={() => setName('Maneena')}
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                 />
@@ -353,6 +354,7 @@ function AdminCollection() {
                     variant="outlined"
                     placeholder="Image URL"
                     label="Image URL"
+                    onClick={() => setImage('https://avatars.githubusercontent.com/u/77373737?v=4')}
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
@@ -362,6 +364,7 @@ function AdminCollection() {
                     placeholder="City"
                     label="City"
                     value={city}
+                    onClick={() => setCity('St. Paul')}
                     onChange={(event) => setCity(event.target.value)}
                 />
                 <TextField type="text"
@@ -370,6 +373,7 @@ function AdminCollection() {
                     placeholder="State"
                     label="State"
                     value={state}
+                    onClick={() => setState('Minnesota')}
                     onChange={(event) => setState(event.target.value)}
                 />
                 <TextField type="text"
@@ -380,6 +384,7 @@ function AdminCollection() {
                     multiline
                     rows={6}
                     value={bio}
+                    onClick={() => setBio('Maneena Xiong is a talented software engineer who loves to learn, share, and promote art.')}
                     onChange={(event) => setBio(event.target.value)}
                 />
                 <TextField type="text"
@@ -388,6 +393,7 @@ function AdminCollection() {
                     placeholder="Donation URL"
                     label="Donation URL"
                     value={donate_link}
+                    onClick={() => setDonateLink('https://maneenacollection.com')}
                     onChange={(event) => setDonateLink(event.target.value)}
                 />
                 <TextField type="text"
@@ -396,6 +402,7 @@ function AdminCollection() {
                     placeholder="Website URL"
                     label="Website URL"
                     value={site_link}
+                    onClick={() => setSiteLink('https://maneena.com')}
                     onChange={(event) => setSiteLink(event.target.value)}
                 />
                 <TextField type="text"
@@ -404,6 +411,7 @@ function AdminCollection() {
                     placeholder="Search Text"
                     label="Search Text"
                     value={search_text}
+                    onClick={() => setSearchText('art, St. Paul, Minnesota')}
                     onChange={(event) => setSearchText(event.target.value)}
                 />
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>

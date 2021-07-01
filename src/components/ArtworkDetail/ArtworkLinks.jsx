@@ -21,6 +21,7 @@ function CollectionLinks({ list, userLat, userLng }) {
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
                     <div className={classes.pageMargin}>
+                        <Divider />
                         <ListItem>
                             <ListItemText
                                 primary={'Artist'}
@@ -51,16 +52,16 @@ function CollectionLinks({ list, userLat, userLng }) {
                         <ListItem>
                             <ListItemText
                                 primary={'Directions'}
-                                secondary={'Miles XX'}
+                                
                             />
                             <IconButton>
                                 <ArrowForwardIosIcon onClick={() =>
                                     location.href = "https://www.google.com/maps/dir/?api=1&origin="
-                                    + userLat + "," + userLng + "&destination=" + list.lat + "," + list.long
+                                    + userLat + "," + userLng + "&destination=" + list.lat + "," + list.lng
                                     + "&dir_action=navigate"} />
-                            </IconButton>
-                            <Divider />
+                            </IconButton>  
                         </ListItem>
+                        <Divider />
                     </div>
                 </Grid>
             </Grid>

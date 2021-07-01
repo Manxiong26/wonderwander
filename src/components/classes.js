@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
           marginBottom: '5%',
       },
       image: {
-          maxWidth: '280px',
-          maxHeight: '280px',
+          maxWidth: '200px',
+          maxHeight: '200px',
           marginRight: 'auto',
           marginLeft: 'auto',
           display: 'block',
@@ -124,6 +124,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         paddingRight: '10%',
         paddingLeft: '10%',
+        overflow: 'auto'
       },
       btnGroup: {
         display: 'flex',
@@ -131,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '15%'
       },
       btn: {
-        marginTop: '2%'
+        margin: '2%'
         
         
       },
@@ -194,7 +195,17 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         
-      }
+      },
+      bio: {
+        width: '300px',
+        maxHeight: '500px',
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        border: '1px solid black',
+        marginBottom: '2%',
+        padding: '2%',
+        backgroundColor: '#F1F0F0'
+    },
 
   }));
 

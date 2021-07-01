@@ -3,6 +3,8 @@ import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import {makeStyles, Typography, Button, Divider, List, ListItem, ListItemAvatar, Avatar, ListItemText, Card} from '@material-ui/core';
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -63,13 +65,13 @@ const ArtistDetail = () => {
 
     return(
         <>
-        <button
+        <Button
                 onClick={() => {
                     history.goBack();
                 }}
             >
-                Go back
-            </button>
+                <ArrowBackIosIcon />
+            </Button>
         {artistInfo === undefined ? ('Loading...') : (
         <div className={classes.name}>
         <Typography variant="h5">{artistInfo.name}</Typography>

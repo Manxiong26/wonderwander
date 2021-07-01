@@ -20,6 +20,9 @@ const useStyles = makeStyles({
     card: {
         margin: '5px',
     },
+    nextBtn: {
+        float: 'right',
+    },
   });
 
 function DoPrompt() {
@@ -57,7 +60,7 @@ function DoPrompt() {
                     </CardContent>
                 </div>
                 <CardActionArea onClick={(event) => history.push(`/do/${id}`)}>
-                    <CardContent>
+                    <CardContent className={classes.nextBtn}>
                         <IconButton>
                             <ArrowForwardIosIcon />
                         </IconButton>

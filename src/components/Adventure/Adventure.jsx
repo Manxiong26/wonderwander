@@ -5,30 +5,40 @@ import { useParams } from "react-router";
 import AdventureHeader from "./AdventureHeader";
 import AdventureSee from "./AdventureSee";
 import AdventureDo from "./AdventureDo";
+import { useStyles } from '../classes'
 
 
 function Adventure() {
     const list = useSelector((store) => store.adventureReducer.adventureDetailReducer);
     const dispatch = useDispatch();
+    const {id} = useParams();
+    const classes = useStyles();
 
 
     useEffect(() => {
         dispatch({type: 'FETCH_ADVENTURE', payload: id})
-        console.log('In useEffect param: adventure: ', list);
     }, []);
 
-    const {id} = useParams();
+    console.log('In Adventure.jsx. Checking adventure detail ', list);
+
+
+    
 
     return (
 
         <div>
             <AdventureHeader list={list}/>
-            <Typography>SEE. DO.</Typography>
-            <AdventureSee />
-            <AdventureDo />
+            <div className={classes.bio}>
             <Typography>
                 {list.description}
             </Typography>
+            </div>
+            <Typography variant="h6" className={classes.title}>
+                See Do
+            </Typography>
+            <AdventureSee />
+            <AdventureDo />
+            
         </div>
     );
 }

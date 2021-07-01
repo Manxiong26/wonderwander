@@ -20,6 +20,9 @@ const useStyles = makeStyles({
     card: {
         // background: 'red',
     },
+    nextBtn: {
+        float: 'right',
+    },
   });
 
 function AdventureDo() {
@@ -58,7 +61,7 @@ function AdventureDo() {
                     
                 </div>
                 <CardActionArea onClick={(event) => history.push(`/adventure/do/${id}`)}>
-                    <CardContent>
+                    <CardContent className={classes.nextBtn}>
                         <IconButton>
                             <ArrowForwardIosIcon />
                         </IconButton>

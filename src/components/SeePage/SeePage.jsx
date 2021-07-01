@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import PropTypes from "prop-types";
 import ReactPlayer from 'react-player';
+import { useStyles } from '../classes'
 
 
 
@@ -11,6 +12,7 @@ function SeePage() {
     const list = useSelector((store) => store.seesaydoReducer.seeReducer);
     const dispatch = useDispatch();
     const {id} = useParams();
+    const classes = useStyles();
     
     
     useEffect(() => {
@@ -23,18 +25,22 @@ console.log('TESTING', list);
 
 
     return (
-        <div>
+        <div className={classes.pageMargin}>
             {list.map((lists, i) => {
                 return (
                     <section key={lists.id}>
                     
-                      
-                            <ReactPlayer url={lists.link} controls="true" width="100" />
-                            <img src={lists.link} />
-            
-                    <Typography  align="center" gutterBottom variant="h5">
+                            <div className={classes.thumbnail}>
+                            <ReactPlayer url={lists.link} controls="true" width="75" />
+                            </div>
+                            <div >
+                            <img className={classes.image} src={lists.image} />
+                            </div>
+                    <div className={classes.bio}>
+                    <Typography  align="center" gutterBottom variant="body1">
                         {lists.prompts}
                     </Typography>
+                    </div>
                 </section>
                 )
             })}

@@ -18,6 +18,13 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
       },
+      nextBtn: {
+        float: 'right',
+    },
+    pageMargin: {
+        marginLeft: '6%',
+        marginRight: '6%'
+      },
   });
 
 function AdventureSee() {
@@ -26,15 +33,18 @@ function AdventureSee() {
     const dispatch = useDispatch();
     const classes = useStyles();
     const history = useHistory();
+    const {id} = useParams();
 
 
     useEffect(() => {
-        console.log('In useEffect param:');
         dispatch({type: 'FETCH_ADVENTURE', payload: id});
         dispatch({type: 'FETCH_SEE_ADVENTURE', payload: id});
     }, []);
 
-    const {id} = useParams();
+    console.log('In Adventure See checking id: ', id);
+
+
+   
 
     return (
         <Card>
@@ -57,7 +67,7 @@ function AdventureSee() {
                     
                 </div>
                 <CardActionArea onClick={(event) => history.push(`/adventure/see/${id}`)}>
-                    <CardContent>
+                    <CardContent className={classes.nextBtn}>
                         <IconButton>
                             <ArrowForwardIosIcon />
                         </IconButton>

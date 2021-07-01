@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import ImageHeader from "./ImageHeader";
 import ArtworkLinks from "./ArtworkLinks";
-import { Typography } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SeePrompt from "../SeePrompt/SeePrompt";
 import SayPrompt from "../SayPrompt/SayPrompt";
 import DoPrompt from "../DoPrompt/DoPrompt";
@@ -9,11 +10,13 @@ import ArtworkDescription from "./ArtworkDescription";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { useStyles } from '../classes'
 
 function CollectionDetail({userLat, userLng}) {
     const list = useSelector((store) => store.artworkDetailReducer);
     const dispatch = useDispatch();
     const history = useHistory();
+    const classes = useStyles();
 
     useEffect(() => {
         dispatch({type: 'FETCH_ART_DETAIL', payload: id})
@@ -24,22 +27,25 @@ function CollectionDetail({userLat, userLng}) {
     
     return (
         <div>
-            <button
+            <Button
                 onClick={() => {
                     history.goBack();
                 }}
             >
-                Go back
-            </button>
+                <ArrowBackIosIcon />
+            </Button>
             <ImageHeader list={list}/>
+            <div style={{marginTop: '2%'}}>
+            <ArtworkDescription />
+            </div>
             <ArtworkLinks userLat={userLat} userLng={userLng} list={list}/>
-            <Typography>
-                See. Say. Do.
+            <Typography variant="h6" className={classes.title}>
+                See Say Do
             </Typography>
             <SeePrompt/>
             <SayPrompt />
             <DoPrompt />
-            <ArtworkDescription />
+            
         </div>
     );
 }

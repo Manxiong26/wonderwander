@@ -15,6 +15,7 @@ import {
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos"
 import MapIcon from "@material-ui/icons/Map";
 import ListIcon from "@material-ui/icons/List";
 import { useEffect } from "react";
@@ -102,7 +103,15 @@ const MapView = ({ userLat, userLng }) => {
 
   return (
     <>
+    <Button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                <ArrowBackIosIcon />
+            </Button>
     <div className={classes.pageMargin}>
+    
       <ToggleButtonGroup
         exclusive
         className={classes.toggle}
@@ -159,7 +168,7 @@ const MapView = ({ userLat, userLng }) => {
                       <ListItemText
                         secondary={distance(
                           Number(item.lat),
-                          Number(item.long),
+                          Number(item.lng),
                           userLat,
                           userLng
                         )}

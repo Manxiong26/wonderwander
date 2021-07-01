@@ -68,8 +68,10 @@ function ImageHeader({ list }) {
 
                             <div className={classes.center}>
                                 {list.has_seen === true ?
-                                    <Typography variant="body1" className={classes.imageInfo}>
+                                    <div>
+                                    <Typography variant="caption" className={classes.imageInfo}>
                                         {list.artwork_name}
+                                        </Typography>
                                         <IconButton>
                                             <ToggleButton
                                                 value="check"
@@ -83,7 +85,8 @@ function ImageHeader({ list }) {
                                                 Already Seen
                                             </ToggleButton>
                                         </IconButton>
-                                    </Typography>
+                                    </div>
+                                    
                                     : (
                                         <>
                                             <Typography variant="body1" className={classes.imageInfo}>
