@@ -32,6 +32,7 @@ import seesaydoReducer from './seesaydo.reducer';
 
 import artistDetail from './artist.reducer';
 import adventureReducer from './adventure.reducer';
+import imageUrlReducer from './imageUrl.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -71,6 +72,7 @@ const rootReducer = combineReducers({
   seesaydoReducer,
   adventureReducer,
   adventureSeeDo,
+  imageUrlReducer,
 });
 
 export default rootReducer;

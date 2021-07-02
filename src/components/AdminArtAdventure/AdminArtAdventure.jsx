@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useHistory, useParams } from 'react-router-dom';
 import AdminNav from '../AdminNav/AdminNav'
+import ImageUpload from '../ImageUpload/ImageUpload';
 
 import {
     Button,
@@ -382,6 +383,9 @@ function AdminArtAdventure() {
                         return (<option key={adventure.id} value={adventure.id}>{adventure.title}</option>);
                     })}
                 </select>
+                
+                <ImageUpload />
+
                 <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
           </div>

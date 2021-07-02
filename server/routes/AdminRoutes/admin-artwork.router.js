@@ -43,7 +43,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {  //rejectUnauthenticated
 
     let artwork = req.body;
     
-    const query  = `INSERT INTO "artwork" ("name", "year", "lat", "lng", "image", 
+    const query  = `INSERT INTO "artwork" ("name", "year", "lat", "long", "image", 
                     "description", "vid_link", "vid_description", "artist_id", 
                     "sponsor_id", "collection_id")
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
