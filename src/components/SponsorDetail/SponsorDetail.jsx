@@ -47,8 +47,6 @@ function SponsorDetail({ userLat, userLng }) {
         console.log('Click');
     };
 
-
-
     const { id } = useParams();
 
     useEffect(() => {
@@ -70,7 +68,7 @@ function SponsorDetail({ userLat, userLng }) {
                         >
                             <ArrowBackIosIcon />
                         </Button>
-                        <Typography variant="h5" className={classes.title}>
+                        <Typography variant="h4" className={classes.title}>
                             Sponsor Detail
                         </Typography>
 
@@ -93,9 +91,9 @@ function SponsorDetail({ userLat, userLng }) {
                                 userLng={userLng}
                             />
                         </div>
-                        <div className={classes.center}>
-                            <h3>ArtWork</h3>
-                        </div>
+
+                        <Typography variant="h6" className={classes.redCenter}>ArtWork</Typography>
+
                         <div>
                             <List>
                                 {sponsorArt.map((art, index) => {
@@ -112,10 +110,8 @@ function SponsorDetail({ userLat, userLng }) {
                                                 <IconButton>
                                                     <ArrowForwardIosIcon
                                                     //IAN THIS IS WHERE YOUR VIEW ARTWORKDETAIL BUTTON WILL GO 
-                                                    // onClick={(event) =>
-                                                    //   viewCollectionDetail(event, artwork)
-                                                    // }
-                                                    // className={classes.nextBtn}
+                                                    // onClick={(event) => viewArtworkDetail(event, art.art_work_id)}
+                                                    
                                                     />
                                                 </IconButton>
                                             </ListItem>

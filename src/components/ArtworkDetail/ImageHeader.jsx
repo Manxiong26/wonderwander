@@ -53,79 +53,73 @@ function ImageHeader({ list }) {
 
     return (
         <>
-            <Grid container direction="column">
-                <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
-                        <Typography variant="h5" className={classes.title}>
-                            Art Detail
+
+            <Typography variant="h4" className={classes.title}>
+                Art Detail
+            </Typography>
+            <img
+                className={classes.image}
+                src={list.artwork_image}
+            />
+
+            {user.id !== undefined ?
+
+                <div className={classes.center}>
+                    {list.has_seen === true ?
+                        <Typography variant="body1" className={classes.imageInfo}>
+                            {list.artwork_name}
+                            <IconButton>
+                                <ToggleButton
+                                    value="check"
+                                    disabled
+                                    selected={selected}
+                                    onClick={seen}
+                                    onChange={() => {
+                                        setSelected(!selected)
+                                    }}
+                                >
+                                    Already Seen
+                                </ToggleButton>
+                            </IconButton>
                         </Typography>
-                        <img
-                            className={classes.image}
-                            src={list.artwork_image}
-                        />
-
-                        {user.id !== undefined ?
-
-                            <div className={classes.center}>
-                                {list.has_seen === true ?
-                                    <Typography variant="body1" className={classes.imageInfo}>
-                                        {list.artwork_name}
-                                        <IconButton>
-                                            <ToggleButton
-                                                value="check"
-                                                disabled
-                                                selected={selected}
-                                                onClick={seen}
-                                                onChange={() => {
-                                                    setSelected(!selected)
-                                                }}
-                                            >
-                                                Already Seen
-                                            </ToggleButton>
-                                        </IconButton>
-                                    </Typography>
-                                    : (
-                                        <>
-                                            <Typography variant="body1" className={classes.imageInfo}>
-                                                {list.artwork_name}
-                                                <IconButton>
-                                                    <VisibilityIcon
-                                                        color="secondary"
-                                                        variant="contained"
-                                                        value="check"
-                                                        selected={selected}
-                                                        onClick={function () { refreshPage(); seen(); }}
-                                                        onChange={() => {
-                                                            setSelected(!selected)
-                                                        }}
-                                                    />
-                                                </IconButton>
-                                            </Typography>
-                                        </>
-                                    )
-                                }</div>
-                            : (
-                                <div className="center">
-                                    <Typography variant="body1" className={classes.imageInfo}>
-                                        {list.artwork_name}
-                                        <IconButton>
-                                            <VisibilityIcon
-                                                color="secondary"
-                                                variant="contained"
-                                                value="check"
-                                                selected={selected}
-                                                onClick={alertLogin}
-                                                onChange={() => {
-                                                    setSelected(!selected)
-                                                }} /></IconButton>
-                                        {/* <VisibilityIcon /> */}
-                                        {/* </Button> */}
-                                    </Typography>
-                                </div>
-                            )}
+                        : (
+                            <>
+                                <Typography variant="body1" className={classes.imageInfo}>
+                                    {list.artwork_name}
+                                    <IconButton>
+                                        <VisibilityIcon
+                                            color="secondary"
+                                            variant="contained"
+                                            value="check"
+                                            selected={selected}
+                                            onClick={function () { refreshPage(); seen(); }}
+                                            onChange={() => {
+                                                setSelected(!selected)
+                                            }}
+                                        />
+                                    </IconButton>
+                                </Typography>
+                            </>
+                        )
+                    }</div>
+                : (
+                    <div className="center">
+                        <Typography variant="body1" className={classes.imageInfo}>
+                            {list.artwork_name}
+                            <IconButton>
+                                <VisibilityIcon
+                                    color="secondary"
+                                    variant="contained"
+                                    value="check"
+                                    selected={selected}
+                                    onClick={alertLogin}
+                                    onChange={() => {
+                                        setSelected(!selected)
+                                    }} />
+                            </IconButton>
+                        </Typography>
                     </div>
-                </Grid>
-            </Grid>
+                )}
         </>
     );
 }

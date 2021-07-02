@@ -22,20 +22,19 @@ function WelcomePage4() {
 
     return (
         <>
-            <div className={classes.pageMargin}>
+            <div className={classes.welcomeMargin}>
                 <ArrowBackIosIcon
                     onClick={goBack}
                     className={classes.backBtn}
                 />
-                <div className={classes.nextBtn}>
-                    <HomeIcon
-                        onClick={skipWelcome}
-                    />
-                </div>
+                <HomeIcon
+                    className={classes.nextBtn}
+                    onClick={skipWelcome}
+                />
             </div>
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
+                    <div className={classes.welcomeMargin}>
                         <Typography
                             variant="h3"
                             className={classes.title}

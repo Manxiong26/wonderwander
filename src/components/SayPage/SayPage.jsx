@@ -1,8 +1,19 @@
 import React, { useEffect } from "react";
-import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, Container, Grid, Button, } from "@material-ui/core";
+import { 
+  CardContent, 
+  Card, 
+  IconButton, 
+  Typography, 
+  CardMedia, 
+  makeStyles, 
+  Container, 
+  Grid, 
+  Button, 
+} from "@material-ui/core";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useState } from "react";
 import './SayPage.css';
 
@@ -39,10 +50,12 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
       justifyContent: 'center',
+      textAlign: 'center',
     },
     cardClicker: {
       background: props => props.lists ? 'linear-gradient(#e66465, #9198e5)' : 'linear-gradient(#e66465, #9198e5)',
     },
+
   }));
 
 
@@ -109,10 +122,17 @@ const useStyles = makeStyles((theme) => ({
   
     console.log('In useEffect param:', list);
     const {id} = useParams();
-    
+    const history = useHistory();
   
     return (
         <div>
+            <Button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                <ArrowBackIosIcon />
+            </Button>
           {voteMode === false ?
           <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={2} >
@@ -157,13 +177,15 @@ const useStyles = makeStyles((theme) => ({
       </Container>)  
           }
             {voteMode === false ?
-            <Button className={classes.button} variant="contained" color="primary" >
+            <div className={classes.button}>
+            <Button  variant="contained" color="primary" >
                 Vote!
-            </Button>
-            :
-            (<Button variant="contained" color="primary" >Back</Button>)
-            }
-  
+            </Button></div>
+            : (
+            <div className={classes.button}>
+            <Button variant="contained" color="primary" >Back</Button>
+            </div> 
+            )}
         </div>
     );
   }

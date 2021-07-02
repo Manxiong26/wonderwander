@@ -27,7 +27,7 @@ function WelcomePage2() {
 
     return (
         <>
-            <div className={classes.pageMargin}>
+            <div className={classes.welcomeMargin}>
                 <ArrowBackIosIcon
                     onClick={goBack}
                     className={classes.backBtn}
@@ -44,7 +44,7 @@ function WelcomePage2() {
             </div>
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
+                    <div className={classes.welcomeMargin}>
                         <Typography
                             variant="h3"
                             className={classes.red}>
@@ -65,7 +65,6 @@ function WelcomePage2() {
                             story. No matter which of these challenges is
                             undertaken, the writer is forced to use creativity
                             to incorporate the paragraph into their writing.</p>
-                        <Divider />
                         <Typography
                             variant="h3"
                             className={classes.red}>
@@ -86,7 +85,6 @@ function WelcomePage2() {
                             story. No matter which of these challenges is
                             undertaken, the writer is forced to use creativity
                             to incorporate the paragraph into their writing.</p>
-                        <Divider />
                         <Typography
                             variant="h3"
                             className={classes.red}>
@@ -107,7 +105,6 @@ function WelcomePage2() {
                             story. No matter which of these challenges is
                             undertaken, the writer is forced to use creativity
                             to incorporate the paragraph into their writing.</p>
-                        <Divider />
                     </div>
                 </Grid>
             </Grid>

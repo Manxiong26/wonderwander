@@ -31,9 +31,6 @@ function SayPrompt() {
     // Currently using red to tell the cards apart at the moment
     return (
         <>
-            <Grid container direction="column">
-                <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
                         <Card className={classes.card}>
                             <CardContent>
                                 <CardMedia
@@ -58,9 +55,6 @@ function SayPrompt() {
                                 </div>
                             </CardContent>
                         </Card>
-                    </div>
-                </Grid>
-            </Grid>
         </>
     );
 }
