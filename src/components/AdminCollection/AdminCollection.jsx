@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import AdminNav from '../AdminNav/AdminNav'
 import { useStyles } from '../classes'
+import ImageUpload from '../ImageUpload/ImageUpload';
 
 import {
     Button,
@@ -406,6 +407,9 @@ function AdminCollection() {
                     value={search_text}
                     onChange={(event) => setSearchText(event.target.value)}
                 />
+
+                <ImageUpload />
+                
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
           </div>

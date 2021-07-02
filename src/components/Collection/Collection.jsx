@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './Collection.css'
 
@@ -10,8 +10,6 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Grid,
-  Box,
   Button,
   Divider,
   Typography,
@@ -19,7 +17,7 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 function Collection() {
   const classes = useStyles();
@@ -47,6 +45,13 @@ function Collection() {
   }
   return (
     <>
+      <Button
+        onClick={() => {
+          history.goBack();
+        }}
+      >
+        <ArrowBackIosIcon />
+      </Button>
       <div className={classes.pageMargin}>
         <Typography variant="h5" className={classes.title}>
           All Collections
@@ -54,7 +59,6 @@ function Collection() {
         <List>
           {/* <div className="collectionList"> */}
           {collectionList.map(collection => {
-
             return (
               <>
                 <Divider />

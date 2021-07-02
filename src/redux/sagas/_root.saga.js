@@ -17,6 +17,7 @@ import artDetailSaga from './artworkdetail.saga';
 import collectionSaga from './collection.saga';
 import threeCollectionSaga from './collection.3.saga';
 import getCollectionDetailSaga from './collection.detail.saga';
+import imageInfoSaga from './imageinfo.saga';
 
 import seesaydoSaga from './seesaydo.saga';
 
@@ -27,7 +28,8 @@ import addTaskSeenSaga from './addTaskSeen.saga';
 import adventureSaga from './artAdventure.saga';
 
 import adventureSeeDoSaga from './adventureSeeDo.saga';
-
+import addVoteSaga from './addVote.saga';
+import totalVoteSaga from './voteNumber.saga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -61,8 +63,8 @@ export default function* rootSaga() {
     addTaskSeenSaga(),
 
     adventureSaga(),
-
+    totalVoteSaga(),
     adventureSeeDoSaga(),
-
+    addVoteSaga(),
   ]);
 }

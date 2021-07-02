@@ -7,6 +7,9 @@ const app = express();
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
+//import for AWS
+const UploaderS3Router = require('react-dropzone-s3-uploader/s3router');
+
 // Route includes
 const userRouter = require('./routes/user.router');
 // const adminRouter = require('./routes/user.admin.router')
@@ -30,6 +33,7 @@ const sayRouter = require('./routes/say.router');
 const otherRouter = require('./routes/otheradventures.router');
 const adventureSeeRouter = require('./routes/adventuresee.router');
 const adventureDoRouter = require('./routes/adventuredo.router');
+const imageUrlRouter = require('./routes/imageUrl.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -65,6 +69,16 @@ app.use('/api/say', sayRouter);
 app.use('/api/adventure', otherRouter);
 app.use('/api/adventure/see', adventureSeeRouter);
 app.use('/api/adventure/do', adventureDoRouter);
+app.use('/api/imageurl', imageUrlRouter);
+
+
+//route for AWS image upload
+app.use('/s3', UploaderS3Router({
+  bucket: 'wonder-wander-bucket',
+  region: 'us-east-2',
+  headers: {'Access-Control-Allow-Origin': '*'},
+  ACL: 'public-read',
+}));
 
 // Serve static files
 app.use(express.static('build'));

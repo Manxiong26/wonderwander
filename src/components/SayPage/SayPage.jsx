@@ -1,9 +1,21 @@
 import React, { useEffect } from "react";
-import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, Container, Grid, Button, } from "@material-ui/core";
+import { 
+  CardContent, 
+  Card, 
+  IconButton, 
+  Typography, 
+  CardMedia, 
+  makeStyles, 
+  Container, 
+  Grid, 
+  Button, 
+} from "@material-ui/core";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useState } from "react";
+import './SayPage.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,77 +50,100 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
       justifyContent: 'center',
+      textAlign: 'center',
     },
     cardClicker: {
-      mouseEvent: 'onClick',
+      background: props => props.lists ? 'linear-gradient(#e66465, #9198e5)' : 'linear-gradient(#e66465, #9198e5)',
     },
+
   }));
 
 
-
-
-
-function SayPage() {
+  function SayPage() {
+    
     const classes = useStyles();
     // const history = useHistory();
     const list = useSelector((store) => store.seesaydoReducer.sayReducer);
+    const totalVote = useSelector((store) => store.voteNumber);
+    // const addVote = useSelector((store) => store.addVote);
     const dispatch = useDispatch();
     const [voteMode, setVoteMode] = useState(false);
+ 
+    console.log('voteCount', totalVote);
+    // console.log('Testing addVote reducer', addVote);
 
-    const handleVote = () => {
-      console.log(handleVote);
-      setVoteMode(true);
-    }
+    // const handleVote = () => {
+    //   console.log(handleVote);
+    //   setVoteMode(true);
+    //   let voteClicker = 1;
+    //   console.log('voteclicker', voteClicker);
+    //   const voteCounted = {
+    //     say_id: say_id,
+    //     artwork_id: id,
+    //   }
+    //   console.log('testing handlevote', voteCounted);
+    //   dispatch({type: 'ADDING_NEW_VOTE', payload: voteCounted});
+    // }
 
-    const [clickedVote, setClickedVote] = useState(null);
-    const [bgColor, setBgColor] = useState(null);
-
-    const voteClick = function(key) {
-      setClickedVote(key);
-      setBgColor(light.palette.secondary.main);
-    }
-
-    const[isLike, setIsLike] = useState(false);
-
-const colorStyle = {color:"blue"}
-
-const handleClick = () => {
-    setIsLike(!isLike);
-}
-    
-    // // This is where we update and insert into the db
+    // This is where we update and insert into the db
     // const [say_id, setSay_Id] = useState('');
     // const [artwork_id, setArtwork_Id] = useState('');
 
+  const [select, setSelected] = useState(null);
 
-    // //This saves the vote
-    // const saveVote = () => {
-    //     const voteCompleted = {
-    //         say_id: list.id,
-    //         artwork_id: artwork_id.id,
-    //     }
-    //     console.log('updated the vote:', voteCompleted);
-    //     dispatch({type: 'UPDATE_VOTE', payload: voteCompleted});
-    // }
+  
+  const onCardClick = (event, lists) => {
+    if (select === lists) {
+        setSelected(null);
+    } else {
+      setSelected(lists);
+    }
+    console.log(lists); 
 
-
-
+      setVoteMode(true);
+      let voteClicker = 1;
+      console.log('voteclicker', voteClicker);
+      const voteCounted = {
+        say_id: lists.id,
+        artwork_id: id,
+      }
+      console.log('testing handlevote', voteCounted);
+      dispatch({type: 'ADDING_NEW_VOTE', payload: voteCounted});
+    // console.log('clicked card', list);
+ };
+  // onClick={() => setSelected(lists.sayid)} className={select && select !== lists.sayid ? 'bg-disabled' : null}
+  
     useEffect(() => {
-        console.log('In useEffect param:', list);
-        dispatch({type: 'FETCH_SAY_DETAIL'})
+        console.log('In useEffect param:');
+        dispatch({type: 'FETCH_SAY_DETAIL', payload: id});
+        dispatch({type: 'FETCH_TOTAL_VOTE', payload: id});
     }, []);
+  
     console.log('In useEffect param:', list);
-    // const {id} = useParams();
-    console.log(list);
+    const {id} = useParams();
 
+    const history = useHistory();
+
+    console.log('testing22222', totalVote);
+    // console.log('Testing addVote reducer 2222222', addVote);
+
+  
     return (
         <div>
+            <Button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                <ArrowBackIosIcon />
+            </Button>
           {voteMode === false ?
           <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={2} >
                 {list.map((lists, i) => (
-                    <Grid item  key={i} alignItems='center' >
-                    <CardActionArea honClick={handleClick} style={isLike ? colorStyle : null}>
+                    <Grid item  key={lists.id} alignItems='center'>
+                      
+                    <CardActionArea  onClick={(event) => onCardClick(event, lists)} className={classes.cardClicker}>
                         <Card className={classes.card} >
                             <CardMedia image={lists.image} className={classes.cardMedia}/>
                             <CardContent className={classes.cardContent}>
@@ -125,14 +160,14 @@ const handleClick = () => {
           :
           (<Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={2}>
-          {list.map((lists, i) => (
+          {totalVote.map((lists, i) => (
               <Grid item key={i} alignItems='center'>
               <CardActionArea>
                   <Card className={classes.card}>
                       <CardMedia image={lists.image} className={classes.cardMedia}/>
                       <CardContent className={classes.cardContent}>
-                          <Typography className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
-                          Vote Count: 
+                          <Typography item key={lists.say_id} className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
+                          Vote Count: {lists.count} 
                           </Typography>
                       </CardContent>    
                   </Card>
@@ -142,16 +177,20 @@ const handleClick = () => {
           </Grid>
       </Container>)  
           }
+
             {voteMode === false ?
-            <Button className={classes.button} variant="contained" color="primary" onClick={handleVote} >
+            <div className={classes.button}>
+            <Button  variant="contained" color="primary" >
                 Vote!
-            </Button>
-            :
-            (<Button variant="contained" color="primary" >Back</Button>)
-            }
+            </Button></div>
+            : (
+            <div className={classes.button}>
+            <Button variant="contained" color="primary" >Back</Button>
+            </div> 
+            )}
 
         </div>
     );
-}
-
-export default SayPage;
+  }
+  
+  export default SayPage;

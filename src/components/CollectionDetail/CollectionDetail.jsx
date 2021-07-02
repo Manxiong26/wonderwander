@@ -1,19 +1,15 @@
 import React, { useEffect } from 'react'
-import { useHistory, Link, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './CollectionDetail.css'
-import GoogleMapReact from "google-map-react";
 import Map from '../Map/Map'
 
 //material UI
 import {
-    List,
     ListItem,
     ListItemAvatar,
     ListItemText,
     Avatar,
-    Grid,
-    Box,
     Button,
     Divider,
     Typography,
@@ -55,41 +51,42 @@ function CollectionDetail({ userLat, userLng }) {
 
     return (
         <>
-            <Button
-                onClick={() => {
-                    history.goBack();
-                }}
-            >
-                <ArrowBackIosIcon />
-            </Button>
             <div className={classes.pageMargin}>
-            <div>
-                <Typography variant="h5" className={classes.title}>
-                    Collection Detail
-                </Typography>
-            </div>
-            {collectionDet[0] === undefined ?
-                ('') : (<>
-                    <div className="center">
-                        <img className="logo3" src={collectionDet[0].collection_image} />
-                    </div>
-                    <div className="center">
-                        <Button><a className="web" href={collectionDet[0].site_link}>WebSite</a></Button>
-                        <Button><a className="web" href={collectionDet[0].donate_link}>$ Donate</a></Button>
-                    </div>
-
-                    <div className="center">
-                        <p>Map Goes Here</p>
+                <Button
+                    onClick={() => {
+                        history.goBack();
+                    }}
+                >
+                    <ArrowBackIosIcon />
+                </Button>
+                <div>
+                    <Typography variant="h4" className={classes.title}>
+                        Collection Detail
+                    </Typography>
+                </div>
+                {collectionDet[0] === undefined ?
+                    ('') : (<>
+                        <div className={classes.image}>
+                            <img src={collectionDet[0].collection_image} />
+                        </div>
+                        <div className={classes.center}>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                href={collectionDet[0].site_link}>Website</Button>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                href={collectionDet[0].donate_link}>$ Donate</Button>
+                        </div>
                         {/* Need to change to Number for lat & long for map to show */}
                         <Map mapLat={Number(collectionDet[0].lat)} mapLng={Number(collectionDet[0].long)} zoom={10}
                             reducer={collectionDet} height={300} width={'90%'} userLat={userLat} userLng={userLng} />
-
-                        <div>
-                            <h3>ArtWork</h3>
-                        </div>
+                        <Typography variant="h6" className={classes.redCenter}>
+                            ArtWork
+                        </Typography>
                         <div >
                             {collectionDet.map(artDet => {
-
                                 return (
                                     <>
                                         <Divider />
@@ -112,8 +109,8 @@ function CollectionDetail({ userLat, userLng }) {
                             })}
                             <Divider />
                         </div>
-                    </div>
-                </>)}
+                    </>
+                    )}
             </div>
         </>
     )

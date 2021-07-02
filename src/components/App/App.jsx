@@ -183,7 +183,7 @@ function App() {
         
             <Route
             exact
-            path="/say"
+            path="/say/:id"
             >
               <SayPage />
             </Route>

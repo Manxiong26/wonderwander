@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import AdminNav from '../AdminNav/AdminNav'
+import ImageUpload from '../ImageUpload/ImageUpload';
 
 import {
   Button,
@@ -329,6 +330,9 @@ function AdminArtist() {
                   value={bio}
                   onChange={(event) => setBio(event.target.value)}
                 />
+
+                <ImageUpload />
+                
                 <Button
                   className={classes.formBtn}
                   type="submit"

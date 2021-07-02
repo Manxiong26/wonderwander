@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import AdminNav from "../AdminNav/AdminNav";
 import { useStyles } from "../classes";
+import ImageUpload from '../ImageUpload/ImageUpload';
 
 import {
   Button,
@@ -38,6 +39,8 @@ function AdminSponsor() {
   //redux store instances
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
   const sponsor = useSelector((store) => store.adminSponsorInfoReducer);
+  const logo = useSelector((store) => store.imageUrlReducer);
+  console.log('imageUrl: ', logo);
   console.log("sponsor reducer id:", sponsor.id);
 
   //retrieves sponsors' info from DB
@@ -47,7 +50,6 @@ function AdminSponsor() {
 
   //sets local state for post request
   const [name, setName] = useState("");
-  const [logo, setLogo] = useState("");
   const [description, setDescription] = useState("");
   const [site_link, setSiteLink] = useState("");
 
@@ -78,7 +80,6 @@ function AdminSponsor() {
 
     //clears input fields
     setName("");
-    setLogo("");
     setDescription("");
     setSiteLink("");
   };
@@ -95,7 +96,7 @@ function AdminSponsor() {
 
     //shows specific artist's details in input fields for editing
     setName(item.name);
-    setLogo(item.logo);
+    // setLogo(item.logo);
     setDescription(item.description);
     setSiteLink(item.site_link);
   };
@@ -127,7 +128,6 @@ function AdminSponsor() {
 
     //clears input fields
     setName("");
-    setLogo("");
     setDescription("");
     setSiteLink("");
   };
@@ -138,7 +138,6 @@ function AdminSponsor() {
 
     //clears input fields
     setName("");
-    setLogo("");
     setDescription("");
     setSiteLink("");
   };
@@ -265,6 +264,9 @@ function AdminSponsor() {
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
                   />
+
+                  <ImageUpload />
+
                   <Button
                     className={classes.formBtn}
                     type="submit"
@@ -306,7 +308,7 @@ function AdminSponsor() {
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                   />
-                  <TextField
+                  {/* <TextField
                     type="text"
                     className={classes.inputs}
                     variant="outlined"
@@ -314,7 +316,7 @@ function AdminSponsor() {
                     label="Logo URL"
                     value={logo}
                     onChange={(event) => setLogo(event.target.value)}
-                  />
+                  /> */}
                   <TextField
                     type="text"
                     className={classes.inputs}
@@ -335,6 +337,13 @@ function AdminSponsor() {
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
                   />
+
+                  
+
+                  <ImageUpload />
+
+                  
+                  
                   <Button
                     className={classes.formBtn}
                     type="submit"

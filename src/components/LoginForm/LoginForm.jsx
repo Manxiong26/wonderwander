@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import {Button, Typography, TextField, Card, Grid} from '@material-ui/core'
+import { useStyles } from '../classes';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -9,6 +11,7 @@ function LoginForm() {
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
   const history = useHistory();
+  const classes = useStyles();
   const user = useSelector(store => store.user)
   const login = (event) => {
     event.preventDefault();
@@ -30,41 +33,48 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+    <Card className={classes.loginForm}>
+    <form className={classes.form} onSubmit={login}>
+      <Typography className={classes.title} variant="h4">Login</Typography>
+      <div className={classes.cardContent}>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
       )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
+      <div className={classes.loginInputs}>
+          <TextField
+            className={classes.inputs}
+            variant="outlined"
+            placeholder="Username"
+            label="Username"
             type="text"
             name="username"
             required
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
+        
+      
+          <TextField
+            className={classes.inputs}
+            variant="outlined"
+            placeholder="Password"
+            label="Password"
             type="password"
             name="password"
             required
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
+      
+      <div className={classes.btn}>
+        <Button  color="primary" variant="outlined" type="submit" name="submit">Log In</Button>
       </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+      </div>
       </div>
     </form>
+    </Card>
   );
 }
 
