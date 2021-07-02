@@ -17,10 +17,29 @@ function AdminLanding() {
   return (
     <>
     <AdminNav />
-    <Card className={classes.cardForm} >
-        <Typography align="center" variant="h5">
+    <Card className={classes.loginForm} >
+      <div className={classes.cardContent}>
+        <Typography className={classes.title} align="center" variant="h5">
             Welcome, {user.first_name}
         </Typography>
+        <Typography className={classes.tableContent} variant="body1">
+        As an administrator of this site you have unique capabilities. Some features include:</Typography>
+        <ul>
+        <li>
+            Navigation based on the category links above
+          </li>
+          <li>
+            The ability to add, edit, and delete information
+          </li>
+          <li>
+            The option to 'publish' an item to display it on the app, or to put it in 'draft' mode which will not be publicly viewable
+          </li>
+          <li>
+            The ability to add new administrators using the 'ADD ADMIN' button on the top right
+          </li>
+        </ul>
+        
+        </div>
     </Card>
     </>
   );

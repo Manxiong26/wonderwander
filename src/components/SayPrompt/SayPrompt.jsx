@@ -1,61 +1,61 @@
-import React from 'react';
-import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, CardActionArea, } from "@material-ui/core";
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {
+    Grid,
+    ListItem,
+    ListItemText,
+    CardContent,
+    Card,
+    Typography,
+    CardMedia,
+} from "@material-ui/core";
+import { useStyles } from "../classes";
+import { useHistory, useParams } from 'react-router-dom';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { render } from 'react-dom';
-
-
-const useStyles = makeStyles({
-    cardmedia: {
-      width: '60px',
-      height: '60px',
-    },
-    content: {
-        flex: '1 0 auto',
-      },
-    details: {
-        display: 'flex',
-        flexDirection: 'column',
-      },
-    card: {
-        background: 'red',
-    },
-  });
-
-
+import { useDispatch, useSelector } from 'react-redux';
 
 function SayPrompt() {
     const classes = useStyles();
     const history = useHistory();
-    
+    const dispatch = useDispatch();
+    const list = useSelector((store) => store.seesaydoReducer.sayReducer);
+
+    useEffect(() => {
+        console.log('in useEffect param: SayPrompt');
+        dispatch({ type: 'FETCH_SAY_DETAIL', payload: id });
+    }, []);
+
+    const { id } = useParams();
+
 
     // Currently using red to tell the cards apart at the moment
     return (
-        <Card className={classes.card}>
-            <CardContent>
-                <CardMedia
-                className={classes.cardmedia}
-                component="img" 
-                image="http://cdn.onlinewebfonts.com/svg/img_464398.png"
-                >
-
-                </CardMedia>
-                <div className={classes.details}>
-                    <CardContent>
-                        <Typography className={classes.content}>
-                            What did you think of this piece? Vote!
-                        </Typography>
-                    </CardContent>
-                </div>
-                <CardActionArea onClick={() => history.push('/say')}>
-                    <CardContent>
-                        <IconButton>
-                            <ArrowForwardIosIcon />
-                        </IconButton>
-                    </CardContent>
-                </CardActionArea>
-            </CardContent>
-        </Card>
+        <>
+                        <Card className={classes.card}>
+                            <CardContent>
+                                <CardMedia
+                                    className={classes.smallImg}
+                                    component="img"
+                                    image="http://cdn.onlinewebfonts.com/svg/img_464398.png"
+                                >
+                                </CardMedia>
+                                <div >
+                                    <ArrowForwardIosIcon
+                                        onClick={() => history.push(`/say/${id}`)}
+                                        className={classes.nextBtn} />
+                                    <CardContent>
+                                        <ListItem>
+                                            <ListItemText>
+                                                <Typography >
+                                                    What did you think of this piece? Vote!
+                                                </Typography>
+                                            </ListItemText>
+                                        </ListItem>
+                                    </CardContent>
+                                </div>
+                            </CardContent>
+                        </Card>
+        </>
     );
 }
 

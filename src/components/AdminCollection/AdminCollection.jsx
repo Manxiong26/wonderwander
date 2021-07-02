@@ -9,13 +9,8 @@ import {
     Button,
     Typography,
     TextField,
-    List,
-    ListItem,
-    ListItemAvatar,
-    Avatar,
-    Divider,
-    Input,
-    Box,
+    FormControlLabel,
+    Switch,
     Grid,
     Card,
     makeStyles,
@@ -210,13 +205,52 @@ function AdminCollection() {
           }
         });
     }
+
+    //changes db boolean to true which "publishes" item on public facing pages
+  const publish = (event, item) => {
+    console.log("clicking publish for Collection = ", item);
+
+    //sets specific artist in artist reducer
+    dispatch({ type: "SET_COLLECTION_INFO", payload: item });
+
+    let pubObject
+
+    if( item.published === true) {
+    //changes item boolean to true
+    pubObject = {
+      id: item.id,
+      published: false,
+    };
+    //swal success indicator
+    swal({
+      text: "This collection's information is now unpublished!",
+      icon: "success",
+    });
+  } else {
+    pubObject = {
+      id: item.id,
+      published: true,
+    }
+    //swal success indicator
+    swal({
+      text: "This collection's information has been published!",
+      icon: "success",
+    });
+  }
+
+    //sends updated artist info 
+    // (published boolean true/false) to collection saga
+    dispatch({ type: "UPDATE_PUBLISH_COLLECTION", payload: pubObject });
+
+    
+  };
   
     return (
       <>
           <AdminNav/>
           <Grid container spacing={1} direction="row">
           {editMode ?
-            <Grid item lg={5} className={classes.grid}>
+            <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Edit Collection</Typography>
@@ -302,7 +336,7 @@ function AdminCollection() {
               </Card>
           </Grid>
           : 
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
           <Card elevation={6} className={classes.cardForm}>   
           <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Add Collection</Typography>
@@ -384,7 +418,7 @@ function AdminCollection() {
           
           {/* Collection List. Always shows. */}
           {/* Edit clickability renders a specific collections's details in the edit form */}
-          <Grid item lg={7}>
+          <Grid item lg={7} sm={12} xs={12}>
           <TableContainer
           elevation={6}
           component={Card}
@@ -396,13 +430,26 @@ function AdminCollection() {
                   <TableBody>
                 {collectionList.map((item, i) =>
                     <TableRow alignItems="flex-start" key={i}>        
-                        <TableCell>
+                        <TableCell className={classes.thumbnailContainer}>
                             <img src={item.image} alt="Collection Image" className={classes.thumbnail}/> 
                         </TableCell>
                         <TableCell>
                         <Typography variant="body1">{item.name}</Typography>
                         </TableCell>
-                        
+                        <TableCell>
+                        <FormControlLabel 
+                        control={
+                          <Switch
+                          size="small"
+                          checked={item.published}
+                          onChange={(event) => publish(event, item)}
+                          name="publish"
+                          color="primary"
+                        /> }
+                        labelPlacement="top"
+                        label="Publish"
+                        />
+                        </TableCell>
                         <TableCell align="right">
                       <IconButton>
                         <EditIcon

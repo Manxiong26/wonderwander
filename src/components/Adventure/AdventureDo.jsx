@@ -1,71 +1,69 @@
 import React, { useEffect } from 'react';
-import { CardContent, Card, IconButton, Typography, CardMedia, makeStyles, } from "@material-ui/core";
+import {
+    Grid,
+    ListItem,
+    ListItemText,
+    CardContent,
+    Card,
+    Typography,
+    CardMedia,
+} from "@material-ui/core";
+import { useStyles } from "../classes";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useHistory, useParams } from "react-router-dom";
-import CardActionArea from '@material-ui/core/CardActionArea';
 import { useDispatch, useSelector } from 'react-redux';
-
-const useStyles = makeStyles({
-    cardmedia: {
-      width: '60px',
-      height: '60px',
-    },
-    content: {
-        flex: '1 0 auto',
-      },
-    details: {
-        display: 'flex',
-        flexDirection: 'column',
-      },
-    card: {
-        // background: 'red',
-    },
-  });
 
 function AdventureDo() {
     const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
     const doDetail = useSelector((store) => store.adventureSeeDo.doAdventureReducer);
-    const {id} = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
-        dispatch({type: 'FETCH_DO_ADVENTURE', payload: id})
+        dispatch({ type: 'FETCH_DO_ADVENTURE', payload: id })
     }, []);
 
     console.log('in do prompt looking for art detail information', doDetail);
 
-       
+
     return (
-        <Card className={classes.card}>
-            <CardContent >
-                <CardMedia
-                className={classes.cardmedia}
-                component="img" 
-                image="http://simpleicon.com/wp-content/uploads/camera.png"
-                >
-                </CardMedia>
-                <div className={classes.details}>
-                    {doDetail.map((dolist, i) => {
-                        return (
-                            <CardContent>
-                        <Typography className={classes.content} key={i}>
-                            {dolist.prompts}
-                        </Typography>
-                    </CardContent>
-                        )
-                    })}
-                    
-                </div>
-                <CardActionArea onClick={(event) => history.push(`/adventure/do/${id}`)}>
-                    <CardContent>
-                        <IconButton>
-                            <ArrowForwardIosIcon />
-                        </IconButton>
-                    </CardContent>
-                </CardActionArea>
-            </CardContent>
-        </Card>
+        <>
+            <Grid container direction="column">
+                <Grid item xs={12} sm={12} lg={12}>
+                    <div className={classes.pageMargin}>
+                        <Card className={classes.card}>
+                            <CardContent >
+                                <CardMedia
+                                    className={classes.smallImg}
+                                    component="img"
+                                    image="http://simpleicon.com/wp-content/uploads/camera.png"
+                                >
+                                </CardMedia>
+                                <div >
+                                    <ArrowForwardIosIcon
+                                        className={classes.nextBtn}
+                                        onClick={(event) => history.push(`/adventure/do/${id}`)} />
+                                    {doDetail.map((dolist, i) => {
+                                        return (
+                                            <CardContent>
+                                                <ListItem>
+                                                    <ListItemText>
+                                                        <Typography className={classes.content} key={i}>
+                                                            {dolist.prompts}
+                                                        </Typography>
+                                                    </ListItemText>
+                                                </ListItem>
+                                            </CardContent>
+                                        )
+                                    })}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </Grid>
+            </Grid>
+        </>
     );
 }
 

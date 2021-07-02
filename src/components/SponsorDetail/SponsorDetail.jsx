@@ -1,42 +1,34 @@
-import {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import {useParams} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import Map from "../Map/Map";
 import { useHistory } from 'react-router-dom';
 
-import { makeStyles } from "@material-ui/core";
+//matierl UI
+import {
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Avatar,
+    Grid,
+    Button,
+    Divider,
+    Typography,
+    IconButton,
+} from "@material-ui/core";
+import { useStyles } from "../classes";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 
 
-function SponsorDetail({userLat, userLng}) {
+
+function SponsorDetail({ userLat, userLng }) {
     const details = useSelector(store => store.sponsorDetails);
     const sponsorArt = useSelector(store => store.sponsorArt);
     const dispatch = useDispatch();
     const history = useHistory();
-
-    const useStyles = makeStyles((theme) => ({
-        mapContainer: {
-            marginTop: "auto",
-            marginBottom: "auto",
-        },
-        logo: {
-            width: "50%",
-            justifyContent: "center",
-        },
-        artCard: {
-            height: '70%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-        },
-        image: {
-            flexGrow: 1,
-        }
-    }));
 
     const classes = useStyles();
 
@@ -51,57 +43,85 @@ function SponsorDetail({userLat, userLng}) {
         history.push(`/artworkdetail/${art.id}`)
     };
 
+    const { id } = useParams();
 
-
-    const {id} = useParams();
-
-    useEffect (() => {
-        dispatch({type: 'FETCH_SPONSOR_DETAILS', payload: id})
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SPONSOR_DETAILS', payload: id })
     }, [])
-    useEffect (() => {
-        dispatch({type: 'FETCH_SPONSOR_ART', payload: id})
+    useEffect(() => {
+        dispatch({ type: 'FETCH_SPONSOR_ART', payload: id })
     }, [])
     
 
     return (
-        <div>
-            <img className={classes.logo} src={details.logo}></img>
-            <button onClick={(event) => {
-                event.preventDefault();
-                window.location.href=`${details.site_link}`
-            }}>Visit Website</button>
+        <>
+            <Grid container direction="column">
+                <Grid item xs={12} sm={12} lg={12}>
+                    <div className={classes.pageMargin}>
+                        <Button
+                            onClick={() => {
+                                history.goBack();
+                            }}
+                        >
+                            <ArrowBackIosIcon />
+                        </Button>
+                        <Typography variant="h4" className={classes.title}>
+                            Sponsor Detail
+                        </Typography>
 
-            <div className={classes.mapContainer}>
-                <Map
-                    mapLat={center.lat}
-                    mapLng={center.lng}
-                    zoom={10}
-                    height={500}
-                    width={"90%"}
-                    reducer={sponsorArt}
-                    userLat={userLat}
-                    userLng={userLng}
-                />
-            </div>
-            
-            <Grid container spacing={2}>
-                {sponsorArt.map((art, index) => {
-                    return (
-                    <Grid item key={art.id}>
-                        <Card className={classes.artCard}>
-                            <CardMedia className={classes.image}>
-                                <img src={art.image} onClick={(event) => toArt(event, art)}></img>
-                            </CardMedia>
-                            <CardContent>
-                                <p>{art.description}</p>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    )
-                })}   
+                        <img className={classes.image} src={details.logo}></img>
+                        <div className={classes.center}>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                href={details.site_link}>Visit Website</Button>
+                        </div>
+                        <div>
+                            <Map
+                                mapLat={center.lat}
+                                mapLng={center.lng}
+                                zoom={10}
+                                height={300}
+                                width={"90%"}
+                                reducer={sponsorArt}
+                                userLat={userLat}
+                                userLng={userLng}
+                            />
+                        </div>
+
+                        <Typography variant="h6" className={classes.redCenter}>ArtWork</Typography>
+
+                        <div>
+                            <List>
+                                {sponsorArt.map((art, index) => {
+                                    return (
+                                        <>
+                                            <Divider />
+                                            <ListItem>
+                                                <ListItemAvatar>
+                                                    <Avatar className={classes.thumbnailLarge} src={art.image} />
+                                                </ListItemAvatar>
+                                                <ListItemText
+                                                    primary={art.name}
+                                                />
+                                                <IconButton>
+                                                    <ArrowForwardIosIcon
+                                                    //IAN THIS IS WHERE YOUR VIEW ARTWORKDETAIL BUTTON WILL GO 
+                                                    // onClick={(event) => viewArtworkDetail(event, art.art_work_id)}
+                                                    
+                                                    />
+                                                </IconButton>
+                                            </ListItem>
+                                            <Divider />
+                                        </>
+                                    )
+                                })}
+                            </List>
+                        </div>
+                    </div>
+                </Grid>
             </Grid>
-        </div>
-
+        </>
     )
 }
 

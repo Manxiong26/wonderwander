@@ -16,11 +16,11 @@ import {
     TableCell,
     TableContainer,
     TableRow,
-  } from "@material-ui/core";
-  import DeleteIcon from "@material-ui/icons/Delete";
-  import EditIcon from "@material-ui/icons/Edit";
+    } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
   
-  import { useStyles } from "../classes";
+import { useStyles } from "../classes";
 
 function AdminArtAdventure() {
 
@@ -38,17 +38,15 @@ function AdminArtAdventure() {
     //redux store instances 
     const artAdventureList = useSelector((store) => store.adminArtAdventureListReducer);
     const artAdventure = useSelector((store) => store.adminArtAdventureInfoReducer);
-    console.log('artAdventure reducer id:', artAdventure.id);
+        console.log('artAdventure reducer id:', artAdventure.id);
     const seeList = useSelector((store) => store.adminSeeListReducer);
     const see = useSelector ((store) => store.adminSeeInfoReducer);
-    //const doList = useSelector((store) => store.adminDoListReducer);
-    //const doItem = useSelector((store) => store.adminDoReducer);
+    const doList = useSelector((store) => store.adminDoListReducer);
+    const doItem = useSelector((store) => store.adminDoReducer);
 
     //retrieves art adventures' info from DB
     useEffect(() => {
         dispatch({ type: 'FETCH_ADVENTURE_LIST' });
-        //dispatch({ type: 'FETCH_SEE_LIST' });
-        //dispatch({ type: 'FETCH_DO_LIST' });
     }, []);
 
     //sets local state for post request
@@ -93,7 +91,10 @@ function AdminArtAdventure() {
 
         //sets specific art adventure in art adventure reducer 
         dispatch({type: 'SET_ADVENTURE_INFO', payload: item});
+
+        //sets see/do lists for specific adventure in seeList/doList reducers
         dispatch({type: 'FETCH_SEE_LIST', payload: item.id}); 
+        dispatch({type: 'FETCH_DO_LIST', payload: item.id});
 
         //renders form view from add to edit mode
         setEditMode(true);
@@ -180,6 +181,7 @@ function AdminArtAdventure() {
     const [link, setLink] = useState('');
     const [adventure_id, setAdventureId] = useState('');
     const [seeId, setSeeId] = useState('');
+    const [doId, setDoId] = useState('');
 
     const addSee = () => {
         console.log('Add See Clicked.');
@@ -246,7 +248,7 @@ function AdminArtAdventure() {
       <AdminNav />
       <Grid container spacing={1} direction="row">
           {editMode ?
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5}  sm={12} xs={12}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Edit Adventure</Typography>
@@ -260,8 +262,8 @@ function AdminArtAdventure() {
                     onChange={(event) => setTitle(event.target.value)}
                 />
                 <TextField type="text"
-                className={classes.inputs}
-                variant="outlined"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Description"
                     label="Description"
                     value={description}
@@ -270,14 +272,24 @@ function AdminArtAdventure() {
                     onChange={(event) => setDescription(event.target.value)}
                 />
                 <TextField type="text"
-                className={classes.inputs}
-                variant="outlined"
+                    className={classes.inputs}
+                    variant="outlined"
                     placeholder="Image URL"
                     label="Image URL"
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                 />
 
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
+                <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
+              </form>
+            </div>
+
+            {/* TODO - ADD EDIT FORMS FOR SEE & DO HERE */}
+            {/* <Grid item lg={5} className={classes.grid}>
+            <Card elevation={6} className={classes.cardForm}>
+            <div className={classes.cardContent}> */}
+            <Typography className={classes.title} align="center" variant="h4">Edit See</Typography>
                 {/* generates 'See' options dynamically */}
                 <select type="text"
                     onChange={(event) => setSeeId(event.target.value)}
@@ -287,26 +299,31 @@ function AdminArtAdventure() {
                         return (<option key={see.id} value={see.id}>{see.prompts}</option>);
                     })}
                 </select>
+            {/* </div>
+            </Card>
+            </Grid> */}
+
+            {/* <Grid item lg={5} className={classes.grid}>
+            <Card elevation={6} className={classes.cardForm}>
+            <div className={classes.cardContent}> */}
+            <Typography className={classes.title} align="center" variant="h4">Edit Do</Typography>
                 {/* generates 'Do' options dynamically */}
-                {/* <select type="text"
+                <select type="text"
                     onChange={(event) => setDoId(event.target.value)}
                     >
                     <option value="Default">Do</option>
                     {doList.map((doItem) => {
                         return (<option key={doItem.id} value={doItem.id}>{doItem.prompts}</option>);
                     })}
-                </select> */}
-           
+                </select>
+            {/* </div>
+            </Card>
+            </Grid> */}
 
-                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
-                <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
-
-              </form>
-                </div>
           </Card>
           </Grid>
           : 
-          <Grid item lg={5} className={classes.grid}>
+          <Grid item lg={5} sm={12} xs={12} >
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>  
               <Typography className={classes.title} align="center" variant="h4">Add Adventure</Typography>
@@ -395,21 +412,22 @@ function AdminArtAdventure() {
           
           {/* Adventure List. Always shows. */}
           {/* Edit clickability renders a specific art adventure's details in the edit form */}
-          <Grid item lg={7}>
+
+          <Grid item lg={7} xs={12}>
         <TableContainer
           elevation={6}
           component={Card}
           className={classes.cardTable}
-        >
+          >
           <div className={classes.tableContent}>
             <Typography className={classes.title} align="center" variant="h4">
-              <u>Artist List</u>
+              <u>Adventure List</u>
             </Typography>
             <Table className={classes.table}>
               <TableBody>
                 {artAdventureList.map((item, i) => (
                   <TableRow alignItems="flex-start" key={i}>
-                    <TableCell>
+                    <TableCell className={classes.thumbnailContainer}>
                       <img
                         src={item.image}
                         alt="Artist Image"

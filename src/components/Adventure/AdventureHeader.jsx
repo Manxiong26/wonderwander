@@ -1,32 +1,26 @@
-import { CardMedia, makeStyles, Typography } from "@material-ui/core";
-import { CardContent } from "@material-ui/core";
-import { Card } from "@material-ui/core";
+import {
+    Typography,
+} from "@material-ui/core";
+import { useStyles } from "../classes";
 import React from "react";
 
 
-const useStyles = makeStyles({
-    cardmedia: {
-        maxWidth: '100%',
-    },
-})
-
-function AdventureHeader({list}) {
+function AdventureHeader({ list }) {
     const classes = useStyles();
 
 
     return (
-        <Card className={classes.cardmedia}>
-            <CardMedia
-            component="img" 
-            image={list.image}
-            >
-            </CardMedia>
-            <CardContent>
-                <Typography>
-                    Activity: {list.title}
-                </Typography>
-            </CardContent>
-        </Card>
+        <>
+            <Typography variant="h4" className={classes.title}>
+                Adventure
+            </Typography>
+            <img
+                className={classes.bigImage}
+                src={list.image}
+            /><Typography className={classes.center}>
+                {list.title}
+            </Typography>
+        </>
     );
 }
 

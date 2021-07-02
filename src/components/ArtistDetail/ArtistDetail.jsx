@@ -1,44 +1,27 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import {makeStyles, Typography, Button, Divider, List, ListItem, ListItemAvatar, Avatar, ListItemText, Card} from '@material-ui/core';
+import {
+    Typography,
+    Button,
+    Divider,
+    List,
+    ListItem,
+    ListItemAvatar,
+    Avatar,
+    ListItemText,
+    Grid,
+} from '@material-ui/core';
+import { useStyles } from "../classes";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useHistory } from 'react-router-dom';
-
-const useStyles = makeStyles((theme) => ({
-    name: {
-        textAlign: 'center',
-        fontFamily: theme.typography.fontFamily,
-    },
-    pic: {
-        width: '300px',
-        maxHeight: '500px',
-        marginRight: 'auto',
-        marginLeft: 'auto',
-        border: '1px solid black'
-    },
-    bio: {
-        width: '300px',
-        maxHeight: '500px',
-        marginRight: 'auto',
-        marginLeft: 'auto',
-        border: '1px solid black',
-        marginBottom: '2%',
-        padding: '2%',
-        backgroundColor: '#d3d3d3'
-    },
-    btn: {
-        margin: '4%'
-    }
-    
-  }));
-
 
 
 const ArtistDetail = () => {
 
     // Grabs id of specific artist from URL
-    const {id} = useParams()
+    const { id } = useParams()
     console.log(id)
 
 
@@ -48,7 +31,7 @@ const ArtistDetail = () => {
 
     // Loads artist detail info
     useEffect(() => {
-    dispatch({ type: 'FETCH_ARTIST_DETAIL', payload: id })
+        dispatch({ type: 'FETCH_ARTIST_DETAIL', payload: id })
     }, [])
 
     // artist detail reducer
@@ -61,54 +44,71 @@ const ArtistDetail = () => {
     }
 
 
-    return(
+    return (
         <>
-        <button
-                onClick={() => {
-                    history.goBack();
-                }}
-            >
-                Go back
-            </button>
-        {artistInfo === undefined ? ('Loading...') : (
-        <div className={classes.name}>
-        <Typography variant="h5">{artistInfo.name}</Typography>
-        <div>
-            <img className={classes.pic} src={artistInfo.image}/>
-        </div>
-        <div className={classes.bio}>
-           <Typography variant="body1">{artistInfo.bio}</Typography>
-        </div>
-        <div className={classes.btn}>
-            <Button variant="outlined"><a href={artistInfo.site_link}>Artist Website</a></Button>
-        </div>
-        <div>
-            <Typography variant="h6">Art by {artistInfo.name}</Typography>
-            <Divider />
-            <List>
-            {artist.map((item, i) => {
-                return(
-                    <>
-                    <ListItem key={i}>
-                        <ListItemAvatar>
-                            <Avatar variant="square" src={item.art_pic}/>
-                        </ListItemAvatar>
-                        <ListItemText 
-                            primary={item.title}
-                            secondary={item.name}
-                            />
-                        <ArrowForwardIosIcon onClick={() => toArtDetail(item)} />
-                    </ListItem>
-                    <Divider />
-                    </>
-                )
-            })}
-            </List>
-        </div>
-        </div>
-        )}
+            <Grid container direction="column">
+                <Grid item xs={12} sm={12} lg={12}>
+                    <div className={classes.pageMargin}>
+                        <Button
+                            onClick={() => {
+                                history.goBack();
+                            }}
+                        >
+                            <ArrowBackIosIcon />
+                        </Button>
+                        {artistInfo === undefined ? ('Loading...') : (
+                            <div >
+                                <Typography
+                                    className={classes.title}
+                                    variant="h4">{artistInfo.name}</Typography>
+                                <div>
+                                    <img className={classes.bigImage} src={artistInfo.image} />
+                                </div>
+                                <div >
+                                    <Typography
+                                        className={classes.center}
+                                        variant="body1">{artistInfo.bio}</Typography>
+                                </div>
+                                <div className={classes.center}>
+                                    <Button
+
+                                        variant="outlined"
+                                        color="primary"
+                                        href={artistInfo.site_link}>Artist Website</Button>
+                                </div>
+                                <div>
+                                    <Typography
+                                        variant="h6"
+                                        className={classes.red}
+                                    >Art by {artistInfo.name}</Typography>
+                                    <Divider />
+                                    <List>
+                                        {artist.map((item, i) => {
+                                            return (
+                                                <>
+                                                    <ListItem key={i}>
+                                                        <ListItemAvatar>
+                                                            <Avatar variant="square" src={item.art_pic} />
+                                                        </ListItemAvatar>
+                                                        <ListItemText
+                                                            primary={item.title}
+                                                            secondary={item.name}
+                                                        />
+                                                        <ArrowForwardIosIcon onClick={() => toArtDetail(item)} />
+                                                    </ListItem>
+                                                    <Divider />
+                                                </>
+                                            )
+                                        })}
+                                    </List>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </Grid>
+            </Grid>
         </>
     )
 }
 
-export default ArtistDetail
+export default ArtistDetail;
