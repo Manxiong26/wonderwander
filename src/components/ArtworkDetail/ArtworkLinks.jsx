@@ -51,12 +51,12 @@ function CollectionLinks({ list, userLat, userLng }) {
                         <ListItem>
                             <ListItemText
                                 primary={'Directions'}
-                                secondary={'Miles XX'}
+                                
                             />
                             <IconButton>
                                 <ArrowForwardIosIcon onClick={() =>
                                     location.href = "https://www.google.com/maps/dir/?api=1&origin="
-                                    + userLat + "," + userLng + "&destination=" + list.lat + "," + list.long
+                                    + userLat + "," + userLng + "&destination=" + list.lat + "," + list.lng
                                     + "&dir_action=navigate"} />
                             </IconButton>
                         </ListItem>

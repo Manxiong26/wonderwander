@@ -40,20 +40,21 @@ function Adventure() {
                             <ArrowBackIosIcon />
                         </Button>
                         <AdventureHeader list={list} />
+                        <ListItemText
+                            className={classes.center}
+                            primary={list.description}
+                        />
                         <h2 className={classes.redCenter}>
                             See. Do.
                         </h2>
                         <Divider />
                         <AdventureSee />
                         <AdventureDo />
-                        <Typography variant="h6" className={classes.red}>
+                        {/* <Typography variant="h6" className={classes.red}>
                             Description of the Adventure
-                        </Typography>
+                        </Typography> */}
                         <Divider />
-                        <ListItemText
-                            className={classes.center}
-                            primary={list.description}
-                        />
+                        
                     </div>
                 </Grid>
             </Grid>

@@ -26,6 +26,18 @@ function AdminRegister() {
 
       },
     });
+
+    swal({
+      text: "A new admin has been created!",
+      icon: "success"
+  });
+
+  setUsername('');
+  setPassword('');
+  setEmail('');
+  setName('');
+
+
   }; // end registerUser
 
   return (

@@ -73,7 +73,7 @@ function Collection() {
                     primary={collection.name}
                     secondary={collectionText(collection)}
                   />
-                  <ListItemText secondary="miles" />
+                  <ListItemText />
                   <IconButton>
                     <ArrowForwardIosIcon
                       onClick={(event) =>

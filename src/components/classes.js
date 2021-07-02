@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         marginTop: '5%',
         marginBottom: '5%',
+        overflow: 'auto'
     },
     media: {
       height: 300,
@@ -142,6 +143,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 'auto',
         paddingRight: '10%',
         paddingLeft: '10%',
+        overflow: 'auto'
       },
       btnGroup: {
         display: 'flex',

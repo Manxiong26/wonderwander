@@ -159,7 +159,7 @@ const MapView = ({ userLat, userLng }) => {
                       <ListItemText
                         secondary={distance(
                           Number(item.lat),
-                          Number(item.long),
+                          Number(item.lng),
                           userLat,
                           userLng
                         )}

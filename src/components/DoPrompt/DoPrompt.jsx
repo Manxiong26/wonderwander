@@ -4,6 +4,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useHistory, useParams } from "react-router-dom";
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { useDispatch, useSelector } from 'react-redux';
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
 const useStyles = makeStyles({
     cardmedia: {
@@ -43,10 +44,8 @@ function DoPrompt() {
         <Card className={classes.card}>
             <CardContent >
                 <CardMedia
-                className={classes.cardmedia}
-                component="img" 
-                image={dolist.image}
-                >
+                className={classes.cardmedia} 
+                ><CameraAltIcon/>
                 </CardMedia>
                 <div className={classes.details}>
                     

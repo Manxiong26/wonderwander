@@ -41,6 +41,7 @@ function CollectionDetail({ userLat, userLng }) {
                         <ArrowBackIosIcon />
                     </Button>
                     <ImageHeader list={list} />
+                    <ArtworkDescription />
                     <ArtworkLinks userLat={userLat} userLng={userLng} list={list} />
                     <h2 className={classes.red}>
                         See. Say. Do.
@@ -48,7 +49,6 @@ function CollectionDetail({ userLat, userLng }) {
                     <SeePrompt />
                     <SayPrompt />
                     <DoPrompt />
-                    <ArtworkDescription />
                 </div>
             </Grid>
         </Grid>

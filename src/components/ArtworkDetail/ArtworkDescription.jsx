@@ -20,9 +20,9 @@ function ArtworkDescription() {
         <Grid container direction="column">
             <Grid item xs={12} sm={12} lg={12}>
                 <div className={classes.pageMargin}>
-                    <Typography variant="h6" className={classes.redCenter}>
+                    {/* <Typography variant="h6" className={classes.redCenter}>
                         Description of the Art Work
-                    </Typography>
+                    </Typography> */}
                     <Divider />
                     <ListItemText
                     className={classes.center}

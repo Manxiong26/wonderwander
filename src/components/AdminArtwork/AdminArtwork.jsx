@@ -723,7 +723,7 @@ function AdminArtwork() {
                       type="text"
                       onChange={(event) => setArtistId(event.target.value)}
                     >
-                      <option value="Default">Artist</option>
+                      <option value={artwork_id}>Artist</option>
                       {artistList.map((artist) => {
                         return (
                           <option key={artist.id} value={artist.id}>
