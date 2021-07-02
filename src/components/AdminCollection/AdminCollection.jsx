@@ -346,6 +346,7 @@ function AdminCollection() {
                     placeholder="Collection Name"
                     label="Collection Name"
                     value={name}
+                    onClick={() => setName(`The St. Paul Collection`)}
                     onChange={(event) => setName(event.target.value)}
                 />
                 <TextField type="text"
@@ -354,6 +355,7 @@ function AdminCollection() {
                     placeholder="Image URL"
                     label="Image URL"
                     value={image}
+                    onClick={() => setImage('https://pbr-affd.kxcdn.com/upload/st-paul-s-jpg')}
                     onChange={(event) => setImage(event.target.value)}
                 />
                 <TextField type="text"
@@ -362,6 +364,7 @@ function AdminCollection() {
                     placeholder="City"
                     label="City"
                     value={city}
+                    onClick={() => setCity('St. Paul')}
                     onChange={(event) => setCity(event.target.value)}
                 />
                 <TextField type="text"
@@ -370,6 +373,7 @@ function AdminCollection() {
                     placeholder="State"
                     label="State"
                     value={state}
+                    onClick={() => setState('Minnesota')}
                     onChange={(event) => setState(event.target.value)}
                 />
                 <TextField type="text"
@@ -380,6 +384,7 @@ function AdminCollection() {
                     multiline
                     rows={6}
                     value={bio}
+                    onClick={() => setBio('The St. Paul Collection contains public works of art.')}
                     onChange={(event) => setBio(event.target.value)}
                 />
                 <TextField type="text"
@@ -388,6 +393,7 @@ function AdminCollection() {
                     placeholder="Donation URL"
                     label="Donation URL"
                     value={donate_link}
+                    onClick={() => setDonateLink('stpauldonation.com')}
                     onChange={(event) => setDonateLink(event.target.value)}
                 />
                 <TextField type="text"
@@ -396,6 +402,7 @@ function AdminCollection() {
                     placeholder="Website URL"
                     label="Website URL"
                     value={site_link}
+                    onClick={() => setSiteLink('stpaul.com')}
                     onChange={(event) => setSiteLink(event.target.value)}
                 />
                 <TextField type="text"
@@ -404,6 +411,7 @@ function AdminCollection() {
                     placeholder="Search Text"
                     label="Search Text"
                     value={search_text}
+                    onClick={() => setSearchText('St. Paul, Twin Cities')}
                     onChange={(event) => setSearchText(event.target.value)}
                 />
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>

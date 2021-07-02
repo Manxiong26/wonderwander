@@ -11,8 +11,9 @@ import { useHistory } from "react-router-dom";
 
 //material UI
 import {
-    Grid,
     Button,
+    Typography,
+    Divider,
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -22,36 +23,34 @@ function CollectionDetail({ userLat, userLng }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    
+
     useEffect(() => {
         dispatch({ type: 'FETCH_ART_DETAIL', payload: id })
-        console.log('In useEffect param: artwork detail', list);
     }, []);
 
     const { id } = useParams();
     const classes = useStyles();
     return (
-        <Grid container direction="column">
-            <Grid item xs={12} sm={12} lg={12}>
-                <div className={classes.pageMargin}>
-                    <Button
-                        onClick={() => {
-                            history.goBack();
-                        }}
-                    >
-                        <ArrowBackIosIcon />
-                    </Button>
-                    <ImageHeader list={list} />
-                    <ArtworkDescription />
-                    <ArtworkLinks userLat={userLat} userLng={userLng} list={list} />
-                    <h2 className={classes.red}>
-                        See. Say. Do.
-                    </h2>
-                    <SeePrompt />
-                    <SayPrompt />
-                    <DoPrompt />
-                </div>
-            </Grid>
-        </Grid>
+        <div className={classes.pageMargin}>
+            <Button
+                onClick={() => {
+                    history.goBack();
+                }}
+            >
+                <ArrowBackIosIcon />
+            </Button>
+            <ImageHeader list={list} />
+            <ArtworkDescription />
+            <ArtworkLinks userLat={userLat} userLng={userLng} list={list} />
+            <Typography variant="h6" className={classes.redCenter}>
+                See. Say. Do.
+                <Divider />
+            </Typography>
+            <SeePrompt />
+            <SayPrompt />
+            <DoPrompt />
+        </div>
     );
 }
 

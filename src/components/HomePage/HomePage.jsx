@@ -52,10 +52,11 @@ function HomePage() {
   };
   // pushes to adventure info page
   const toAdventure = (event, advDet) => {
-    console.log('Adventure', advDet);
+    // console.log('In toAdventure function...checking advDet: ', advDet);
     event.preventDefault();
+    dispatch({ type: 'FETCH_DO_ADVENTURE', payload: advDet.id })
     history.push(`/adventure/${advDet.id}`);
-    console.log('clicking to adventure');
+    // console.log('clicking to adventure');
   };
   // function to render collection location text
   const collectionText = (collection) => (
@@ -68,7 +69,7 @@ function HomePage() {
       <Grid container direction="column">
         <Grid item xs={12} sm={12} lg={12}>
           <div className={classes.pageMargin}>
-            <Typography variant="h5" className={classes.title}>
+            <Typography variant="h4" className={classes.title}>
               Art of the Day
             </Typography>
             <p key={randomArt.id}>
@@ -77,12 +78,12 @@ function HomePage() {
             <Typography variant="body2" className={classes.imageInfo}>
               "{randomArt.name}" by {randomArt.artist_name}
             </Typography>
-            <h4>
+            <Typography variant="h6" className={classes.red}>
               Find Local Art:
               <Link to="/collection" className={classes.nextBtn}>
                 Browse All
               </Link>
-            </h4>
+            </Typography>
             <div>
               <List>
                 {collectionThreeList.map((collection, i) => {
@@ -120,7 +121,9 @@ function HomePage() {
               </Button>
             </div>
             <div>
-              <h4>Other Art Adventures:</h4>
+            <Typography variant="h6" className={classes.red}>
+              Other Art Adventures:
+              </Typography>
               <List>
                 {adventure.map((advDet, i) => {
                   return (

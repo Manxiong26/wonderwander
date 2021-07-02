@@ -1,10 +1,9 @@
-import { CardActionArea, IconButton, Typography } from "@material-ui/core";
 import {
-    Grid,
     ListItem,
     ListItemText,
     CardContent,
     CardMedia,
+    Typography,
 } from "@material-ui/core";
 import { Card } from "@material-ui/core";
 import React, { useEffect } from "react";
@@ -32,39 +31,34 @@ function AdventureSee() {
 
     return (
         <>
-            <Grid container direction="column">
-                <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
-                        <Card className={classes.card}>
-                            <CardContent>
-                                <CardMedia
-                                    className={classes.smallImg}
-                                    component="img"
-                                    image={list.image}
-                                />
-                                <div>
-                                    <ArrowForwardIosIcon
-                                        className={classes.nextBtn}
-                                        onClick={(event) => history.push(`/adventure/see/${id}`)} />
-                                    {seelist.map((seel, i) => {
-                                        return (
-                                            <CardContent>
-                                                <ListItem>
-                                                    <ListItemText>
-                                                        <Typography className={classes.content} key={i}>
-                                                            {seel.prompts}
-                                                        </Typography>
-                                                    </ListItemText>
-                                                </ListItem>
-                                            </CardContent>
-                                        )
-                                    })}
-                                </div>
-                            </CardContent>
-                        </Card>
+
+            <Card className={classes.card}>
+                <CardContent>
+                    <CardMedia
+                        className={classes.smallImg}
+                        component="img"
+                        image={list.image}
+                    />
+                    <div>
+                        <ArrowForwardIosIcon
+                            className={classes.nextBtn}
+                            onClick={(event) => history.push(`/adventure/see/${id}`)} />
+                        {seelist.map((seel, i) => {
+                            return (
+                                <CardContent>
+                                    <ListItem>
+                                        <ListItemText>
+                                            <Typography className={classes.content} key={i}>
+                                                {seel.prompts}
+                                            </Typography>
+                                        </ListItemText>
+                                    </ListItem>
+                                </CardContent>
+                            )
+                        })}
                     </div>
-                </Grid>
-            </Grid>
+                </CardContent>
+            </Card>
         </>
     );
 }

@@ -45,7 +45,7 @@ function WelcomePage1() {
 
     return (
         <>
-            <div className={classes.pageMargin}>
+            <div className={classes.welcomeMargin}>
                 <Button
                     className={classes.backBtn}
                     onClick={logIn}>Login</Button>
@@ -60,7 +60,7 @@ function WelcomePage1() {
             </div>
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
+                    <div className={classes.welcomeMargin}>
                         {quote.quote === undefined ?
                             '' : (
                                 <>
@@ -80,7 +80,6 @@ function WelcomePage1() {
                     <div>
                         <ListItem>
                             <img className={classes.image} src={art.image} />
-
                         </ListItem>
                     </div>
                 </Grid>

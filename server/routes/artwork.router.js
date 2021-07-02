@@ -6,7 +6,7 @@ const router = express.Router();
 // where published = true
 router.get('/', (req, res) => {
     const query = `SELECT artwork.id, artwork.name as title, artwork.year, artwork.lat, artwork.lng, artwork.image, artwork.description, artwork.vid_link, artwork.vid_description, artist.name, artist.bio, artist.site_link FROM artwork
-    JOIN artist ON artist.id=artwork.id
+    JOIN artist ON artist.id=artwork.artist_id
     WHERE artwork.published=true AND artist.published=true;`;
 
     pool.query(query)

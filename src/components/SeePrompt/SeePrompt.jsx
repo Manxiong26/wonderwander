@@ -36,10 +36,8 @@ function SeePrompt() {
     return (
         // {list && list.name && editMode?}
         <>
-            <Divider />
-            <Grid container direction="column">
-                <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
+
+
                         {seelist.map((seel, i) => {
                             return (
                                 <Card className={classes.card}>
@@ -67,9 +65,6 @@ function SeePrompt() {
                                 </Card>
                             )
                         })}
-                    </div>
-                </Grid>
-            </Grid>
         </>
     );
 }

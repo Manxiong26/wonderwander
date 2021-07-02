@@ -23,24 +23,6 @@ import axios from "axios";
 import env from "react-dotenv";
 import { useHistory } from "react-router-dom";
 
-// const useStyles = makeStyles((theme) => ({
-//   mapContainer: {
-//     marginTop: "auto",
-//     marginBottom: "auto",
-//   },
-//   toggle: {
-//     display: "flex",
-//     justifyContent: "flex-end",
-//     marginRight: "5%",
-//     marginBottom: "1%",
-//   },
-//   thumbnail: {
-//     width: '60px',
-//     height: '60px',
-//     marginRight: 10,
-//     border: "1px solid black"
-//   }
-// }));
 
 const MapView = ({ userLat, userLng }) => {
   useEffect(() => {
@@ -79,7 +61,7 @@ const MapView = ({ userLat, userLng }) => {
       dist = (dist * 180) / Math.PI;
       dist = dist * 60 * 1.1515;
 
-      let miles = dist.toFixed(1);
+      let miles = Math.round(dist.toFixed(1));
       return miles + " mi";
     }
   }
@@ -157,6 +139,8 @@ const MapView = ({ userLat, userLng }) => {
                         secondary={item.name}
                       />
                       <ListItemText
+                        
+                        inset="true"
                         secondary={distance(
                           Number(item.lat),
                           Number(item.lng),

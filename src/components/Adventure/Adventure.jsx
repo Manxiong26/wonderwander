@@ -3,7 +3,6 @@ import {
     Divider,
     Button,
     ListItemText,
-    Grid
 } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,42 +21,39 @@ function Adventure() {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ADVENTURE', payload: id })
-        console.log('In useEffect param: adventure: ', list);
+        console.log('Adventure Detail item: ', list);
     }, []);
 
     const { id } = useParams();
     const classes = useStyles();
     return (
         <>
-            <Grid container direction="column">
-                <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
-                        <Button
-                            onClick={() => {
-                                history.goBack();
-                            }}
-                        >
-                            <ArrowBackIosIcon />
-                        </Button>
-                        <AdventureHeader list={list} />
-                        <ListItemText
-                            className={classes.center}
-                            primary={list.description}
-                        />
-                        <h2 className={classes.redCenter}>
-                            See. Do.
-                        </h2>
-                        <Divider />
-                        <AdventureSee />
-                        <AdventureDo />
-                        {/* <Typography variant="h6" className={classes.red}>
-                            Description of the Adventure
-                        </Typography> */}
-                        <Divider />
-                        
-                    </div>
-                </Grid>
-            </Grid>
+            <div className={classes.pageMargin}>
+                <Button
+                    onClick={() => {
+                        history.goBack();
+                    }}
+                >
+                    <ArrowBackIosIcon />
+                </Button>
+                <AdventureHeader list={list} />
+                <Typography variant="h6" className={classes.redCenter}>
+                    Description of the Adventure
+                    <Divider />
+                </Typography>
+
+                <ListItemText
+                    className={classes.center}
+                    primary={list.description}
+                />
+                <Divider />
+                <Typography variant="h6" className={classes.redCenter}>
+                    See. Do.
+                    <Divider />
+                </Typography>
+                <AdventureSee />
+                <AdventureDo />
+            </div>
         </>
     );
 }
