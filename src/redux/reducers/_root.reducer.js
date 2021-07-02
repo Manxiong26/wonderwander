@@ -38,7 +38,10 @@ import seesaydoReducer from './seesaydo.reducer';
 
 import artistDetail from './artist.reducer';
 import adventureReducer from './adventure.reducer';
+
+import imageUrlReducer from './imageUrl.reducer';
 import voteNumber from './voteNumber.reducer';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -83,6 +86,7 @@ const rootReducer = combineReducers({
   seesaydoReducer,
   adventureReducer,
   adventureSeeDo,
+  imageUrlReducer,
   addVote,
   voteNumber,
 });

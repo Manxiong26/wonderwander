@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from "../Map/Map";
+import { useHistory } from 'react-router-dom';
 
 //matierl UI
 import {
@@ -37,14 +38,9 @@ function SponsorDetail({ userLat, userLng }) {
     };
 
 
-    const BalloonMarker = () => {
-        <div className="mapMarker" onClick={toArt}></div>
-    }
-
-    const UserLocation = () => <div className="userMarker"></div>;
-
-    const toArt = () => {
-        console.log('Click');
+    const toArt = (event, art) => {
+        event.preventDefault();
+        history.push(`/artworkdetail/${art.id}`)
     };
 
     const { id } = useParams();
@@ -55,6 +51,7 @@ function SponsorDetail({ userLat, userLng }) {
     useEffect(() => {
         dispatch({ type: 'FETCH_SPONSOR_ART', payload: id })
     }, [])
+    
 
     return (
         <>

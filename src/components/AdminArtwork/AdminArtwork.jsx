@@ -1,8 +1,10 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import AdminNav from "../AdminNav/AdminNav";
-
+import ImageUpload from '../ImageUpload/ImageUpload';
+      
 import {
   Button,
   Typography,
@@ -841,10 +843,18 @@ function AdminArtwork() {
                       variant="outlined"
                       value="Submit"
                     >
-                      Submit
-                    </Button>
-                  </form>
-                </div>
+                    <option value="Default">Collection</option>
+                    {collectionList.map((collection) => {
+                        return (<option key={collection.id} value={collection.id}>{collection.name}</option>);
+                    })}
+                </select>
+
+                <ImageUpload />
+
+                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+              </form>
+              </div>
+
               </Card>
             </Grid>
 
