@@ -27,7 +27,7 @@ function WelcomePage3() {
 
     return (
         <>
-            <div className={classes.pageMargin}>
+            <div className={classes.welcomeMargin}>
                 <ArrowBackIosIcon
                     onClick={goBack}
                     className={classes.backBtn}
@@ -43,7 +43,7 @@ function WelcomePage3() {
             </div>
             <Grid container direction="column">
                 <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
+                    <div className={classes.welcomeMargin}>
                         <Typography
                             variant="h3"
                             className={classes.red}

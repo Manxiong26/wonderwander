@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './Collection.css'
 
@@ -10,8 +10,6 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Grid,
-  Box,
   Button,
   Divider,
   Typography,
@@ -61,7 +59,6 @@ function Collection() {
         <List>
           {/* <div className="collectionList"> */}
           {collectionList.map(collection => {
-
             return (
               <>
                 <Divider />

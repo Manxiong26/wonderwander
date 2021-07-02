@@ -57,7 +57,6 @@ function AdventureDo() {
                                             </CardContent>
                                         )
                                     })}
-
                                 </div>
                             </CardContent>
                         </Card>
