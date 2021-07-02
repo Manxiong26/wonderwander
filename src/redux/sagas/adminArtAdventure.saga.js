@@ -45,6 +45,17 @@ function* updateArtAdventure(action) {
     }
 }
 
+function* updatePublish(action) {
+  console.log('in update art adventure publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/art-adventure/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_ADVENTURE_LIST'}); 
+    yield put({type: 'CLEAR_ADVENTURE'});
+  } catch (error) {
+    console.log('Error updating publish: ', error);
+  }
+}
+
 function* deleteArtAdventure(action) {
     try{
         yield axios.delete(`/api/admin/art-adventure/${action.payload}`); 
@@ -79,9 +90,29 @@ function* addSee(action) {
   try{
       console.log('New See for Adventure:', action.payload);
       yield axios.post('/api/admin/art-adventure/see', action.payload);
-      yield put({type: 'FETCH_SEE_LIST' }); //Double check if this needs payload
+      yield put({type: 'FETCH_SEE_LIST' }); 
   } catch (error) {
       console.log(`Error adding 'See' to adventure: `, error);
+  }
+}
+
+function* updatePublishSee(action) {
+  console.log('in update See publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/art-adventure/see/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_SEE_LIST'}); 
+    yield put({type: 'CLEAR_SEE'});
+  } catch (error) {
+    console.log('Error updating see publish: ', error);
+  }
+}
+
+function* deleteSee(action) {
+  try{
+      yield axios.delete(`/api/admin/art-adventure/see/${action.payload}`); 
+      yield put({type: 'FETCH_SEE_LIST'}); 
+  } catch (error) {
+      console.log('Error deleting see: ', error);
   }
 }
 
@@ -95,15 +126,44 @@ function* getDoList(action) {
   }
 }
 
-// TODO - Add getDo function for specific do
+function* getDo(action) {
+  try {
+    const doo = yield axios.get(`/api/admin/art-adventure/do/${action.payload}`); 
+    console.log('get one specific DO for adventure:', doo.data[0]);
+    yield put({ type: 'SET_DO_INFO', payload: doo.data[0] });
+    
+  } catch (error) {
+    console.log('Art adventure DO get request failed: ', error);
+  }
+}
 
 function* addDo(action) {
   try{
       console.log('New Do for Adventure:', action.payload);
       yield axios.post('/api/admin/art-adventure/do', action.payload);
-      yield put({type: 'FETCH_DO_LIST' }); //Double check if this needs payload
+      yield put({type: 'FETCH_DO_LIST' }); 
   } catch (error) {
       console.log(`Error adding 'Do' to adventure: `, error);
+  }
+}
+
+function* updatePublishDo(action) {
+  console.log('in update do publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/art-adventure/do/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_DO_LIST'}); 
+    yield put({type: 'CLEAR_DO'});
+  } catch (error) {
+    console.log('Error updating Do publish: ', error);
+  }
+}
+
+function* deleteDo(action) {
+  try{
+      yield axios.delete(`/api/admin/art-adventure/do/${action.payload}`); 
+      yield put({type: 'FETCH_DO_LIST'}); 
+  } catch (error) {
+      console.log('Error deleting do: ', error);
   }
 }
 
@@ -112,12 +172,18 @@ function* adminArtAdventureSaga() {
   yield takeEvery('FETCH_ADVENTURE', getArtAdventure);
   yield takeEvery('ADD_ADVENTURE', addArtAdventure);
   yield takeEvery('UPDATE_ADVENTURE_INFO', updateArtAdventure); 
+  yield takeEvery('UPDATE_PUBLISH_ADVENTURE', updatePublish); 
   yield takeEvery('DELETE_ADVENTURE', deleteArtAdventure);
   yield takeEvery('FETCH_SEE_LIST', getSeeList);
   yield takeEvery('FETCH_SEE', getSee);
   yield takeEvery('ADD_SEE', addSee);
+  yield takeEvery('UPDATE_PUBLISH_SEE', updatePublishSee);
+  yield takeEvery('DELETE_SEE', deleteSee);
   yield takeEvery('FETCH_DO_LIST', getDoList);
+  yield takeEvery('FETCH_DO', getDo);
   yield takeEvery('ADD_DO', addDo);
+  yield takeEvery('UPDATE_PUBLISH_DO', updatePublishDo);
+  yield takeEvery('DELETE_DO', deleteDo);
 }
 
 export default adminArtAdventureSaga;

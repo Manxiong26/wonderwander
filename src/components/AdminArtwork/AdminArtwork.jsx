@@ -69,9 +69,8 @@ function AdminArtwork() {
 
   const artistList = useSelector((store) => store.adminArtistListReducer);
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
-  const collectionList = useSelector(
-    (store) => store.adminCollectionListReducer
-  );
+  const collectionList = useSelector((store) => store.adminCollectionListReducer);
+  
   const seeList = useSelector((store) => store.adminSeeListArtworkReducer);
   console.log("seeList reducer: ", seeList);
   const see = useSelector((store) => store.adminSeeInfoReducer);
@@ -290,10 +289,8 @@ function AdminArtwork() {
     };
     console.log("Adding see object: ", newSee);
 
-    //TODO - double check this //dispatch to artAdventure saga
+    //dispatch to artwork saga
     dispatch({ type: "ADD_SEE_ARTWORK", payload: newSee });
-
-    //updates see list on DOM (where/are we listing the see prompts ?)
 
     //alert successful post
     swal({
@@ -320,10 +317,8 @@ function AdminArtwork() {
     };
     console.log("Adding do object: ", newDo);
 
-    // TODO - Double check this //dispatch to artAdventure saga
+    //dispatch to artwork saga
     dispatch({ type: "ADD_DO_ARTWORK", payload: newDo });
-
-    //updates do list on DOM (where/are we listing the do prompts ?)
 
     //alert successful post
     swal({
@@ -336,6 +331,22 @@ function AdminArtwork() {
     //clears input fields
     setDoPrompts("");
     setArtworkId("");
+  };
+
+  //delete see
+  const deleteSee = (event, item) => {
+    console.log("deleting see:", item.id);
+
+    //dispatch to artwork saga w see id
+    dispatch({ type: "DELETE_SEE_ARTWORK", payload: item.id });
+  };
+
+  //delete do
+  const deleteDo = (event, item) => {
+    console.log("deleting do:", item.id);
+
+    //dispatch to artwork saga w see id
+    dispatch({ type: "DELETE_DO_ARTWORK", payload: item.id });
   };
 
   //changes db boolean to true which "publishes" item on public facing pages
@@ -372,6 +383,78 @@ function AdminArtwork() {
     //sends updated artwork info
     // (published boolean true/false) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_ARTWORK", payload: pubObject });
+  };
+
+  //changes db boolean to true which "publishes" item on public facing pages
+  const publishSee = (event, item) => {
+    console.log("clicking publish for See = ", item);
+
+    //sets specific artwork in artwork reducer
+    dispatch({ type: "SET_SEE_INFO_ARTWORK", payload: item });
+
+    let pubObject;
+
+    if (item.published === true) {
+      //changes item boolean to true
+      pubObject = {
+        id: item.id,
+        published: false,
+      };
+      //swal success indicator
+      swal({
+        text: `This 'See' is now unpublished!`,
+        icon: "success",
+      });
+    } else {
+      pubObject = {
+        id: item.id,
+        published: true,
+      };
+      //swal success indicator
+      swal({
+        text: `This 'See' has been published!`,
+        icon: "success",
+      });
+    }
+    //sends updated see info
+    // (published boolean true/false) to artwork saga
+    dispatch({ type: "UPDATE_PUBLISH_SEE_ARTWORK", payload: pubObject });
+  };
+
+  //changes db boolean to true which "publishes" item on public facing pages
+  const publishDo = (event, item) => {
+    console.log("clicking publish for Do = ", item);
+
+    //sets specific artwork in artwork reducer
+    dispatch({ type: "SET_DO_INFO_ARTWORK", payload: item });
+
+    let pubObject;
+
+    if (item.published === true) {
+      //changes item boolean to true
+      pubObject = {
+        id: item.id,
+        published: false,
+      };
+      //swal success indicator
+      swal({
+        text: `This 'Do' is now unpublished!`,
+        icon: "success",
+      });
+    } else {
+      pubObject = {
+        id: item.id,
+        published: true,
+      };
+      //swal success indicator
+      swal({
+        text: `This 'Do' has been published!`,
+        icon: "success",
+      });
+    }
+    //sends updated do info
+    // (published boolean true/false) to artwork saga
+    dispatch({ type: "UPDATE_PUBLISH_DO_ARTWORK", payload: pubObject });
   };
 
   const [open, setOpen] = useState(false);
@@ -577,7 +660,8 @@ function AdminArtwork() {
                                 {item.prompts}
                               </Typography>
                             </TableCell>
-                            <TableCell align="right">
+                            {/* Let's change this to publish, rather than edit */}
+                            {/* <TableCell align="right">
                               <IconButton>
                                 <EditIcon
                                   className={classes.btn}
@@ -585,6 +669,21 @@ function AdminArtwork() {
                                   onClick={modalToggle}
                                 />
                               </IconButton>
+                            </TableCell> */}
+                            <TableCell>
+                                <FormControlLabel
+                                control={
+                                    <Switch
+                                    size="small"
+                                    checked={item.published}
+                                    onChange={(event) => publishSee(event, item)}
+                                    name="publish"
+                                    color="primary"
+                                    />
+                                }
+                                labelPlacement="top"
+                                label="Publish"
+                                />
                             </TableCell>
                             <TableCell align="right">
                               <IconButton>
@@ -592,9 +691,7 @@ function AdminArtwork() {
                                   color="primary"
                                   className={classes.btn}
                                   variant="outlined"
-                                  onClick={() =>
-                                    alert("CREATE A FUNCTION FOR ME!!!")
-                                  }
+                                  onClick={(event) => deleteSee(event, item)}
                                 />
                               </IconButton>
                             </TableCell>
@@ -613,8 +710,12 @@ function AdminArtwork() {
             {/* EDIT DO CARD */}
 
             <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
-              <Card elevation={6} className={classes.cardForm}>
-                <div className={classes.cardContent}>
+              <TableContainer
+                elevation={6}
+                component={Card}
+                className={classes.cardTable}
+              >
+                <div className={classes.tableContent}>
                   <Typography
                     className={classes.title}
                     align="center"
@@ -622,9 +723,68 @@ function AdminArtwork() {
                   >
                     Edit Do
                   </Typography>
-                  <form className={classes.form}></form>
+                  <form className={classes.form}>
+                    <Table className={classes.table}>
+                      <TableBody>
+                        {doList.map((item, i) => (
+                          <TableRow alignItems="flex-start" key={i}>
+                            {/* <TableCell className={classes.thumbnailContainer}>
+                              <img
+                                src={item.link}
+                                alt="See Prompt Image"
+                                className={classes.thumbnail}
+                              />
+                            </TableCell> */}
+                            <TableCell>
+                              <Typography noWrap="true" variant="body1">
+                                {item.prompts}
+                              </Typography>
+                            </TableCell>
+                            {/* Let's change this to publish, rather than edit */}
+                            {/* <TableCell align="right">
+                              <IconButton>
+                                <EditIcon
+                                  className={classes.btn}
+                                  variant="outlined"
+                                  onClick={modalToggle}
+                                />
+                              </IconButton>
+                            </TableCell> */}
+                            <TableCell>
+                                <FormControlLabel
+                                control={
+                                    <Switch
+                                    size="small"
+                                    checked={item.published}
+                                    onChange={(event) => publishDo(event, item)}
+                                    name="publish"
+                                    color="primary"
+                                    />
+                                }
+                                labelPlacement="top"
+                                label="Publish"
+                                />
+                            </TableCell>
+                            <TableCell align="right">
+                              <IconButton>
+                                <DeleteIcon
+                                  color="primary"
+                                  className={classes.btn}
+                                  variant="outlined"
+                                  onClick={(event) => deleteDo(event, item)}
+                                />
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </form>
                 </div>
-              </Card>
+              </TableContainer>
+              <Modal open={open} onClose={modalToggle}>
+                {body}
+              </Modal>
             </Grid>
           </>
         ) : (
@@ -718,6 +878,7 @@ function AdminArtwork() {
                         setVidDescription(event.target.value)
                       }
                     />
+                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artist options dynamically */}
                     <select
                       type="text"
@@ -732,6 +893,7 @@ function AdminArtwork() {
                         );
                       })}
                     </select>
+                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates sponsor options dynamically */}
                     <select
                       type="text"
@@ -746,6 +908,7 @@ function AdminArtwork() {
                         );
                       })}
                     </select>
+                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates collection options dynamically */}
                     <select
                       type="text"
@@ -786,6 +949,7 @@ function AdminArtwork() {
                       value={link}
                       onChange={(event) => setLink(event.target.value)}
                     />
+                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artwork options dynamically */}
                     <select
                       type="text"
@@ -820,6 +984,7 @@ function AdminArtwork() {
                       value={do_prompts}
                       onChange={(event) => setDoPrompts(event.target.value)}
                     />
+                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artwork options dynamically */}
                     <select
                       type="text"
@@ -924,8 +1089,6 @@ function AdminArtwork() {
       </Grid>
     </div>
 
-    //   {/* Artwork List. Always shows. */}
-    //   {/* Edit clickability renders a specific artwork's details in the edit form */}
   );
 }
 

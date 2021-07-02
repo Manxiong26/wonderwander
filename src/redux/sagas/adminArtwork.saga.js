@@ -96,6 +96,26 @@ function* addSee(action) {
   }
 }
 
+function* updatePublishSee(action) {
+  console.log('in update See publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/artwork/see/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_SEE_LIST_ARTWORK'}); 
+    yield put({type: 'CLEAR_SEE_ARTWORK'});
+  } catch (error) {
+    console.log('Error updating see publish: ', error);
+  }
+}
+
+function* deleteSee(action) {
+  try{
+      yield axios.delete(`/api/admin/artwork/see/${action.payload}`); 
+      yield put({type: 'FETCH_SEE_LIST_ARTWORK'}); 
+  } catch (error) {
+      console.log('Error deleting see: ', error);
+  }
+}
+
 function* getDoList(action) {
   try {
     const dos = yield axios.get(`/api/admin/artwork/${action.payload}/do`); 
@@ -106,7 +126,16 @@ function* getDoList(action) {
   }
 }
 
-// TODO - Add getDo function for specific do
+function* getDo(action) {
+  try {
+    const doo = yield axios.get(`/api/admin/artwork/do/${action.payload}`); 
+    console.log('get one specific DO for artwork:', doo.data[0]);
+    yield put({ type: 'SET_DO_INFO_ARTWORK', payload: doo.data[0] });
+    
+  } catch (error) {
+    console.log('Artwork DO get request failed: ', error);
+  }
+}
 
 function* addDo(action) {
   try{
@@ -115,6 +144,26 @@ function* addDo(action) {
       yield put({type: 'FETCH_DO_LIST_ARTWORK' }); //Double check if this needs payload
   } catch (error) {
       console.log(`Error adding 'Do' to adventure: `, error);
+  }
+}
+
+function* updatePublishDo(action) {
+  console.log('in update do publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/artwork/do/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_DO_LIST_ARTWORK'}); 
+    yield put({type: 'CLEAR_DO_ARTWORK'});
+  } catch (error) {
+    console.log('Error updating Do publish: ', error);
+  }
+}
+
+function* deleteDo(action) {
+  try{
+      yield axios.delete(`/api/admin/artwork/do/${action.payload}`); 
+      yield put({type: 'FETCH_DO_LIST_ARTWORK'}); 
+  } catch (error) {
+      console.log('Error deleting do: ', error);
   }
 }
 
@@ -128,8 +177,13 @@ function* adminArtworkSaga() {
   yield takeEvery('FETCH_SEE_LIST_ARTWORK', getSeeList);
   yield takeEvery('FETCH_SEE_ARTWORK', getSee);
   yield takeEvery('ADD_SEE_ARTWORK', addSee);
+  yield takeEvery('UPDATE_PUBLISH_SEE_ARTWORK', updatePublishSee);
+  yield takeEvery('DELETE_SEE_ARTWORK', deleteSee);
   yield takeEvery('FETCH_DO_LIST_ARTWORK', getDoList);
+  yield takeEvery('FETCH_DO_ARTWORK', getDo);
   yield takeEvery('ADD_DO_ARTWORK', addDo);
+  yield takeEvery('UPDATE_PUBLISH_DO_ARTWORK', updatePublishDo);
+  yield takeEvery('DELETE_DO_ARTWORK', deleteDo);
 }
 
 export default adminArtworkSaga;
