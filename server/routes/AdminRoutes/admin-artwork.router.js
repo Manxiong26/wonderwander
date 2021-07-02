@@ -6,8 +6,7 @@ const pool = require('../../modules/pool');
 const router = express.Router();
 
 //gets all artwork from DB to display on admin artwork page as li's
-router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  //rejectUnauthenticated,
-
+router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     //returns all artwork info to reducer
     const query = `SELECT * FROM "artwork" ORDER BY "name" ASC;`;
     pool.query(query)
@@ -22,7 +21,7 @@ router.get('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  //reject
 });//end artwork GET route
 
 //gets one specific artwork from DB to display on admin artwork page for editing
-router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  //rejectUnauthenticated,
+router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
     console.log(`in one artwork's info get, id:`, req.params.id);
     
     //returns a specific artwork's info to reducer
@@ -71,8 +70,7 @@ router.get('/:id/do', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 });//end GET all DOs for a specific artwork
 
 //adds new artwork to the DB from admin artwork page
-router.post('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  //rejectUnauthenticated,
-
+router.post('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     let artwork = req.body;
     
     const query  = `INSERT INTO "artwork" ("name", "year", "lat", "long", "image", 
@@ -132,7 +130,7 @@ router.post('/do', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 });//end add new 'Do' for artwork POST route
 
 //PUT route to edit an artwork's information 
-router.put('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { //rejectUnauthenticated,
+router.put('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
     console.log('put id:', req.params.id);
     console.log('put update body:', req.body);
 
@@ -173,9 +171,53 @@ router.put('/publish/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => 
     })
   
 });//end artwork PUT route
+
+//PUT route to publish an artwork's SEE information 
+router.put('/see/publish/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let see = req.body;
+    
+    const query = `UPDATE "see" SET published=$2 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id, see.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating SEE publish in server:', error);
+        res.sendStatus(500)
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end publish SEE PUT route
+
+//PUT route to publish an artwork's information 
+router.put('/do/publish/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let doo = req.body;
+    
+    const query = `UPDATE "do" SET published=$2 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id, doo.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating DO publish in server:', error);
+        res.sendStatus(500)
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end publish DO PUT route
   
 //DELETE route to delete an artwork
-router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { //rejectUnauthenticated,
+router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
   
     const query = `DELETE FROM "artwork" WHERE id=$1;`;
     
@@ -188,5 +230,41 @@ router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { //r
     })
   
 });//end artwork DELETE route
+
+//TODO - delete route for SEE artwork
+router.delete('/see/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
+  
+    const query = `DELETE FROM "see" WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id]) 
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in delete', error);
+        res.sendStatus(500);
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end SEE DELETE route
+
+//TODO - delete route for DO artwork
+router.delete('/do/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
+  
+    const query = `DELETE FROM "do" WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id]) 
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in delete', error);
+        res.sendStatus(500);
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end DO DELETE route
 
 module.exports = router;

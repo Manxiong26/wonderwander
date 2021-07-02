@@ -242,6 +242,130 @@ function AdminArtAdventure() {
         setDoPrompts('');
         setAdventureId('');
     }
+
+    //delete see
+    const deleteSee = (event, item) => {
+        console.log("deleting see:", item.id);
+
+        //dispatch to artwork saga w see id
+        dispatch({ type: "DELETE_SEE", payload: item.id });
+    };
+
+    //delete do
+    const deleteDo = (event, item) => {
+        console.log("deleting do:", item.id);
+
+        //dispatch to artwork saga w see id
+        dispatch({ type: "DELETE_DO", payload: item.id });
+    };
+
+    //changes db boolean to true which "publishes" item on public facing pages
+    const publish = (event, item) => {
+        console.log("clicking publish for Art Adventure = ", item);
+
+        //sets specific adventure in artAdventure reducer
+        dispatch({ type: "SET_ADVENTURE_INFO", payload: item });
+
+        let pubObject;
+
+        if (item.published === true) {
+        //changes item boolean to true
+        pubObject = {
+            id: item.id,
+            published: false,
+        };
+        //swal success indicator
+        swal({
+            text: "This adventure's information is now unpublished!",
+            icon: "success",
+        });
+        } else {
+        pubObject = {
+            id: item.id,
+            published: true,
+        };
+        //swal success indicator
+        swal({
+            text: "This adventure's information has been published!",
+            icon: "success",
+        });
+        }
+        //sends updated art adventure info
+        // (published boolean true/false) to artAdventure saga
+        dispatch({ type: "UPDATE_PUBLISH_ADVENTURE", payload: pubObject });
+    };
+
+    //changes db boolean to true which "publishes" item on public facing pages
+    const publishSee = (event, item) => {
+        console.log("clicking publish for See = ", item);
+
+        //sets specific see in See reducer
+        dispatch({ type: "SET_SEE_INFO", payload: item });
+
+        let pubObject;
+
+        if (item.published === true) {
+        //changes item boolean to true
+        pubObject = {
+            id: item.id,
+            published: false,
+        };
+        //swal success indicator
+        swal({
+            text: `This 'See' is now unpublished!`,
+            icon: "success",
+        });
+        } else {
+        pubObject = {
+            id: item.id,
+            published: true,
+        };
+        //swal success indicator
+        swal({
+            text: `This 'See' has been published!`,
+            icon: "success",
+        });
+        }
+        //sends updated see info
+        // (published boolean true/false) to art adventure saga
+        dispatch({ type: "UPDATE_PUBLISH_SEE", payload: pubObject });
+    };
+
+    //changes db boolean to true which "publishes" item on public facing pages
+    const publishDo = (event, item) => {
+        console.log("clicking publish for Do = ", item);
+
+        //sets specific do in Do reducer
+        dispatch({ type: "SET_DO_INFO", payload: item });
+
+        let pubObject;
+
+        if (item.published === true) {
+        //changes item boolean to true
+        pubObject = {
+            id: item.id,
+            published: false,
+        };
+        //swal success indicator
+        swal({
+            text: `This 'Do' is now unpublished!`,
+            icon: "success",
+        });
+        } else {
+        pubObject = {
+            id: item.id,
+            published: true,
+        };
+        //swal success indicator
+        swal({
+            text: `This 'Do' has been published!`,
+            icon: "success",
+        });
+        }
+        //sends updated do info
+        // (published boolean true/false) to art adventure saga
+        dispatch({ type: "UPDATE_PUBLISH_DO", payload: pubObject });
+    };
   
     return (        
       <div>

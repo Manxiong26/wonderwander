@@ -150,6 +150,72 @@ router.put('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
   
 });//end art adventure PUT route
+
+//PUT route to publish an art adventure's information 
+router.put('/publish/:id', rejectUnauthenticated, (req, res) => { 
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let artAdventure = req.body;
+    
+    const query = `UPDATE "activities" SET published=$2 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id, artAdventure.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating art adventure publish in server:', error);
+        res.sendStatus(500)
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end artwork PUT route
+
+//PUT route to publish an art adventure's SEE information 
+router.put('/see/publish/:id', rejectUnauthenticated, (req, res) => { 
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let see = req.body;
+    
+    const query = `UPDATE "see" SET published=$2 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id, see.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating SEE publish in server:', error);
+        res.sendStatus(500)
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end publish SEE PUT route
+
+//PUT route to publish an art adventure's DO information 
+router.put('/do/publish/:id', rejectUnauthenticated, (req, res) => { 
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let doo = req.body;
+    
+    const query = `UPDATE "do" SET published=$2 WHERE id=$1;`;
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id, doo.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating DO publish in server:', error);
+        res.sendStatus(500)
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end publish DO PUT route
   
 //DELETE route to delete an art adventure
 router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
