@@ -129,6 +129,9 @@ function HomePage() {
                     <>
                       <Divider />
                       <ListItem key={i}>
+                      <ListItemAvatar>
+                          <Avatar className={classes.thumbnail} src={advDet.image} />
+                        </ListItemAvatar>
                         <ListItemText>{advDet.title}</ListItemText>
                         <IconButton >
                           <ArrowForwardIosIcon
