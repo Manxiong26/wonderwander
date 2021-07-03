@@ -1007,16 +1007,18 @@ function AdminArtwork() {
                       name="submit"
                       variant="outlined"
                       value="Submit"
-                    >
-                    <option value="Default">Collection</option>
+                    > 
+                        Submit
+                    </Button>
+                    {/* <option value="Default">Collection</option>
                     {collectionList.map((collection) => {
                         return (<option key={collection.id} value={collection.id}>{collection.name}</option>);
-                    })}
-                </select>
+                    })} */}
+                {/* </select> */}
 
                 <ImageUpload />
 
-                <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+                {/* <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button> */}
               </form>
               </div>
 
