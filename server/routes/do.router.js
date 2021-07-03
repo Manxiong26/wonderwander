@@ -4,16 +4,15 @@ const pool = require('../modules/pool');
 
 //need to add the random nature to this part, currently just grabs the first quote
 router.get('/:id', (req, res) => {
-    console.log('Start of the do page', req.params);
+    console.log('Inside GET of seesaydo.router. Checking artwork id: ', req.params);
     const queryText = `
-    SELECT "do".id, "do".prompts, "do".image FROM "do" WHERE "do".artwork_id = $1;`
+    SELECT * FROM "do" WHERE "do".artwork_id = $1 AND published='true';`
     pool.query(queryText, [req.params.id])
         .then(result => {
-            console.log('END OF THE DO PAGE HELLO', req.params);
             res.send(result.rows);
         })
         .catch(error => {
-            console.log('Error with getting random quote', error);
+            console.log('Error in GET route inside seesaydo.router: ', error);
             res.sendStatus(500);
         })
 })

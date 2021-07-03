@@ -159,6 +159,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     paddingRight: '10%',
     paddingLeft: '10%',
+    overflow: 'auto'
   },
   btnGroup: {
     display: 'flex',

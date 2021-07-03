@@ -3,7 +3,8 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 
-// SEE PAGE ROUTER
+// SEE PAGE GET ROUTE to grab See prompt 
+// based on specific artwork ID
 router.get('/:id', (req, res) => {
     console.log('Start of the see page', req.params);
     const queryText = `

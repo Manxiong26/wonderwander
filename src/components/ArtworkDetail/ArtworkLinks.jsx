@@ -35,7 +35,7 @@ function CollectionLinks({ list, userLat, userLng }) {
                                 primary={'Collection'}
                             />
                             <IconButton>
-                                <ArrowForwardIosIcon onClick={() => history.push('/collection')} />
+                                <ArrowForwardIosIcon onClick={() => history.push(`/collectionDetail/${list.collection_id}`)} />
                             </IconButton>
                         </ListItem>
                         <Divider />
