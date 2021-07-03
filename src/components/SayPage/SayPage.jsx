@@ -160,14 +160,14 @@ const useStyles = makeStyles((theme) => ({
           :
           (<Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={2}>
-          {totalVote.map((lists, i) => (
+          {totalVote.map((item, i) => (
               <Grid item key={i} alignItems='center'>
               <CardActionArea>
                   <Card className={classes.card}>
-                      <CardMedia image={lists.image} className={classes.cardMedia}/>
+                      <CardMedia image={item.image} className={classes.cardMedia}/>
                       <CardContent className={classes.cardContent}>
-                          <Typography item key={lists.say_id} className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
-                          Vote Count: {lists.count} 
+                          <Typography item key={item.say_id} className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
+                          Vote Count: {item.count} 
                           </Typography>
                       </CardContent>    
                   </Card>
@@ -178,7 +178,7 @@ const useStyles = makeStyles((theme) => ({
       </Container>)  
           }
 
-            {voteMode === false ?
+            {/* {voteMode === false ?
             <div className={classes.button}>
             <Button  variant="contained" color="primary" >
                 Vote!
@@ -187,7 +187,7 @@ const useStyles = makeStyles((theme) => ({
             <div className={classes.button}>
             <Button variant="contained" color="primary" >Back</Button>
             </div> 
-            )}
+            )} */}
 
         </div>
     );
