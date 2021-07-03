@@ -45,7 +45,7 @@ function SeePrompt() {
                                         <CardMedia
                                             className={classes.smallImg}
                                             component="img"
-                                            image={seel.link}
+                                            image={seel.image}
                                         />
                                         <div>
                                             <ArrowForwardIosIcon
