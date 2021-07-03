@@ -103,7 +103,6 @@ function AdminSponsor() {
 
     //shows specific artist's details in input fields for editing
     setName(item.name);
-    // setLogo(item.logo);
     setDescription(item.description);
     setSiteLink(item.site_link);
   };
