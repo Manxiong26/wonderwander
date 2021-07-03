@@ -78,7 +78,7 @@ function HomePage() {
               "{randomArt.name}" by {randomArt.artist_name}
             </Typography>
             <Typography variant="h6" className={classes.red}>
-              Find Local Art:
+              Find Public Art:
               <Link to="/collection" className={classes.nextBtn}>
                 Browse All
               </Link>
@@ -97,7 +97,7 @@ function HomePage() {
                           primary={collection.name}
                           secondary={collectionText(collection)}
                         />
-                        <ListItemText secondary="miles" />
+                        <ListItemText/>
                         <IconButton>
                           <ArrowForwardIosIcon
                             onClick={(event) =>
@@ -137,10 +137,10 @@ function HomePage() {
                           />
                         </IconButton>
                       </ListItem>
-                      <Divider />
                     </>
                   )
                 })}
+                <Divider />
               </List>
             </div>
           </div>

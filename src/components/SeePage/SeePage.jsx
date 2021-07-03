@@ -44,7 +44,7 @@ function SeePage() {
                     <section key={lists.id}>
                         <ReactPlayer
                             url={lists.link} controls="true" width="100" />
-                        <img src={lists.link} />
+                        {/* <img src={lists.image} /> */}
                         <Typography align="center" gutterBottom variant="h5">
                             {lists.prompts}
                         </Typography>

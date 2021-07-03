@@ -11,7 +11,7 @@ router.get('/:id', (req, res) => {
     // console.log('testing', req.params.id);
  if(req.user === undefined){
     const query = `SELECT artwork.id AS artworkdetail_id, artwork."name" AS artwork_name, 
-    artwork."year" AS artwork_year, artwork."lat", artwork."long", artwork.image AS artwork_image, 
+    artwork."year" AS artwork_year, artwork."lat", artwork."lng", artwork.image AS artwork_image, 
     artwork.description AS artwork_description, artwork.vid_link AS artwork_vidlink, artwork.vid_description, 
     artwork.artist_id, artwork.sponsor_id, artwork.collection_id, artist."name" AS artist_name,
     collection."name" AS collection_name, sponsor."name" AS sponsor_name  
@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
   } else {
 
   const query = `SELECT artwork.id AS artworkdetail_id, artwork."name" AS artwork_name, 
-    artwork."year" AS artwork_year, artwork."lat", artwork."long", artwork.image AS artwork_image, 
+    artwork."year" AS artwork_year, artwork."lat", artwork."lng", artwork.image AS artwork_image, 
     artwork.description AS artwork_description, artwork.vid_link AS artwork_vidlink, artwork.vid_description, 
     artwork.artist_id, artwork.sponsor_id, artwork.collection_id, artist."name" AS artist_name,
     collection."name" AS collection_name, sponsor."name" AS sponsor_name,  
