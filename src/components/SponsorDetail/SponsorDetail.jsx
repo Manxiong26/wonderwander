@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from "../Map/Map";
-import { useHistory } from 'react-router-dom';
 
 //matierl UI
 import {

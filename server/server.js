@@ -12,7 +12,7 @@ const UploaderS3Router = require('react-dropzone-s3-uploader/s3router');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-// const adminRouter = require('./routes/user.admin.router')
+//const adminRouter = require('./routes/user.admin.router')
 const adminArtistRouter = require('./routes/AdminRoutes/admin-artist.router');
 const adminArtworkRouter = require('./routes/AdminRoutes/admin-artwork.router');
 const adminCollectionRouter = require('./routes/AdminRoutes/admin-collection.router');
