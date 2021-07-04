@@ -18,15 +18,18 @@ import {
 import { useStyles } from "../classes";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-function CollectionDetail({ userLat, userLng }) {
-    const list = useSelector((store) => store.artworkDetailReducer);
+function ArtworkDetail({ userLat, userLng }) {
+    const artItem = useSelector((store) => store.artworkDetailReducer);
     const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ART_DETAIL', payload: id })
-        console.log('In useEffect param: artwork detail', list);
+        dispatch({ type: 'CLEAR_SPONSOR_DETAILS' })
     }, []);
+
+    console.log('Artwork Detail Item: ', artItem);
+
 
     const { id } = useParams();
     const classes = useStyles();
@@ -39,13 +42,13 @@ function CollectionDetail({ userLat, userLng }) {
             >
                 <ArrowBackIosIcon />
             </Button>
-            <ImageHeader list={list} />
-            <ArtworkDescription />
-            <ArtworkLinks userLat={userLat} userLng={userLng} list={list} />
+            <ImageHeader artItem={artItem} />
+            <ArtworkDescription artItem={artItem}/>
+            <ArtworkLinks userLat={userLat} userLng={userLng} artItem={artItem} />
             <Typography variant="h6" className={classes.redCenter}>
-                See. Say. Do.
-                <Divider />
+                See. Say. Do.     
             </Typography>
+            <Divider />
             <SeePrompt />
             <SayPrompt />
             <DoPrompt />
@@ -53,4 +56,4 @@ function CollectionDetail({ userLat, userLng }) {
     );
 }
 
-export default CollectionDetail;
+export default ArtworkDetail;

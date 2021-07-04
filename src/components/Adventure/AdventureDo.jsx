@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import {
-    Grid,
+    List,
     ListItem,
     ListItemText,
-    CardContent,
-    Card,
     Typography,
-    CardMedia,
+    Avatar,
+    ListItemAvatar,
+    Divider
+    
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
@@ -29,40 +30,31 @@ function AdventureDo() {
 
     return (
         <>
-            <Grid container direction="column">
-                <Grid item xs={12} sm={12} lg={12}>
-                    <div className={classes.pageMargin}>
-                        <Card className={classes.card}>
-                            <CardContent >
-                                <CardMedia
-                                    className={classes.smallImg}
-                                    component="img"
-                                    image="http://simpleicon.com/wp-content/uploads/camera.png"
-                                >
-                                </CardMedia>
-                                <div >
-                                    <ArrowForwardIosIcon
-                                        className={classes.nextBtn}
-                                        onClick={(event) => history.push(`/adventure/do/${id}`)} />
-                                    {doDetail.map((dolist, i) => {
-                                        return (
-                                            <CardContent>
-                                                <ListItem>
-                                                    <ListItemText>
-                                                        <Typography className={classes.content} key={i}>
-                                                            {dolist.prompts}
-                                                        </Typography>
-                                                    </ListItemText>
-                                                </ListItem>
-                                            </CardContent>
-                                        )
-                                    })}
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </Grid>
-            </Grid>
+        {(doDetail.length) > 0 &&
+        <List>
+        {doDetail.map((dolist, i) => {
+            return (
+                <>
+                    <ListItem>
+                        <ListItemAvatar>
+                            <Avatar variant="square" src={"http://simpleicon.com/wp-content/uploads/camera.png"}/>
+                        </ListItemAvatar>
+                        <ListItemText>
+                            <Typography className={classes.content} key={i}>
+                                {dolist.prompts}
+                            </Typography>
+                        </ListItemText>
+                        <ArrowForwardIosIcon
+            className={classes.nextBtn}
+            onClick={(event) => history.push(`/adventure/do/${id}`)} />
+                    </ListItem>  
+                    </>
+            )
+            
+        })}
+        <Divider/>
+        </List>  
+        }         
         </>
     );
 }

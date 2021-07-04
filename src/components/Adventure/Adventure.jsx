@@ -15,17 +15,23 @@ import { useStyles } from "../classes";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 function Adventure() {
-    const list = useSelector((store) => store.adventureReducer.adventureDetailReducer);
+    const advDetail = useSelector((store) => store.adventureReducer.adventureDetailReducer);
     const dispatch = useDispatch();
     const history = useHistory();
-
-    useEffect(() => {
-        dispatch({ type: 'FETCH_ADVENTURE', payload: id })
-        console.log('In useEffect param: adventure: ', list);
-    }, []);
-
     const { id } = useParams();
     const classes = useStyles();
+
+
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_ADVENTURE_DETAIL', payload: id })
+    }, []);
+
+    console.log('Adventure Detail: ', advDetail);
+    console.log('Adventure Detail ID: ', id);
+
+
+
     return (
         <>
             <div className={classes.pageMargin}>
@@ -36,16 +42,17 @@ function Adventure() {
                 >
                     <ArrowBackIosIcon />
                 </Button>
-                <AdventureHeader list={list} />
+                <AdventureHeader advDetail={advDetail} />
                 <Typography variant="h6" className={classes.redCenter}>
-                    Description of the Adventure
+                    Adventure Description
                     <Divider />
                 </Typography>
-
+                <div className={classes.textBox}>
                 <ListItemText
                     className={classes.center}
-                    primary={list.description}
+                    primary={advDetail.description}
                 />
+                </div>
                 <Divider />
                 <Typography variant="h6" className={classes.redCenter}>
                     See. Do.

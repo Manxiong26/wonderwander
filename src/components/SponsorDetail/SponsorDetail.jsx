@@ -31,6 +31,8 @@ function SponsorDetail({ userLat, userLng }) {
 
     const classes = useStyles();
 
+    console.log('Checking Sponsor Details: ', details)
+
     const center = {
         lat: 44.9681,
         lng: -93.2886,
@@ -67,14 +69,23 @@ function SponsorDetail({ userLat, userLng }) {
                         <Typography variant="h4" className={classes.title}>
                             Sponsor Detail
                         </Typography>
-
+                        {details.id === undefined ? (<Typography className={classes.center}>There is no sponsor for this artwork.</Typography>) :
+                        (<> <div>
                         <img className={classes.image} src={details.logo}></img>
+                        </div>
+                        <div className={classes.textBox}>
+                        <Typography variant="body1" className={classes.center}>
+                        {details.description}
+                        </Typography>
+                        </div>
+                        {details.site_link &&
                         <div className={classes.center}>
                             <Button
                                 variant="outlined"
                                 color="primary"
                                 href={details.site_link}>Visit Website</Button>
                         </div>
+                        }
                         <div>
                             <Map
                                 mapLat={center.lat}
@@ -117,6 +128,8 @@ function SponsorDetail({ userLat, userLng }) {
                                 })}
                             </List>
                         </div>
+                        </>
+                        )}
                     </div>
                 </Grid>
             </Grid>

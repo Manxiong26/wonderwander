@@ -3,18 +3,16 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 
-// SEE PAGE ROUTER
+// Grabbing See Prompts for specific Adventure Item
 router.get('/:id', (req, res) => {
-    console.log('Start of the see page', req.params);
-    const queryText = `
-    SELECT "see".id, "see".prompts, "see".link FROM "see" WHERE "see".activity_id = $1;`;
+    console.log('Adventure ID: ', req.params);
+    const queryText = `SELECT * FROM "see" WHERE "see".activity_id = $1 AND published = true;`;
     pool.query(queryText, [req.params.id])
         .then(result => {
-            console.log('END OF THE SEE PAGE', req.params);
             res.send(result.rows);
         })
         .catch(error => {
-            console.log('Error with getting see', error);
+            console.log('Error GETting See Prompt for Adventure: ', error);
             res.sendStatus(500);
         })
 })

@@ -61,14 +61,19 @@ const ArtistDetail = () => {
                                 <Typography
                                     className={classes.title}
                                     variant="h4">{artistInfo.name}</Typography>
+                                {artistInfo.image && 
                                 <div>
                                     <img className={classes.bigImage} src={artistInfo.image} />
                                 </div>
-                                <div >
+                                }
+                                {artistInfo.bio &&
+                                <div className={classes.textBox}>
                                     <Typography
                                         className={classes.center}
                                         variant="body1">{artistInfo.bio}</Typography>
                                 </div>
+                                }
+                                {artistInfo.site_link &&
                                 <div className={classes.center}>
                                     <Button
 
@@ -76,10 +81,11 @@ const ArtistDetail = () => {
                                         color="primary"
                                         href={artistInfo.site_link}>Artist Website</Button>
                                 </div>
+                                }
                                 <div>
                                     <Typography
                                         variant="h6"
-                                        className={classes.red}
+                                        className={classes.redCenter}
                                     >Art by {artistInfo.name}</Typography>
                                     <Divider />
                                     <List>

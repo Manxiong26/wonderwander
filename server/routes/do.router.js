@@ -4,7 +4,7 @@ const pool = require('../modules/pool');
 
 //need to add the random nature to this part, currently just grabs the first quote
 router.get('/:id', (req, res) => {
-    console.log('Inside GET of seesaydo.router. Checking artwork id: ', req.params);
+    console.log('Inside GET of do.router. Checking artwork id: ', req.params);
     const queryText = `
     SELECT * FROM "do" WHERE "do".artwork_id = $1 AND published='true';`
     pool.query(queryText, [req.params.id])

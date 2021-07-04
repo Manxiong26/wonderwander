@@ -1,7 +1,7 @@
 import { put, takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
-function* fetchArtdetail(action){
+function* fetchArtDetail(action){
     try {
         let id = action.payload;
         const response = yield axios.get(`/api/artworkdetail/${id}`);
@@ -13,7 +13,7 @@ function* fetchArtdetail(action){
 }
 
 function* artDetailSaga(){
-    yield takeLatest('FETCH_ART_DETAIL', fetchArtdetail);
+    yield takeLatest('FETCH_ART_DETAIL', fetchArtDetail);
 }
 
 export default artDetailSaga;

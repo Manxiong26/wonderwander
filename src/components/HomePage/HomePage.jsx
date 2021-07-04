@@ -32,10 +32,10 @@ function HomePage() {
     
     dispatch({ type: "FETCH_RANDOM_ART" });
     dispatch({ type: "FETCH_THREE_COLLECTION" });
-    dispatch({ type: 'FETCH_ADVENTURE_DETAIL', payload: id });
+    dispatch({ type: 'FETCH_ADVENTURES' });
   }, []);
   //Adventure reducer
-  const adventure = useSelector((store) => store.adventureReducer.adventureReducer);
+  const adventure = useSelector((store) => store.adventureReducer.adventureList);
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   //randomArt Store reducer

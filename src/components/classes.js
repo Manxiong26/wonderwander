@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontFamily: theme.typography.Pacifico,
     marginTop: '5%',
-    marginBottom: '5%',
+    marginBottom: '2%',
   },
   black: {
     color: 'black',
@@ -230,6 +230,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
 
+  },
+  textBox: {
+    textAlign: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '80%',
+    minHeight: '50px',
+    maxHeight: '200px',
+    overflow:'auto'
   }
 
 }));

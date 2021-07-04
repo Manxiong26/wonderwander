@@ -21,19 +21,13 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 //     },
 // })
 
-function ImageHeader({ list }) {
+function ImageHeader({ artItem }) {
 
     const classes = useStyles();
-    // const list = useSelector((store) => store.artworkDetailReducer);
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     console.log('In useEffect param:');
-    //     dispatch({type: 'FETCH_ART_DETAIL', payload: id})
-    // }, []);
-    console.log('CHECKING LIST', list);
-    // const {id} = useParams();
+  
+    console.log('Art Detail: ', artItem);
     const dispatch = useDispatch();
+
     const seen = () => {
         console.log('Clicked!!');
         dispatch({ type: 'ADD_ARTWORK_SEEN', payload: list })
@@ -44,7 +38,10 @@ function ImageHeader({ list }) {
     }
 
     const alertLogin = () => {
-        alert('Please Login or Signup to access feature')
+        swal({
+            text: `Please Login or Register to access this feature`,
+            icon: "warning",
+          });
     }
 
 
@@ -53,21 +50,22 @@ function ImageHeader({ list }) {
 
     return (
         <>
+        
 
             <Typography variant="h4" className={classes.title}>
                 Art Detail
             </Typography>
             <img
                 className={classes.image}
-                src={list.artwork_image}
+                src={artItem.image}
             />
 
-            {user.id !== undefined ?
+            {/* {user.id !== undefined ?
 
                 <div className={classes.center}>
-                    {list.has_seen === true ?
+                    {artItem.has_seen === true ?
                         <Typography variant="body1" className={classes.imageInfo}>
-                            {list.artwork_name}
+                            {artItem.artwork_name}
                             <IconButton>
                                 <ToggleButton
                                     value="check"
@@ -85,7 +83,7 @@ function ImageHeader({ list }) {
                         : (
                             <>
                                 <Typography variant="body1" className={classes.imageInfo}>
-                                    {list.artwork_name}
+                                    {artItem.artwork_name}
                                     <IconButton>
                                         <VisibilityIcon
                                             color="secondary"
@@ -102,10 +100,10 @@ function ImageHeader({ list }) {
                             </>
                         )
                     }</div>
-                : (
+                : ( */}
                     <div className="center">
                         <Typography variant="body1" className={classes.imageInfo}>
-                            {list.artwork_name}
+                            {artItem.name}
                             <IconButton>
                                 <VisibilityIcon
                                     color="secondary"
@@ -119,7 +117,7 @@ function ImageHeader({ list }) {
                             </IconButton>
                         </Typography>
                     </div>
-                )}
+                {/* )} */}
         </>
     );
 }
