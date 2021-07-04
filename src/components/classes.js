@@ -167,7 +167,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '15%'
   },
   btn: {
-    marginTop: '2%'
+    margin: '1%'
 
 
   },
@@ -194,9 +194,6 @@ const useStyles = makeStyles((theme) => ({
   loginInputs: {
     display: 'table-cell',
     textAlign: 'center',
-
-
-
   },
   formBtn: {
     marginLeft: '25%',

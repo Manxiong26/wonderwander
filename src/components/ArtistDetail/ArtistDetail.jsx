@@ -67,11 +67,14 @@ const ArtistDetail = () => {
                                 </div>
                                 }
                                 {artistInfo.bio &&
+                                <>
+                                <Typography variant="h6" className={classes.title}>Bio</Typography>
                                 <div className={classes.textBox}>
                                     <Typography
                                         className={classes.center}
                                         variant="body1">{artistInfo.bio}</Typography>
                                 </div>
+                                </>
                                 }
                                 {artistInfo.site_link &&
                                 <div className={classes.center}>

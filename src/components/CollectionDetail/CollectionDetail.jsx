@@ -82,6 +82,7 @@ function CollectionDetail({ userLat, userLng }) {
                         <Divider/>
                         <div className={classes.center}>
                             <Button
+                                className={classes.btn}
                                 variant="outlined"
                                 color="primary"
                                 href={collectionDet[0].site_link}>Website</Button>
