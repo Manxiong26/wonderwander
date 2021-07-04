@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import env from "react-dotenv";
 import { useHistory } from "react-router-dom";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+
 
 // const useStyles = makeStyles((theme) => ({
 //   mapContainer: {
@@ -103,6 +105,16 @@ const MapView = ({ userLat, userLng }) => {
   return (
     <>
     <div className={classes.pageMargin}>
+    <Button
+    onClick={() => {
+        history.goBack();
+    }}
+>
+    <ArrowBackIosIcon />
+</Button>
+</div>
+    <div className={classes.pageMargin}>
+
       <ToggleButtonGroup
         exclusive
         className={classes.toggle}
@@ -157,6 +169,7 @@ const MapView = ({ userLat, userLng }) => {
                         secondary={item.name}
                       />
                       <ListItemText
+                        align="right"
                         secondary={distance(
                           Number(item.lat),
                           Number(item.lng),

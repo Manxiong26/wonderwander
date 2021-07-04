@@ -75,7 +75,7 @@ function HomePage() {
               <img className={classes.image} src={randomArt.image} />
             </p>
             <Typography variant="body2" className={classes.imageInfo}>
-              "{randomArt.name}" by {randomArt.artist_name}
+              <b>{randomArt.name}</b> by {randomArt.artist_name}
             </Typography>
             <Typography variant="h6" className={classes.red}>
               Find Public Art:

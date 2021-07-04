@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import {
-    Typography,
-    Button,
+    Card,
+  Grid,
+  Typography,
+  IconButton,
+  Avatar,
+  Button,
+  Divider,
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -13,7 +18,7 @@ import ReactPlayer from 'react-player';
 
 
 function SeePage() {
-    const list = useSelector((store) => store.seesaydoReducer.seeReducer);
+    const seeList = useSelector((store) => store.seesaydoReducer.seeReducer);
     const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory();
@@ -25,7 +30,7 @@ function SeePage() {
     }, []);
 
 
-    console.log('TESTING', list);
+    console.log('Checking seeList ', seeList);
 
 
     return (<>
@@ -38,20 +43,35 @@ function SeePage() {
                 <ArrowBackIosIcon />
             </Button>
         </div>
-        <div className={classes.welcomeMargin}>
-            {list.map((lists, i) => {
+
+       <Grid container direction="column">
+      <Grid item xs={12} sm={12} lg={12}>
+        <div className={classes.pageMargin}>
+        <Typography variant="h5" className={classes.title}>
+            See
+          </Typography>
+          
+            {seeList.map((item, i) => {
                 return (
-                    <section key={lists.id}>
+                    <Card >
+                    <div key={i} className={classes.cardContent}>
+                        
                         <ReactPlayer
-                            url={lists.link} controls="true" width="100" />
-                        {/* <img src={lists.image} /> */}
-                        <Typography align="center" gutterBottom variant="h5">
-                            {lists.prompts}
+                            url={item.link} controls="true" width="75%" height="100%" className={classes.reactPlayer} />
+                       
+                        <Typography align="center" variant="body1" className={classes.caption}>
+                            {item.prompts}
                         </Typography>
-                    </section>
+                        {/* <img src={item.image} />  */}
+
+                        </div>
+                        </Card>
                 )
             })}
+           
         </div>
+        </Grid>
+        </Grid>
     </>
     );
 }

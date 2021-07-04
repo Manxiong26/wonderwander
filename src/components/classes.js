@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: theme.typography.Pacifico,
     textDecoration: 'underline',
     color: theme.palette.primary.main,
+    marginBottom: '2%'
 
   },
   image: {
@@ -73,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   pageMargin: {
     marginLeft: '6%',
     marginRight: '6%',
-    marginBottom: '30%',
+    // marginBottom: '30%',
   },
   welcomeMargin: {
     marginLeft: '6%',
@@ -162,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
   },
   promptCard: {
     width: '80%',
-    height: 500,
+    height: 400,
     marginRight: 'auto',
     marginLeft: 'auto',
     marginTop: '10%',
@@ -257,8 +258,19 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '50px',
     maxHeight: '200px',
     overflow:'auto'
+  }, 
+  reactPlayer: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    
+  },
+  caption: {
+    width: '75%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    paddingBottom: '5%'
+    
   }
-
 }));
 
 export { useStyles }

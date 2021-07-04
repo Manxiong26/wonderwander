@@ -34,8 +34,11 @@ const useStyles = makeStyles((theme) => ({
       height: '60px',
       width: '60px',
       margin: 'auto',
+      marginTop: '10%',
+
     },
     cardContent: {
+      
       flexGrow: 1,
     },
     footer: {
@@ -53,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
     },
     cardClicker: {
-      background: props => props.lists ? 'linear-gradient(#e66465, #9198e5)' : 'linear-gradient(#e66465, #9198e5)',
+      // background: props => props.lists ? 'linear-gradient(#e66465, #9198e5)' : 'linear-gradient(#e66465, #9198e5)',
     },
 
   }));
@@ -147,7 +150,7 @@ const useStyles = makeStyles((theme) => ({
                         <Card className={classes.card} >
                             <CardMedia image={lists.image} className={classes.cardMedia}/>
                             <CardContent className={classes.cardContent}>
-                                <Typography className={classes.gamesHeader}  gutterBottom variant="h5" component="h5" align='center'>
+                                <Typography className={classes.gamesHeader}  gutterBottom variant="body1" align='center'>
                                 {lists.prompts}
                                 </Typography>
                             </CardContent>    
@@ -166,7 +169,7 @@ const useStyles = makeStyles((theme) => ({
                   <Card className={classes.card}>
                       <CardMedia image={item.image} className={classes.cardMedia}/>
                       <CardContent className={classes.cardContent}>
-                          <Typography item key={item.say_id} className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
+                          <Typography item key={item.say_id} className={classes.gamesHeader} gutterBottom variant="body1" align='center'>
                           Vote Count: {item.count} 
                           </Typography>
                       </CardContent>    

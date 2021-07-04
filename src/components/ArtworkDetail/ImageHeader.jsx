@@ -103,7 +103,7 @@ function ImageHeader({ artItem }) {
                 : ( */}
                     <div className="center">
                         <Typography variant="body1" className={classes.imageInfo}>
-                            {artItem.name}
+                            <b>{artItem.name}</b>
                             <IconButton>
                                 <VisibilityIcon
                                     color="secondary"

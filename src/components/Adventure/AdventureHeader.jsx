@@ -20,7 +20,7 @@ function AdventureHeader({ advDetail }) {
                 className={classes.bigImage}
                 src={advDetail.image}
             /><Typography className={classes.center}>
-                {advDetail.title}
+                <b>{advDetail.title}</b>
             </Typography>
         </>
     );
