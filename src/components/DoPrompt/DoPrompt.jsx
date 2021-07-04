@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
-function DoPrompt() {
+function DoPrompt({truncateString}) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ function DoPrompt() {
               </ListItemAvatar>
               <ListItemText>
                 <Typography className={classes.content} key={i}>
-                  {dolist.prompts}
+                  {truncateString(dolist.prompts, 50)}
                 </Typography>
               </ListItemText>
               <IconButton onClick={(event) => history.push(`/do/${id}`)}>

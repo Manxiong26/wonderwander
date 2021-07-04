@@ -14,7 +14,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
-function AdventureDo() {
+function AdventureDo({truncateString}) {
     const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -41,7 +41,7 @@ function AdventureDo() {
                         </ListItemAvatar>
                         <ListItemText>
                             <Typography className={classes.content} key={i}>
-                                {dolist.prompts}
+                                {truncateString(dolist.prompts, 50)}
                             </Typography>
                         </ListItemText>
                         <ArrowForwardIosIcon

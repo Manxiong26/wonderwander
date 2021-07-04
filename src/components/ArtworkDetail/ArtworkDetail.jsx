@@ -23,6 +23,15 @@ function ArtworkDetail({ userLat, userLng }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // Function to create preview text 
+    const truncateString = (str, num) => {
+        if (str.length <= num) {
+          return str
+        }
+        return str.slice(0, num) + '...'
+      }
+      
+
     useEffect(() => {
         dispatch({ type: 'FETCH_ART_DETAIL', payload: id })
         dispatch({ type: 'CLEAR_SPONSOR_DETAILS' })
@@ -49,9 +58,9 @@ function ArtworkDetail({ userLat, userLng }) {
                 See. Say. Do.     
             </Typography>
             <Divider />
-            <SeePrompt />
+            <SeePrompt truncateString={truncateString}/>
             <SayPrompt />
-            <DoPrompt />
+            <DoPrompt truncateString={truncateString} />
         </div>
     );
 }

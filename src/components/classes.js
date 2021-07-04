@@ -104,7 +104,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '5%',
     marginBottom: '5%',
     overflow: 'auto'
-
   },
   media: {
     height: 300,
@@ -161,6 +160,18 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '10%',
     overflow: 'auto'
   },
+  promptCard: {
+    width: '80%',
+    height: 500,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: '10%',
+    paddingRight: '5%',
+    paddingLeft: '5%',
+    overflow: 'auto',
+    display: 'flex'
+  },
+
   btnGroup: {
     display: 'flex',
     alignItems: 'flex-end',
@@ -169,6 +180,16 @@ const useStyles = makeStyles((theme) => ({
   btn: {
     margin: '1%'
 
+
+  },
+  cameraBtn: {
+    marginLeft: '25%',
+    marginRight: '25%',
+    marginTop: '4%',
+    marginBottom: '4%',
+    position: 'absolute',
+    bottom: 0,
+    left: 30
 
   },
   table: {

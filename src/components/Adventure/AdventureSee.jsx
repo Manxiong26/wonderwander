@@ -15,7 +15,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
-function AdventureSee() {
+function AdventureSee({truncateString}) {
     const list = useSelector((store) => store.adventureReducer.adventureDetailReducer);
     const seeList = useSelector((store) => store.adventureSeeDo.seeAdventureReducer);
     const dispatch = useDispatch();
@@ -42,7 +42,7 @@ function AdventureSee() {
                                         </ListItemAvatar>
                                         <ListItemText>
                                             <Typography className={classes.content} key={i}>
-                                                {item.prompts}
+                                                {truncateString(item.prompts,50)}
                                             </Typography>
                                         </ListItemText>
                                         <ArrowForwardIosIcon

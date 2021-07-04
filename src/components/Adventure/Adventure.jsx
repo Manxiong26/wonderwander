@@ -21,6 +21,14 @@ function Adventure() {
     const { id } = useParams();
     const classes = useStyles();
 
+    // Function to create preview of prompt
+    const truncateString = (str, num) => {
+        if (str.length <= num) {
+          return str
+        }
+        return str.slice(0, num) + '...'
+      }
+
 
 
     useEffect(() => {
@@ -58,8 +66,8 @@ function Adventure() {
                     See. Do.
                     <Divider />
                 </Typography>
-                <AdventureSee />
-                <AdventureDo />
+                <AdventureSee truncateString={truncateString} />
+                <AdventureDo truncateString={truncateString} />
             </div>
         </>
     );

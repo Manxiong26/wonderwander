@@ -15,7 +15,7 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-function SeePrompt() {
+function SeePrompt({truncateString}) {
   const classes = useStyles();
   const history = useHistory();
   const list = useSelector((store) => store.artworkDetailReducer);
@@ -47,7 +47,7 @@ function SeePrompt() {
                 </ListItemAvatar>
                 <ListItemText>
                   <Typography className={classes.content} key={seel.id}>
-                    {seel.prompts}
+                    {truncateString(seel.prompts, 50)}
                   </Typography>
                 </ListItemText>
                 <IconButton onClick={(event) => history.push(`/see/${id}`)}>
