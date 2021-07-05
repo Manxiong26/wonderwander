@@ -81,8 +81,7 @@ function App() {
     }
   })
 
-    // Grab users location and store it
-    // in local state
+    // Grab users location and store it in local state
     useEffect(() => {
       axios({
           method: 'POST',
@@ -215,57 +214,55 @@ function App() {
               <AdminRegister />
             </ProtectedRoute>
 
-
-            
-            {/* this is temporary until we can get the log in working */}
             <ProtectedRoute
-              // shows AdminArtist Page at all times (logged in or not)
+              // shows AdminArtist Page only when admin is logged in
               exact
               path="/admin/artist"
             >
               <AdminArtist />
-
             </ProtectedRoute>
-            {/* this is temporary until we can get the log in working */}
+
             <ProtectedRoute
-              // shows AdminArtwork Page at all times (logged in or not)
+              // shows AdminArtwork Page only when admin is logged in
               exact
               path="/admin/artwork"
             >
               <AdminArtwork />
             </ProtectedRoute>
-            {/* this is temporary until we can get the log in working */}
+
             <ProtectedRoute
-              // shows AdminCollection Page at all times (logged in or not)
+              // shows AdminCollection Page only when admin is logged in
               exact
               path="/admin/collection"
             >
               <AdminCollection />
             </ProtectedRoute>
-            {/* this is temporary until we can get the log in working */}
+
             <ProtectedRoute
-              // shows AdminSponsor Page at all times (logged in or not)
+              // shows AdminSponsor Page only when admin is logged in
               exact
               path="/admin/sponsor"
             >
               <AdminSponsor />
             </ProtectedRoute>
-            {/* this is temporary until we can get the log in working */}
+
             <ProtectedRoute
-              // shows AdminQuote Page at all times (logged in or not)
+              // shows AdminQuote Page only when admin is logged in
               exact
               path="/admin/quote"
             >
               <AdminQuote />
             </ProtectedRoute>
-            {/* this is temporary until we can get the log in working */}
+
             <ProtectedRoute
-              // shows AdminArtAdventure Page at all times (logged in or not)
+              // shows AdminArtAdventure Page only when admin is logged in
               exact
               path="/admin/art-adventure"
             >
               <AdminArtAdventure />
             </ProtectedRoute>
+
+            {/* ------------------- END ADMIN ROUTES ------------------- */}
 
             {/* For protected routes, the view could show one of several things on the same route.
               Visiting localhost:3000/user will show the UserPage if the user is logged in.

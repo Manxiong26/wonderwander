@@ -221,28 +221,26 @@ function AdminCollection() {
       id: item.id,
       published: false,
     };
-    //swal success indicator
-    swal({
-      text: "This collection's information is now unpublished!",
-      icon: "success",
-    });
+    // //swal success indicator
+    // swal({
+    //   text: "This collection's information is now unpublished!",
+    //   icon: "success",
+    // });
   } else {
     pubObject = {
       id: item.id,
       published: true,
     }
-    //swal success indicator
-    swal({
-      text: "This collection's information has been published!",
-      icon: "success",
-    });
+    // //swal success indicator
+    // swal({
+    //   text: "This collection's information has been published!",
+    //   icon: "success",
+    // });
   }
 
-    //sends updated artist info 
-    // (published boolean true/false) to collection saga
+    //sends updated artist boolean (published/unpublished) to collection saga
     dispatch({ type: "UPDATE_PUBLISH_COLLECTION", payload: pubObject });
 
-    
   };
   
     return (
@@ -329,6 +327,9 @@ function AdminCollection() {
                     value={search_text}
                     onChange={(event) => setSearchText(event.target.value)}
                 />
+
+                {/* TODO - Add Image Upload Component here */}
+                
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
                 <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
               </form>
@@ -408,7 +409,7 @@ function AdminCollection() {
                     onChange={(event) => setSearchText(event.target.value)}
                 />
 
-                <ImageUpload />
+                {/* <ImageUpload /> */}
                 
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>

@@ -45,6 +45,18 @@ function* updateQuote(action) {
     }
 }
 
+//TODO - Add updatePublishQuote function here
+function* updatePublish(action) {
+  console.log('in update quote publish', action.payload);
+  try{
+    yield axios.put(`/api/admin/quote/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_QUOTE_LIST'}); 
+    yield put({type: 'CLEAR_QUOTE'});
+  } catch (error) {
+    console.log('Error updating quote: ', error);
+  }
+}
+
 function* deleteQuote(action) {
     try{
         yield axios.delete(`/api/admin/quote/${action.payload}`); 
@@ -58,7 +70,8 @@ function* adminQuoteSaga() {
   yield takeEvery('FETCH_QUOTE_LIST', getQuoteList);
   yield takeEvery('FETCH_QUOTE', getQuote);
   yield takeEvery('ADD_QUOTE', addQuote);
-  yield takeEvery('UPDATE_QUOTE_INFO', updateQuote); 
+  yield takeEvery('UPDATE_QUOTE_INFO', updateQuote);
+  yield takeEvery('UPDATE_PUBLISH_QUOTE', updatePublish);  
   yield takeEvery('DELETE_QUOTE', deleteQuote);
 }
 

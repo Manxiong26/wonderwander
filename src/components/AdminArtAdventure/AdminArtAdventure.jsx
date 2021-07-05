@@ -8,9 +8,12 @@ import {
     Button,
     Typography,
     TextField,
+    FormControlLabel,
+    Switch,
     Grid,
     Card,
     IconButton,
+    Select,
     Table,
     TableBody,
     TableCell,
@@ -38,8 +41,10 @@ function AdminArtAdventure() {
     //redux store instances 
     const artAdventureList = useSelector((store) => store.adminArtAdventureListReducer);
     const artAdventure = useSelector((store) => store.adminArtAdventureInfoReducer);
-        console.log('artAdventure reducer id:', artAdventure.id);
+    console.log('artAdventure reducer id:', artAdventure.id);
+    
     const seeList = useSelector((store) => store.adminSeeListReducer);
+    console.log('adventure see list', seeList);
     const see = useSelector ((store) => store.adminSeeInfoReducer);
     const doList = useSelector((store) => store.adminDoListReducer);
     const doItem = useSelector((store) => store.adminDoReducer);
@@ -178,6 +183,7 @@ function AdminArtAdventure() {
     //sets local state for See/Do post request
     const [do_prompts, setDoPrompts] = useState('');
     const [see_prompts, setSeePrompts] = useState('');
+    const [see_image, setSeeImage] = useState('');
     const [link, setLink] = useState('');
     const [adventure_id, setAdventureId] = useState('');
     const [seeId, setSeeId] = useState('');
@@ -189,6 +195,7 @@ function AdminArtAdventure() {
         //create object to send
         const newSee = {
             prompts: see_prompts,
+            image: see_image,
             link: link,
             artwork_id: null,
             activity_id: adventure_id,
@@ -197,8 +204,6 @@ function AdminArtAdventure() {
 
         //dispatch to artAdventure saga
         dispatch({ type: 'ADD_SEE', payload: newSee });
-
-        //updates see list on DOM (where/are we listing the see prompts ?)
 
         //alert successful post
         swal({
@@ -210,6 +215,7 @@ function AdminArtAdventure() {
 
         //clears input fields
         setSeePrompts('');
+        setSeeImage('');
         setLink('');
         setAdventureId('');
     }
@@ -227,8 +233,6 @@ function AdminArtAdventure() {
 
         //dispatch to artAdventure saga
         dispatch({ type: 'ADD_DO', payload: newDo });
-
-        //updates do list on DOM (where/are we listing the do prompts ?)
 
         //alert successful post
         swal({
@@ -249,6 +253,10 @@ function AdminArtAdventure() {
 
         //dispatch to artwork saga w see id
         dispatch({ type: "DELETE_SEE", payload: item.id });
+
+        //TODO - Refresh See list for this specific adventure
+
+        //TODO - add sweet alert so admin knows item has been deleted
     };
 
     //delete do
@@ -257,6 +265,10 @@ function AdminArtAdventure() {
 
         //dispatch to artwork saga w see id
         dispatch({ type: "DELETE_DO", payload: item.id });
+
+        //TODO - Refresh See list for this specific adventure
+
+        //TODO - add sweet alert so admin knows item has been deleted
     };
 
     //changes db boolean to true which "publishes" item on public facing pages
@@ -274,24 +286,24 @@ function AdminArtAdventure() {
             id: item.id,
             published: false,
         };
-        //swal success indicator
-        swal({
-            text: "This adventure's information is now unpublished!",
-            icon: "success",
-        });
+        // //swal success indicator
+        // swal({
+        //     text: "This adventure's information is now unpublished!",
+        //     icon: "success",
+        // });
         } else {
         pubObject = {
             id: item.id,
             published: true,
         };
-        //swal success indicator
-        swal({
-            text: "This adventure's information has been published!",
-            icon: "success",
-        });
+        // //swal success indicator
+        // swal({
+        //     text: "This adventure's information has been published!",
+        //     icon: "success",
+        // });
         }
-        //sends updated art adventure info
-        // (published boolean true/false) to artAdventure saga
+
+        //sends updated art adventure boolean (published/unpublished) to artAdventure saga
         dispatch({ type: "UPDATE_PUBLISH_ADVENTURE", payload: pubObject });
     };
 
@@ -311,23 +323,23 @@ function AdminArtAdventure() {
             published: false,
         };
         //swal success indicator
-        swal({
-            text: `This 'See' is now unpublished!`,
-            icon: "success",
-        });
+        // swal({
+        //     text: `This 'See' is now unpublished!`,
+        //     icon: "success",
+        // });
         } else {
         pubObject = {
             id: item.id,
             published: true,
         };
         //swal success indicator
-        swal({
-            text: `This 'See' has been published!`,
-            icon: "success",
-        });
+        // swal({
+        //     text: `This 'See' has been published!`,
+        //     icon: "success",
+        // });
         }
-        //sends updated see info
-        // (published boolean true/false) to art adventure saga
+
+        //sends updated 'See' boolean (publish/unpublish) to art adventure saga
         dispatch({ type: "UPDATE_PUBLISH_SEE", payload: pubObject });
     };
 
@@ -347,23 +359,23 @@ function AdminArtAdventure() {
             published: false,
         };
         //swal success indicator
-        swal({
-            text: `This 'Do' is now unpublished!`,
-            icon: "success",
-        });
+        // swal({
+        //     text: `This 'Do' is now unpublished!`,
+        //     icon: "success",
+        // });
         } else {
         pubObject = {
             id: item.id,
             published: true,
         };
         //swal success indicator
-        swal({
-            text: `This 'Do' has been published!`,
-            icon: "success",
-        });
+        // swal({
+        //     text: `This 'Do' has been published!`,
+        //     icon: "success",
+        // });
         }
-        //sends updated do info
-        // (published boolean true/false) to art adventure saga
+        
+        //sends updated 'Do' boolean (publish/unpublish) to art adventure saga
         dispatch({ type: "UPDATE_PUBLISH_DO", payload: pubObject });
     };
   
@@ -371,8 +383,9 @@ function AdminArtAdventure() {
       <div>
       <AdminNav />
       <Grid container spacing={1} direction="row">
-          {editMode ?
-          <Grid item lg={5}  sm={12} xs={12}>
+          {editMode ? (
+          <>
+          <Grid item lg={4}  sm={12} xs={12}>
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>
               <Typography className={classes.title} align="center" variant="h4">Edit Adventure</Typography>
@@ -408,45 +421,136 @@ function AdminArtAdventure() {
                 <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
               </form>
             </div>
-
-            {/* TODO - ADD EDIT FORMS FOR SEE & DO HERE */}
-            {/* <Grid item lg={5} className={classes.grid}>
-            <Card elevation={6} className={classes.cardForm}>
-            <div className={classes.cardContent}> */}
-            <Typography className={classes.title} align="center" variant="h4">Edit See</Typography>
-                {/* generates 'See' options dynamically */}
-                <select type="text"
-                    onChange={(event) => setSeeId(event.target.value)}
-                    >
-                    <option value="Default">See</option>
-                    {seeList.map((see) => {
-                        return (<option key={see.id} value={see.id}>{see.prompts}</option>);
-                    })}
-                </select>
-            {/* </div>
-            </Card>
-            </Grid> */}
-
-            {/* <Grid item lg={5} className={classes.grid}>
-            <Card elevation={6} className={classes.cardForm}>
-            <div className={classes.cardContent}> */}
-            <Typography className={classes.title} align="center" variant="h4">Edit Do</Typography>
-                {/* generates 'Do' options dynamically */}
-                <select type="text"
-                    onChange={(event) => setDoId(event.target.value)}
-                    >
-                    <option value="Default">Do</option>
-                    {doList.map((doItem) => {
-                        return (<option key={doItem.id} value={doItem.id}>{doItem.prompts}</option>);
-                    })}
-                </select>
-            {/* </div>
-            </Card>
-            </Grid> */}
-
           </Card>
           </Grid>
-          : 
+
+            {/* Edit See Form */}
+            <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
+              <TableContainer
+                elevation={6}
+                component={Card}
+                className={classes.cardTable}
+              >
+                <div className={classes.tableContent}>
+                  <Typography
+                    className={classes.title}
+                    align="center"
+                    variant="h4"
+                  >
+                    Edit See
+                  </Typography>
+                  <form className={classes.form}>
+                    <Table className={classes.table}>
+                      <TableBody>
+                        {seeList.map((item, i) => (
+                          <TableRow alignItems="flex-start" key={i}>
+                            <TableCell className={classes.thumbnailContainer}>
+                              <img
+                                src={item.see_image}
+                                alt="See Prompt Image"
+                                className={classes.thumbnail}
+                              />
+                            </TableCell>
+                            <TableCell>
+                              <Typography noWrap="true" variant="body1">
+                                {item.prompts}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                                <FormControlLabel
+                                control={
+                                    <Switch
+                                    size="small"
+                                    checked={item.published}
+                                    onChange={(event) => publishSee(event, item)}
+                                    name="publish"
+                                    color="primary"
+                                    />
+                                }
+                                labelPlacement="top"
+                                label="Publish"
+                                />
+                            </TableCell>
+                            <TableCell align="right">
+                              <IconButton>
+                                <DeleteIcon
+                                  color="primary"
+                                  className={classes.btn}
+                                  variant="outlined"
+                                  onClick={(event) => deleteSee(event, item)}
+                                />
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </form>
+                </div>
+              </TableContainer>
+            </Grid>
+            
+            {/* Edit Do Form */}
+            <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
+              <TableContainer
+                elevation={6}
+                component={Card}
+                className={classes.cardTable}
+              >
+                <div className={classes.tableContent}>
+                  <Typography
+                    className={classes.title}
+                    align="center"
+                    variant="h4"
+                  >
+                    Edit Do
+                  </Typography>
+                  <form className={classes.form}>
+                    <Table className={classes.table}>
+                      <TableBody>
+                        {doList.map((item, i) => (
+                          <TableRow alignItems="flex-start" key={i}>
+                            <TableCell>
+                              <Typography noWrap="true" variant="body1">
+                                {item.prompts}
+                              </Typography>
+                            </TableCell>
+                            <TableCell>
+                                <FormControlLabel
+                                control={
+                                    <Switch
+                                    size="small"
+                                    checked={item.published}
+                                    onChange={(event) => publishDo(event, item)}
+                                    name="publish"
+                                    color="primary"
+                                    />
+                                }
+                                labelPlacement="top"
+                                label="Publish"
+                                />
+                            </TableCell>
+                            <TableCell align="right">
+                              <IconButton>
+                                <DeleteIcon
+                                  color="primary"
+                                  className={classes.btn}
+                                  variant="outlined"
+                                  onClick={(event) => deleteDo(event, item)}
+                                />
+                              </IconButton>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </form>
+                </div>
+              </TableContainer>
+            </Grid>
+          </>
+         ) : (
+          <>
           <Grid item lg={5} sm={12} xs={12} >
           <Card elevation={6} className={classes.cardForm}>
             <div className={classes.cardContent}>  
@@ -481,9 +585,8 @@ function AdminArtAdventure() {
                 <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
 
-
               {/* Add See Form */}
-              <Typography variant="h4">Add See</Typography>
+              <Typography className={classes.title} align="center" variant="h4">Add See</Typography>
               <form className="admin-form" onSubmit={addSee}>
                 <TextField type="text"
                     placeholder="Prompt"
@@ -491,7 +594,12 @@ function AdminArtAdventure() {
                     onChange={(event) => setSeePrompts(event.target.value)}
                 />
                 <TextField type="text"
-                    placeholder="Image/Video URL"
+                    placeholder="Image URL"
+                    value={see_image}
+                    onChange={(event) => setSeeImage(event.target.value)}
+                />
+                <TextField type="text"
+                    placeholder="Video URL"
                     value={link}
                     onChange={(event) => setLink(event.target.value)}
                 />
@@ -508,7 +616,7 @@ function AdminArtAdventure() {
               </form>
 
               {/* Add Do Form */}
-              <Typography variant="h4">Add Do</Typography>
+              <Typography className={classes.title} align="center" variant="h4">Add Do</Typography>
               <form className="admin-form" onSubmit={addDo}>
                 <TextField type="text"
                     placeholder="Prompt"
@@ -525,19 +633,18 @@ function AdminArtAdventure() {
                     })}
                 </select>
                 
-                <ImageUpload />
+                {/* <ImageUpload /> */}
 
                 <Button className="admin-btn" type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
               </form>
           </div>
           </Card>
-          </Grid>}
+          </Grid>
 
-          
-          {/* Adventure List. Always shows. */}
+          {/* Adventure List */}
           {/* Edit clickability renders a specific art adventure's details in the edit form */}
 
-          <Grid item lg={7} xs={12}>
+        <Grid item lg={7} xs={12}>
         <TableContainer
           elevation={6}
           component={Card}
@@ -554,14 +661,14 @@ function AdminArtAdventure() {
                     <TableCell className={classes.thumbnailContainer}>
                       <img
                         src={item.image}
-                        alt="Artist Image"
+                        alt="Adventure Image"
                         className={classes.thumbnail}
                       />
                     </TableCell>
                     <TableCell>
                       <Typography variant="body1">{item.title}</Typography>
                     </TableCell>
-                    <TableCell align="right">
+                    {/* <TableCell align="right">
                       <Button
                         className={classes.btn}
                         variant="outlined"
@@ -569,6 +676,21 @@ function AdminArtAdventure() {
                       >
                         Publish
                       </Button>
+                    </TableCell> */}
+                    <TableCell>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            size="small"
+                            checked={item.published}
+                            onChange={(event) => publish(event, item)}
+                            name="publish"
+                            color="primary"
+                          />
+                        }
+                        labelPlacement="top"
+                        label="Publish"
+                      />
                     </TableCell>
                     <TableCell align="right">
                       <IconButton>
@@ -596,8 +718,10 @@ function AdminArtAdventure() {
           </div>
         </TableContainer>
       </Grid>
-         </Grid>  
-         </div>         
+      </>
+      )}
+    </Grid>  
+    </div>         
     );
 }
 

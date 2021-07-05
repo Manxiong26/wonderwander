@@ -38,7 +38,7 @@ CREATE TABLE "artist" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(150) NOT NULL,
 	"image" varchar(1000),
-	"bio" varchar(1000),
+	"bio" varchar(10000),
 	"site_link" varchar(1000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
@@ -50,7 +50,7 @@ CREATE TABLE "artwork" (
 	"lat" numeric(6,4),
 	"lng" numeric(7,4),
 	"image" varchar(1000),
-	"description" varchar(1000),
+	"description" varchar(10000),
 	"vid_link" varchar(1000),
 	"vid_description" varchar(1000),
 	"artist_id" INT REFERENCES "artist",

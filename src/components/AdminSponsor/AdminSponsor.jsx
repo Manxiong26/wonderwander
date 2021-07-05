@@ -39,7 +39,7 @@ function AdminSponsor() {
   //redux store instances
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
   const sponsor = useSelector((store) => store.adminSponsorInfoReducer);
-  const logo = useSelector((store) => store.imageUrlReducer);
+  //const logo = useSelector((store) => store.imageUrlReducer);
   console.log('imageUrl: ', logo);
   console.log("sponsor reducer id:", sponsor.id);
 
@@ -52,6 +52,7 @@ function AdminSponsor() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [site_link, setSiteLink] = useState("");
+  const [logo, setLogo] = useState("");
 
   //edit mode
   const [editMode, setEditMode] = useState(false);
@@ -82,6 +83,7 @@ function AdminSponsor() {
     setName("");
     setDescription("");
     setSiteLink("");
+    setLogo("");
   };
 
   //renders specific sponsor's details in input feilds to edit
@@ -96,7 +98,7 @@ function AdminSponsor() {
 
     //shows specific artist's details in input fields for editing
     setName(item.name);
-    // setLogo(item.logo);
+    setLogo(item.logo);
     setDescription(item.description);
     setSiteLink(item.site_link);
   };
@@ -130,6 +132,7 @@ function AdminSponsor() {
     setName("");
     setDescription("");
     setSiteLink("");
+    setLogo("");
   };
 
   //cancel (editMode) button - returns to add sponsor form
@@ -140,6 +143,7 @@ function AdminSponsor() {
     setName("");
     setDescription("");
     setSiteLink("");
+    setLogo("");
   };
 
   //delete sponsor
@@ -186,25 +190,24 @@ function AdminSponsor() {
           id: item.id,
           published: false,
         };
-        //swal success indicator
-        swal({
-          text: "This sponsor's information is now unpublished!",
-          icon: "success",
-        });
+        // //swal success indicator
+        // swal({
+        //   text: "This sponsor's information is now unpublished!",
+        //   icon: "success",
+        // });
       } else {
         pubObject = {
           id: item.id,
           published: true,
         }
-        //swal success indicator
-        swal({
-          text: "This sponsor's information has been published!",
-          icon: "success",
-        });
+        // //swal success indicator
+        // swal({
+        //   text: "This sponsor's information has been published!",
+        //   icon: "success",
+        // });
       }
     
-        //sends updated sponsor info 
-        // (published boolean true/false) to sponsor saga
+        //sends updated sponsor boolean (published/unpublished)) to sponsor saga
         dispatch({ type: "UPDATE_PUBLISH_SPONSOR", payload: pubObject });
     
         
@@ -265,7 +268,7 @@ function AdminSponsor() {
                     onChange={(event) => setSiteLink(event.target.value)}
                   />
 
-                  <ImageUpload />
+                  {/* <ImageUpload /> */}
 
                   <Button
                     className={classes.formBtn}
@@ -308,7 +311,7 @@ function AdminSponsor() {
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                   />
-                  {/* <TextField
+                  <TextField
                     type="text"
                     className={classes.inputs}
                     variant="outlined"
@@ -316,7 +319,7 @@ function AdminSponsor() {
                     label="Logo URL"
                     value={logo}
                     onChange={(event) => setLogo(event.target.value)}
-                  /> */}
+                  />
                   <TextField
                     type="text"
                     className={classes.inputs}
@@ -338,12 +341,8 @@ function AdminSponsor() {
                     onChange={(event) => setSiteLink(event.target.value)}
                   />
 
-                  
+                  {/* <ImageUpload /> */}
 
-                  <ImageUpload />
-
-                  
-                  
                   <Button
                     className={classes.formBtn}
                     type="submit"
