@@ -348,6 +348,7 @@ function AdminCollection() {
                     placeholder="Collection Name"
                     label="Collection Name"
                     value={name}
+                    onClick={() => setName('St. Paul Collection')}
                     onChange={(event) => setName(event.target.value)}
                 />
                 <TextField type="text"
@@ -356,6 +357,7 @@ function AdminCollection() {
                     placeholder="Image URL"
                     label="Image URL"
                     value={image}
+                    onClick={() => setImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNOMc4NOd6w5sztaE2RBIVz_pzO3kqjRQhQQ&usqp=CAU')}
                     onChange={(event) => setImage(event.target.value)}
                 />
                 <TextField type="text"
@@ -364,6 +366,7 @@ function AdminCollection() {
                     placeholder="City"
                     label="City"
                     value={city}
+                    onClick={() => setCity('St. Paul')}
                     onChange={(event) => setCity(event.target.value)}
                 />
                 <TextField type="text"
@@ -372,6 +375,7 @@ function AdminCollection() {
                     placeholder="State"
                     label="State"
                     value={state}
+                    onClick={() => setState('Minnesota')}
                     onChange={(event) => setState(event.target.value)}
                 />
                 <TextField type="text"
@@ -382,6 +386,7 @@ function AdminCollection() {
                     multiline
                     rows={6}
                     value={bio}
+                    onClick={() => setBio('A public art collection based in St. Paul, Minnesota.')}
                     onChange={(event) => setBio(event.target.value)}
                 />
                 <TextField type="text"
@@ -390,6 +395,7 @@ function AdminCollection() {
                     placeholder="Donation URL"
                     label="Donation URL"
                     value={donate_link}
+                    onClick={() => setDonateLink('stpaulcollection.com')}
                     onChange={(event) => setDonateLink(event.target.value)}
                 />
                 <TextField type="text"
@@ -398,6 +404,7 @@ function AdminCollection() {
                     placeholder="Website URL"
                     label="Website URL"
                     value={site_link}
+                    onClick={() => setSiteLink('stpaulcollection.com')}
                     onChange={(event) => setSiteLink(event.target.value)}
                 />
                 <TextField type="text"
@@ -406,6 +413,7 @@ function AdminCollection() {
                     placeholder="Search Text"
                     label="Search Text"
                     value={search_text}
+                    onClick={() => setSearchText('St. Paul, Minnesota, Art')}
                     onChange={(event) => setSearchText(event.target.value)}
                 />
 
