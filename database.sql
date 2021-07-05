@@ -8,77 +8,69 @@ CREATE TABLE "users" (
 	"email" varchar(100) NOT NULL,
 	"password" varchar(100) NOT NULL,
 	"username" varchar(100) NOT NULL,
-	"first_name" varchar(100),
+	"first_name" varchar(100) ,
 	"admin" BOOLEAN NOT NULL DEFAULT 'false'
 );
 
 CREATE TABLE "sponsor" (
 	"id" serial primary key NOT NULL,
-	"name" varchar(100) NOT NULL,
+	"name" varchar(500) NOT NULL,
 	"logo" varchar(500),
 	"description" varchar(1000),
 	"site_link" varchar(1000),
+	"donate_link" varchar(1000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
-);
-
+	);
+	
 CREATE TABLE "collection" (
 	"id" serial primary key NOT NULL,
-	"name" varchar(50) NOT NULL,
-	"image" varchar(1000),
-	"city" varchar(50),
-	"state" varchar(50),
-	"bio" varchar(1000),
-	"donate_link" varchar(1000),
-	"site_link" varchar(1000),
+	"name" varchar(200) NOT NULL,
+	"image" varchar(5000),
+	"city" varchar(100),
+	"state" varchar(100),
+	"bio" varchar(5000),
+	"donate_link" varchar(5000),
+	"site_link" varchar(5000),
 	"search_text" varchar(500),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
 
+
+	
 CREATE TABLE "artist" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(150) NOT NULL,
-	"image" varchar(1000),
-	"bio" varchar(1000),
-	"site_link" varchar(1000),
+	"image" varchar(5000),
+	"bio" varchar(5000),
+	"site_link" varchar(5000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
-);
+	);
 
+
+	
 CREATE TABLE "artwork" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(100) NOT NULL,
 	"year" varchar(10),
 	"lat" numeric(6,4),
 	"lng" numeric(7,4),
-	"image" varchar(1000),
-	"description" varchar(1000),
-	"vid_link" varchar(1000),
-	"vid_description" varchar(1000),
+	"image" varchar(5000),
+	"description" varchar(5000),
+	"vid_link" varchar(5000),
+	"vid_description" varchar(5000),
 	"artist_id" INT REFERENCES "artist",
 	"sponsor_id" INT REFERENCES "sponsor",
 	"collection_id" INT REFERENCES "collection",
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
-);
-
-CREATE TABLE "quotes" (
-	"id" SERIAL PRIMARY KEY,
-	"quote" varchar(10000) NOT NULL,
-	"quote_by" varchar(100),
-	"published" BOOLEAN NOT NULL DEFAULT 'false'
-);
-
-CREATE TABLE "activities" (
-	"id" SERIAL PRIMARY KEY,
-	"title" varchar(255) NOT NULL,
-	"description" varchar(1000),
-	"image" varchar(1000),
-	"published" BOOLEAN NOT NULL DEFAULT 'false'
-);
+	);
 	
+
 CREATE TABLE "favorites" (
 	"id" SERIAL PRIMARY KEY,
 	"users_id" INT REFERENCES "users" NOT NULL,
 	"artwork_id" INT REFERENCES "artwork" NOT NULL
 );
+
 
 CREATE TABLE "artwork_seen" (
 	"id" SERIAL PRIMARY KEY,
@@ -86,35 +78,54 @@ CREATE TABLE "artwork_seen" (
 	"artwork_id" INT REFERENCES "artwork" NOT NULL
 );
 
-CREATE TABLE "see" (
+
+CREATE TABLE "quotes" (
 	"id" SERIAL PRIMARY KEY,
-	"prompts" varchar(1000) NOT NULL,
-	"link" varchar(1000),
-	"image" varchar(1000),
-	"artwork_id" INT REFERENCES "artwork",
-	"activity_id" INT REFERENCES "activities",
+	"quote" varchar(10000) NOT NULL,
+	"quote_by" varchar(100),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
-
-CREATE TABLE "do" (
-	"id" SERIAL PRIMARY KEY,
-	"prompts" varchar(1000) NOT NULL,
-	"artwork_id" INT REFERENCES "artwork",
-	"activity_id" INT REFERENCES "activities",
-	"published" BOOLEAN NOT NULL DEFAULT 'false'
-);
-
 CREATE TABLE "say" (
 	"id" SERIAL PRIMARY KEY,
 	"prompts" varchar(255) NOT NULL,
-	"image" varchar(1000) NOT NULL
+	"image" varchar(5000) NOT NULL
 );
+
+CREATE TABLE "activities" (
+	"id" SERIAL PRIMARY KEY,
+	"title" varchar(255) NOT NULL,
+	"description" varchar(5000),
+	"image" varchar(5000),
+	"published" BOOLEAN NOT NULL DEFAULT 'false'
+);
+
+
 
 CREATE TABLE "say_poll" (
 	"id" SERIAL PRIMARY KEY,
 	"say_id" INT NOT NULL REFERENCES "say",
 	"artwork_id" INT NOT NULL REFERENCES "artwork"
 );
+
+CREATE TABLE "do" (
+	"id" SERIAL PRIMARY KEY,
+	"prompts" varchar(5000) NOT NULL,
+	"artwork_id" INT REFERENCES "artwork",
+	"activity_id" INT REFERENCES "activities",
+	"published" BOOLEAN NOT NULL DEFAULT 'false'
+);
+
+	
+CREATE TABLE "see" (
+	"id" SERIAL PRIMARY KEY,
+	"prompts" varchar(5000) NOT NULL,
+	"link" varchar(5000),
+	"image" varchar(5000),
+	"artwork_id" INT REFERENCES "artwork",
+	"activity_id" INT REFERENCES "activities",
+	"published" BOOLEAN NOT NULL DEFAULT 'false'
+); 
+
 
 
 --- TEST DATA ---

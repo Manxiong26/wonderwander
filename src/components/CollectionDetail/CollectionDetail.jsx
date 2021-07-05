@@ -65,15 +65,24 @@ function CollectionDetail({ userLat, userLng }) {
                     </Typography>
                 </div>
                 {collectionDet[0] === undefined ?
-                    ('') : (<>
+                    (<Typography className={classes.center}>This collection does not contain any artwork.</Typography>) : (<>
                         <div className={classes.image}>
                             <img src={collectionDet[0].collection_image} />
                         </div>
                         <Typography variant="body1" className={classes.center}>
-                        {collectionDet[0].city}, {collectionDet[0].state}
+                        <b>{collectionDet[0].city}, {collectionDet[0].state}</b>
                         </Typography>
+                        <Typography variant="h6" className={classes.title}>Bio</Typography>
+                        <Divider/>
+                        <div className={classes.textBox}>
+                        <Typography variant="body1" className={classes.center}>
+                        {collectionDet[0].bio}
+                        </Typography>
+                        </div>
+                        <Divider/>
                         <div className={classes.center}>
                             <Button
+                                className={classes.btn}
                                 variant="outlined"
                                 color="primary"
                                 href={collectionDet[0].site_link}>Website</Button>

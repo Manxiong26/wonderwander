@@ -34,8 +34,11 @@ const useStyles = makeStyles((theme) => ({
       height: '60px',
       width: '60px',
       margin: 'auto',
+      marginTop: '10%',
+
     },
     cardContent: {
+      
       flexGrow: 1,
     },
     footer: {
@@ -53,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
     },
     cardClicker: {
-      background: props => props.lists ? 'linear-gradient(#e66465, #9198e5)' : 'linear-gradient(#e66465, #9198e5)',
+      // background: props => props.lists ? 'linear-gradient(#e66465, #9198e5)' : 'linear-gradient(#e66465, #9198e5)',
     },
 
   }));
@@ -147,7 +150,7 @@ const useStyles = makeStyles((theme) => ({
                         <Card className={classes.card} >
                             <CardMedia image={lists.image} className={classes.cardMedia}/>
                             <CardContent className={classes.cardContent}>
-                                <Typography className={classes.gamesHeader}  gutterBottom variant="h5" component="h5" align='center'>
+                                <Typography className={classes.gamesHeader}  gutterBottom variant="body1" align='center'>
                                 {lists.prompts}
                                 </Typography>
                             </CardContent>    
@@ -160,14 +163,14 @@ const useStyles = makeStyles((theme) => ({
           :
           (<Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={2}>
-          {totalVote.map((lists, i) => (
+          {totalVote.map((item, i) => (
               <Grid item key={i} alignItems='center'>
               <CardActionArea>
                   <Card className={classes.card}>
-                      <CardMedia image={lists.image} className={classes.cardMedia}/>
+                      <CardMedia image={item.image} className={classes.cardMedia}/>
                       <CardContent className={classes.cardContent}>
-                          <Typography item key={lists.say_id} className={classes.gamesHeader} gutterBottom variant="h5" component="h5" align='center'>
-                          Vote Count: {lists.count} 
+                          <Typography item key={item.say_id} className={classes.gamesHeader} gutterBottom variant="body1" align='center'>
+                          Vote Count: {item.count} 
                           </Typography>
                       </CardContent>    
                   </Card>
@@ -178,7 +181,7 @@ const useStyles = makeStyles((theme) => ({
       </Container>)  
           }
 
-            {voteMode === false ?
+            {/* {voteMode === false ?
             <div className={classes.button}>
             <Button  variant="contained" color="primary" >
                 Vote!
@@ -187,7 +190,7 @@ const useStyles = makeStyles((theme) => ({
             <div className={classes.button}>
             <Button variant="contained" color="primary" >Back</Button>
             </div> 
-            )}
+            )} */}
 
         </div>
     );

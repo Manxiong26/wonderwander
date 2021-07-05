@@ -5,8 +5,10 @@ import { useStyles } from "../classes";
 import React from "react";
 
 
-function AdventureHeader({ list }) {
+function AdventureHeader({ advDetail }) {
     const classes = useStyles();
+
+    console.log('In AdventureHeader..Checking adventure detail: ', advDetail)
 
 
     return (
@@ -16,9 +18,9 @@ function AdventureHeader({ list }) {
             </Typography>
             <img
                 className={classes.bigImage}
-                src={list.image}
+                src={advDetail.image}
             /><Typography className={classes.center}>
-                {list.title}
+                <b>{advDetail.title}</b>
             </Typography>
         </>
     );

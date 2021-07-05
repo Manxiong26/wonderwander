@@ -36,8 +36,13 @@ router.post('/', (req, res) => {
 
 router.get('/count/:id', (req, res) => {
     console.log('Start of the see page vote', req.params);
-    const queryText = `
-    SELECT "say_poll".say_id, COUNT (*) FROM "say_poll" JOIN "say" ON "say".id = "say_poll".say_id WHERE "say_poll".artwork_id = $1 GROUP BY "say_poll".say_id ORDER BY "say_poll".say_id ASC;`;
+    const queryText = `SELECT "say".id, "say".prompts, "say".image, COUNT (*)
+    FROM "say_poll"
+    JOIN "say"
+    ON "say".id = "say_poll".say_id
+    WHERE "say_poll".artwork_id = $1
+    GROUP BY "say".id, "say".prompts, "say".image
+    ORDER BY "say".id ASC;`;
     pool.query(queryText, [req.params.id])
         .then(result => {
             console.log('END OF THE SEE PAGE vOTE', req.params);
