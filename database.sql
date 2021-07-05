@@ -40,8 +40,8 @@ CREATE TABLE "collection" (
 CREATE TABLE "artist" (
 	"id" serial primary key NOT NULL,
 	"name" varchar(150) NOT NULL,
-	"image" varchar(10000),
-	"bio" varchar(5000),
+	"image" varchar(5000),
+	"bio" varchar(10000),
 	"site_link" varchar(5000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 	);

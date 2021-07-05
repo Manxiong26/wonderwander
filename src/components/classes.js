@@ -270,6 +270,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     paddingBottom: '5%'
     
+  },
+  loginBtn: {
+     
   }
 }));
 

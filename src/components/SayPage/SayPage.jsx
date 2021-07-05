@@ -58,6 +58,15 @@ const useStyles = makeStyles((theme) => ({
     cardClicker: {
       // background: props => props.lists ? 'linear-gradient(#e66465, #9198e5)' : 'linear-gradient(#e66465, #9198e5)',
     },
+    title: {
+      textAlign: 'center',
+      fontFamily: theme.typography.Pacifico,
+      textDecoration: 'underline',
+      color: theme.palette.primary.main,
+      marginBottom: '2%'
+  
+    },
+
 
   }));
 
@@ -140,6 +149,14 @@ const useStyles = makeStyles((theme) => ({
             >
                 <ArrowBackIosIcon />
             </Button>
+            <Grid item xs={12} sm={12} lg={12}>
+        <div className={classes.pageMargin}>
+          <Typography variant="h5" className={classes.title}>
+            Say
+          </Typography>
+          <Typography variant="body1" align="center">
+            <b>Go Vote!</b>
+          </Typography>
           {voteMode === false ?
           <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={2} >
@@ -192,6 +209,8 @@ const useStyles = makeStyles((theme) => ({
             </div> 
             )} */}
 
+        </div>
+        </Grid>
         </div>
     );
   }
