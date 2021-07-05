@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: theme.typography.Pacifico,
     textDecoration: 'underline',
     color: theme.palette.primary.main,
+    marginBottom: '2%'
 
   },
   image: {
@@ -73,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   pageMargin: {
     marginLeft: '6%',
     marginRight: '6%',
-    marginBottom: '30%',
+    // marginBottom: '30%',
   },
   welcomeMargin: {
     marginLeft: '6%',
@@ -104,7 +105,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '5%',
     marginBottom: '5%',
     overflow: 'auto'
-
   },
   media: {
     height: 300,
@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontFamily: theme.typography.Pacifico,
     marginTop: '5%',
-    marginBottom: '5%',
+    marginBottom: '2%',
   },
   black: {
     color: 'black',
@@ -159,15 +159,38 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     paddingRight: '10%',
     paddingLeft: '10%',
+    overflow: 'auto'
   },
+  promptCard: {
+    width: '80%',
+    height: 400,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    marginTop: '10%',
+    paddingRight: '5%',
+    paddingLeft: '5%',
+    overflow: 'auto',
+    display: 'flex'
+  },
+
   btnGroup: {
     display: 'flex',
     alignItems: 'flex-end',
     marginLeft: '15%'
   },
   btn: {
-    marginTop: '2%'
+    margin: '1%'
 
+
+  },
+  cameraBtn: {
+    marginLeft: '25%',
+    marginRight: '25%',
+    marginTop: '4%',
+    marginBottom: '4%',
+    position: 'absolute',
+    bottom: 0,
+    left: 30
 
   },
   table: {
@@ -193,9 +216,6 @@ const useStyles = makeStyles((theme) => ({
   loginInputs: {
     display: 'table-cell',
     textAlign: 'center',
-
-
-
   },
   formBtn: {
     marginLeft: '25%',
@@ -229,8 +249,28 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
 
+  },
+  textBox: {
+    textAlign: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '80%',
+    minHeight: '50px',
+    maxHeight: '200px',
+    overflow:'auto'
+  }, 
+  reactPlayer: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    
+  },
+  caption: {
+    width: '75%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    paddingBottom: '5%'
+    
   }
-
 }));
 
 export { useStyles }

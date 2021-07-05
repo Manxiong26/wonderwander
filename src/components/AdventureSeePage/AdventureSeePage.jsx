@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import {
-    Typography,
-    Button,
+    Card,
+  Grid,
+  Typography,
+  IconButton,
+  Avatar,
+  Button,
+  Divider,
 } from "@material-ui/core";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
@@ -11,7 +16,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { useStyles } from "../classes";
 
 function AdventureSeePage() {
-    const list = useSelector((store) => store.adventureSeeDo.seeAdventureReducer);
+    const seeList = useSelector((store) => store.adventureSeeDo.seeAdventureReducer);
     const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory();
@@ -22,7 +27,7 @@ function AdventureSeePage() {
     }, []);
 
 
-    console.log('TESTING', list);
+    console.log('Checking Adventure seeList: ', seeList);
 
 
     return (
@@ -34,18 +39,28 @@ function AdventureSeePage() {
             >
                 <ArrowBackIosIcon />
             </Button>
-            {list.map((lists, i) => {
+            <Grid container direction="column">
+      <Grid item xs={12} sm={12} lg={12}>
+        <div className={classes.pageMargin}>
+        <Typography variant="h5" className={classes.title}>
+            See
+          </Typography>
+            {seeList.map((item, i) => {
                 return (
-                    <section>
-                        <ReactPlayer url={lists.link} controls="true" width="100" />
+                    <Card >
+                    <div key={i} className={classes.cardContent}>
+                        <ReactPlayer url={item.link} controls="true" width="75%" height="100%" className={classes.reactPlayer} />
                         <Typography
-                            className={classes.redCenter}
-                            key={i} variant="h5">
-                            {lists.prompts}
+                            align="center" variant="body1" className={classes.caption}>
+                            {item.prompts}
                         </Typography>
-                    </section>
+                        </div>
+                        </Card>
                 )
             })}
+         </div>
+        </Grid>
+        </Grid>
         </div>
     );
 }

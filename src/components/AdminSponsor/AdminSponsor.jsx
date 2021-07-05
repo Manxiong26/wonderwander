@@ -39,7 +39,9 @@ function AdminSponsor() {
   //redux store instances
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
   const sponsor = useSelector((store) => store.adminSponsorInfoReducer);
+
   //const logo = useSelector((store) => store.imageUrlReducer);
+
   console.log('imageUrl: ', logo);
   console.log("sponsor reducer id:", sponsor.id);
 

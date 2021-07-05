@@ -10,10 +10,10 @@ import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useHistory } from 'react-router-dom';
 
-function CollectionLinks({ list, userLat, userLng }) {
+function CollectionLinks({ artItem, userLat, userLng }) {
     const history = useHistory();
     const classes = useStyles();
-    console.log('In ArtworkLinks...', list);
+    console.log('In ArtworkLinks...', artItem);
     // ROUTE to direct user to directions
 
     return (
@@ -26,7 +26,7 @@ function CollectionLinks({ list, userLat, userLng }) {
                                 primary={'Artist'}
                             />
                             <IconButton>
-                                <ArrowForwardIosIcon onClick={() => history.push(`/artist_detail/${list.artist_id}`)} />
+                                <ArrowForwardIosIcon onClick={() => history.push(`/artist_detail/${artItem.artist_id}`)} />
                             </IconButton>
                         </ListItem>
                         <Divider />
@@ -35,7 +35,7 @@ function CollectionLinks({ list, userLat, userLng }) {
                                 primary={'Collection'}
                             />
                             <IconButton>
-                                <ArrowForwardIosIcon onClick={() => history.push('/collection')} />
+                                <ArrowForwardIosIcon onClick={() => history.push(`/collectionDetail/${artItem.collection_id}`)} />
                             </IconButton>
                         </ListItem>
                         <Divider />
@@ -44,7 +44,7 @@ function CollectionLinks({ list, userLat, userLng }) {
                                 primary={'Sponsor'}
                             />
                             <IconButton>
-                                <ArrowForwardIosIcon onClick={() => history.push(`/sponsor/${list.sponsor_id}`)} />
+                                <ArrowForwardIosIcon onClick={() => history.push(`/sponsor/${artItem.sponsor_id}`)} />
                             </IconButton>
                         </ListItem>
                         <Divider />
@@ -55,7 +55,7 @@ function CollectionLinks({ list, userLat, userLng }) {
                             <IconButton>
                                 <ArrowForwardIosIcon onClick={() =>
                                     location.href = "https://www.google.com/maps/dir/?api=1&origin="
-                                    + userLat + "," + userLng + "&destination=" + list.lat + "," + list.lng
+                                    + userLat + "," + userLng + "&destination=" + artItem.lat + "," + artItem.lng
                                     + "&dir_action=navigate"} />
                             </IconButton>
                         </ListItem>

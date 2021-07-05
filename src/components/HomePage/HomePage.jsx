@@ -32,10 +32,10 @@ function HomePage() {
     
     dispatch({ type: "FETCH_RANDOM_ART" });
     dispatch({ type: "FETCH_THREE_COLLECTION" });
-    dispatch({ type: 'FETCH_ADVENTURE_DETAIL', payload: id });
+    dispatch({ type: 'FETCH_ADVENTURES' });
   }, []);
   //Adventure reducer
-  const adventure = useSelector((store) => store.adventureReducer.adventureReducer);
+  const adventure = useSelector((store) => store.adventureReducer.adventureList);
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   //randomArt Store reducer
@@ -75,7 +75,7 @@ function HomePage() {
               <img className={classes.image} src={randomArt.image} />
             </p>
             <Typography variant="body2" className={classes.imageInfo}>
-              "{randomArt.name}" by {randomArt.artist_name}
+              <b>{randomArt.name}</b> by {randomArt.artist_name}
             </Typography>
             <Typography variant="h6" className={classes.red}>
               Find Public Art:
@@ -129,6 +129,9 @@ function HomePage() {
                     <>
                       <Divider />
                       <ListItem key={i}>
+                      <ListItemAvatar>
+                          <Avatar className={classes.thumbnail} src={advDet.image} />
+                        </ListItemAvatar>
                         <ListItemText>{advDet.title}</ListItemText>
                         <IconButton >
                           <ArrowForwardIosIcon
