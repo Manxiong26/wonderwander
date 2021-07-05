@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   image: {
-    maxWidth: '280px',
+    width: '280px',
     maxHeight: '280px',
     marginRight: 'auto',
     marginLeft: 'auto',
@@ -49,6 +49,12 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid black',
     marginTop: '5%',
 
+  },
+  imageContainer: {
+    height: '150px', 
+    width: '150px',
+    marginRight: 'auto',
+    marginLeft: 'auto'
   },
   bigImage: {
     maxWidth: '360px',

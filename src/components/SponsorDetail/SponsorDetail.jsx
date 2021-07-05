@@ -109,7 +109,7 @@ function SponsorDetail({ userLat, userLng }) {
                                             <Divider />
                                             <ListItem>
                                                 <ListItemAvatar>
-                                                    <Avatar className={classes.thumbnailLarge} src={art.image} />
+                                                    <Avatar className={classes.thumbnail} src={art.image} />
                                                 </ListItemAvatar>
                                                 <ListItemText
                                                     primary={art.name}

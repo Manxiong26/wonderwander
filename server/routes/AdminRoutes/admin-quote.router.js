@@ -75,6 +75,25 @@ router.put('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { //reje
     })
   
 });//end quote PUT route
+
+//PUT route to publish a quote's information 
+router.put('/publish/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
+    console.log('put id:', req.params.id);
+    console.log('put update body:', req.body);
+
+    let artwork = req.body;
+    
+    const query = `UPDATE "quotes" SET published=$2 WHERE id=$1;`;
+    
+    pool.query(query, [req.params.id, artwork.published])
+    .then(response => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error updating quote publish in server:', error);
+        res.sendStatus(500)
+    })
+  
+});//end artwork PUT route
   
 //DELETE route to delete a quote
 router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { //rejectUnauthenticated,
