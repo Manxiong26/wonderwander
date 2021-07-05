@@ -39,7 +39,9 @@ function AdminSponsor() {
   //redux store instances
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
   const sponsor = useSelector((store) => store.adminSponsorInfoReducer);
-  // const logo = useSelector((store) => store.imageUrlReducer);
+
+  //const logo = useSelector((store) => store.imageUrlReducer);
+
   console.log('imageUrl: ', logo);
   console.log("sponsor reducer id:", sponsor.id);
 
@@ -143,7 +145,7 @@ function AdminSponsor() {
     setName("");
     setDescription("");
     setSiteLink("");
-    setLogo("")
+    setLogo("");
   };
 
   //delete sponsor
@@ -190,25 +192,24 @@ function AdminSponsor() {
           id: item.id,
           published: false,
         };
-        //swal success indicator
-        swal({
-          text: "This sponsor's information is now unpublished!",
-          icon: "success",
-        });
+        // //swal success indicator
+        // swal({
+        //   text: "This sponsor's information is now unpublished!",
+        //   icon: "success",
+        // });
       } else {
         pubObject = {
           id: item.id,
           published: true,
         }
-        //swal success indicator
-        swal({
-          text: "This sponsor's information has been published!",
-          icon: "success",
-        });
+        // //swal success indicator
+        // swal({
+        //   text: "This sponsor's information has been published!",
+        //   icon: "success",
+        // });
       }
     
-        //sends updated sponsor info 
-        // (published boolean true/false) to sponsor saga
+        //sends updated sponsor boolean (published/unpublished)) to sponsor saga
         dispatch({ type: "UPDATE_PUBLISH_SPONSOR", payload: pubObject });
     
         
@@ -342,12 +343,8 @@ function AdminSponsor() {
                     onChange={(event) => setSiteLink(event.target.value)}
                   />
 
-                  
-
                   {/* <ImageUpload /> */}
 
-                  
-                  
                   <Button
                     className={classes.formBtn}
                     type="submit"

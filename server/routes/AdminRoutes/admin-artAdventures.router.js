@@ -232,4 +232,40 @@ router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
 });//end art adventure DELETE route
 
+//TODO - delete route for SEE art adventure
+router.delete('/see/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
+  
+    const query = `DELETE FROM "see" WHERE id=$1;`; //should this also have activity_id?
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id]) 
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in delete', error);
+        res.sendStatus(500);
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end SEE DELETE route
+
+//TODO - delete route for DO art adventure
+router.delete('/do/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
+  
+    const query = `DELETE FROM "do" WHERE id=$1;`; //should this also have activity_id?
+    if(req.isAuthenticated() && req.user.admin) {
+    pool.query(query, [req.params.id]) 
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in delete', error);
+        res.sendStatus(500);
+    })
+} else {
+    res.sendStatus(403)
+}
+  
+});//end DO DELETE route
+
 module.exports = router;

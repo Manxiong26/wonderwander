@@ -274,6 +274,7 @@ function AdminArtwork() {
   //sets local state for See/Do post request
   const [do_prompts, setDoPrompts] = useState("");
   const [see_prompts, setSeePrompts] = useState("");
+  const [see_image, setSeeImage] = useState("");
   const [link, setLink] = useState("");
   const [artwork_id, setArtworkId] = useState("");
   const [seeId, setSeeId] = useState("");
@@ -285,6 +286,7 @@ function AdminArtwork() {
     //create object to send
     const newSee = {
       prompts: see_prompts,
+      image: see_image, 
       link: link,
       artwork_id: artwork_id,
       activity_id: null,
@@ -304,6 +306,7 @@ function AdminArtwork() {
 
     //clears input fields
     setSeePrompts("");
+    setSeeImage("");
     setLink("");
     setArtworkId("");
   };
@@ -341,6 +344,9 @@ function AdminArtwork() {
 
     //dispatch to artwork saga w see id
     dispatch({ type: "DELETE_SEE_ARTWORK", payload: item.id });
+
+    //TODO - Get updated See list
+    
   };
 
   //delete do
@@ -349,6 +355,9 @@ function AdminArtwork() {
 
     //dispatch to artwork saga w see id
     dispatch({ type: "DELETE_DO_ARTWORK", payload: item.id });
+
+    //TODO - Get updated do list 
+
   };
 
   //changes db boolean to true which "publishes" item on public facing pages
@@ -367,23 +376,23 @@ function AdminArtwork() {
         published: false,
       };
       //swal success indicator
-      swal({
-        text: "This artwork's information is now unpublished!",
-        icon: "success",
-      });
+      // swal({
+      //   text: "This artwork's information is now unpublished!",
+      //   icon: "success",
+      // });
     } else {
       pubObject = {
         id: item.id,
         published: true,
       };
       //swal success indicator
-      swal({
-        text: "This artwork's information has been published!",
-        icon: "success",
-      });
+      // swal({
+      //   text: "This artwork's information has been published!",
+      //   icon: "success",
+      // });
     }
-    //sends updated artwork info
-    // (published boolean true/false) to artwork saga
+
+    //sends updated artwork boolean (published/unpublished) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_ARTWORK", payload: pubObject });
   };
 
@@ -403,23 +412,23 @@ function AdminArtwork() {
         published: false,
       };
       //swal success indicator
-      swal({
-        text: `This 'See' is now unpublished!`,
-        icon: "success",
-      });
+      // swal({
+      //   text: `This 'See' is now unpublished!`,
+      //   icon: "success",
+      // });
     } else {
       pubObject = {
         id: item.id,
         published: true,
       };
       //swal success indicator
-      swal({
-        text: `This 'See' has been published!`,
-        icon: "success",
-      });
+      // swal({
+      //   text: `This 'See' has been published!`,
+      //   icon: "success",
+      // });
     }
-    //sends updated see info
-    // (published boolean true/false) to artwork saga
+    
+    //sends updated 'See' boolean (publish/unpublish) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_SEE_ARTWORK", payload: pubObject });
   };
 
@@ -439,26 +448,27 @@ function AdminArtwork() {
         published: false,
       };
       //swal success indicator
-      swal({
-        text: `This 'Do' is now unpublished!`,
-        icon: "success",
-      });
+      // swal({
+      //   text: `This 'Do' is now unpublished!`,
+      //   icon: "success",
+      // });
     } else {
       pubObject = {
         id: item.id,
         published: true,
       };
       //swal success indicator
-      swal({
-        text: `This 'Do' has been published!`,
-        icon: "success",
-      });
+      // swal({
+      //   text: `This 'Do' has been published!`,
+      //   icon: "success",
+      // });
     }
-    //sends updated do info
-    // (published boolean true/false) to artwork saga
+    
+    //sends updated 'Do' boolean (publish/unpublish) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_DO_ARTWORK", payload: pubObject });
   };
 
+  //TODO - If not using modal, remove this code in clean up
   const [open, setOpen] = useState(false);
 
   const body = (
@@ -608,6 +618,9 @@ function AdminArtwork() {
                         );
                       })}
                     </select>
+
+                    {/* <ImageUpload /> */}
+
                     <Button
                       className={classes.formBtn}
                       type="submit"
@@ -662,16 +675,6 @@ function AdminArtwork() {
                                 {item.prompts}
                               </Typography>
                             </TableCell>
-                            {/* Let's change this to publish, rather than edit */}
-                            {/* <TableCell align="right">
-                              <IconButton>
-                                <EditIcon
-                                  className={classes.btn}
-                                  variant="outlined"
-                                  onClick={modalToggle}
-                                />
-                              </IconButton>
-                            </TableCell> */}
                             <TableCell>
                                 <FormControlLabel
                                 control={
@@ -730,28 +733,11 @@ function AdminArtwork() {
                       <TableBody>
                         {doList.map((item, i) => (
                           <TableRow alignItems="flex-start" key={i}>
-                            {/* <TableCell className={classes.thumbnailContainer}>
-                              <img
-                                src={item.link}
-                                alt="See Prompt Image"
-                                className={classes.thumbnail}
-                              />
-                            </TableCell> */}
                             <TableCell>
                               <Typography noWrap="true" variant="body1">
                                 {item.prompts}
                               </Typography>
                             </TableCell>
-                            {/* Let's change this to publish, rather than edit */}
-                            {/* <TableCell align="right">
-                              <IconButton>
-                                <EditIcon
-                                  className={classes.btn}
-                                  variant="outlined"
-                                  onClick={modalToggle}
-                                />
-                              </IconButton>
-                            </TableCell> */}
                             <TableCell>
                                 <FormControlLabel
                                 control={
@@ -842,8 +828,8 @@ function AdminArtwork() {
                       type="text"
                       className={classes.inputs}
                       variant="outlined"
-                      placeholder="Longitude"
-                      label="Longitude"
+                      placeholder="Image URL"
+                      label="Image URL"
                       value={image}
                       onChange={(event) => setImage(event.target.value)}
                     />
@@ -925,6 +911,9 @@ function AdminArtwork() {
                         );
                       })}
                     </select>
+
+                    {/* <ImageUpload /> */}
+
                     <Button
                       className={classes.formBtn}
                       type="submit"
@@ -937,7 +926,13 @@ function AdminArtwork() {
                   </form>
 
                   {/* Add See Form */}
-                  <Typography variant="h4">Add See</Typography>
+                  <Typography
+                    className={classes.title}
+                    align="center"
+                    variant="h4"
+                  >
+                    Add See
+                  </Typography>
                   <form className="admin-form" onSubmit={addSee}>
                     <TextField
                       type="text"
@@ -947,7 +942,13 @@ function AdminArtwork() {
                     />
                     <TextField
                       type="text"
-                      placeholder="Image/Video URL"
+                      placeholder="Image URL"
+                      value={see_image}
+                      onChange={(event) => setSeeImage(event.target.value)}
+                    />
+                    <TextField
+                      type="text"
+                      placeholder="Video URL"
                       value={link}
                       onChange={(event) => setLink(event.target.value)}
                     />
@@ -978,7 +979,13 @@ function AdminArtwork() {
                   </form>
 
                   {/* Add Do Form */}
-                  <Typography variant="h4">Add Do</Typography>
+                  <Typography
+                    className={classes.title}
+                    align="center"
+                    variant="h4"
+                  >
+                    Add Do
+                  </Typography>
                   <form className="admin-form" onSubmit={addDo}>
                     <TextField
                       type="text"
@@ -1010,15 +1017,6 @@ function AdminArtwork() {
                     > 
                         Submit
                     </Button>
-                    {/* <option value="Default">Collection</option>
-                    {collectionList.map((collection) => {
-                        return (<option key={collection.id} value={collection.id}>{collection.name}</option>);
-                    })} */}
-                {/* </select> */}
-
-                <ImageUpload />
-
-                {/* <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button> */}
               </form>
               </div>
 

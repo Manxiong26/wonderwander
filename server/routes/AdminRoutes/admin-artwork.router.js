@@ -234,7 +234,7 @@ router.delete('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 //TODO - delete route for SEE artwork
 router.delete('/see/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
   
-    const query = `DELETE FROM "see" WHERE id=$1;`;
+    const query = `DELETE FROM "see" WHERE id=$1;`; //should this also have artwork_id?
     if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id]) 
     .then(result => {
@@ -252,7 +252,7 @@ router.delete('/see/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 //TODO - delete route for DO artwork
 router.delete('/do/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => { 
   
-    const query = `DELETE FROM "do" WHERE id=$1;`;
+    const query = `DELETE FROM "do" WHERE id=$1;`; //should this also have artwork_id?
     if(req.isAuthenticated() && req.user.admin) {
     pool.query(query, [req.params.id]) 
     .then(result => {

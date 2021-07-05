@@ -7,6 +7,8 @@ import {
     Button,
     Typography,
     TextField,
+    FormControlLabel,
+    Switch,
     Grid,
     Card,
     IconButton,
@@ -163,6 +165,42 @@ function AdminQuote() {
           }
         });
     }
+
+    //changes db boolean to true which "publishes" item on public facing pages
+    const publish = (event, item) => {
+      console.log("clicking publish for Quote = ", item);
+
+      //sets specific adventure in artAdventure reducer
+      dispatch({ type: "SET_QUOTE_INFO", payload: item });
+
+      let pubObject;
+
+      if (item.published === true) {
+      //changes item boolean to true
+      pubObject = {
+          id: item.id,
+          published: false,
+      };
+      // //swal success indicator
+      // swal({
+      //     text: "This quote's information is now unpublished!",
+      //     icon: "success",
+      // });
+      } else {
+      pubObject = {
+          id: item.id,
+          published: true,
+      };
+      // //swal success indicator
+      // swal({
+      //     text: "This quote's information has been published!",
+      //     icon: "success",
+      // });
+      }
+
+      //sends updated quote boolean (published/unpublished) to quote saga
+      dispatch({ type: "UPDATE_PUBLISH_QUOTE", payload: pubObject });
+    };
   
     return (
       <div>
@@ -227,26 +265,51 @@ function AdminQuote() {
           {/* Quote List. Always shows. */}
           {/* Edit clickability renders a specific quote's details in the edit form */}
           <Grid item lg={7} sm={12} xs={12}>
-              <Card elevation={6}
-          
-                className={classes.cardTable}>
-                <div className={classes.tableContent}>
-              <Typography className={classes.title} align="center" variant="h4">Quote List</Typography>
-            <List className={classes.table}>
-                {quoteList.map((item, i) =>
-                    <div>
-                    <ListItem key={i} > 
-                        <Typography variant="body1">
-                            "{item.quote}" by <b>{item.quote_by}</b>
-                        </Typography>
-                      <IconButton align="right">
+          <TableContainer
+            elevation={6}
+            component={Card}
+            className={classes.cardTable}
+            >
+            <div className={classes.tableContent}>
+              <Typography className={classes.title} align="center" variant="h4">
+                <u>Quote List</u>
+              </Typography>
+              {/* <Typography className={classes.title} align="center" variant="h4">Quote List</Typography> */}
+              <Table className={classes.table}>
+              <TableBody>
+              {quoteList.map((item, i) => (
+                  <TableRow alignItems="flex-start" key={i}>
+                    <TableCell>
+                      <Typography variant="body1">
+                      "{item.quote}" by <b>{item.quote_by}</b>
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            size="small"
+                            checked={item.published}
+                            onChange={(event) => publish(event, item)}
+                            name="publish"
+                            color="primary"
+                          />
+                        }
+                        labelPlacement="top"
+                        label="Publish"
+                      />
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
                         <EditIcon
                           className={classes.btn}
                           variant="outlined"
                           onClick={(event) => renderQuoteDetail(event, item)}
                         />
                       </IconButton>
-                      <IconButton align="right">
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
                         <DeleteIcon
                           color="primary"
                           className={classes.btn}
@@ -254,15 +317,15 @@ function AdminQuote() {
                           onClick={() => deleteValidation(item.id)}
                         />
                       </IconButton>
-                    </ListItem>
-                    <Divider/>
-                   </div>
-                )}
-            </List>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+            </Table>
           </div>
-          </Card>
+          </TableContainer>
           </Grid>
-                </Grid>
+        </Grid>
       </div>
     );
 }

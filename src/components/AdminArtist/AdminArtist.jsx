@@ -191,21 +191,21 @@ function AdminArtist() {
       id: item.id,
       published: false,
     };
-    //swal success indicator
-    swal({
-      text: "This artist's information is now unpublished!",
-      icon: "success",
-    });
+    // //swal success indicator
+    // swal({
+    //   text: "This artist's information is now unpublished!",
+    //   icon: "success",
+    // });
   } else {
     pubObject = {
       id: item.id,
       published: true,
     }
-    //swal success indicator
-    swal({
-      text: "This artist's information has been published!",
-      icon: "success",
-    });
+    // //swal success indicator
+    // swal({
+    //   text: "This artist's information has been published!",
+    //   icon: "success",
+    // });
   }
 
     //sends updated artist info (published boolean true) to artist saga
@@ -264,6 +264,9 @@ function AdminArtist() {
                     value={bio}
                     onChange={(event) => setBio(event.target.value)}
                   />
+
+                  {/* TODO - Add Image Uploader Component here */}
+                  
                   <Button
                     className={classes.formBtn}
                     type="submit"
@@ -331,7 +334,7 @@ function AdminArtist() {
                   onChange={(event) => setBio(event.target.value)}
                 />
 
-                <ImageUpload />
+                {/* <ImageUpload /> */}
                 
                 <Button
                   className={classes.formBtn}
