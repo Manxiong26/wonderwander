@@ -51,7 +51,7 @@ function getModalStyle() {
   };
 }
 
-function AdminArtwork() {
+function AdminArtwork({truncateString}) {
   let { id } = useParams();
   //console.log(id);
 
@@ -663,16 +663,17 @@ function AdminArtwork() {
                       <TableBody>
                         {seeList.map((item, i) => (
                           <TableRow alignItems="flex-start" key={i}>
-                            <TableCell className={classes.thumbnailContainer}>
-                              <img
-                                src={item.link}
+                            <TableCell >
+                              <Avatar 
+                                variant="square"
+                                src={item.image}
                                 alt="See Prompt Image"
-                                className={classes.thumbnail}
+                                
                               />
                             </TableCell>
                             <TableCell>
                               <Typography noWrap="true" variant="body1">
-                                {item.prompts}
+                                {truncateString(item.prompts, 15)}
                               </Typography>
                             </TableCell>
                             <TableCell>
@@ -735,7 +736,7 @@ function AdminArtwork() {
                           <TableRow alignItems="flex-start" key={i}>
                             <TableCell>
                               <Typography noWrap="true" variant="body1">
-                                {item.prompts}
+                                {truncateString(item.prompts, 15)}
                               </Typography>
                             </TableCell>
                             <TableCell>
@@ -924,6 +925,7 @@ function AdminArtwork() {
                       Submit
                     </Button>
                   </form>
+                  <Divider style={{marginBottom: '5%'}}/>
 
                   {/* Add See Form */}
                   <Typography
@@ -933,22 +935,33 @@ function AdminArtwork() {
                   >
                     Add See
                   </Typography>
-                  <form className="admin-form" onSubmit={addSee}>
+                  
+                  <form className={classes.form} onSubmit={addSee}>
                     <TextField
+                    className={classes.inputs}
+                    variant="outlined"
+            
                       type="text"
                       placeholder="Prompt"
+                      label="Prompt"
                       value={see_prompts}
                       onChange={(event) => setSeePrompts(event.target.value)}
                     />
                     <TextField
+                    className={classes.inputs}
+                    variant="outlined"
                       type="text"
                       placeholder="Image URL"
+                      label="Image URL"
                       value={see_image}
                       onChange={(event) => setSeeImage(event.target.value)}
                     />
                     <TextField
+                    className={classes.inputs}
+                    variant="outlined"
                       type="text"
                       placeholder="Video URL"
+                      label="Video URL"
                       value={link}
                       onChange={(event) => setLink(event.target.value)}
                     />
@@ -968,7 +981,7 @@ function AdminArtwork() {
                       })}
                     </select>
                     <Button
-                      className="admin-btn"
+                      className={classes.formBtn}
                       type="submit"
                       name="submit"
                       variant="outlined"
@@ -977,6 +990,8 @@ function AdminArtwork() {
                       Submit
                     </Button>
                   </form>
+                  <Divider style={{marginBottom: '5%'}}/>
+                  
 
                   {/* Add Do Form */}
                   <Typography
@@ -986,10 +1001,13 @@ function AdminArtwork() {
                   >
                     Add Do
                   </Typography>
-                  <form className="admin-form" onSubmit={addDo}>
+                  <form className={classes.form} onSubmit={addDo}>
                     <TextField
+                    className={classes.inputs}
+                    variant="outlined"
                       type="text"
                       placeholder="Prompt"
+                      label="Prompt"
                       value={do_prompts}
                       onChange={(event) => setDoPrompts(event.target.value)}
                     />
@@ -1009,7 +1027,7 @@ function AdminArtwork() {
                       })}
                     </select>
                     <Button
-                      className="admin-btn"
+                      className={classes.formBtn}
                       type="submit"
                       name="submit"
                       variant="outlined"

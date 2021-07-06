@@ -66,7 +66,7 @@ function CollectionDetail({ userLat, userLng }) {
                 </div>
                 {collectionDet[0] === undefined ?
                     (<Typography className={classes.center}>This collection does not contain any artwork.</Typography>) : (<>
-                        <div className={classes.imageContainer}>
+                        <div >
                             <img className={classes.image} src={collectionDet[0].collection_image} />
                         </div>
                         <Typography variant="body1" className={classes.center}>
