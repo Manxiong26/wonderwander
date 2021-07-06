@@ -12,8 +12,19 @@ function* fetchArtDetail(action){
     }
 }
 
+function* fetchViewed(){
+    try {
+        const response = yield axios.get(`/api/viewed`);
+        yield put ({type: 'SET_VIEWED_ART', payload: response.data});
+        console.log('Artwork Seen: ', response.data);
+    } catch {
+        console.log('Error with getting Viewed Art detail');
+    }
+}
+
 function* artDetailSaga(){
     yield takeLatest('FETCH_ART_DETAIL', fetchArtDetail);
+    yield takeLatest('FETCH_VIEWED_ART', fetchViewed);
 }
 
 export default artDetailSaga;

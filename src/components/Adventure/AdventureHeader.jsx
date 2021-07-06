@@ -17,7 +17,7 @@ function AdventureHeader({ advDetail }) {
                 Adventure
             </Typography>
             <img
-                className={classes.bigImage}
+                className={classes.image}
                 src={advDetail.image}
             /><Typography className={classes.center}>
                 <b>{advDetail.title}</b>

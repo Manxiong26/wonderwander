@@ -13,6 +13,7 @@ import {
 import { useStyles } from "../classes";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import ToggleButton from '@material-ui/lab/ToggleButton';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 
 // const useStyles = makeStyles({
@@ -28,9 +29,15 @@ function ImageHeader({ artItem }) {
     console.log('Art Detail: ', artItem);
     const dispatch = useDispatch();
 
+    const [selected, setSelected] = React.useState(false);
+    const user = useSelector(store => store.user)
+    const viewed = useSelector(store => store.viewedArt)
+
+    console.log('Viewed Art for user: ', viewed)
+
     const seen = () => {
         console.log('Clicked!!');
-        dispatch({ type: 'ADD_ARTWORK_SEEN', payload: list })
+        dispatch({ type: 'ADD_ARTWORK_SEEN', payload: artItem })
     }
 
     const refreshPage = () => {
@@ -44,9 +51,18 @@ function ImageHeader({ artItem }) {
           });
     }
 
+    const checkId = (artItem) => {
+        for (let item of viewed) {
+          if (artItem.id == item.artwork_id) {
+            return true;
+          } else {
+            false;
+          }
+        } // end of loop
+      }; // end checkId
 
-    const [selected, setSelected] = React.useState(false);
-    const user = useSelector(store => store.user)
+
+    
 
     return (
         <>
@@ -55,42 +71,42 @@ function ImageHeader({ artItem }) {
             <Typography variant="h4" className={classes.title}>
                 Art Detail
             </Typography>
+            
             <img
                 className={classes.image}
                 src={artItem.image}
             />
+            
 
-            {/* {user.id !== undefined ?
+            {user.id !== undefined ?
 
                 <div className={classes.center}>
-                    {artItem.has_seen === true ?
+                    {checkId(artItem) ?
                         <Typography variant="body1" className={classes.imageInfo}>
-                            {artItem.artwork_name}
+                            <b>{artItem.name}</b>
                             <IconButton>
-                                <ToggleButton
+                                <CheckCircleIcon
                                     value="check"
                                     disabled
                                     selected={selected}
-                                    onClick={seen}
-                                    onChange={() => {
-                                        setSelected(!selected)
-                                    }}
-                                >
-                                    Already Seen
-                                </ToggleButton>
+                                    
+                                    // onChange={() => {
+                                    //     setSelected(!selected)
+                                    // }}
+                                />
                             </IconButton>
                         </Typography>
                         : (
                             <>
                                 <Typography variant="body1" className={classes.imageInfo}>
-                                    {artItem.artwork_name}
+                                <b>{artItem.name}</b>
                                     <IconButton>
                                         <VisibilityIcon
                                             color="secondary"
                                             variant="contained"
                                             value="check"
                                             selected={selected}
-                                            onClick={function () { refreshPage(); seen(); }}
+                                            onClick={function () { seen(); }}
                                             onChange={() => {
                                                 setSelected(!selected)
                                             }}
@@ -100,7 +116,7 @@ function ImageHeader({ artItem }) {
                             </>
                         )
                     }</div>
-                : ( */}
+                : (
                     <div className="center">
                         <Typography variant="body1" className={classes.imageInfo}>
                             <b>{artItem.name}</b>
@@ -117,7 +133,7 @@ function ImageHeader({ artItem }) {
                             </IconButton>
                         </Typography>
                     </div>
-                {/* )} */}
+                )}
         </>
     );
 }

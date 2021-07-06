@@ -72,11 +72,13 @@ router.get('/:id', (req, res) => {
 })
 
 
+
+
 router.post('/', rejectUnauthenticated, (req, res) => {
   const users_id = req.user.id
-  const artwork_id = req.body.artworkdetail_id
-  console.log('CHECKING REQSSSSSSSS', req.body, users_id, artwork_id);
-  console.log('CHECCCCKKKIINNNGGG ID', users_id);
+  const artwork_id = req.body.id
+  console.log('Checking req.body', req.body);
+  console.log('Checking users id: ', users_id);
   
   let sqlText = `INSERT INTO artwork_seen (users_id, artwork_id)
   VALUES ($1, $2);`;
