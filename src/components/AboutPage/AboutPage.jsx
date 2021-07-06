@@ -12,10 +12,10 @@ function AboutPage() {
   return (
     <div className="container">
       <div>
-        <div className={classes.imageContainer}>
+        <div >
         <img className={classes.image} src="https://uploads-ssl.webflow.com/5ee5775bed4e85640a7db47f/600e48af247f2becaa582044_New%20Image%20WW-p-500.jpeg" alt="Shannon Steven, founder of Wonder Wander"/>
         </div>
-        <div style={{marginTop: '15%'}}></div>
+        <div style={{marginTop: '10%'}}></div>
         <Divider/>
         <div className={classes.textBox}>
         <Typography variant="body1">Shannon Steven is an art teacher with a master's degree in K12 Art Education. She has worked in a classroom predominantly with elementary aged students but has also worked with adults throughout her career.
