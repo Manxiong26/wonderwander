@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import AdminNav from "../AdminNav/AdminNav";
-import ImageUpload from '../ImageUpload/ImageUpload';
-      
+import ImageUpload from "../ImageUpload/ImageUpload";
+
 import {
   Button,
   Typography,
@@ -30,6 +29,10 @@ import {
   Switch,
   Popper,
   Modal,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -51,7 +54,7 @@ function getModalStyle() {
   };
 }
 
-function AdminArtwork({truncateString}) {
+function AdminArtwork({ truncateString }) {
   let { id } = useParams();
   //console.log(id);
 
@@ -71,8 +74,10 @@ function AdminArtwork({truncateString}) {
 
   const artistList = useSelector((store) => store.adminArtistListReducer);
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
-  const collectionList = useSelector((store) => store.adminCollectionListReducer);
-  
+  const collectionList = useSelector(
+    (store) => store.adminCollectionListReducer
+  );
+
   const seeList = useSelector((store) => store.adminSeeListArtworkReducer);
   console.log("seeList reducer: ", seeList);
   const see = useSelector((store) => store.adminSeeInfoReducer);
@@ -286,7 +291,7 @@ function AdminArtwork({truncateString}) {
     //create object to send
     const newSee = {
       prompts: see_prompts,
-      image: see_image, 
+      image: see_image,
       link: link,
       artwork_id: artwork_id,
       activity_id: null,
@@ -346,7 +351,6 @@ function AdminArtwork({truncateString}) {
     dispatch({ type: "DELETE_SEE_ARTWORK", payload: item.id });
 
     //TODO - Get updated See list
-    
   };
 
   //delete do
@@ -356,8 +360,7 @@ function AdminArtwork({truncateString}) {
     //dispatch to artwork saga w see id
     dispatch({ type: "DELETE_DO_ARTWORK", payload: item.id });
 
-    //TODO - Get updated do list 
-
+    //TODO - Get updated do list
   };
 
   //changes db boolean to true which "publishes" item on public facing pages
@@ -427,7 +430,7 @@ function AdminArtwork({truncateString}) {
       //   icon: "success",
       // });
     }
-    
+
     //sends updated 'See' boolean (publish/unpublish) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_SEE_ARTWORK", payload: pubObject });
   };
@@ -463,7 +466,7 @@ function AdminArtwork({truncateString}) {
       //   icon: "success",
       // });
     }
-    
+
     //sends updated 'Do' boolean (publish/unpublish) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_DO_ARTWORK", payload: pubObject });
   };
@@ -577,47 +580,58 @@ function AdminArtwork({truncateString}) {
                       }
                     />
                     {/* generates artist options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setArtistId(event.target.value)}
-                    >
-                      <option value="Default">Artist</option>
-                      {artistList.map((artist) => {
-                        return (
-                          <option key={artist.id} value={artist.id}>
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Artist</InputLabel>
+                      <Select
+                        required
+                        id="type"
+                        value={artist_id}
+                        onChange={(e) => setArtistId(e.target.value)}
+                      >
+                        {artistList.map((artist) => (
+                          <MenuItem key={artist.id} value={artist.id}>
                             {artist.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
                     {/* generates sponsor options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setSponsorId(event.target.value)}
-                    >
-                      <option value="Default">Sponsor</option>
-                      {sponsorList.map((sponsor) => {
-                        return (
-                          <option key={sponsor.id} value={sponsor.id}>
+                    
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Sponsor</InputLabel>
+                      <Select
+                        required
+                        id="type"
+                        value={sponsor_id}
+                        onChange={(e) => setSponsorId(e.target.value)}
+                      >
+                        {sponsorList.map((sponsor) => (
+                          <MenuItem key={sponsor.id} value={sponsor.id}>
                             {sponsor.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
                     {/* generates collection options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setCollectionId(event.target.value)}
-                    >
-                      <option value="Default">Collection</option>
-                      {collectionList.map((collection) => {
-                        return (
-                          <option key={collection.id} value={collection.id}>
+          
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Collection</InputLabel>
+                      <Select
+                        required
+                        id="type"
+                        value={collection_id}
+                        onChange={(e) => setCollectionId(e.target.value)}
+                      >
+                        {collectionList.map((collection) => (
+                          <MenuItem key={collection.id} value={collection.id}>
                             {collection.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
 
                     {/* <ImageUpload /> */}
 
@@ -663,12 +677,11 @@ function AdminArtwork({truncateString}) {
                       <TableBody>
                         {seeList.map((item, i) => (
                           <TableRow alignItems="flex-start" key={i}>
-                            <TableCell >
-                              <Avatar 
+                            <TableCell>
+                              <Avatar
                                 variant="square"
                                 src={item.image}
                                 alt="See Prompt Image"
-                                
                               />
                             </TableCell>
                             <TableCell>
@@ -677,19 +690,21 @@ function AdminArtwork({truncateString}) {
                               </Typography>
                             </TableCell>
                             <TableCell>
-                                <FormControlLabel
+                              <FormControlLabel
                                 control={
-                                    <Switch
+                                  <Switch
                                     size="small"
                                     checked={item.published}
-                                    onChange={(event) => publishSee(event, item)}
+                                    onChange={(event) =>
+                                      publishSee(event, item)
+                                    }
                                     name="publish"
                                     color="primary"
-                                    />
+                                  />
                                 }
                                 labelPlacement="top"
                                 label="Publish"
-                                />
+                              />
                             </TableCell>
                             <TableCell align="right">
                               <IconButton>
@@ -740,19 +755,19 @@ function AdminArtwork({truncateString}) {
                               </Typography>
                             </TableCell>
                             <TableCell>
-                                <FormControlLabel
+                              <FormControlLabel
                                 control={
-                                    <Switch
+                                  <Switch
                                     size="small"
                                     checked={item.published}
                                     onChange={(event) => publishDo(event, item)}
                                     name="publish"
                                     color="primary"
-                                    />
+                                  />
                                 }
                                 labelPlacement="top"
                                 label="Publish"
-                                />
+                              />
                             </TableCell>
                             <TableCell align="right">
                               <IconButton>
@@ -867,51 +882,59 @@ function AdminArtwork({truncateString}) {
                         setVidDescription(event.target.value)
                       }
                     />
-                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artist options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setArtistId(event.target.value)}
-                    >
-                      <option value="Default">Artist</option>
-                      {artistList.map((artist) => {
-                        return (
-                          <option key={artist.id} value={artist.id}>
+
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Artist</InputLabel>
+                      <Select
+                        required
+                        id="type"
+                        value={artist_id}
+                        onChange={(e) => setArtistId(e.target.value)}
+                      >
+                        {artistList.map((artist) => (
+                          <MenuItem key={artist.id} value={artist.id}>
                             {artist.name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
                     {/* generates sponsor options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setSponsorId(event.target.value)}
-                    >
-                      <option value="Default">Sponsor</option>
-                      {sponsorList.map((sponsor) => {
-                        return (
-                          <option key={sponsor.id} value={sponsor.id}>
+                    
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Sponsor</InputLabel>
+                      <Select
+                        required
+                        id="type"
+                        value={sponsor_id}
+                        onChange={(e) => setSponsorId(e.target.value)}
+                      >
+                        {sponsorList.map((sponsor) => (
+                          <MenuItem key={sponsor.id} value={sponsor.id}>
                             {sponsor.name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
                     {/* generates collection options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setCollectionId(event.target.value)}
-                    >
-                      <option value="Default">Collection</option>
-                      {collectionList.map((collection) => {
-                        return (
-                          <option key={collection.id} value={collection.id}>
+          
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Collection</InputLabel>
+                      <Select
+                        required
+                        id="type"
+                        value={collection_id}
+                        onChange={(e) => setCollectionId(e.target.value)}
+                      >
+                        {collectionList.map((collection) => (
+                          <MenuItem key={collection.id} value={collection.id}>
                             {collection.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
 
                     {/* <ImageUpload /> */}
 
@@ -925,7 +948,7 @@ function AdminArtwork({truncateString}) {
                       Submit
                     </Button>
                   </form>
-                  <Divider style={{marginBottom: '5%'}}/>
+                  <Divider style={{ marginBottom: "5%" }} />
 
                   {/* Add See Form */}
                   <Typography
@@ -935,12 +958,11 @@ function AdminArtwork({truncateString}) {
                   >
                     Add See
                   </Typography>
-                  
+
                   <form className={classes.form} onSubmit={addSee}>
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
-            
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Prompt"
                       label="Prompt"
@@ -948,8 +970,8 @@ function AdminArtwork({truncateString}) {
                       onChange={(event) => setSeePrompts(event.target.value)}
                     />
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Image URL"
                       label="Image URL"
@@ -957,8 +979,8 @@ function AdminArtwork({truncateString}) {
                       onChange={(event) => setSeeImage(event.target.value)}
                     />
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Video URL"
                       label="Video URL"
@@ -967,7 +989,7 @@ function AdminArtwork({truncateString}) {
                     />
                     {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artwork options dynamically */}
-                    <select
+                    {/* <select
                       type="text"
                       onChange={(event) => setArtworkId(event.target.value)}
                     >
@@ -979,7 +1001,22 @@ function AdminArtwork({truncateString}) {
                           </option>
                         );
                       })}
-                    </select>
+                    </select> */}
+
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Artwork</InputLabel>
+                      <Select
+                        required
+                        value={artwork_id}
+                        onChange={(e) => setArtworkId(e.target.value)}
+                      >
+                        {artworkList.map((art) => (
+                          <MenuItem key={art.id} value={art.id}>
+                            {art.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                     <Button
                       className={classes.formBtn}
                       type="submit"
@@ -990,8 +1027,7 @@ function AdminArtwork({truncateString}) {
                       Submit
                     </Button>
                   </form>
-                  <Divider style={{marginBottom: '5%'}}/>
-                  
+                  <Divider style={{ marginBottom: "5%" }} />
 
                   {/* Add Do Form */}
                   <Typography
@@ -1003,8 +1039,8 @@ function AdminArtwork({truncateString}) {
                   </Typography>
                   <form className={classes.form} onSubmit={addDo}>
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Prompt"
                       label="Prompt"
@@ -1013,7 +1049,7 @@ function AdminArtwork({truncateString}) {
                     />
                     {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artwork options dynamically */}
-                    <select
+                    {/* <select
                       type="text"
                       onChange={(event) => setArtworkId(event.target.value)}
                     >
@@ -1025,19 +1061,34 @@ function AdminArtwork({truncateString}) {
                           </option>
                         );
                       })}
-                    </select>
+                    </select> */}
+
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Artwork</InputLabel>
+                      <Select
+                        required
+                        id="type"
+                        value={artwork_id}
+                        onChange={(e) => setArtworkId(e.target.value)}
+                      >
+                        {artworkList.map((art) => (
+                          <MenuItem key={art.id} value={art.id}>
+                            {art.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                     <Button
                       className={classes.formBtn}
                       type="submit"
                       name="submit"
                       variant="outlined"
                       value="Submit"
-                    > 
-                        Submit
+                    >
+                      Submit
                     </Button>
-              </form>
-              </div>
-
+                  </form>
+                </div>
               </Card>
             </Grid>
 
@@ -1116,7 +1167,6 @@ function AdminArtwork({truncateString}) {
         )}
       </Grid>
     </div>
-
   );
 }
 

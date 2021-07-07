@@ -98,9 +98,9 @@ router.post('/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
     let newSee = req.body;
     
-    const query  = `INSERT INTO "see" ("prompts", "link", "artwork_id", "activity_id")
-        VALUES ($1, $2, $3, $4);`;
-    pool.query(query, [newSee.prompts, newSee.link, newSee.artwork_id, newSee.activity_id])
+    const query  = `INSERT INTO "see" ("prompts", "link", "image", "artwork_id", "activity_id")
+        VALUES ($1, $2, $3, $4, $5);`;
+    pool.query(query, [newSee.prompts, newSee.link, newSee.image, newSee.artwork_id, newSee.activity_id])
     .then(result => {
         console.log(`new 'See' for artwork object POST`, result.rows);
         res.sendStatus(201);
