@@ -102,7 +102,7 @@ function ImageHeader({ artItem }) {
                                 <b>{artItem.name}</b>
                                     <IconButton>
                                         <VisibilityIcon
-                                            color="secondary"
+                                            color="primary"
                                             variant="contained"
                                             value="check"
                                             selected={selected}
@@ -122,7 +122,7 @@ function ImageHeader({ artItem }) {
                             <b>{artItem.name}</b>
                             <IconButton>
                                 <VisibilityIcon
-                                    color="secondary"
+                                    color="primary"
                                     variant="contained"
                                     value="check"
                                     selected={selected}
