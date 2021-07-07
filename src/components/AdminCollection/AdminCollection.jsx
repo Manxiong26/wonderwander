@@ -422,8 +422,7 @@ function AdminCollection() {
                     variant="outlined"
                     placeholder="Donation URL"
                     label="Donation URL"
-                    value={donate_link}
-                    onClick={() => setDonateLink("stpaulcollection.com")}
+                    value={donate_link}     
                     onChange={(event) => setDonateLink(event.target.value)}
                   />
                   <TextField

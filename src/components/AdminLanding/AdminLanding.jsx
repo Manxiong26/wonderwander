@@ -38,8 +38,7 @@ function AdminLanding() {
               put it in 'draft' mode which will not be publicly viewable
             </li>
             <li>
-              The ability to add new administrators using the 'ADD ADMIN' button
-              on the top right
+              The ability to add new administrators using the 'ADD ADMIN' button below.
             </li>
           </ul>
           <div style={{ display: "flex" }}>
