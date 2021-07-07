@@ -20,7 +20,7 @@ CREATE TABLE "sponsor" (
 	"site_link" varchar(5000),
 	"donate_link" varchar(5000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
-	);
+);
 	
 CREATE TABLE "collection" (
 	"id" serial primary key NOT NULL,
@@ -34,8 +34,6 @@ CREATE TABLE "collection" (
 	"search_text" varchar(500),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
-
-
 	
 CREATE TABLE "artist" (
 	"id" serial primary key NOT NULL,
@@ -44,9 +42,7 @@ CREATE TABLE "artist" (
 	"bio" varchar(10000),
 	"site_link" varchar(5000),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
-	);
-
-
+);
 	
 CREATE TABLE "artwork" (
 	"id" serial primary key NOT NULL,
@@ -58,26 +54,23 @@ CREATE TABLE "artwork" (
 	"description" varchar(5000),
 	"vid_link" varchar(5000),
 	"vid_description" varchar(5000),
-	"artist_id" INT REFERENCES "artist",
-	"sponsor_id" INT REFERENCES "sponsor",
-	"collection_id" INT REFERENCES "collection",
+	"artist_id" INT REFERENCES "artist" ON DELETE CASCADE,
+	"sponsor_id" INT REFERENCES "sponsor" ON DELETE CASCADE,
+	"collection_id" INT REFERENCES "collection" ON DELETE CASCADE,
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
-	);
-	
+);	
 
 CREATE TABLE "favorites" (
 	"id" SERIAL PRIMARY KEY,
-	"users_id" INT REFERENCES "users" NOT NULL,
-	"artwork_id" INT REFERENCES "artwork" NOT NULL
+	"users_id" INT REFERENCES "users" NOT NULL ON DELETE CASCADE,
+	"artwork_id" INT REFERENCES "artwork" NOT NULL ON DELETE CASCADE
 );
-
 
 CREATE TABLE "artwork_seen" (
 	"id" SERIAL PRIMARY KEY,
-	"users_id" INT REFERENCES "users" NOT NULL,
-	"artwork_id" INT REFERENCES "artwork" NOT NULL
+	"users_id" INT REFERENCES "users" NOT NULL ON DELETE CASCADE,
+	"artwork_id" INT REFERENCES "artwork" NOT NULL ON DELETE CASCADE
 );
-
 
 CREATE TABLE "quotes" (
 	"id" SERIAL PRIMARY KEY,
@@ -85,6 +78,7 @@ CREATE TABLE "quotes" (
 	"quote_by" varchar(100),
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
+
 CREATE TABLE "say" (
 	"id" SERIAL PRIMARY KEY,
 	"prompts" varchar(255) NOT NULL,
@@ -99,34 +93,29 @@ CREATE TABLE "activities" (
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
 
-
-
 CREATE TABLE "say_poll" (
 	"id" SERIAL PRIMARY KEY,
-	"say_id" INT NOT NULL REFERENCES "say",
-	"artwork_id" INT NOT NULL REFERENCES "artwork"
+	"say_id" INT NOT NULL REFERENCES "say" ON DELETE CASCADE,
+	"artwork_id" INT NOT NULL REFERENCES "artwork" ON DELETE CASCADE
 );
 
 CREATE TABLE "do" (
 	"id" SERIAL PRIMARY KEY,
 	"prompts" varchar(5000) NOT NULL,
-	"artwork_id" INT REFERENCES "artwork",
-	"activity_id" INT REFERENCES "activities",
+	"artwork_id" INT REFERENCES "artwork" ON DELETE CASCADE,
+	"activity_id" INT REFERENCES "activities" ON DELETE CASCADE,
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 );
-
 	
 CREATE TABLE "see" (
 	"id" SERIAL PRIMARY KEY,
 	"prompts" varchar(5000) NOT NULL,
 	"link" varchar(5000),
 	"image" varchar(5000),
-	"artwork_id" INT REFERENCES "artwork",
-	"activity_id" INT REFERENCES "activities",
+	"artwork_id" INT REFERENCES "artwork" ON DELETE CASCADE,
+	"activity_id" INT REFERENCES "activities" ON DELETE CASCADE,
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 ); 
-
-
 
 --- TEST DATA ---
 INSERT INTO sponsor ("name", "logo", "description", "site_link", "published")
@@ -159,12 +148,10 @@ VALUES ('John Doe', 'https://i.ytimg.com/vi/LguXG80DezY/maxresdefault.jpg', 'A t
 	   ('Nicholas Legeros', 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Nicholas_Legeros%2C_sculptor.jpg', 'Nicholas Legeros has a Masters of Fine Arts degree from the University of Minnesota. For over twenty years he was an Artist-in-Residence and instructor at the Minnetonka Center for the Arts. He also taught at Metropolitan State University, Breck Schools, and the Edina Art Center. Eleven years ago Mr. Legeros left teaching to pursue a full-time career as a sculptor. His recent large commissions include a statue of Goldy Gopher for Coffman Union; Sid Hartman for the Target Center; and a 17 ft. high statue of St. Joseph for St. Joseph''s Hospital. Mr. Legeros served on the board of the Northeast Minneapolis Arts Association (NEMAA) for seven years (three as President) and five years on the board of the Northeast Community Development Corporation.', 'http://nikosculpture.com/', 'true');
 
 INSERT INTO artwork ("name", "year", "lat", "lng", "image", "description", "vid_link", "vid_description", "artist_id", "sponsor_id", "collection_id", "published")
-VALUES ('I see what you mean', 'year', '39.743605', '-104.995274', 'https://upload.wikimedia.org/wikipedia/en/8/82/I_See_What_You_Mean_LCCN2015633445.jpg', 'The 40-foot tall Blue Bear, designed by Lawrence Argent is formally named "I See What You Mean™." The Bear can be found peering into the Colorado Convention Center and has become a favorite of tourists and locals alike. Argent felt it important to focus on what it is like to be a resident in Denver when a convention is taking place. "I''m always interested in what might be going on in there, the exchange of information, ideas, and ideologies but there''s never really any indication from the outside what''s going on inside." In the process of brainstorming, the city was going through a period of drought and bears would venture into the city. After seeing a photo of a black bear looking into someone''s window from a local newspaper, Argent saw the ultimate resemblance of "curiosity" and the idea of a curious bear never left his mind. Now that the idea of a bear came into play, Mr. Argent wanted his bear to have a unique texture similar to the toys his sons played with which inspired the idea of a toy bear look. In presenting the concept to the selection committee, the blue 3D modeling clay he used intrigued everyone so much that it ultimately became the bear''s trademark. With combining Argent''s passion for regional western art with a non-resident''s perspective of curiosity, the story of how the Colorado Convention Center''s Blue Bear known as I See What You Mean has not only become one of the iconic symbols of the Colorado Convention Center, but also an iconic symbol of the city itself.',
-		null, null, 4, null, null, 'true'),
-	   ('Venus in Ventus', 'year', '44.950106', '-93.297017', 'https://i2.wp.com/ackerberg.com/wp-content/uploads/2014/11/Bronzes1.jpg?resize=350%2C350&ssl=1', 'Love on the Wind. The sculptures that I like to make and that define me as an artist are those of women, torn open and illusive, expressing a range of strong, uplifting emotions. My inspiration does not strike like lightning, rather it reveals itself to me as the sculpted form takes shape in my hands. Venus in Ventus began with the intent of depicting the emotion of joy, but in the end, became the messenger of love, taking flight on the winds. Venus" after the Roman goddess of love and beauty: "In Ventus" meaning "on the wind". Love on the wind is what our world needs and what my sculptures express.  Heidi Hoy',
-	    null, null, 3, 1, 2, 'true'),
+VALUES ('I see what you mean', 'year', '39.743605', '-104.995274', 'https://upload.wikimedia.org/wikipedia/en/8/82/I_See_What_You_Mean_LCCN2015633445.jpg', 'The 40-foot tall Blue Bear, designed by Lawrence Argent is formally named "I See What You Mean™." The Bear can be found peering into the Colorado Convention Center and has become a favorite of tourists and locals alike. Argent felt it important to focus on what it is like to be a resident in Denver when a convention is taking place. "I''m always interested in what might be going on in there, the exchange of information, ideas, and ideologies but there''s never really any indication from the outside what''s going on inside." In the process of brainstorming, the city was going through a period of drought and bears would venture into the city. After seeing a photo of a black bear looking into someone''s window from a local newspaper, Argent saw the ultimate resemblance of "curiosity" and the idea of a curious bear never left his mind. Now that the idea of a bear came into play, Mr. Argent wanted his bear to have a unique texture similar to the toys his sons played with which inspired the idea of a toy bear look. In presenting the concept to the selection committee, the blue 3D modeling clay he used intrigued everyone so much that it ultimately became the bear''s trademark. With combining Argent''s passion for regional western art with a non-resident''s perspective of curiosity, the story of how the Colorado Convention Center''s Blue Bear known as I See What You Mean has not only become one of the iconic symbols of the Colorado Convention Center, but also an iconic symbol of the city itself.', null, null, 4, null, null, 'true'),
+	   ('Venus in Ventus', 'year', '44.950106', '-93.297017', 'https://i2.wp.com/ackerberg.com/wp-content/uploads/2014/11/Bronzes1.jpg?resize=350%2C350&ssl=1', 'Love on the Wind. The sculptures that I like to make and that define me as an artist are those of women, torn open and illusive, expressing a range of strong, uplifting emotions. My inspiration does not strike like lightning, rather it reveals itself to me as the sculpted form takes shape in my hands. Venus in Ventus began with the intent of depicting the emotion of joy, but in the end, became the messenger of love, taking flight on the winds. Venus" after the Roman goddess of love and beauty: "In Ventus" meaning "on the wind". Love on the wind is what our world needs and what my sculptures express.  Heidi Hoy', null, null, 3, 1, 2, 'true'),
 	   ('Mona Lisa', '1503', '44.9681', '93.2886', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg', 'A simple picture during simpler times', 'monalisa.com', 'This has literally nothing to do with the painting', 1, 1, 1, 'true'),
-('Leap of Faith', 'year', '27.447635604171282', '-80.32600106994082', 'https://artstlucie.org/wp-content/uploads/2018/08/Taking-the-Dive.jpg', 'In 2009, after entering a competition for a work of art for the new downtown Ft. Pierce parking garage. Pat Cochran was awarded the commission . The piece represents our beautiful city, Ft. Pierce, the oldest city on the treasure coast, having seen its share of history, but looking into a prophetic rosy future.  Leap of Faith took four months to complete and consists of 3,000 pounds of bronze.', null, null, 2, 1, null, 'true'),
+	   ('Leap of Faith', 'year', '27.447635604171282', '-80.32600106994082', 'https://artstlucie.org/wp-content/uploads/2018/08/Taking-the-Dive.jpg', 'In 2009, after entering a competition for a work of art for the new downtown Ft. Pierce parking garage. Pat Cochran was awarded the commission . The piece represents our beautiful city, Ft. Pierce, the oldest city on the treasure coast, having seen its share of history, but looking into a prophetic rosy future.  Leap of Faith took four months to complete and consists of 3,000 pounds of bronze.', null, null, 2, 1, null, 'true'),
 	   ('Spaulding', 'year', '44.91189153397999', '-93.32904656902083', 'https://www.edinamn.gov/ImageRepository/Document?documentID=1216', 'A bronze sculpture of a dog.', 'https://youtu.be/sY6TXeM9PnU', 'Heidi Hoy: Foundry Dance', 3, 2, 3, 'true'),
 	   ('School of (Fish)', '2019', '44.864413', '-93.326561666', 'https://www.edinamn.gov/ImageRepository/Document?documentID=7500', '2019, Bronze, Steel, Glass', null, null, '5', '3', null, 'true'),
 	   ('A Reflection of Me', '2018', '44.874586', '-93.325344', 'https://www.edinamn.gov/ImageRepository/Document?documentID=5539', 'This bronze figure is 48in and is placed on a 1ft pedestal. It has a predominantly matte finish except for the mirror-like high polish on the face and heart. The sculpture you see is a large scale replica of the  student artist''s original maquette designed for a district wide elementary school call for art with the theme, "I am".', null, null, null, 4, null, 'true'),
