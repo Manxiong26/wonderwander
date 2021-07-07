@@ -7,6 +7,7 @@ function AboutPage() {
   const classes = useStyles();
   const goEmail = () => {
     window.location.href = `mailto:${email}`;
+    console.log('click');
   }
 
   return (
