@@ -70,7 +70,7 @@ function AdminArtwork({ truncateString }) {
   //redux store instances
   const artworkList = useSelector((store) => store.adminArtworkListReducer);
   const artwork = useSelector((store) => store.adminArtworkInfoReducer);
-  console.log("artwork reducer id:", artwork.id);
+  // console.log("artwork reducer id:", artwork.id);
 
   const artistList = useSelector((store) => store.adminArtistListReducer);
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
@@ -79,7 +79,7 @@ function AdminArtwork({ truncateString }) {
   );
 
   const seeList = useSelector((store) => store.adminSeeListArtworkReducer);
-  console.log("seeList reducer: ", seeList);
+  // console.log("seeList reducer: ", seeList);
   const see = useSelector((store) => store.adminSeeInfoReducer);
   const doList = useSelector((store) => store.adminDoListArtworkReducer);
   const doItem = useSelector((store) => store.adminDoReducer);

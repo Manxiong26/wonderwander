@@ -72,6 +72,21 @@ router.get('/:id/do', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 //adds new artwork to the DB from admin artwork page
 router.post('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     let artwork = req.body;
+    if( artwork.lat === '' ) {
+        artwork.lat = null
+    }
+    if( artwork.lng === '' ) {
+        artwork.lng = null
+    }
+    if( artwork.artist_id === '' ) {
+        artwork.artist_id = null
+    }
+    if( artwork.sponsor_id === '' ) {
+        artwork.sponsor_id = null
+    }
+    if( artwork.collection_id === '' ) {
+        artwork.collection_id = null
+    }
     
     const query  = `INSERT INTO "artwork" ("name", "year", "lat", "lng", "image", 
                     "description", "vid_link", "vid_description", "artist_id", 
@@ -83,10 +98,10 @@ router.post('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
                     artwork.vid_description, artwork.artist_id, artwork.sponsor_id, 
                     artwork.collection_id])
     .then(result => {
-        console.log('new artwork object POST', result.rows);
+        // console.log('new artwork object POST');
         res.sendStatus(201);
     }).catch (error => {
-        console.log(error);
+        console.log('Error adding artwork to DB: ', error);
         res.sendStatus(500)
     })
 
