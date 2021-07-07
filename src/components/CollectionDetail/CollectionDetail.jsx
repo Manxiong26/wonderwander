@@ -97,7 +97,7 @@ function CollectionDetail({ userLat, userLng }) {
                         <Typography variant="h6" className={classes.redCenter}>
                             ArtWork
                         </Typography>
-                        {collectionDet[0].art_work_id === null ? (<Typography className={classes.center}>This collection does not contain any artwork.</Typography>) :
+                        {collectionDet[0].art_work_id === null ? ( <Typography className={classes.center}>This collection does not contain any artwork.</Typography>) :
                         (
                         <div >
                             {collectionDet.map(artDet => {
