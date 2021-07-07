@@ -693,7 +693,6 @@ function AdminArtAdventure({truncateString}) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Adventure</InputLabel>
                       <Select
-                        required
                         value={adventure_id}
                         onChange={(e) => setAdventureId(e.target.value)}
                       >
@@ -751,7 +750,6 @@ function AdminArtAdventure({truncateString}) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Adventure</InputLabel>
                       <Select
-                        required
                         value={adventure_id}
                         onChange={(e) => setAdventureId(e.target.value)}
                       >

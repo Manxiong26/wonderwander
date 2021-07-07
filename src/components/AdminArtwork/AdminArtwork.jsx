@@ -583,8 +583,6 @@ function AdminArtwork({ truncateString }) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Artist</InputLabel>
                       <Select
-                        required
-                        id="type"
                         value={artist_id}
                         onChange={(e) => setArtistId(e.target.value)}
                       >
@@ -601,8 +599,6 @@ function AdminArtwork({ truncateString }) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Sponsor</InputLabel>
                       <Select
-                        required
-                        id="type"
                         value={sponsor_id}
                         onChange={(e) => setSponsorId(e.target.value)}
                       >
@@ -619,8 +615,6 @@ function AdminArtwork({ truncateString }) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Collection</InputLabel>
                       <Select
-                        required
-                        id="type"
                         value={collection_id}
                         onChange={(e) => setCollectionId(e.target.value)}
                       >
@@ -887,8 +881,6 @@ function AdminArtwork({ truncateString }) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Artist</InputLabel>
                       <Select
-                        required
-                        id="type"
                         value={artist_id}
                         onChange={(e) => setArtistId(e.target.value)}
                       >
@@ -905,8 +897,6 @@ function AdminArtwork({ truncateString }) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Sponsor</InputLabel>
                       <Select
-                        required
-                        id="type"
                         value={sponsor_id}
                         onChange={(e) => setSponsorId(e.target.value)}
                       >
@@ -923,8 +913,6 @@ function AdminArtwork({ truncateString }) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Collection</InputLabel>
                       <Select
-                        required
-                        id="type"
                         value={collection_id}
                         onChange={(e) => setCollectionId(e.target.value)}
                       >
@@ -1006,7 +994,6 @@ function AdminArtwork({ truncateString }) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Artwork</InputLabel>
                       <Select
-                        required
                         value={artwork_id}
                         onChange={(e) => setArtworkId(e.target.value)}
                       >
@@ -1066,8 +1053,6 @@ function AdminArtwork({ truncateString }) {
                     <FormControl className={classes.inputs}>
                       <InputLabel>Artwork</InputLabel>
                       <Select
-                        required
-                        id="type"
                         value={artwork_id}
                         onChange={(e) => setArtworkId(e.target.value)}
                       >
