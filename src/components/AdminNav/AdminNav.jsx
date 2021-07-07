@@ -32,10 +32,15 @@ const AdminNav = () => {
         history.push('/admin/quote')
     }
 
+    const toHome = () => {
+        history.push('/admin/landing')
+    }
+
 
     return(
         <Grid container>
         <Grid direction="row" xs={12} sm={12} item className={classes.adminNav}>
+        <Button onClick={() => toHome()}>Home</Button>
         <Button onClick={() => toArtist()}>Artist</Button>
         <Button onClick={() => toCollection()}>Collection</Button>
         <Button onClick={() => toSponsor()}>Sponsor</Button>

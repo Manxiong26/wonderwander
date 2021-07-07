@@ -107,6 +107,13 @@ function App() {
     const user = useSelector(store => store.user);
     console.log('Logged in user: ', user)
 
+    const truncateString = (str, num) => {
+      if (str.length <= num) {
+        return str
+      }
+      return str.slice(0, num) + '...'
+    }
+
     
 
   return (
@@ -227,7 +234,7 @@ function App() {
               exact
               path="/admin/artwork"
             >
-              <AdminArtwork />
+              <AdminArtwork truncateString={truncateString}/>
             </ProtectedRoute>
 
             <ProtectedRoute

@@ -97,7 +97,7 @@ const ArtistDetail = () => {
                                                 <>
                                                     <ListItem key={i}>
                                                         <ListItemAvatar>
-                                                            <Avatar variant="square" src={item.art_pic} />
+                                                            <Avatar src={item.art_pic} />
                                                         </ListItemAvatar>
                                                         <ListItemText
                                                             primary={item.title}

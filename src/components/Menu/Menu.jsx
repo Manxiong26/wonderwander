@@ -129,9 +129,9 @@ function Menu() {
     setOpen(false);
   };
 
-  const toAdminRegister = () => {
-    history.push('/admin/register')
-  }
+  // const toAdminRegister = () => {
+  //   history.push('/admin/register')
+  // }
 
   return (
     <>
@@ -156,10 +156,10 @@ function Menu() {
             <Typography className={classes.title} variant="h6" noWrap>
               Wonder Wander
             </Typography>
-            {user.admin &&
+            {/* {user.admin &&
               <Button variant="outlined" onClick={toAdminRegister}>
                 <Typography style={{ color: 'white' }}>Add Admin</Typography>
-              </Button>}
+              </Button>} */}
           </Toolbar>
         </AppBar>
         <Drawer

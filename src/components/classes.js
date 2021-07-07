@@ -50,6 +50,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '5%',
 
   },
+  imageContainer: {
+    height: '150px', 
+    width: '150px',
+    marginRight: 'auto',
+    marginLeft: 'auto'
+  },
   bigImage: {
     maxWidth: '360px',
     maxHeight: '360px',
@@ -270,6 +276,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     paddingBottom: '5%'
     
+  },
+  loginBtn: {
+     
   }
 }));
 

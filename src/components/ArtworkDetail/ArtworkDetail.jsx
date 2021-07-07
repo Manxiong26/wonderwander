@@ -20,6 +20,9 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 function ArtworkDetail({ userLat, userLng }) {
     const artItem = useSelector((store) => store.artworkDetailReducer);
+    const user = useSelector(store => store.user)
+    console.log('User: ', user.id)
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -33,8 +36,10 @@ function ArtworkDetail({ userLat, userLng }) {
       
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_ART_DETAIL', payload: id })
-        dispatch({ type: 'CLEAR_SPONSOR_DETAILS' })
+        dispatch({ type: 'FETCH_ART_DETAIL', payload: id });
+        dispatch({ type: 'FETCH_VIEWED_ART' });
+        dispatch({ type: 'CLEAR_SPONSOR_DETAILS' });
+        
     }, []);
 
     console.log('Artwork Detail Item: ', artItem);
