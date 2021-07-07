@@ -116,7 +116,7 @@ function SponsorDetail({ userLat, userLng }) {
                                                 />
                                                 <IconButton>
                                                     <ArrowForwardIosIcon
-                                                    onClick={(event) => toArt(event, art.art_work_id)}
+                                                    onClick={(event) => toArt(event, art.id)}
                                                     
                                                     />
                                                 </IconButton>
