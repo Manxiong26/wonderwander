@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
-import AdminNav from '../AdminNav/AdminNav'
-import { useStyles } from '../classes'
-import ImageUpload from '../ImageUpload/ImageUpload';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
+import AdminNav from "../AdminNav/AdminNav";
+import { useStyles } from "../classes";
+import ImageUpload from "../ImageUpload/ImageUpload";
 
 import {
   Button,
@@ -27,40 +27,44 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
 function AdminCollection() {
-
   let { id } = useParams();
+  //console.log(id);
 
+  //functionality to route to a page
   const history = useHistory();
+
+  //functionality to dispatch information to a saga or reducer
+  const dispatch = useDispatch();
 
   const classes = useStyles();
 
-  const dispatch = useDispatch();
-
-  //redux store instances 
-  const collectionList = useSelector((store) => store.adminCollectionListReducer);
+  //redux store instances
+  const collectionList = useSelector(
+    (store) => store.adminCollectionListReducer
+  );
   const collection = useSelector((store) => store.adminCollectionInfoReducer);
+  console.log("collection reducer id:", collection.id);
 
   //retrieves collections' info from DB
   useEffect(() => {
-    dispatch({ type: 'FETCH_COLLECTION_LIST' });
+    dispatch({ type: "FETCH_COLLECTION_LIST" });
   }, []);
 
   //sets local state for post request
-  const [name, setName] = useState('');
-  const [image, setImage] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [bio, setBio] = useState('');
-  const [donate_link, setDonateLink] = useState('');
-  const [site_link, setSiteLink] = useState('');
-  const [search_text, setSearchText] = useState('');
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [bio, setBio] = useState("");
+  const [donate_link, setDonateLink] = useState("");
+  const [site_link, setSiteLink] = useState("");
+  const [search_text, setSearchText] = useState("");
 
   //edit mode
   const [editMode, setEditMode] = useState(false);
 
-  //Collection post to saga
+  //post to saga
   const addCollection = () => {
-
     //create object to send
     const newCollection = {
       name: name,
@@ -71,36 +75,37 @@ function AdminCollection() {
       donate_link: donate_link,
       site_link: site_link,
       search_text: search_text,
-    }
+    };
 
     //dispatch to collectionList saga
-    dispatch({ type: 'ADD_COLLECTION', payload: newCollection });
+    dispatch({ type: "ADD_COLLECTION", payload: newCollection });
 
     //alert successful post
     swal({
       text: "This collection has been added to your list!",
-      icon: "success"
+      icon: "success",
     });
 
     //updates collection list on DOM
-    dispatch({ type: 'FETCH_COLLECTION_LIST' });
+    dispatch({ type: "FETCH_COLLECTION_LIST" });
 
     //clears input fields
-    setName('');
-    setImage('');
-    setCity('');
-    setState('');
-    setBio('');
-    setDonateLink('');
-    setSiteLink('');
-    setSearchText('');
-  }
+    setName("");
+    setImage("");
+    setCity("");
+    setState("");
+    setBio("");
+    setDonateLink("");
+    setSiteLink("");
+    setSearchText("");
+  };
 
   //renders specific collections's details in input feilds to edit
   const renderCollectionDetail = (event, item) => {
+    console.log("clicking edit for Collection = ", item);
 
-    //sets specific collection in artist reducer 
-    dispatch({ type: 'SET_COLLECTION_INFO', payload: item }); // 
+    //sets specific collection in artist reducer
+    dispatch({ type: "SET_COLLECTION_INFO", payload: item }); //
 
     //renders form view from add to edit mode
     setEditMode(true);
@@ -114,11 +119,10 @@ function AdminCollection() {
     setDonateLink(item.donate_link);
     setSiteLink(item.site_link);
     setSearchText(item.search_text);
-  }
+  };
 
   //update (edit) collection information
   const updateCollectionInfo = () => {
-
     //create updated collection object
     const updatedCollectionInfo = {
       id: collection.id,
@@ -130,65 +134,71 @@ function AdminCollection() {
       donate_link: donate_link,
       site_link: site_link,
       search_text: search_text,
-    }
+    };
+
+    console.log("updated collection info:", updatedCollectionInfo);
 
     //send updated collection info to collection saga
-    dispatch({ type: 'UPDATE_COLLECTION_INFO', payload: updatedCollectionInfo });
+    dispatch({
+      type: "UPDATE_COLLECTION_INFO",
+      payload: updatedCollectionInfo,
+    });
 
     //swal success indicator
     swal({
       text: "This Collection's information has been updated!",
-      icon: "success"
+      icon: "success",
     });
 
     //turn editMode off
     setEditMode(false);
 
     //clears input fields
-    setName('');
-    setImage('');
-    setCity('');
-    setState('');
-    setBio('');
-    setDonateLink('');
-    setSiteLink('');
-    setSearchText('');
-  }
+    setName("");
+    setImage("");
+    setCity("");
+    setState("");
+    setBio("");
+    setDonateLink("");
+    setSiteLink("");
+    setSearchText("");
+  };
 
   //cancel (editMode) button - returns to add collection form
   const renderToInfo = () => {
-
     setEditMode(false);
 
     //clears input fields
-    setName('');
-    setImage('');
-    setCity('');
-    setState('');
-    setBio('');
-    setDonateLink('');
-    setSiteLink('');
-    setSearchText('');
-  }
+    setName("");
+    setImage("");
+    setCity("");
+    setState("");
+    setBio("");
+    setDonateLink("");
+    setSiteLink("");
+    setSearchText("");
+  };
 
-  //delete collection 
+  //delete collection
   const deleteCollection = (id) => {
+    console.log("deleting collection:", id);
 
-    //dispatch to saga w collection id 
-    dispatch({ type: 'DELETE_COLLECTION', payload: id })
-  }
+    //dispatch to saga w collection id
+    dispatch({ type: "DELETE_COLLECTION", payload: id });
+  };
 
   //alerts admin to verify collection deletion
   const deleteValidation = (id) => {
+    console.log("delete clicked! id = ", id);
 
     swal({
       title: "Hello!",
       text: "Are you sure you want to PERMANENTLY delete this collection?",
       buttons: {
         cancel: true,
-        confirm: "Delete"
-      }
-    }).then(val => {
+        confirm: "Delete",
+      },
+    }).then((val) => {
       if (val) {
         swal({
           text: "You've deleted this collection.",
@@ -196,7 +206,7 @@ function AdminCollection() {
         deleteCollection(id);
       }
     });
-  }
+  };
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publish = (event, item) => {
@@ -204,7 +214,7 @@ function AdminCollection() {
     //sets specific artist in artist reducer
     dispatch({ type: "SET_COLLECTION_INFO", payload: item });
 
-    let pubObject
+    let pubObject;
 
     if (item.published === true) {
       //changes item boolean to true
@@ -221,19 +231,23 @@ function AdminCollection() {
 
     //sends updated artist boolean (published/unpublished) to collection saga
     dispatch({ type: "UPDATE_PUBLISH_COLLECTION", payload: pubObject });
-
   };
 
   return (
     <>
       <AdminNav />
       <Grid container spacing={1} direction="row">
-        {editMode ?
-          // Edit Collection Form
+        {editMode ? (
           <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
               <div className={classes.cardContent}>
-                <Typography className={classes.title} align="center" variant="h4">Edit Collection</Typography>
+                <Typography
+                  className={classes.title}
+                  align="center"
+                  variant="h4"
+                >
+                  Edit Collection
+                </Typography>
                 <form className={classes.form} onSubmit={updateCollectionInfo}>
                   <TextField
                     className={classes.inputs}
@@ -312,20 +326,42 @@ function AdminCollection() {
 
                   {/* <ImageUpload /> */}
 
-                  <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Update">Update</Button>
-                  <Button className={classes.formBtn} variant="outlined" onClick={renderToInfo}>Cancel</Button>
+                  {/* TODO - Add Image Upload Component here */}
+
+                  <Button
+                    className={classes.formBtn}
+                    type="submit"
+                    name="submit"
+                    variant="outlined"
+                    value="Update"
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    className={classes.formBtn}
+                    variant="outlined"
+                    onClick={renderToInfo}
+                  >
+                    Cancel
+                  </Button>
                 </form>
               </div>
             </Card>
           </Grid>
-          :
-          // Add Collection Form
+        ) : (
           <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
               <div className={classes.cardContent}>
-                <Typography className={classes.title} align="center" variant="h4">Add Collection</Typography>
+                <Typography
+                  className={classes.title}
+                  align="center"
+                  variant="h4"
+                >
+                  Add Collection
+                </Typography>
                 <form className={classes.form} onSubmit={addCollection}>
-                  <TextField type="text"
+                  <TextField
+                    type="text"
                     className={classes.inputs}
                     variant="outlined"
                     placeholder="Collection Name"
@@ -333,7 +369,8 @@ function AdminCollection() {
                     value={name}
                     onChange={(event) => setName(event.target.value)}
                   />
-                  <TextField type="text"
+                  <TextField
+                    type="text"
                     className={classes.inputs}
                     variant="outlined"
                     placeholder="Image URL"
@@ -341,7 +378,8 @@ function AdminCollection() {
                     value={image}
                     onChange={(event) => setImage(event.target.value)}
                   />
-                  <TextField type="text"
+                  <TextField
+                    type="text"
                     className={classes.inputs}
                     variant="outlined"
                     placeholder="City"
@@ -349,7 +387,8 @@ function AdminCollection() {
                     value={city}
                     onChange={(event) => setCity(event.target.value)}
                   />
-                  <TextField type="text"
+                  <TextField
+                    type="text"
                     className={classes.inputs}
                     variant="outlined"
                     placeholder="State"
@@ -357,7 +396,8 @@ function AdminCollection() {
                     value={state}
                     onChange={(event) => setState(event.target.value)}
                   />
-                  <TextField type="text"
+                  <TextField
+                    type="text"
                     className={classes.inputs}
                     variant="outlined"
                     placeholder="Collection Bio"
@@ -367,15 +407,17 @@ function AdminCollection() {
                     value={bio}
                     onChange={(event) => setBio(event.target.value)}
                   />
-                  <TextField type="text"
+                  <TextField
+                    type="text"
                     className={classes.inputs}
                     variant="outlined"
                     placeholder="Donation URL"
                     label="Donation URL"
-                    value={donate_link}
+                    value={donate_link}     
                     onChange={(event) => setDonateLink(event.target.value)}
                   />
-                  <TextField type="text"
+                  <TextField
+                    type="text"
                     className={classes.inputs}
                     variant="outlined"
                     placeholder="Website URL"
@@ -383,7 +425,8 @@ function AdminCollection() {
                     value={site_link}
                     onChange={(event) => setSiteLink(event.target.value)}
                   />
-                  <TextField type="text"
+                  <TextField
+                    type="text"
                     className={classes.inputs}
                     variant="outlined"
                     placeholder="Search Text"
@@ -393,12 +436,20 @@ function AdminCollection() {
                   />
 
                   {/* <ImageUpload /> */}
-
-                  <Button className={classes.formBtn} type="submit" name="submit" variant="outlined" value="Submit">Submit</Button>
+                  <Button
+                    className={classes.formBtn}
+                    type="submit"
+                    name="submit"
+                    variant="outlined"
+                    value="Submit"
+                  >
+                    Submit
+                  </Button>
                 </form>
               </div>
             </Card>
-          </Grid>}
+          </Grid>
+        )}
 
         {/* Collection List. Always shows. */}
         {/* Edit clickability renders a specific collections's details in the edit form */}
@@ -409,13 +460,19 @@ function AdminCollection() {
             className={classes.cardTable}
           >
             <div className={classes.tableContent}>
-              <Typography className={classes.title} align="center" variant="h4">Collection List</Typography>
+              <Typography className={classes.title} align="center" variant="h4">
+                Collection List
+              </Typography>
               <Table className={classes.table}>
                 <TableBody>
-                  {collectionList.map((item, i) =>
+                  {collectionList.map((item, i) => (
                     <TableRow alignItems="flex-start" key={i}>
                       <TableCell className={classes.thumbnailContainer}>
-                        <img src={item.image} alt="Collection Image" className={classes.thumbnail} />
+                        <img
+                          src={item.image}
+                          alt="Collection Image"
+                          className={classes.thumbnail}
+                        />
                       </TableCell>
                       <TableCell>
                         <Typography variant="body1">{item.name}</Typography>
@@ -429,7 +486,8 @@ function AdminCollection() {
                               onChange={(event) => publish(event, item)}
                               name="publish"
                               color="primary"
-                            />}
+                            />
+                          }
                           labelPlacement="top"
                           label="Publish"
                         />
@@ -439,7 +497,9 @@ function AdminCollection() {
                           <EditIcon
                             className={classes.btn}
                             variant="outlined"
-                            onClick={(event) => renderCollectionDetail(event, item)}
+                            onClick={(event) =>
+                              renderCollectionDetail(event, item)
+                            }
                           />
                         </IconButton>
                       </TableCell>
@@ -454,7 +514,7 @@ function AdminCollection() {
                         </IconButton>
                       </TableCell>
                     </TableRow>
-                  )}
+                  ))}
                 </TableBody>
               </Table>
             </div>

@@ -87,19 +87,19 @@ function* addSee(action) {
 }
 
 function* updatePublishSee(action) {
-  try {
-    yield axios.put(`/api/admin/art-adventure/see/publish/${action.payload.id}`, action.payload);
-    yield put({ type: 'FETCH_SEE_LIST' });
-    yield put({ type: 'CLEAR_SEE' });
+  try{
+    yield axios.put(`/api/admin/art-adventure/see/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_SEE_LIST', payload: action.payload.activity_id }); 
+    yield put({type: 'CLEAR_SEE'});
   } catch (error) {
     console.log('Error updating see publish: ', error);
   }
 }
 
 function* deleteSee(action) {
-  try {
-    yield axios.delete(`/api/admin/art-adventure/see/${action.payload}`);
-    yield put({ type: 'FETCH_SEE_LIST' });
+  try{
+      yield axios.delete(`/api/admin/art-adventure/see/${action.payload.id}`); 
+      yield put({type: 'FETCH_SEE_LIST', payload: action.payload.activity_id }); 
   } catch (error) {
     console.log('Error deleting see: ', error);
   }
@@ -133,19 +133,19 @@ function* addDo(action) {
 }
 
 function* updatePublishDo(action) {
-  try {
-    yield axios.put(`/api/admin/art-adventure/do/publish/${action.payload.id}`, action.payload);
-    yield put({ type: 'FETCH_DO_LIST' });
-    yield put({ type: 'CLEAR_DO' });
+  try{
+    yield axios.put(`/api/admin/art-adventure/do/publish/${action.payload.id}`, action.payload); 
+    yield put({type: 'FETCH_DO_LIST', payload: action.payload.activity_id}); 
+    yield put({type: 'CLEAR_DO'});
   } catch (error) {
     console.log('Error updating Do publish: ', error);
   }
 }
 
 function* deleteDo(action) {
-  try {
-    yield axios.delete(`/api/admin/art-adventure/do/${action.payload}`);
-    yield put({ type: 'FETCH_DO_LIST' });
+  try{
+      yield axios.delete(`/api/admin/art-adventure/do/${action.payload.id}`); 
+      yield put({type: 'FETCH_DO_LIST', payload: action.payload.activity_id}); 
   } catch (error) {
     console.log('Error deleting do: ', error);
   }

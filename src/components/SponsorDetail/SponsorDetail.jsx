@@ -41,7 +41,7 @@ function SponsorDetail({ userLat, userLng }) {
 
     const toArt = (event, art) => {
         event.preventDefault();
-        history.push(`/artworkdetail/${art.id}`)
+        history.push(`/artworkdetail/${art}`)
     };
 
     const { id } = useParams();
@@ -116,8 +116,7 @@ function SponsorDetail({ userLat, userLng }) {
                                                 />
                                                 <IconButton>
                                                     <ArrowForwardIosIcon
-                                                    //IAN THIS IS WHERE YOUR VIEW ARTWORKDETAIL BUTTON WILL GO 
-                                                    // onClick={(event) => viewArtworkDetail(event, art.art_work_id)}
+                                                    onClick={(event) => toArt(event, art.id)}
                                                     
                                                     />
                                                 </IconButton>

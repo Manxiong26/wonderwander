@@ -37,17 +37,15 @@ router.get('/:id', (req, res) => {
 console.log('CHECKING THE ID', req.params);
 
 
-    let sqlText = `SELECT collection.id, collection.image AS collection_image, 
-    collection."name" AS collection_name, collection.city, collection.state, collection.bio, 
-    collection.donate_link, collection.site_link, collection.search_text, artwork.id AS art_work_id, artwork."name" AS artwork_name, 
-    artwork."year" AS artwork_year, artwork."lat", artwork."lng", artwork.image AS artwork_image, 
+    let sqlText = `SELECT collection.id AS collection_id, collection.image AS collection_image, 
+    collection.name AS collection_name, collection.city, collection.state, collection.bio, 
+    collection.donate_link, collection.site_link, collection.search_text, artwork.id AS art_work_id, artwork.name AS artwork_name, 
+    artwork.year AS artwork_year, artwork.lat, artwork.lng, artwork.image AS artwork_image, 
     artwork.description AS artwork_description, artwork.vid_link, artwork.vid_description, 
-    artwork.artist_id, artwork.sponsor_id, artwork.collection_id, artist."name" AS artist_name, 
-    artist."image" AS artist_image, artist."bio" AS artist_bio, artist."site_link"
-    FROM artwork 
-    JOIN collection ON collection.id = artwork.collection_id
-    JOIN artist ON artist.id = artwork.artist_id
-    WHERE collection.id = $1 AND collection.published = true;`;
+    artwork.artist_id, artwork.sponsor_id, artwork.collection_id
+  FROM collection
+    LEFT OUTER JOIN artwork ON collection.id = artwork.collection_id
+  WHERE collection.id = $1 AND collection.published = true;`;
 
     pool.query(sqlText, [req.params.id])
         .then((result) => {
