@@ -34,7 +34,8 @@ const otherRouter = require('./routes/otheradventures.router');
 const adventureSeeRouter = require('./routes/adventuresee.router');
 const adventureDoRouter = require('./routes/adventuredo.router');
 const imageUrlRouter = require('./routes/imageUrl.router');
-const viewedArtRouter = require('./routes/viewedArt.router')
+const viewedArtRouter = require('./routes/viewedArt.router');
+const emailRouter = require('./routes/email.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -71,7 +72,8 @@ app.use('/api/adventure', otherRouter);
 app.use('/api/adventure/see', adventureSeeRouter);
 app.use('/api/adventure/do', adventureDoRouter);
 app.use('/api/imageurl', imageUrlRouter);
-app.use('/api/viewed', viewedArtRouter)
+app.use('/api/viewed', viewedArtRouter);
+app.use('/api/email', emailRouter);
 
 
 //route for AWS image upload

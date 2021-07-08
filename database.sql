@@ -117,6 +117,13 @@ CREATE TABLE "see" (
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
 ); 
 
+CREATE TABLE "emailSignUp" (
+	"id" SERIAL primary key NOT NULL,
+	"email" varchar(500) NOT NULL,
+	"first_name" varchar(500) NOT NULL,
+	"last_name" varchar(500) NOT NULL
+);
+
 --- TEST DATA ---
 INSERT INTO sponsor ("name", "logo", "description", "site_link", "published")
 VALUES ('The Ackerberg Group', 'https://i1.wp.com/ackerberg.com/wp-content/uploads/2015/06/logo-2.0.png?fit=2048%2C1194&ssl=1', 'description', 'site_link', 'true'),

@@ -23,8 +23,8 @@ import { Button } from '@material-ui/core';
 const drawerWidth = 240;
 
 const email = `shannon@wonderwander.art`
-const goEmail = () => {
-  window.location.href = `mailto:${email}`;
+const goEmail = (text) => {
+  window.location.href = `mailto:${email}?subject=${text}`;
 }
 
 const styles = {
@@ -200,19 +200,19 @@ function Menu() {
             </List>
           </Link>
           <List>
-            <ListItem button onClick={function () { handleDrawerClose(); goEmail(); }} key={'Contact Wonder Wander'}>
+            <ListItem button onClick={function () { handleDrawerClose(); goEmail('Hello Wonder Wander!'); }} key={'Contact Wonder Wander'}>
               <ListItemText primary={'Contact Wonder Wander'} />
             </ListItem>
           </List>
 
           <List>
-            <ListItem button onClick={function () { handleDrawerClose(); goEmail(); }} key={'Add an Art Collection'}>
+            <ListItem button onClick={function () { handleDrawerClose(); goEmail('Submit a Collection'); }} key={'Add an Art Collection'}>
               <ListItemText primary={'Add an Art Collection'} />
             </ListItem>
           </List>
 
           <List>
-            <ListItem button onClick={function () { handleDrawerClose(); goEmail(); }} key={'Become a Sponsor'}>
+            <ListItem button onClick={function () { handleDrawerClose(); goEmail('Become a Sponsor'); }} key={'Become a Sponsor'}>
               <ListItemText primary={'Become a Sponsor'} />
             </ListItem>
           </List>
