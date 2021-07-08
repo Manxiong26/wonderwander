@@ -39,9 +39,9 @@ router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
 //gets all SEEs' info for a specific artwork from DB to store in seeListArtwork reducer
 router.get('/:id/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
-
+    console.log(req.params.id)
     //returns all SEE info to reducer
-    const query = `SELECT * FROM "see" WHERE "artwork_id" = $1;`; 
+    const query = `SELECT * FROM "see" WHERE "artwork_id" = $1 ORDER BY "id";`; 
     pool.query(query, [req.params.id])
     .then(result => {
         res.send(result.rows);
@@ -57,7 +57,7 @@ router.get('/:id/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 router.get('/:id/do', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
     //returns all DO info to reducer
-    const query = `SELECT * FROM "do" WHERE "artwork_id" = $1;`; 
+    const query = `SELECT * FROM "do" WHERE "artwork_id" = $1 ORDER BY "id";`; 
     pool.query(query, [req.params.id])
     .then(result => {
         res.send(result.rows);

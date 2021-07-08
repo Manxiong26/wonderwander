@@ -91,6 +91,7 @@ function AdminArtwork({ truncateString }) {
     dispatch({ type: "FETCH_SPONSOR_LIST" });
     dispatch({ type: "FETCH_COLLECTION_LIST" });
   }, []);
+  
 
   //sets local state for post request
   const [name, setName] = useState("");
@@ -344,23 +345,73 @@ function AdminArtwork({ truncateString }) {
   };
 
   //delete see
-  const deleteSee = (event, item) => {
+  const deleteSee = (item) => {
     console.log("deleting see:", item.id);
 
+    let deleteObj = {
+      id: item.id,
+      artwork_id: item.artwork_id
+    }
+
     //dispatch to artwork saga w see id
-    dispatch({ type: "DELETE_SEE_ARTWORK", payload: item.id });
+    dispatch({ type: "DELETE_SEE_ARTWORK", payload: deleteObj });
 
     //TODO - Get updated See list
   };
 
+  const deleteSeeValidation = (item) => {
+    console.log("delete clicked! item = ", item);
+
+    swal({
+      title: "Hello!",
+      text: "Are you sure you want to PERMANENTLY delete this See prompt?",
+      buttons: {
+        cancel: true,
+        confirm: "Delete",
+      },
+    }).then((val) => {
+      if (val) {
+        swal({
+          text: "You've deleted this prompt.",
+        });
+        deleteSee(item);
+      }
+    });
+  };
+
   //delete do
-  const deleteDo = (event, item) => {
+  const deleteDo = (item) => {
     console.log("deleting do:", item.id);
 
+    let deleteObj = {
+      id: item.id,
+      artwork_id: item.artwork_id
+    }
+
     //dispatch to artwork saga w see id
-    dispatch({ type: "DELETE_DO_ARTWORK", payload: item.id });
+    dispatch({ type: "DELETE_DO_ARTWORK", payload: deleteObj });
 
     //TODO - Get updated do list
+  };
+
+  const deleteDoValidation = (item) => {
+    console.log("delete clicked! item = ", item);
+
+    swal({
+      title: "Hello!",
+      text: "Are you sure you want to PERMANENTLY delete this Do prompt?",
+      buttons: {
+        cancel: true,
+        confirm: "Delete",
+      },
+    }).then((val) => {
+      if (val) {
+        swal({
+          text: "You've deleted this prompt.",
+        });
+        deleteDo(item);
+      }
+    });
   };
 
   //changes db boolean to true which "publishes" item on public facing pages
@@ -378,21 +429,13 @@ function AdminArtwork({ truncateString }) {
         id: item.id,
         published: false,
       };
-      //swal success indicator
-      // swal({
-      //   text: "This artwork's information is now unpublished!",
-      //   icon: "success",
-      // });
+      
     } else {
       pubObject = {
         id: item.id,
         published: true,
       };
-      //swal success indicator
-      // swal({
-      //   text: "This artwork's information has been published!",
-      //   icon: "success",
-      // });
+      
     }
 
     //sends updated artwork boolean (published/unpublished) to artwork saga
@@ -413,22 +456,16 @@ function AdminArtwork({ truncateString }) {
       pubObject = {
         id: item.id,
         published: false,
+        artwork_id: item.artwork_id
       };
-      //swal success indicator
-      // swal({
-      //   text: `This 'See' is now unpublished!`,
-      //   icon: "success",
-      // });
+      
     } else {
       pubObject = {
         id: item.id,
         published: true,
+        artwork_id: item.artwork_id
       };
-      //swal success indicator
-      // swal({
-      //   text: `This 'See' has been published!`,
-      //   icon: "success",
-      // });
+      
     }
 
     //sends updated 'See' boolean (publish/unpublish) to artwork saga
@@ -449,22 +486,16 @@ function AdminArtwork({ truncateString }) {
       pubObject = {
         id: item.id,
         published: false,
+        artwork_id: item.artwork_id
       };
-      //swal success indicator
-      // swal({
-      //   text: `This 'Do' is now unpublished!`,
-      //   icon: "success",
-      // });
+      
     } else {
       pubObject = {
         id: item.id,
         published: true,
+        artwork_id: item.artwork_id
       };
-      //swal success indicator
-      // swal({
-      //   text: `This 'Do' has been published!`,
-      //   icon: "success",
-      // });
+    
     }
 
     //sends updated 'Do' boolean (publish/unpublish) to artwork saga
@@ -706,7 +737,7 @@ function AdminArtwork({ truncateString }) {
                                   color="primary"
                                   className={classes.btn}
                                   variant="outlined"
-                                  onClick={(event) => deleteSee(event, item)}
+                                  onClick={() => deleteSeeValidation(item)}
                                 />
                               </IconButton>
                             </TableCell>
@@ -769,7 +800,7 @@ function AdminArtwork({ truncateString }) {
                                   color="primary"
                                   className={classes.btn}
                                   variant="outlined"
-                                  onClick={(event) => deleteDo(event, item)}
+                                  onClick={() => deleteDoValidation(item)}
                                 />
                               </IconButton>
                             </TableCell>

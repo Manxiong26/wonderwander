@@ -295,21 +295,13 @@ function AdminArtAdventure({truncateString}) {
         id: item.id,
         published: false,
       };
-      // //swal success indicator
-      // swal({
-      //     text: "This adventure's information is now unpublished!",
-      //     icon: "success",
-      // });
+     
     } else {
       pubObject = {
         id: item.id,
         published: true,
       };
-      // //swal success indicator
-      // swal({
-      //     text: "This adventure's information has been published!",
-      //     icon: "success",
-      // });
+     
     }
 
     //sends updated art adventure boolean (published/unpublished) to artAdventure saga
@@ -810,15 +802,6 @@ function AdminArtAdventure({truncateString}) {
                               {item.title}
                             </Typography>
                           </TableCell>
-                          {/* <TableCell align="right">
-                      <Button
-                        className={classes.btn}
-                        variant="outlined"
-                        onClick={(event) => publish(event, item)}
-                      >
-                        Publish
-                      </Button>
-                    </TableCell> */}
                           <TableCell>
                             <FormControlLabel
                               control={
