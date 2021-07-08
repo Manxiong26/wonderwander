@@ -322,22 +322,16 @@ function AdminArtAdventure({truncateString}) {
       pubObject = {
         id: item.id,
         published: false,
+        activity_id: item.activity_id
       };
-      //swal success indicator
-      // swal({
-      //     text: `This 'See' is now unpublished!`,
-      //     icon: "success",
-      // });
+      
     } else {
       pubObject = {
         id: item.id,
         published: true,
+        activity_id: item.activity_id
       };
-      //swal success indicator
-      // swal({
-      //     text: `This 'See' has been published!`,
-      //     icon: "success",
-      // });
+      
     }
 
     //sends updated 'See' boolean (publish/unpublish) to art adventure saga
@@ -358,22 +352,14 @@ function AdminArtAdventure({truncateString}) {
       pubObject = {
         id: item.id,
         published: false,
+        activity_id: item.activity_id
       };
-      //swal success indicator
-      // swal({
-      //     text: `This 'Do' is now unpublished!`,
-      //     icon: "success",
-      // });
     } else {
       pubObject = {
         id: item.id,
         published: true,
+        activity_id: item.activity_id
       };
-      //swal success indicator
-      // swal({
-      //     text: `This 'Do' has been published!`,
-      //     icon: "success",
-      // });
     }
 
     //sends updated 'Do' boolean (publish/unpublish) to art adventure saga
