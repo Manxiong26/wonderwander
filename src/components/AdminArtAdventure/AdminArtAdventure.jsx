@@ -270,6 +270,7 @@ function AdminArtAdventure({truncateString}) {
 
   };
 
+  // Delete See confirmation prompt
   const deleteSeeValidation = (item) => {
     console.log("delete clicked! item = ", item);
 
@@ -304,6 +305,7 @@ function AdminArtAdventure({truncateString}) {
 
   };
 
+  // Delete Do confirmation alert
   const deleteDoValidation = (item) => {
     console.log("delete clicked! item = ", item);
 
