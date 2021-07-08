@@ -13,13 +13,13 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
       console.log(maps.geometry.spherical)
   }
 
-  
 
-  // Balloon marker
+  // Balloon marker for google maps
   const BalloonMarker = ({item}) => (
     <div className="mapMarker" onClick={() => toArtDetail(item)}></div>
 
   );
+
   // User location marker
   const UserLocation = () => <div className="userMarker"></div>;
 
@@ -49,9 +49,12 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
             yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
           >
+            {/* Looping through artwork reducer to populate map w/ ballon markers */}
             {reducer.map((item, i) => (
               <BalloonMarker  item={item} key={i} lat={item.lat} lng={item.lng} />
             ))}
+            {/* If user location is found/granted
+             then location marker gets placed on the map */}
             {userLat !== null && userLng !== null ? (
             <UserLocation lat={userLat} lng={userLng} />
             ) : ('')}

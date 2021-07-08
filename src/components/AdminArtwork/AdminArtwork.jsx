@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import AdminNav from "../AdminNav/AdminNav";
-import ImageUpload from '../ImageUpload/ImageUpload';
-      
+import ImageUpload from "../ImageUpload/ImageUpload";
+
 import {
   Button,
   Typography,
@@ -30,6 +29,10 @@ import {
   Switch,
   Popper,
   Modal,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -51,7 +54,7 @@ function getModalStyle() {
   };
 }
 
-function AdminArtwork({truncateString}) {
+function AdminArtwork({ truncateString }) {
   let { id } = useParams();
   //console.log(id);
 
@@ -67,14 +70,16 @@ function AdminArtwork({truncateString}) {
   //redux store instances
   const artworkList = useSelector((store) => store.adminArtworkListReducer);
   const artwork = useSelector((store) => store.adminArtworkInfoReducer);
-  console.log("artwork reducer id:", artwork.id);
+  // console.log("artwork reducer id:", artwork.id);
 
   const artistList = useSelector((store) => store.adminArtistListReducer);
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
-  const collectionList = useSelector((store) => store.adminCollectionListReducer);
-  
+  const collectionList = useSelector(
+    (store) => store.adminCollectionListReducer
+  );
+
   const seeList = useSelector((store) => store.adminSeeListArtworkReducer);
-  console.log("seeList reducer: ", seeList);
+  // console.log("seeList reducer: ", seeList);
   const see = useSelector((store) => store.adminSeeInfoReducer);
   const doList = useSelector((store) => store.adminDoListArtworkReducer);
   const doItem = useSelector((store) => store.adminDoReducer);
@@ -86,6 +91,7 @@ function AdminArtwork({truncateString}) {
     dispatch({ type: "FETCH_SPONSOR_LIST" });
     dispatch({ type: "FETCH_COLLECTION_LIST" });
   }, []);
+  
 
   //sets local state for post request
   const [name, setName] = useState("");
@@ -286,7 +292,7 @@ function AdminArtwork({truncateString}) {
     //create object to send
     const newSee = {
       prompts: see_prompts,
-      image: see_image, 
+      image: see_image,
       link: link,
       artwork_id: artwork_id,
       activity_id: null,
@@ -339,25 +345,72 @@ function AdminArtwork({truncateString}) {
   };
 
   //delete see
-  const deleteSee = (event, item) => {
+  const deleteSee = (item) => {
     console.log("deleting see:", item.id);
 
-    //dispatch to artwork saga w see id
-    dispatch({ type: "DELETE_SEE_ARTWORK", payload: item.id });
+    let deleteObj = {
+      id: item.id,
+      artwork_id: item.artwork_id
+    }
 
-    //TODO - Get updated See list
-    
+    //dispatch to artwork saga w see id
+    dispatch({ type: "DELETE_SEE_ARTWORK", payload: deleteObj });
+
+  };
+
+  const deleteSeeValidation = (item) => {
+    console.log("delete clicked! item = ", item);
+
+    swal({
+      title: "Hello!",
+      text: "Are you sure you want to PERMANENTLY delete this See prompt?",
+      buttons: {
+        cancel: true,
+        confirm: "Delete",
+      },
+    }).then((val) => {
+      if (val) {
+        swal({
+          text: "You've deleted this prompt.",
+        });
+        deleteSee(item);
+      }
+    });
   };
 
   //delete do
-  const deleteDo = (event, item) => {
+  const deleteDo = (item) => {
     console.log("deleting do:", item.id);
 
+    let deleteObj = {
+      id: item.id,
+      artwork_id: item.artwork_id
+    }
+
     //dispatch to artwork saga w see id
-    dispatch({ type: "DELETE_DO_ARTWORK", payload: item.id });
+    dispatch({ type: "DELETE_DO_ARTWORK", payload: deleteObj });
 
-    //TODO - Get updated do list 
+    //TODO - Get updated do list
+  };
 
+  const deleteDoValidation = (item) => {
+    console.log("delete clicked! item = ", item);
+
+    swal({
+      title: "Hello!",
+      text: "Are you sure you want to PERMANENTLY delete this Do prompt?",
+      buttons: {
+        cancel: true,
+        confirm: "Delete",
+      },
+    }).then((val) => {
+      if (val) {
+        swal({
+          text: "You've deleted this prompt.",
+        });
+        deleteDo(item);
+      }
+    });
   };
 
   //changes db boolean to true which "publishes" item on public facing pages
@@ -375,21 +428,13 @@ function AdminArtwork({truncateString}) {
         id: item.id,
         published: false,
       };
-      //swal success indicator
-      // swal({
-      //   text: "This artwork's information is now unpublished!",
-      //   icon: "success",
-      // });
+      
     } else {
       pubObject = {
         id: item.id,
         published: true,
       };
-      //swal success indicator
-      // swal({
-      //   text: "This artwork's information has been published!",
-      //   icon: "success",
-      // });
+      
     }
 
     //sends updated artwork boolean (published/unpublished) to artwork saga
@@ -410,24 +455,18 @@ function AdminArtwork({truncateString}) {
       pubObject = {
         id: item.id,
         published: false,
+        artwork_id: item.artwork_id
       };
-      //swal success indicator
-      // swal({
-      //   text: `This 'See' is now unpublished!`,
-      //   icon: "success",
-      // });
+      
     } else {
       pubObject = {
         id: item.id,
         published: true,
+        artwork_id: item.artwork_id
       };
-      //swal success indicator
-      // swal({
-      //   text: `This 'See' has been published!`,
-      //   icon: "success",
-      // });
+      
     }
-    
+
     //sends updated 'See' boolean (publish/unpublish) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_SEE_ARTWORK", payload: pubObject });
   };
@@ -446,24 +485,18 @@ function AdminArtwork({truncateString}) {
       pubObject = {
         id: item.id,
         published: false,
+        artwork_id: item.artwork_id
       };
-      //swal success indicator
-      // swal({
-      //   text: `This 'Do' is now unpublished!`,
-      //   icon: "success",
-      // });
+      
     } else {
       pubObject = {
         id: item.id,
         published: true,
+        artwork_id: item.artwork_id
       };
-      //swal success indicator
-      // swal({
-      //   text: `This 'Do' has been published!`,
-      //   icon: "success",
-      // });
-    }
     
+    }
+
     //sends updated 'Do' boolean (publish/unpublish) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_DO_ARTWORK", payload: pubObject });
   };
@@ -577,47 +610,52 @@ function AdminArtwork({truncateString}) {
                       }
                     />
                     {/* generates artist options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setArtistId(event.target.value)}
-                    >
-                      <option value="Default">Artist</option>
-                      {artistList.map((artist) => {
-                        return (
-                          <option key={artist.id} value={artist.id}>
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Artist</InputLabel>
+                      <Select
+                        value={artist_id}
+                        onChange={(e) => setArtistId(e.target.value)}
+                      >
+                        {artistList.map((artist) => (
+                          <MenuItem key={artist.id} value={artist.id}>
                             {artist.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
                     {/* generates sponsor options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setSponsorId(event.target.value)}
-                    >
-                      <option value="Default">Sponsor</option>
-                      {sponsorList.map((sponsor) => {
-                        return (
-                          <option key={sponsor.id} value={sponsor.id}>
+                    
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Sponsor</InputLabel>
+                      <Select
+                        value={sponsor_id}
+                        onChange={(e) => setSponsorId(e.target.value)}
+                      >
+                        {sponsorList.map((sponsor) => (
+                          <MenuItem key={sponsor.id} value={sponsor.id}>
                             {sponsor.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
                     {/* generates collection options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setCollectionId(event.target.value)}
-                    >
-                      <option value="Default">Collection</option>
-                      {collectionList.map((collection) => {
-                        return (
-                          <option key={collection.id} value={collection.id}>
+          
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Collection</InputLabel>
+                      <Select
+                        value={collection_id}
+                        onChange={(e) => setCollectionId(e.target.value)}
+                      >
+                        {collectionList.map((collection) => (
+                          <MenuItem key={collection.id} value={collection.id}>
                             {collection.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
 
                     {/* <ImageUpload /> */}
 
@@ -663,12 +701,11 @@ function AdminArtwork({truncateString}) {
                       <TableBody>
                         {seeList.map((item, i) => (
                           <TableRow alignItems="flex-start" key={i}>
-                            <TableCell >
-                              <Avatar 
+                            <TableCell>
+                              <Avatar
                                 variant="square"
                                 src={item.image}
                                 alt="See Prompt Image"
-                                
                               />
                             </TableCell>
                             <TableCell>
@@ -677,19 +714,21 @@ function AdminArtwork({truncateString}) {
                               </Typography>
                             </TableCell>
                             <TableCell>
-                                <FormControlLabel
+                              <FormControlLabel
                                 control={
-                                    <Switch
+                                  <Switch
                                     size="small"
                                     checked={item.published}
-                                    onChange={(event) => publishSee(event, item)}
+                                    onChange={(event) =>
+                                      publishSee(event, item)
+                                    }
                                     name="publish"
                                     color="primary"
-                                    />
+                                  />
                                 }
                                 labelPlacement="top"
                                 label="Publish"
-                                />
+                              />
                             </TableCell>
                             <TableCell align="right">
                               <IconButton>
@@ -697,7 +736,7 @@ function AdminArtwork({truncateString}) {
                                   color="primary"
                                   className={classes.btn}
                                   variant="outlined"
-                                  onClick={(event) => deleteSee(event, item)}
+                                  onClick={() => deleteSeeValidation(item)}
                                 />
                               </IconButton>
                             </TableCell>
@@ -740,19 +779,19 @@ function AdminArtwork({truncateString}) {
                               </Typography>
                             </TableCell>
                             <TableCell>
-                                <FormControlLabel
+                              <FormControlLabel
                                 control={
-                                    <Switch
+                                  <Switch
                                     size="small"
                                     checked={item.published}
                                     onChange={(event) => publishDo(event, item)}
                                     name="publish"
                                     color="primary"
-                                    />
+                                  />
                                 }
                                 labelPlacement="top"
                                 label="Publish"
-                                />
+                              />
                             </TableCell>
                             <TableCell align="right">
                               <IconButton>
@@ -760,7 +799,7 @@ function AdminArtwork({truncateString}) {
                                   color="primary"
                                   className={classes.btn}
                                   variant="outlined"
-                                  onClick={(event) => deleteDo(event, item)}
+                                  onClick={() => deleteDoValidation(item)}
                                 />
                               </IconButton>
                             </TableCell>
@@ -867,51 +906,53 @@ function AdminArtwork({truncateString}) {
                         setVidDescription(event.target.value)
                       }
                     />
-                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artist options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setArtistId(event.target.value)}
-                    >
-                      <option value="Default">Artist</option>
-                      {artistList.map((artist) => {
-                        return (
-                          <option key={artist.id} value={artist.id}>
+
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Artist</InputLabel>
+                      <Select
+                        value={artist_id}
+                        onChange={(e) => setArtistId(e.target.value)}
+                      >
+                        {artistList.map((artist) => (
+                          <MenuItem key={artist.id} value={artist.id}>
                             {artist.name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
                     {/* generates sponsor options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setSponsorId(event.target.value)}
-                    >
-                      <option value="Default">Sponsor</option>
-                      {sponsorList.map((sponsor) => {
-                        return (
-                          <option key={sponsor.id} value={sponsor.id}>
+                    
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Sponsor</InputLabel>
+                      <Select
+                        value={sponsor_id}
+                        onChange={(e) => setSponsorId(e.target.value)}
+                      >
+                        {sponsorList.map((sponsor) => (
+                          <MenuItem key={sponsor.id} value={sponsor.id}>
                             {sponsor.name}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
                     {/* generates collection options dynamically */}
-                    <select
-                      type="text"
-                      onChange={(event) => setCollectionId(event.target.value)}
-                    >
-                      <option value="Default">Collection</option>
-                      {collectionList.map((collection) => {
-                        return (
-                          <option key={collection.id} value={collection.id}>
+          
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Collection</InputLabel>
+                      <Select
+                        value={collection_id}
+                        onChange={(e) => setCollectionId(e.target.value)}
+                      >
+                        {collectionList.map((collection) => (
+                          <MenuItem key={collection.id} value={collection.id}>
                             {collection.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
 
                     {/* <ImageUpload /> */}
 
@@ -925,7 +966,7 @@ function AdminArtwork({truncateString}) {
                       Submit
                     </Button>
                   </form>
-                  <Divider style={{marginBottom: '5%'}}/>
+                  <Divider style={{ marginBottom: "5%" }} />
 
                   {/* Add See Form */}
                   <Typography
@@ -935,12 +976,11 @@ function AdminArtwork({truncateString}) {
                   >
                     Add See
                   </Typography>
-                  
+
                   <form className={classes.form} onSubmit={addSee}>
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
-            
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Prompt"
                       label="Prompt"
@@ -948,8 +988,8 @@ function AdminArtwork({truncateString}) {
                       onChange={(event) => setSeePrompts(event.target.value)}
                     />
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Image URL"
                       label="Image URL"
@@ -957,8 +997,8 @@ function AdminArtwork({truncateString}) {
                       onChange={(event) => setSeeImage(event.target.value)}
                     />
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Video URL"
                       label="Video URL"
@@ -967,7 +1007,7 @@ function AdminArtwork({truncateString}) {
                     />
                     {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artwork options dynamically */}
-                    <select
+                    {/* <select
                       type="text"
                       onChange={(event) => setArtworkId(event.target.value)}
                     >
@@ -979,7 +1019,21 @@ function AdminArtwork({truncateString}) {
                           </option>
                         );
                       })}
-                    </select>
+                    </select> */}
+
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Artwork</InputLabel>
+                      <Select
+                        value={artwork_id}
+                        onChange={(e) => setArtworkId(e.target.value)}
+                      >
+                        {artworkList.map((art) => (
+                          <MenuItem key={art.id} value={art.id}>
+                            {art.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                     <Button
                       className={classes.formBtn}
                       type="submit"
@@ -990,8 +1044,7 @@ function AdminArtwork({truncateString}) {
                       Submit
                     </Button>
                   </form>
-                  <Divider style={{marginBottom: '5%'}}/>
-                  
+                  <Divider style={{ marginBottom: "5%" }} />
 
                   {/* Add Do Form */}
                   <Typography
@@ -1003,8 +1056,8 @@ function AdminArtwork({truncateString}) {
                   </Typography>
                   <form className={classes.form} onSubmit={addDo}>
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Prompt"
                       label="Prompt"
@@ -1013,7 +1066,7 @@ function AdminArtwork({truncateString}) {
                     />
                     {/* TODO - CHANGE TO MUI STYLING TAGS */}
                     {/* generates artwork options dynamically */}
-                    <select
+                    {/* <select
                       type="text"
                       onChange={(event) => setArtworkId(event.target.value)}
                     >
@@ -1025,19 +1078,32 @@ function AdminArtwork({truncateString}) {
                           </option>
                         );
                       })}
-                    </select>
+                    </select> */}
+
+                    <FormControl className={classes.inputs}>
+                      <InputLabel>Artwork</InputLabel>
+                      <Select
+                        value={artwork_id}
+                        onChange={(e) => setArtworkId(e.target.value)}
+                      >
+                        {artworkList.map((art) => (
+                          <MenuItem key={art.id} value={art.id}>
+                            {art.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
                     <Button
                       className={classes.formBtn}
                       type="submit"
                       name="submit"
                       variant="outlined"
                       value="Submit"
-                    > 
-                        Submit
+                    >
+                      Submit
                     </Button>
-              </form>
-              </div>
-
+                  </form>
+                </div>
               </Card>
             </Grid>
 
@@ -1116,7 +1182,6 @@ function AdminArtwork({truncateString}) {
         )}
       </Grid>
     </div>
-
   );
 }
 

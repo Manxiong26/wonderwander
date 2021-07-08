@@ -100,7 +100,7 @@ function* updatePublishSee(action) {
   console.log('in update See publish', action.payload);
   try{
     yield axios.put(`/api/admin/art-adventure/see/publish/${action.payload.id}`, action.payload); 
-    yield put({type: 'FETCH_SEE_LIST'}); 
+    yield put({type: 'FETCH_SEE_LIST', payload: action.payload.activity_id }); 
     yield put({type: 'CLEAR_SEE'});
   } catch (error) {
     console.log('Error updating see publish: ', error);
@@ -109,8 +109,8 @@ function* updatePublishSee(action) {
 
 function* deleteSee(action) {
   try{
-      yield axios.delete(`/api/admin/art-adventure/see/${action.payload}`); 
-      yield put({type: 'FETCH_SEE_LIST'}); 
+      yield axios.delete(`/api/admin/art-adventure/see/${action.payload.id}`); 
+      yield put({type: 'FETCH_SEE_LIST', payload: action.payload.activity_id }); 
   } catch (error) {
       console.log('Error deleting see: ', error);
   }
@@ -151,7 +151,7 @@ function* updatePublishDo(action) {
   console.log('in update do publish', action.payload);
   try{
     yield axios.put(`/api/admin/art-adventure/do/publish/${action.payload.id}`, action.payload); 
-    yield put({type: 'FETCH_DO_LIST'}); 
+    yield put({type: 'FETCH_DO_LIST', payload: action.payload.activity_id}); 
     yield put({type: 'CLEAR_DO'});
   } catch (error) {
     console.log('Error updating Do publish: ', error);
@@ -160,8 +160,8 @@ function* updatePublishDo(action) {
 
 function* deleteDo(action) {
   try{
-      yield axios.delete(`/api/admin/art-adventure/do/${action.payload}`); 
-      yield put({type: 'FETCH_DO_LIST'}); 
+      yield axios.delete(`/api/admin/art-adventure/do/${action.payload.id}`); 
+      yield put({type: 'FETCH_DO_LIST', payload: action.payload.activity_id}); 
   } catch (error) {
       console.log('Error deleting do: ', error);
   }

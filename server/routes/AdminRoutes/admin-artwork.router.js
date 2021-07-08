@@ -39,9 +39,9 @@ router.get('/:id', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
 //gets all SEEs' info for a specific artwork from DB to store in seeListArtwork reducer
 router.get('/:id/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
-
+    console.log(req.params.id)
     //returns all SEE info to reducer
-    const query = `SELECT * FROM "see" WHERE "artwork_id" = $1;`; 
+    const query = `SELECT * FROM "see" WHERE "artwork_id" = $1 ORDER BY "id";`; 
     pool.query(query, [req.params.id])
     .then(result => {
         res.send(result.rows);
@@ -57,7 +57,7 @@ router.get('/:id/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 router.get('/:id/do', rejectUnauthenticated, rejectNonAdmin, (req, res) => {  
 
     //returns all DO info to reducer
-    const query = `SELECT * FROM "do" WHERE "artwork_id" = $1;`; 
+    const query = `SELECT * FROM "do" WHERE "artwork_id" = $1 ORDER BY "id";`; 
     pool.query(query, [req.params.id])
     .then(result => {
         res.send(result.rows);
@@ -72,6 +72,21 @@ router.get('/:id/do', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 //adds new artwork to the DB from admin artwork page
 router.post('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
     let artwork = req.body;
+    if( artwork.lat === '' ) {
+        artwork.lat = null
+    }
+    if( artwork.lng === '' ) {
+        artwork.lng = null
+    }
+    if( artwork.artist_id === '' ) {
+        artwork.artist_id = null
+    }
+    if( artwork.sponsor_id === '' ) {
+        artwork.sponsor_id = null
+    }
+    if( artwork.collection_id === '' ) {
+        artwork.collection_id = null
+    }
     
     const query  = `INSERT INTO "artwork" ("name", "year", "lat", "lng", "image", 
                     "description", "vid_link", "vid_description", "artist_id", 
@@ -83,10 +98,10 @@ router.post('/', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
                     artwork.vid_description, artwork.artist_id, artwork.sponsor_id, 
                     artwork.collection_id])
     .then(result => {
-        console.log('new artwork object POST', result.rows);
+        // console.log('new artwork object POST');
         res.sendStatus(201);
     }).catch (error => {
-        console.log(error);
+        console.log('Error adding artwork to DB: ', error);
         res.sendStatus(500)
     })
 
@@ -98,9 +113,9 @@ router.post('/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
     let newSee = req.body;
     
-    const query  = `INSERT INTO "see" ("prompts", "link", "artwork_id", "activity_id")
-        VALUES ($1, $2, $3, $4);`;
-    pool.query(query, [newSee.prompts, newSee.link, newSee.artwork_id, newSee.activity_id])
+    const query  = `INSERT INTO "see" ("prompts", "link", "image", "artwork_id", "activity_id")
+        VALUES ($1, $2, $3, $4, $5);`;
+    pool.query(query, [newSee.prompts, newSee.link, newSee.image, newSee.artwork_id, newSee.activity_id])
     .then(result => {
         console.log(`new 'See' for artwork object POST`, result.rows);
         res.sendStatus(201);
