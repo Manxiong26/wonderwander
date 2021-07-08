@@ -210,7 +210,6 @@ function AdminCollection() {
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publish = (event, item) => {
-    console.log("clicking publish for Collection = ", item);
 
     //sets specific artist in artist reducer
     dispatch({ type: "SET_COLLECTION_INFO", payload: item });
@@ -223,21 +222,11 @@ function AdminCollection() {
         id: item.id,
         published: false,
       };
-      // //swal success indicator
-      // swal({
-      //   text: "This collection's information is now unpublished!",
-      //   icon: "success",
-      // });
     } else {
       pubObject = {
         id: item.id,
         published: true,
-      };
-      // //swal success indicator
-      // swal({
-      //   text: "This collection's information has been published!",
-      //   icon: "success",
-      // });
+      }
     }
 
     //sends updated artist boolean (published/unpublished) to collection saga
@@ -334,6 +323,8 @@ function AdminCollection() {
                     value={search_text}
                     onChange={(event) => setSearchText(event.target.value)}
                   />
+
+                  {/* <ImageUpload /> */}
 
                   {/* TODO - Add Image Upload Component here */}
 
@@ -445,7 +436,6 @@ function AdminCollection() {
                   />
 
                   {/* <ImageUpload /> */}
-
                   <Button
                     className={classes.formBtn}
                     type="submit"

@@ -1,8 +1,10 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import AdminNav from "../AdminNav/AdminNav";
 import ImageUpload from "../ImageUpload/ImageUpload";
+
 
 import {
   Button,
@@ -24,48 +26,40 @@ import {
   MenuItem,
   Divider,
   Avatar
+
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
 import { useStyles } from "../classes";
 
+
 function AdminArtAdventure({truncateString}) {
   let { id } = useParams();
-  //console.log(id);
-
-  //functionality to route to a page
+  
   const history = useHistory();
 
   const classes = useStyles();
 
-  //functionality to dispatch information to a saga or reducer
   const dispatch = useDispatch();
 
-  //redux store instances
-  const artAdventureList = useSelector(
-    (store) => store.adminArtAdventureListReducer
-  );
-  const artAdventure = useSelector(
-    (store) => store.adminArtAdventureInfoReducer
-  );
-  console.log("artAdventure reducer id:", artAdventure.id);
-
+  //redux store instances 
+  const artAdventureList = useSelector((store) => store.adminArtAdventureListReducer);
+  const artAdventure = useSelector((store) => store.adminArtAdventureInfoReducer);
   const seeList = useSelector((store) => store.adminSeeListReducer);
-  console.log("adventure see list", seeList);
   const see = useSelector((store) => store.adminSeeInfoReducer);
   const doList = useSelector((store) => store.adminDoListReducer);
   const doItem = useSelector((store) => store.adminDoReducer);
 
-  //retrieves art adventures' info from DB
+  //retrieves art adventures' info from DB on page load
   useEffect(() => {
-    dispatch({ type: "FETCH_ADVENTURE_LIST" });
+    dispatch({ type: 'FETCH_ADVENTURE_LIST' });
   }, []);
 
-  //sets local state for post request
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  //sets local state for Adventure post request
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
 
   //edit mode
   const [editMode, setEditMode] = useState(false);
@@ -386,7 +380,9 @@ function AdminArtAdventure({truncateString}) {
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publishDo = (event, item) => {
+
     console.log("clicking publish for Do = ", item);
+
 
     //sets specific do in Do reducer
     dispatch({ type: "SET_DO_INFO", payload: item });
@@ -398,14 +394,18 @@ function AdminArtAdventure({truncateString}) {
       pubObject = {
         id: item.id,
         published: false,
+
         activity_id: item.activity_id
       };
+
     } else {
       pubObject = {
         id: item.id,
         published: true,
+
         activity_id: item.activity_id
       };
+
     }
 
     //sends updated 'Do' boolean (publish/unpublish) to art adventure saga
@@ -418,6 +418,9 @@ function AdminArtAdventure({truncateString}) {
       <Grid container spacing={1} direction="row">
         {editMode ? (
           <>
+
+            {/* Edit Adventure Form */}
+
             <Grid item lg={4} sm={12} xs={12}>
               <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
@@ -441,6 +444,7 @@ function AdminArtAdventure({truncateString}) {
                       value={title}
                       onChange={(event) => setTitle(event.target.value)}
                     />
+
                     <TextField
                       type="text"
                       className={classes.inputs}
@@ -452,6 +456,7 @@ function AdminArtAdventure({truncateString}) {
                       rows={6}
                       onChange={(event) => setDescription(event.target.value)}
                     />
+
                     <TextField
                       type="text"
                       className={classes.inputs}
@@ -461,6 +466,7 @@ function AdminArtAdventure({truncateString}) {
                       value={image}
                       onChange={(event) => setImage(event.target.value)}
                     />
+
 
                     <Button
                       className={classes.formBtn}
@@ -478,6 +484,7 @@ function AdminArtAdventure({truncateString}) {
                     >
                       Cancel
                     </Button>
+
                   </form>
                 </div>
               </Card>
@@ -612,6 +619,9 @@ function AdminArtAdventure({truncateString}) {
           </>
         ) : (
           <>
+
+            {/* Add Adventure Form */}
+ 
             <Grid item lg={5} sm={12} xs={12}>
               <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
@@ -632,6 +642,7 @@ function AdminArtAdventure({truncateString}) {
                       value={title}
                       onChange={(event) => setTitle(event.target.value)}
                     />
+
                     <TextField
                       type="text"
                       className={classes.inputs}
@@ -643,6 +654,7 @@ function AdminArtAdventure({truncateString}) {
                       rows={6}
                       onChange={(event) => setDescription(event.target.value)}
                     />
+
                     <TextField
                       type="text"
                       className={classes.inputs}
@@ -652,6 +664,8 @@ function AdminArtAdventure({truncateString}) {
                       value={image}
                       onChange={(event) => setImage(event.target.value)}
                     />
+
+           
                     <Button
                       className={classes.formBtn}
                       type="submit"
@@ -700,19 +714,6 @@ function AdminArtAdventure({truncateString}) {
                       onChange={(event) => setLink(event.target.value)}
                     />
                     {/* generates adventure options dynamically */}
-                    {/* <select
-                      type="text"
-                      onChange={(event) => setAdventureId(event.target.value)}
-                    >
-                      <option value="Default">Adventure</option>
-                      {artAdventureList.map((adventure) => {
-                        return (
-                          <option key={adventure.id} value={adventure.id}>
-                            {adventure.title}
-                          </option>
-                        );
-                      })}
-                    </select> */}
 
                     <FormControl className={classes.inputs}>
                       <InputLabel>Adventure</InputLabel>
@@ -758,19 +759,6 @@ function AdminArtAdventure({truncateString}) {
                       onChange={(event) => setDoPrompts(event.target.value)}
                     />
                     {/* generates adventure options dynamically */}
-                    {/* <select
-                      type="text"
-                      onChange={(event) => setAdventureId(event.target.value)}
-                    >
-                      <option value="Default">Adventure</option>
-                      {artAdventureList.map((adventure) => {
-                        return (
-                          <option key={adventure.id} value={adventure.id}>
-                            {adventure.title}
-                          </option>
-                        );
-                      })}
-                    </select> */}
                     <FormControl className={classes.inputs}>
                       <InputLabel>Adventure</InputLabel>
                       <Select
@@ -811,6 +799,7 @@ function AdminArtAdventure({truncateString}) {
                 className={classes.cardTable}
               >
                 <div className={classes.tableContent}>
+
                   <Typography
                     className={classes.title}
                     align="center"
@@ -830,6 +819,7 @@ function AdminArtAdventure({truncateString}) {
                             />
                           </TableCell>
                           <TableCell>
+
                             <Typography variant="body1">
                               {item.title}
                             </Typography>
