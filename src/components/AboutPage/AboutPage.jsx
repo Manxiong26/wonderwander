@@ -3,7 +3,6 @@ import {Button, Typography, Divider} from '@material-ui/core';
 import {useStyles} from '../classes'
 
 function AboutPage() {
-  
   const email = `shannon@wonderwander.art`
   const classes = useStyles();
   
