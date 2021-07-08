@@ -25,7 +25,9 @@ function ArtworkDetail({ userLat, userLng }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const { id } = useParams();
+    const classes = useStyles();
+    
     // Function to create preview text 
     const truncateString = (str, num) => {
         if (str.length <= num) {
@@ -45,8 +47,7 @@ function ArtworkDetail({ userLat, userLng }) {
     console.log('Artwork Detail Item: ', artItem);
 
 
-    const { id } = useParams();
-    const classes = useStyles();
+    
     return (
         <div className={classes.pageMargin}>
             <Button

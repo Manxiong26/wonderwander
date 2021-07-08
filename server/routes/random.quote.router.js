@@ -4,13 +4,12 @@ const pool = require('../modules/pool');
 
 //need to add the random nature to this part, currently just grabs the first quote
 router.get('/', (req, res) => {
-    const queryText = `SELECT quotes."quote", "quotes".quote_by
-    FROM  (
-       SELECT DISTINCT 1 + trunc(random() * 10)::integer AS id
-       FROM   generate_series(1,10) g
-       ) r
-    JOIN quotes USING (id)
-    LIMIT  1;`
+    const queryText = ` SELECT * FROM quotes where id >= (
+        SELECT random()*(max(id)-min(id))+min(id) FROM quotes
+      )
+      ORDER BY id
+      LIMIT 1;`;
+
     pool.query(queryText)
         .then(result => {
             res.send(result.rows[0]);

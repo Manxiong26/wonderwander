@@ -49,9 +49,15 @@ const ArtistDetail = () => {
             >
               <ArrowBackIosIcon />
             </Button>
-            {artistInfo === undefined ? (
-              "Loading..."
-            ) : (
+           
+            {artistInfo === undefined ? ( <>
+            <div>
+                    <Typography variant="h4" className={classes.title}>
+                        Artist Detail
+                    </Typography>
+                </div>
+              <Typography className={classes.center}>Unknown Artist</Typography>
+            </> ) : (
               <div>
                 <Typography className={classes.title} variant="h4">
                   {artistInfo.name}

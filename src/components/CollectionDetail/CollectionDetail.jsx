@@ -27,13 +27,23 @@ function CollectionDetail({ userLat, userLng }) {
     const history = useHistory();
     const classes = useStyles();
     // collection detail reducer
+    const center = {
+        lat: 44.9681,
+        lng: -93.2886,
+    };
 
     const collectionDet = useSelector(store => store.collectionDetail)
     console.log('CHECKING COLLECTDET STORE_____________', collectionDet);
 
+    const viewArtworkDetail = (event, artDet) => {  //artDet
+        console.log('HELLLLLLLLLLPPPPPPPPPPPP', artDet);
+        event.preventDefault();
+        history.push(`/artworkdetail/${artDet}`) //artDet.id
+        console.log('CLICKING');
+    }
 
     // using id to grab detail 
-    let { id } = useParams();
+    const { id } = useParams();
 
     //render on Dom 
     useEffect(() => {
@@ -42,12 +52,7 @@ function CollectionDetail({ userLat, userLng }) {
         dispatch({ type: 'FETCH_ART_DETAIL', payload: id })
     }, [])
 
-    const viewArtworkDetail = (event, artDet) => {  //artDet
-        console.log('HELLLLLLLLLLPPPPPPPPPPPP', artDet);
-        event.preventDefault();
-        history.push(`/artworkdetail/${artDet}`) //artDet.id
-        console.log('CLICKING');
-    }
+    
 
     return (
         <>
@@ -92,19 +97,26 @@ function CollectionDetail({ userLat, userLng }) {
                                 href={collectionDet[0].donate_link}>$ Donate</Button>
                         </div>
                         {/* Need to change to Number for lat & long for map to show */}
-                        <Map mapLat={Number(collectionDet[0].lat)} mapLng={Number(collectionDet[0].lng)} zoom={10}
-                            reducer={collectionDet} height={300} width={'90%'} userLat={userLat} userLng={userLng} />
+                        <Map 
+                        mapLat={center.lat}
+                        mapLng={center.lng}
+                        zoom={10}
+                        reducer={collectionDet} 
+                        height={300} 
+                        width={'90%'} 
+                        userLat={userLat} 
+                        userLng={userLng} />
                         <Typography variant="h6" className={classes.redCenter}>
                             ArtWork
                         </Typography>
-                        {collectionDet[0].art_work_id === null ? ( <Typography className={classes.center}>This collection does not contain any artwork.</Typography>) :
+                        {collectionDet[0].id === null ? ( <Typography className={classes.center}>This collection does not contain any artwork.</Typography>) :
                         (
                         <div >
                             {collectionDet.map(artDet => {
                                 return (
                                     <>
                                         <Divider />
-                                        <ListItem key={artDet.id}>
+                                        <ListItem >
                                             <ListItemAvatar>
                                                 <Avatar className={classes.thumbnail} src={artDet.artwork_image} />
                                             </ListItemAvatar>
@@ -113,7 +125,7 @@ function CollectionDetail({ userLat, userLng }) {
                                             />
                                             <IconButton>
                                                 <ArrowForwardIosIcon
-                                                    onClick={(event) => viewArtworkDetail(event, artDet.art_work_id)}
+                                                    onClick={(event) => viewArtworkDetail(event, artDet.id)}
                                                     className={classes.nextBtn}
                                                 />
                                             </IconButton>
