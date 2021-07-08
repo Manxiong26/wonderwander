@@ -18,23 +18,27 @@ import ReactPlayer from 'react-player';
 
 
 function SeePage() {
+
+    // get the seeList from the store
     const seeList = useSelector((store) => store.seesaydoReducer.seeReducer);
     const dispatch = useDispatch();
+
+    // for getting the id of the artwork
     const { id } = useParams();
     const history = useHistory();
     const classes = useStyles();
 
+    // on page load, fetches the details for the see for that specified artwork, payload of the id of that artwork
     useEffect(() => {
         console.log('In useEffect param:');
         dispatch({ type: 'FETCH_SEE_DETAIL', payload: id })
     }, []);
 
-
-    console.log('Checking seeList ', seeList);
-
-
+    // render the page to the DOM
     return (<>
         <div className={classes.welcomeMargin}>
+
+            {/* button to go back to previous page */}
             <Button
                 onClick={() => {
                     history.goBack();
@@ -44,13 +48,14 @@ function SeePage() {
             </Button>
         </div>
 
-       <Grid container direction="column">
+    <Grid container direction="column">
       <Grid item xs={12} sm={12} lg={12}>
         <div className={classes.pageMargin}>
         <Typography variant="h5" className={classes.title}>
             See
           </Typography>
           
+            {/* maps through the seeList and renders them all to the dom for that artwork */}
             {seeList.map((item, i) => {
                 return (
                     <Card >
@@ -62,8 +67,6 @@ function SeePage() {
                         <Typography align="center" variant="body1" className={classes.caption}>
                             {item.prompts}
                         </Typography>
-                        {/* <img src={item.image} />  */}
-
                         </div>
                         </Card>
                 )

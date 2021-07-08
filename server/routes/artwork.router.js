@@ -10,10 +10,13 @@ router.get('/', (req, res) => {
     WHERE artwork.published=true AND artist.published=true;`;
 
     pool.query(query)
+
+      // success will send back data to client
       .then(result => {
-        // console.log(result.rows);
         res.send(result.rows)
       })
+
+      //failure will send back error
       .catch( error => {
         console.log('Something went wrong GETting artwork:', error)
         res.sendStatus(500);

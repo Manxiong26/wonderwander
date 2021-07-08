@@ -24,26 +24,6 @@ import env from "react-dotenv";
 import { useHistory } from "react-router-dom";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
-
-// const useStyles = makeStyles((theme) => ({
-//   mapContainer: {
-//     marginTop: "auto",
-//     marginBottom: "auto",
-//   },
-//   toggle: {
-//     display: "flex",
-//     justifyContent: "flex-end",
-//     marginRight: "5%",
-//     marginBottom: "1%",
-//   },
-//   thumbnail: {
-//     width: '60px',
-//     height: '60px',
-//     marginRight: 10,
-//     border: "1px solid black"
-//   }
-// }));
-
 const MapView = ({ userLat, userLng }) => {
   useEffect(() => {
     dispatch({ type: "FETCH_ARTWORK" })
@@ -105,6 +85,8 @@ const MapView = ({ userLat, userLng }) => {
   return (
     <>
     <div className={classes.pageMargin}>
+
+    {/* button that when clicked will return a user to the previous page */}
     <Button
     onClick={() => {
         history.goBack();
@@ -113,8 +95,9 @@ const MapView = ({ userLat, userLng }) => {
     <ArrowBackIosIcon />
 </Button>
 </div>
-    <div className={classes.pageMargin}>
 
+    {/* renders the element that toggles between the artwork list and the map view */}
+    <div className={classes.pageMargin}>
       <ToggleButtonGroup
         exclusive
         className={classes.toggle}
@@ -136,6 +119,8 @@ const MapView = ({ userLat, userLng }) => {
           <ListIcon />
         </ToggleButton>
       </ToggleButtonGroup>
+
+      {/* if toggled, show the map element */}
       {toggle ? (
         <div>
           <div className={classes.mapContainer}>
@@ -153,10 +138,14 @@ const MapView = ({ userLat, userLng }) => {
           </div>
         </div>
       ) : (
+
+        // if not toggled, then show the list of the artwork
         <div>
           <div>
             <List>
               <Divider />
+
+              {/* maps through the artwork array to display everything to the DOM */}
               {artwork.map((item, i) => {
                 return (
                   <>
@@ -177,8 +166,10 @@ const MapView = ({ userLat, userLng }) => {
                           userLng
                         )}
                       />
+
+                      {/* when clicked, will call the toArtDetail function and pass the specific artwork into the function as an argument */}
                       <IconButton>
-                      <ArrowForwardIosIcon className={classes.nextBtn} onClick={() => toArtDetail(item)} />
+                        <ArrowForwardIosIcon className={classes.nextBtn} onClick={() => toArtDetail(item)} />
                       </IconButton>
                     </ListItem>
                     <Divider />

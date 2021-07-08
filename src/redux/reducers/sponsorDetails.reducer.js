@@ -1,3 +1,4 @@
+// reducer to set state of specific sponsor
 const sponsorDetails = (state = {}, action) => {
     switch (action.type) {
         case 'SET_SPONSOR_DETAILS':

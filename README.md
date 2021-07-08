@@ -48,7 +48,7 @@ Start postgres if not running already by using brew services start postgresql
 1. First, go to https://console.aws.amazon.com and follow the steps to create an account, a root account 
 2. Then go to https://console.aws.amazon.com/s3 to setup the bucket for s3  uploader specifically 
 3. Go to buckets and click on create bucket 
-4. The bucket name can be anything but I did wonder-wander-bucket
+4. The bucket name NEEDS to be wonder-wander-bucket for the uploader to work
 5. When creating a bucket, for the region, it really doesn't matter what region just pick the one closest. Write down what region you picked because you will     need the region code later. For example, I chose the us east ohio region and the region code was us-east-2
 6. Click next after the region
 7. MAKE SURE TO CLICK OFF BLOCK ALL PUBLIC ACCESS

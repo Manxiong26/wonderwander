@@ -14,13 +14,17 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import { useStyles } from "../classes";
 
 function DoPage() {
-  // const classes = useStyles();
+
+  // to get doList from the store for that piece of artwork
   const doList = useSelector((store) => store.seesaydoReducer.doReducer);
   const dispatch = useDispatch();
   const classes = useStyles();
   const history = useHistory();
+
+  // to get id for the specific artwork
   const { id } = useParams();
 
+  // on page load, makes dispatch to grab DO page from the server with the payload of the specific ID
   useEffect(() => {
     console.log("In useEffect param:");
     dispatch({ type: "FETCH_DO", payload: id });
@@ -28,6 +32,8 @@ function DoPage() {
 
   return (
       <>
+
+    {/* function that when clicked takes the user back to the previous page */}
     <Button
     onClick={() => {
         history.goBack();
@@ -43,6 +49,8 @@ function DoPage() {
           </Typography>
           <Card className={classes.promptCard}>
             <div style={{ position: "relative" }}>
+
+              {/* makes through the do list to render it to the DOM */}
               {doList.map((item, i) => {
                 return (
                   <>

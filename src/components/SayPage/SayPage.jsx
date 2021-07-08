@@ -17,7 +17,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useState } from "react";
 import './SayPage.css';
 
-
+// for styling the page
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
       paddingTop: theme.spacing(2),
@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
     cardMedia: {
-      // paddingTop: '100%', // 16:9
       height: '60px',
       width: '60px',
       margin: 'auto',
@@ -55,9 +54,6 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: 'center',
       textAlign: 'center',
     },
-    cardClicker: {
-      // background: props => props.lists ? 'linear-gradient(#e66465, #9198e5)' : 'linear-gradient(#e66465, #9198e5)',
-    },
     title: {
       textAlign: 'center',
       fontFamily: theme.typography.Pacifico,
@@ -70,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-
   function SayPage() {
     
     const classes = useStyles();
@@ -80,68 +75,42 @@ const useStyles = makeStyles((theme) => ({
     // const addVote = useSelector((store) => store.addVote);
     const dispatch = useDispatch();
     const [voteMode, setVoteMode] = useState(false);
- 
-    console.log('voteCount', totalVote);
-    // console.log('Testing addVote reducer', addVote);
 
-    // const handleVote = () => {
-    //   console.log(handleVote);
-    //   setVoteMode(true);
-    //   let voteClicker = 1;
-    //   console.log('voteclicker', voteClicker);
-    //   const voteCounted = {
-    //     say_id: say_id,
-    //     artwork_id: id,
-    //   }
-    //   console.log('testing handlevote', voteCounted);
-    //   dispatch({type: 'ADDING_NEW_VOTE', payload: voteCounted});
-    // }
-
-    // This is where we update and insert into the db
-    // const [say_id, setSay_Id] = useState('');
-    // const [artwork_id, setArtwork_Id] = useState('');
-
+  // local state for select, defaulted to null
   const [select, setSelected] = useState(null);
 
-  
+  // function to handle when the user clicks a card to vote
   const onCardClick = (event, lists) => {
     if (select === lists) {
         setSelected(null);
     } else {
       setSelected(lists);
     }
-    console.log(lists); 
-
       setVoteMode(true);
       let voteClicker = 1;
-      console.log('voteclicker', voteClicker);
       const voteCounted = {
         say_id: lists.id,
         artwork_id: id,
       }
-      console.log('testing handlevote', voteCounted);
       dispatch({type: 'ADDING_NEW_VOTE', payload: voteCounted});
-    // console.log('clicked card', list);
  };
-  // onClick={() => setSelected(lists.sayid)} className={select && select !== lists.sayid ? 'bg-disabled' : null}
-  
+
+  // on page load, fetch the say details and the total votes for say from the server, using the id of the artwork as the payload to get those only for that artwork
     useEffect(() => {
-        console.log('In useEffect param:');
         dispatch({type: 'FETCH_SAY_DETAIL', payload: id});
         dispatch({type: 'FETCH_TOTAL_VOTE', payload: id});
     }, []);
-  
-    console.log('In useEffect param:', list);
+
+    // to get the id of the artwork
     const {id} = useParams();
 
     const history = useHistory();
 
-    console.log('testing22222', totalVote);
-    // console.log('Testing addVote reducer 2222222', addVote);
 
-  
     return (
         <div>
+
+          {/* takes user back to previous page */}
             <Button
                 onClick={() => {
                     history.goBack();
@@ -157,12 +126,17 @@ const useStyles = makeStyles((theme) => ({
           <Typography variant="body1" align="center">
             <b>Go Vote!</b>
           </Typography>
+
+          {/* if voteMode is false, render the cards with their descriptions */}
           {voteMode === false ?
           <Container className={classes.cardGrid} maxWidth="md">
                 <Grid container spacing={2} >
+
+                {/* maps through all the say cards and render them to the DOM */}
                 {list.map((lists, i) => (
                     <Grid item  key={lists.id} alignItems='center'>
                       
+                    {/* when a card is clicked, call the onCardClick function, passing in the lists as an argument for the specific card clicked */}
                     <CardActionArea  onClick={(event) => onCardClick(event, lists)} className={classes.cardClicker}>
                         <Card className={classes.card} >
                             <CardMedia image={lists.image} className={classes.cardMedia}/>
@@ -177,9 +151,13 @@ const useStyles = makeStyles((theme) => ({
                     ))}
                 </Grid>
             </Container>
+
+          // if vote mode is true, render instead the total votes for each card
           :
           (<Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={2}>
+
+          {/* map through to render each card */}
           {totalVote.map((item, i) => (
               <Grid item key={i} alignItems='center'>
               <CardActionArea>
@@ -197,18 +175,6 @@ const useStyles = makeStyles((theme) => ({
           </Grid>
       </Container>)  
           }
-
-            {/* {voteMode === false ?
-            <div className={classes.button}>
-            <Button  variant="contained" color="primary" >
-                Vote!
-            </Button></div>
-            : (
-            <div className={classes.button}>
-            <Button variant="contained" color="primary" >Back</Button>
-            </div> 
-            )} */}
-
         </div>
         </Grid>
         </div>

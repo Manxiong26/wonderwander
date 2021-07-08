@@ -15,10 +15,16 @@ import { useStyles } from "../classes";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 function Adventure() {
+
+    //variable to bring in the adventure detail from the adventureReducer for a specific adventure
     const advDetail = useSelector((store) => store.adventureReducer.adventureDetailReducer);
     const dispatch = useDispatch();
     const history = useHistory();
+    
+    //to get id for specific adventure
     const { id } = useParams();
+
+    //variable set to classes.js file for styling
     const classes = useStyles();
 
     // Function to create preview of prompt
@@ -30,19 +36,17 @@ function Adventure() {
       }
 
 
-
+    //on page load, dispatch for getting adventure detail from server with the payload of that id from useParams
     useEffect(() => {
         dispatch({ type: 'FETCH_ADVENTURE_DETAIL', payload: id })
     }, []);
 
-    console.log('Adventure Detail: ', advDetail);
-    console.log('Adventure Detail ID: ', id);
-
-
-
+    //to render adventure detail page
     return (
         <>
             <div className={classes.pageMargin}>
+
+                {/* button to take user back to previous page */}
                 <Button
                     onClick={() => {
                         history.goBack();
@@ -66,6 +70,8 @@ function Adventure() {
                     See. Do.
                     <Divider />
                 </Typography>
+
+                {/* components for the see and do part of the adventure, with the truncateString function passed as a prop */}
                 <AdventureSee truncateString={truncateString} />
                 <AdventureDo truncateString={truncateString} />
             </div>
@@ -73,4 +79,5 @@ function Adventure() {
     );
 }
 
+// for exporting this component to App
 export default Adventure;

@@ -14,6 +14,7 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+// for styling the page
 const useStyles = makeStyles({
   cardmedia: {
     width: "60px",
@@ -35,17 +36,23 @@ function DoPrompt({truncateString}) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+
+  // gets the doDetail from the server for that artwork
   const doDetail = useSelector((store) => store.seesaydoReducer.doReducer);
+
+  // gets the id for the artwork
   const { id } = useParams();
 
+  // on page load, fetches the do from the server with the payload being the id for the specific artwork
   useEffect(() => {
     dispatch({ type: "FETCH_DO", payload: id });
   }, []);
 
-  console.log("in do prompt looking for art detail information", doDetail);
-
+  // render the page to the DOM
   return (
       <>
+
+      {/* if the doDetail array has a length greater than 1, meaning that the artwork is supposed to have a do element, render those elements to the DOM */}
       {(doDetail.length) > 0 &&
     <List>
       {doDetail.map((dolist, i) => {
@@ -64,6 +71,8 @@ function DoPrompt({truncateString}) {
                   {truncateString(dolist.prompts, 50)}
                 </Typography>
               </ListItemText>
+
+              {/* button that takes the user to the page for the specific do prompt using the id of the do prompt */}
               <IconButton onClick={(event) => history.push(`/do/${id}`)}>
                 <ArrowForwardIosIcon />
               </IconButton>

@@ -39,6 +39,8 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
   };
 
   return (
+
+        // renders the map to the DOM
         <div style={{ height: height, width: width }} id="map" className={classes.map}>
           <GoogleMapReact
             bootstrapURLKeys={{ 
@@ -49,9 +51,12 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
             yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
           >
+            {/* map to handle rendering the balloon markers to the DOM for each art item, depending on which page the map is being imported into */}
             {reducer.map((item, i) => (
               <BalloonMarker  item={item} key={i} lat={item.lat} lng={item.lng} />
             ))}
+
+            {/* renders user location if their location is available */}
             {userLat !== null && userLng !== null ? (
             <UserLocation lat={userLat} lng={userLng} />
             ) : ('')}

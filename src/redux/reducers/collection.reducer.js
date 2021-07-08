@@ -1,3 +1,4 @@
+// reducer to set state of collections from server
 const collection = (state = [], action) => {
     switch (action.type) {
       case 'SET_COLLECTION':

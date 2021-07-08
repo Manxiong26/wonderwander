@@ -12,9 +12,13 @@ import HomeIcon from '@material-ui/icons/Home';
 function WelcomePage4() {
     const history = useHistory();
     const classes = useStyles();
+
+    // when called, goes back to the previous welcome page
     const goBack = () => {
         history.push('/welcome3');
     }
+
+    // when called, goes to the home page
     const skipWelcome = () => {
         history.push('/home');
     }
@@ -22,6 +26,8 @@ function WelcomePage4() {
 
     return (
         <>
+
+            {/* renders the buttons to the DOM */}
             <div className={classes.welcomeMargin}>
                 <ArrowBackIosIcon
                     onClick={goBack}

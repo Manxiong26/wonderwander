@@ -22,11 +22,16 @@ import { Button } from '@material-ui/core';
 
 const drawerWidth = 240;
 
+// email constant for the email function
 const email = `shannon@wonderwander.art`
+
+// when called, takes a text string in as an argument
+// will take the user to their email, with the to: line filled with the email constant, and the subject pre-filled with the text passed in, based on which button clicked below
 const goEmail = (text) => {
   window.location.href = `mailto:${email}?subject=${text}`;
 }
 
+// for styling
 const styles = {
   sideNav: {
     marginTop: '-60px',
@@ -40,6 +45,8 @@ const styles = {
   }
 };
 
+//theme for styling elements
+// also handles the transitioning of the elements in the menu 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -78,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
+
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
@@ -100,18 +108,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function Menu() {
-
-
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // gets the user information from the store if they are logged in
+  //this is to handle rendering the admin button to the DOM
   const user = useSelector((store) => store.user);
+
 
   let loginLinkData = {
     path: '/login',
     text: 'Login / Register',
   };
 
+  // if the user is logged in, will take the user to the home page if they click on the login/logout button
   if (user.id != null) {
     loginLinkData.path = '/user';
     loginLinkData.text = 'Home';
@@ -119,19 +131,19 @@ function Menu() {
 
   const classes = useStyles();
   const theme = useTheme();
+
+  // local state to handle the opening and closing of the menu drawer
   const [open, setOpen] = React.useState(false);
 
+  // if open, will set Open state to true
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
+  //if closed, will set Open state to false
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  // const toAdminRegister = () => {
-  //   history.push('/admin/register')
-  // }
 
   return (
     <>
@@ -143,6 +155,8 @@ function Menu() {
             [classes.appBarShift]: open,
           })}
         >
+
+          {/* button to open the drawer */}
           <Toolbar>
             <IconButton
               color="inherit"
@@ -156,12 +170,10 @@ function Menu() {
             <Typography className={classes.title} variant="h6" noWrap>
               Wonder Wander
             </Typography>
-            {/* {user.admin &&
-              <Button variant="outlined" onClick={toAdminRegister}>
-                <Typography style={{ color: 'white' }}>Add Admin</Typography>
-              </Button>} */}
           </Toolbar>
         </AppBar>
+
+        {/* handles rendering the drawer to the DOM */}
         <Drawer
           className={classes.drawer}
           variant="persistent"
@@ -173,11 +185,15 @@ function Menu() {
         >
           {/* this is the arrow to close the drawer */}
           <div className={classes.drawerHeader}>
+
+            {/* changes direction of arrow to open/close based on if the drawer is already open */}
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </div>
           <Divider />
+
+          {/* item that when clicked, will route user to the home page and close the drawer */}
           <Link to='/home' style={styles.link} onClick={handleDrawerClose}>
             <List>
               <ListItem button key={'Home'}>
@@ -185,6 +201,8 @@ function Menu() {
               </ListItem>
             </List>
           </Link>
+
+          {/* item that when clicked, will route user to the map page and close the drawer */}
           <Link to='/map' style={styles.link} onClick={handleDrawerClose}>
             <List>
               <ListItem button key={'View Map/List'}>
@@ -192,6 +210,8 @@ function Menu() {
               </ListItem>
             </List>
           </Link>
+
+          {/* item that when clicked, will route user to the about page and close the drawer */}
           <Link to='/about' style={styles.link} onClick={handleDrawerClose}>
             <List>
               <ListItem button key={'About Us'}>
@@ -199,32 +219,42 @@ function Menu() {
               </ListItem>
             </List>
           </Link>
+
+          {/* item that when clicked, will call the goEmail function, passing in the string of text as an argument, and also close the drawer */}
           <List>
             <ListItem button onClick={function () { handleDrawerClose(); goEmail('Hello Wonder Wander!'); }} key={'Contact Wonder Wander'}>
               <ListItemText primary={'Contact Wonder Wander'} />
             </ListItem>
           </List>
 
+          {/* item that when clicked, will call the goEmail function, passing in the string of text as an argument, and also close the drawer */}
           <List>
             <ListItem button onClick={function () { handleDrawerClose(); goEmail('Submit a Collection'); }} key={'Add an Art Collection'}>
               <ListItemText primary={'Add an Art Collection'} />
             </ListItem>
           </List>
 
+          {/* item that when clicked, will call the goEmail function, passing in the string of text as an argument, and also close the drawer */}
           <List>
             <ListItem button onClick={function () { handleDrawerClose(); goEmail('Become a Sponsor'); }} key={'Become a Sponsor'}>
               <ListItemText primary={'Become a Sponsor'} />
             </ListItem>
           </List>
+
+          {/* when clicked, will log the user out and redirect them to the login page */}
           <Link to='/login' style={styles.link} onClick={handleDrawerClose,
             () => dispatch({ type: 'LOGOUT' })}>
 
+            {/* button to log in/log out, will also close drawer when clicked */}
             <List>
               <ListItem button key={'Sign In/Out'}>
                 <ListItemText primary={'Sign In/Out'} onClick={handleDrawerClose} />
               </ListItem>
             </List>
           </Link>
+
+          {/* if the user is logged in AND an admin, will show an admin button */}
+          {/* when clicked, this button directs the user to the admin landing page */}
           {user.admin ?
             (
               <Link to='/admin/landing' style={styles.link} onClick={handleDrawerClose}>

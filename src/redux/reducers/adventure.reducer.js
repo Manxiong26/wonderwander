@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+// reducer to set the state of the adventure from the saga/server
 const adventureList = (state = [], action) => {
     switch (action.type) {
       case 'SET_ADVENTURE':
@@ -11,6 +12,7 @@ const adventureList = (state = [], action) => {
     }
   };
 
+  // reducer to set the state for the adventure detail
   const adventureDetailReducer = (state = {}, action) => {
     switch (action.type) {
       case 'SET_ADVENTURE_DETAIL':

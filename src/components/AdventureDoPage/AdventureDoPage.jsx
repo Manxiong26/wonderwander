@@ -15,11 +15,15 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
 
 function AdventureDoPage() {
-  // const classes = useStyles();
+
+  // list constant from the store, this is for rendering the do for the adventure to the page
   const list = useSelector((store) => store.adventureSeeDo.doAdventureReducer);
   const dispatch = useDispatch();
+
+  //for getting the id for the do page for the adventure
   const { id } = useParams();
 
+  //on page load, dispatch to server with the payload of that id to get the do for the adventure 
   useEffect(() => {
     console.log("In useEffect param:");
     dispatch({ type: "FETCH_DO_ADVENTURE", payload: id });
@@ -27,7 +31,10 @@ function AdventureDoPage() {
   const history = useHistory();
   const classes = useStyles();
 
+  //render the do for the adventure to the page 
   return (
+
+    // button that when clicked, goes back to the previous page 
     <div className={classes.pageMargin}>
       <Button
         onClick={() => {
@@ -44,6 +51,8 @@ function AdventureDoPage() {
             </Typography>
             <Card className={classes.promptCard}>
               <div style={{ position: "relative" }}>
+
+                {/* maps through the list grabbed from the server */}
                 {list.map((item, i) => {
                   return (
                     <>
@@ -77,4 +86,5 @@ function AdventureDoPage() {
   );
 }
 
+//for exporting 
 export default AdventureDoPage;

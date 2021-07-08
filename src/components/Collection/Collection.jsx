@@ -35,6 +35,7 @@ function Collection() {
   const collectionList = useSelector((store) => store.collection);
   console.log('WHAT IS IN COLLECTION__________', collectionList);
 
+  // function that when called, will take the user to the collection detail for a specific collection, passed in as the argument collDet
   const viewCollectionDetail = (event, collDet) => {
     history.push(`/collectionDetail/${collDet.id}`)
   }
@@ -45,6 +46,8 @@ function Collection() {
   }
   return (
     <>
+
+    {/* button that when clicked, will take the user back to the previous page */}
       <Button
         onClick={() => {
           history.goBack();
@@ -57,7 +60,8 @@ function Collection() {
           All Collections
         </Typography>
         <List>
-          {/* <div className="collectionList"> */}
+
+          {/* maps through the whole collection list and renders them to the DOM */}
           {collectionList.map(collection => {
             return (
               <>
@@ -71,6 +75,8 @@ function Collection() {
                     secondary={collectionText(collection)}
                   />
                   <ListItemText />
+
+                  {/* button that when clicked, will call the viewCollectionDetail function and pass in the collection item as an argument */}
                   <IconButton>
                     <ArrowForwardIosIcon
                       onClick={(event) =>
