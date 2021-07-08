@@ -123,6 +123,7 @@ function HomePage() {
             <Typography variant="h6" className={classes.red}>
               Other Art Adventures:
               </Typography>
+              <div className={classes.adventureList}>
               <List>
                 {adventure.map((advDet, i) => {
                   return (
@@ -145,6 +146,7 @@ function HomePage() {
                 })}
                 <Divider />
               </List>
+              </div>
             </div>
           </div>
         </Grid>

@@ -45,6 +45,7 @@ function Collection() {
   }
   return (
     <>
+    <div className={classes.pageMargin}>
       <Button
         onClick={() => {
           history.goBack();
@@ -52,7 +53,7 @@ function Collection() {
       >
         <ArrowBackIosIcon />
       </Button>
-      <div className={classes.pageMargin}>
+      
         <Typography variant="h5" className={classes.title}>
           All Collections
         </Typography>

@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
     cardMedia: {
-      // paddingTop: '100%', // 16:9
       height: '60px',
       width: '60px',
       margin: 'auto',
@@ -66,6 +65,10 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: '2%'
   
     },
+    pageMargin: {
+      marginLeft: '6%',
+      marginRight: '6%',
+    },
 
 
   }));
@@ -74,34 +77,22 @@ const useStyles = makeStyles((theme) => ({
   function SayPage() {
     
     const classes = useStyles();
-    // const history = useHistory();
+    const {id} = useParams();
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    useEffect(() => {
+      dispatch({type: 'FETCH_SAY_DETAIL', payload: id});
+      dispatch({type: 'FETCH_TOTAL_VOTE', payload: id});
+  }, []);
+
+    // ---REDUCERS--- //
     const list = useSelector((store) => store.seesaydoReducer.sayReducer);
     const totalVote = useSelector((store) => store.voteNumber);
-    // const addVote = useSelector((store) => store.addVote);
-    const dispatch = useDispatch();
+
+    // ---Local State--- //
     const [voteMode, setVoteMode] = useState(false);
- 
-    console.log('voteCount', totalVote);
-    // console.log('Testing addVote reducer', addVote);
-
-    // const handleVote = () => {
-    //   console.log(handleVote);
-    //   setVoteMode(true);
-    //   let voteClicker = 1;
-    //   console.log('voteclicker', voteClicker);
-    //   const voteCounted = {
-    //     say_id: say_id,
-    //     artwork_id: id,
-    //   }
-    //   console.log('testing handlevote', voteCounted);
-    //   dispatch({type: 'ADDING_NEW_VOTE', payload: voteCounted});
-    // }
-
-    // This is where we update and insert into the db
-    // const [say_id, setSay_Id] = useState('');
-    // const [artwork_id, setArtwork_Id] = useState('');
-
-  const [select, setSelected] = useState(null);
+    const [select, setSelected] = useState(null);
 
   
   const onCardClick = (event, lists) => {
@@ -110,7 +101,6 @@ const useStyles = makeStyles((theme) => ({
     } else {
       setSelected(lists);
     }
-    console.log(lists); 
 
       setVoteMode(true);
       let voteClicker = 1;
@@ -119,29 +109,14 @@ const useStyles = makeStyles((theme) => ({
         say_id: lists.id,
         artwork_id: id,
       }
-      console.log('testing handlevote', voteCounted);
       dispatch({type: 'ADDING_NEW_VOTE', payload: voteCounted});
-    // console.log('clicked card', list);
  };
-  // onClick={() => setSelected(lists.sayid)} className={select && select !== lists.sayid ? 'bg-disabled' : null}
   
-    useEffect(() => {
-        console.log('In useEffect param:');
-        dispatch({type: 'FETCH_SAY_DETAIL', payload: id});
-        dispatch({type: 'FETCH_TOTAL_VOTE', payload: id});
-    }, []);
-  
-    console.log('In useEffect param:', list);
-    const {id} = useParams();
-
-    const history = useHistory();
-
-    console.log('testing22222', totalVote);
-    // console.log('Testing addVote reducer 2222222', addVote);
-
   
     return (
-        <div>
+      <>
+      <div className={classes.pageMargin}>
+
             <Button
                 onClick={() => {
                     history.goBack();
@@ -149,8 +124,9 @@ const useStyles = makeStyles((theme) => ({
             >
                 <ArrowBackIosIcon />
             </Button>
+            </div>
+            <div>
             <Grid item xs={12} sm={12} lg={12}>
-        <div className={classes.pageMargin}>
           <Typography variant="h5" className={classes.title}>
             Say
           </Typography>
@@ -197,21 +173,9 @@ const useStyles = makeStyles((theme) => ({
           </Grid>
       </Container>)  
           }
-
-            {/* {voteMode === false ?
-            <div className={classes.button}>
-            <Button  variant="contained" color="primary" >
-                Vote!
-            </Button></div>
-            : (
-            <div className={classes.button}>
-            <Button variant="contained" color="primary" >Back</Button>
-            </div> 
-            )} */}
-
-        </div>
         </Grid>
         </div>
+        </>
     );
   }
   

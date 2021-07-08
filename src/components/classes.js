@@ -175,7 +175,11 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     display: 'flex'
   },
+  adventureList: {
+    maxHeight: 150,
+    overflow: 'auto'
 
+  },
   btnGroup: {
     display: 'flex',
     alignItems: 'flex-end',

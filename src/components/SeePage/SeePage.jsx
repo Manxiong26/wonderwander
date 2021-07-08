@@ -34,7 +34,7 @@ function SeePage() {
 
 
     return (<>
-        <div className={classes.welcomeMargin}>
+        <div className={classes.pageMargin}>
             <Button
                 onClick={() => {
                     history.goBack();
@@ -42,7 +42,7 @@ function SeePage() {
             >
                 <ArrowBackIosIcon />
             </Button>
-        </div>
+        
 
        <Grid container direction="column">
       <Grid item xs={12} sm={12} lg={12}>
@@ -72,10 +72,11 @@ function SeePage() {
         </div>
         </Grid>
         </Grid>
+        </div>
     </>
     );
 }
 
 
-// artwork_vidlink
+
 export default SeePage;
