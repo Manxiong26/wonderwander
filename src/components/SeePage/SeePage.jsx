@@ -53,7 +53,7 @@ function SeePage() {
           
             {seeList.map((item, i) => {
                 return (
-                    <Card >
+                    <Card style={{marginBottom: '3%'}}>
                     <div key={i} className={classes.cardContent}>
                         
                         <ReactPlayer

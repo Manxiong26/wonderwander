@@ -54,11 +54,11 @@ CREATE TABLE "artwork" (
 	"description" varchar(5000),
 	"vid_link" varchar(5000),
 	"vid_description" varchar(5000),
-	"artist_id" INT REFERENCES "artist" ON DELETE CASCADE,
-	"sponsor_id" INT REFERENCES "sponsor" ON DELETE CASCADE,
-	"collection_id" INT REFERENCES "collection" ON DELETE CASCADE,
+	"artist_id" INT REFERENCES "artist" ON DELETE SET NULL,
+	"sponsor_id" INT REFERENCES "sponsor" ON DELETE SET NULL,
+	"collection_id" INT REFERENCES "collection" ON DELETE SET NULL,
 	"published" BOOLEAN NOT NULL DEFAULT 'false'
-);	
+);
 
 CREATE TABLE "favorites" (
 	"id" SERIAL PRIMARY KEY,
