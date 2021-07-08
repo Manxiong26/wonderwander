@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import AdminNav from "../AdminNav/AdminNav";
 import ImageUpload from '../ImageUpload/ImageUpload';
-      
+
 import {
   Button,
   Typography,
@@ -33,48 +33,25 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-
 import { useStyles } from "../classes";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+function AdminArtwork({ truncateString }) {
 
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-function AdminArtwork({truncateString}) {
   let { id } = useParams();
-  //console.log(id);
 
-  const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-
-  //functionality to route to a page
   const history = useHistory();
 
-  //functionality to dispatch information to a saga or reducer
+  const classes = useStyles();
+
   const dispatch = useDispatch();
 
   //redux store instances
   const artworkList = useSelector((store) => store.adminArtworkListReducer);
   const artwork = useSelector((store) => store.adminArtworkInfoReducer);
-  console.log("artwork reducer id:", artwork.id);
-
   const artistList = useSelector((store) => store.adminArtistListReducer);
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
   const collectionList = useSelector((store) => store.adminCollectionListReducer);
-  
   const seeList = useSelector((store) => store.adminSeeListArtworkReducer);
-  console.log("seeList reducer: ", seeList);
   const see = useSelector((store) => store.adminSeeInfoReducer);
   const doList = useSelector((store) => store.adminDoListArtworkReducer);
   const doItem = useSelector((store) => store.adminDoReducer);
@@ -87,7 +64,7 @@ function AdminArtwork({truncateString}) {
     dispatch({ type: "FETCH_COLLECTION_LIST" });
   }, []);
 
-  //sets local state for post request
+  //sets local state for Artwork post request
   const [name, setName] = useState("");
   const [year, setYear] = useState("");
   const [lat, setLat] = useState("");
@@ -103,8 +80,9 @@ function AdminArtwork({truncateString}) {
   //edit mode
   const [editMode, setEditMode] = useState(false);
 
-  //post to saga
+  //Artwork post to saga
   const addArtwork = () => {
+
     //create object to send
     const newArtwork = {
       name: name,
@@ -132,8 +110,6 @@ function AdminArtwork({truncateString}) {
       icon: "success",
     });
 
-    //TODO - Reset dropdown to default values (artis, sponsor, collection)
-
     //clears input fields
     setName("");
     setYear("");
@@ -150,10 +126,9 @@ function AdminArtwork({truncateString}) {
 
   //renders specific artwork's details in input feilds to edit
   const renderArtworkDetail = (event, item) => {
-    console.log("clicking edit for Artwork = ", item);
 
     //sets specific artwork in artwork reducer
-    dispatch({ type: "SET_ARTWORK_INFO", payload: item }); //
+    dispatch({ type: "SET_ARTWORK_INFO", payload: item });
 
     // sets see/do list for specific artwork in seeList/doList reducers
     dispatch({ type: "FETCH_SEE_LIST_ARTWORK", payload: item.id });
@@ -178,6 +153,7 @@ function AdminArtwork({truncateString}) {
 
   //update (edit) artwork information
   const updateArtworkInfo = () => {
+
     //create updated artwork object
     const updatedArtworkInfo = {
       id: artwork.id,
@@ -194,8 +170,6 @@ function AdminArtwork({truncateString}) {
       collection_id: collection_id,
     };
 
-    console.log("updated artwork info:", updatedArtworkInfo);
-
     //send updated artwork info to artwork saga
     dispatch({ type: "UPDATE_ARTWORK_INFO", payload: updatedArtworkInfo });
 
@@ -204,8 +178,6 @@ function AdminArtwork({truncateString}) {
       text: "This artwork's information has been updated!",
       icon: "success",
     });
-
-    //TODO - Reset dropdown to default values (artis, sponsor, collection)
 
     //turn editMode off
     setEditMode(false);
@@ -226,6 +198,7 @@ function AdminArtwork({truncateString}) {
 
   //cancel (editMode) button - returns to add artwork form
   const renderToInfo = () => {
+
     setEditMode(false);
 
     //clears input fields
@@ -244,7 +217,6 @@ function AdminArtwork({truncateString}) {
 
   //delete artwork
   const deleteArtwork = (id) => {
-    console.log("deleting artwork:", id);
 
     //dispatch to saga w artwork id
     dispatch({ type: "DELETE_ARTWORK", payload: id });
@@ -252,7 +224,6 @@ function AdminArtwork({truncateString}) {
 
   //alerts admin to verify artwork deletion
   const deleteValidation = (id) => {
-    console.log("delete clicked! id = ", id);
 
     swal({
       title: "Hello!",
@@ -281,17 +252,15 @@ function AdminArtwork({truncateString}) {
   const [doId, setDoId] = useState("");
 
   const addSee = () => {
-    console.log("Add See Clicked.");
 
     //create object to send
     const newSee = {
       prompts: see_prompts,
-      image: see_image, 
+      image: see_image,
       link: link,
       artwork_id: artwork_id,
       activity_id: null,
     };
-    console.log("Adding see object: ", newSee);
 
     //dispatch to artwork saga
     dispatch({ type: "ADD_SEE_ARTWORK", payload: newSee });
@@ -302,8 +271,6 @@ function AdminArtwork({truncateString}) {
       icon: "success",
     });
 
-    //TODO - Reset dropdown to default value
-
     //clears input fields
     setSeePrompts("");
     setSeeImage("");
@@ -312,7 +279,6 @@ function AdminArtwork({truncateString}) {
   };
 
   const addDo = () => {
-    console.log("Add Do Clicked.");
 
     //create object to send
     const newDo = {
@@ -320,7 +286,6 @@ function AdminArtwork({truncateString}) {
       artwork_id: artwork_id,
       activity_id: null,
     };
-    console.log("Adding do object: ", newDo);
 
     //dispatch to artwork saga
     dispatch({ type: "ADD_DO_ARTWORK", payload: newDo });
@@ -330,8 +295,6 @@ function AdminArtwork({truncateString}) {
       text: `This 'Do' has been added to your artwork!`,
       icon: "success",
     });
-
-    //TODO - Reset dropdown to default value
 
     //clears input fields
     setDoPrompts("");
@@ -346,7 +309,13 @@ function AdminArtwork({truncateString}) {
     dispatch({ type: "DELETE_SEE_ARTWORK", payload: item.id });
 
     //TODO - Get updated See list
-    
+
+    //sweet alert lets admin know 'see' has been deleted
+    swal({
+      text: `This 'See' has been deleted!`,
+      icon: "success",
+    });
+
   };
 
   //delete do
@@ -358,11 +327,16 @@ function AdminArtwork({truncateString}) {
 
     //TODO - Get updated do list 
 
+    //sweet alert lets admin know 'do' has been deleted
+    swal({
+      text: `This 'Do' has been deleted!`,
+      icon: "success",
+    });
+
   };
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publish = (event, item) => {
-    console.log("clicking publish for Artwork = ", item);
 
     //sets specific artwork in artwork reducer
     dispatch({ type: "SET_ARTWORK_INFO", payload: item });
@@ -375,21 +349,11 @@ function AdminArtwork({truncateString}) {
         id: item.id,
         published: false,
       };
-      //swal success indicator
-      // swal({
-      //   text: "This artwork's information is now unpublished!",
-      //   icon: "success",
-      // });
     } else {
       pubObject = {
         id: item.id,
         published: true,
       };
-      //swal success indicator
-      // swal({
-      //   text: "This artwork's information has been published!",
-      //   icon: "success",
-      // });
     }
 
     //sends updated artwork boolean (published/unpublished) to artwork saga
@@ -398,7 +362,6 @@ function AdminArtwork({truncateString}) {
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publishSee = (event, item) => {
-    console.log("clicking publish for See = ", item);
 
     //sets specific artwork in artwork reducer
     dispatch({ type: "SET_SEE_INFO_ARTWORK", payload: item });
@@ -427,14 +390,13 @@ function AdminArtwork({truncateString}) {
       //   icon: "success",
       // });
     }
-    
+
     //sends updated 'See' boolean (publish/unpublish) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_SEE_ARTWORK", payload: pubObject });
   };
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publishDo = (event, item) => {
-    console.log("clicking publish for Do = ", item);
 
     //sets specific artwork in artwork reducer
     dispatch({ type: "SET_DO_INFO_ARTWORK", payload: item });
@@ -463,22 +425,9 @@ function AdminArtwork({truncateString}) {
       //   icon: "success",
       // });
     }
-    
+
     //sends updated 'Do' boolean (publish/unpublish) to artwork saga
     dispatch({ type: "UPDATE_PUBLISH_DO_ARTWORK", payload: pubObject });
-  };
-
-  //TODO - If not using modal, remove this code in clean up
-  const [open, setOpen] = useState(false);
-
-  const body = (
-    <div className={classes.modal} style={modalStyle}>
-      The Prompt to edit will go here!!!
-    </div>
-  );
-
-  const modalToggle = () => {
-    setOpen(!open);
   };
 
   return (
@@ -487,6 +436,7 @@ function AdminArtwork({truncateString}) {
       <Grid container spacing={1} direction="row">
         {editMode ? (
           <>
+            {/* Edit Artwork Form */}
             <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
               <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
@@ -642,8 +592,7 @@ function AdminArtwork({truncateString}) {
               </Card>
             </Grid>
 
-            {/* EDIT SEE CARD */}
-
+            {/* EDIT SEE FORM */}
             <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
               <TableContainer
                 elevation={6}
@@ -664,11 +613,10 @@ function AdminArtwork({truncateString}) {
                         {seeList.map((item, i) => (
                           <TableRow alignItems="flex-start" key={i}>
                             <TableCell >
-                              <Avatar 
+                              <Avatar
                                 variant="square"
                                 src={item.image}
                                 alt="See Prompt Image"
-                                
                               />
                             </TableCell>
                             <TableCell>
@@ -677,19 +625,19 @@ function AdminArtwork({truncateString}) {
                               </Typography>
                             </TableCell>
                             <TableCell>
-                                <FormControlLabel
+                              <FormControlLabel
                                 control={
-                                    <Switch
+                                  <Switch
                                     size="small"
                                     checked={item.published}
                                     onChange={(event) => publishSee(event, item)}
                                     name="publish"
                                     color="primary"
-                                    />
+                                  />
                                 }
                                 labelPlacement="top"
                                 label="Publish"
-                                />
+                              />
                             </TableCell>
                             <TableCell align="right">
                               <IconButton>
@@ -708,13 +656,9 @@ function AdminArtwork({truncateString}) {
                   </form>
                 </div>
               </TableContainer>
-              <Modal open={open} onClose={modalToggle}>
-                {body}
-              </Modal>
             </Grid>
 
-            {/* EDIT DO CARD */}
-
+            {/* EDIT DO FORM */}
             <Grid item lg={4} sm={12} xs={12} className={classes.grid}>
               <TableContainer
                 elevation={6}
@@ -740,19 +684,19 @@ function AdminArtwork({truncateString}) {
                               </Typography>
                             </TableCell>
                             <TableCell>
-                                <FormControlLabel
+                              <FormControlLabel
                                 control={
-                                    <Switch
+                                  <Switch
                                     size="small"
                                     checked={item.published}
                                     onChange={(event) => publishDo(event, item)}
                                     name="publish"
                                     color="primary"
-                                    />
+                                  />
                                 }
                                 labelPlacement="top"
                                 label="Publish"
-                                />
+                              />
                             </TableCell>
                             <TableCell align="right">
                               <IconButton>
@@ -771,13 +715,11 @@ function AdminArtwork({truncateString}) {
                   </form>
                 </div>
               </TableContainer>
-              <Modal open={open} onClose={modalToggle}>
-                {body}
-              </Modal>
             </Grid>
           </>
         ) : (
           <>
+            {/* Add Artwork Form */}
             <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
               <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
@@ -925,7 +867,7 @@ function AdminArtwork({truncateString}) {
                       Submit
                     </Button>
                   </form>
-                  <Divider style={{marginBottom: '5%'}}/>
+                  <Divider style={{ marginBottom: '5%' }} />
 
                   {/* Add See Form */}
                   <Typography
@@ -935,12 +877,10 @@ function AdminArtwork({truncateString}) {
                   >
                     Add See
                   </Typography>
-                  
                   <form className={classes.form} onSubmit={addSee}>
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
-            
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Prompt"
                       label="Prompt"
@@ -948,8 +888,8 @@ function AdminArtwork({truncateString}) {
                       onChange={(event) => setSeePrompts(event.target.value)}
                     />
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Image URL"
                       label="Image URL"
@@ -957,8 +897,8 @@ function AdminArtwork({truncateString}) {
                       onChange={(event) => setSeeImage(event.target.value)}
                     />
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Video URL"
                       label="Video URL"
@@ -990,8 +930,7 @@ function AdminArtwork({truncateString}) {
                       Submit
                     </Button>
                   </form>
-                  <Divider style={{marginBottom: '5%'}}/>
-                  
+                  <Divider style={{ marginBottom: '5%' }} />
 
                   {/* Add Do Form */}
                   <Typography
@@ -1003,8 +942,8 @@ function AdminArtwork({truncateString}) {
                   </Typography>
                   <form className={classes.form} onSubmit={addDo}>
                     <TextField
-                    className={classes.inputs}
-                    variant="outlined"
+                      className={classes.inputs}
+                      variant="outlined"
                       type="text"
                       placeholder="Prompt"
                       label="Prompt"
@@ -1032,15 +971,15 @@ function AdminArtwork({truncateString}) {
                       name="submit"
                       variant="outlined"
                       value="Submit"
-                    > 
-                        Submit
+                    >
+                      Submit
                     </Button>
-              </form>
-              </div>
-
+                  </form>
+                </div>
               </Card>
             </Grid>
 
+            {/* Artwork List */}
             <Grid item lg={7} sm={12} xs={12}>
               <TableContainer
                 elevation={6}

@@ -25,32 +25,27 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
 function AdminSponsor() {
-  let { id } = useParams();
-  //console.log(id);
 
-  //functionality to route to a page
+  let { id } = useParams();
+
   const history = useHistory();
 
   const classes = useStyles();
 
-  //functionality to dispatch information to a saga or reducer
   const dispatch = useDispatch();
 
   //redux store instances
   const sponsorList = useSelector((store) => store.adminSponsorListReducer);
   const sponsor = useSelector((store) => store.adminSponsorInfoReducer);
-
   //const logo = useSelector((store) => store.imageUrlReducer);
+  //console.log('imageUrl: ', logo);
 
-  console.log('imageUrl: ', logo);
-  console.log("sponsor reducer id:", sponsor.id);
-
-  //retrieves sponsors' info from DB
+  //retrieves sponsors' info from DB on page load
   useEffect(() => {
     dispatch({ type: "FETCH_SPONSOR_LIST" });
   }, []);
 
-  //sets local state for post request
+  //sets local state for sponsor post request
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [site_link, setSiteLink] = useState("");
@@ -59,8 +54,9 @@ function AdminSponsor() {
   //edit mode
   const [editMode, setEditMode] = useState(false);
 
-  //post to saga
+  //Sponsor post to saga
   const addSponsor = () => {
+
     //create object to send
     const newSponsor = {
       name: name,
@@ -90,10 +86,9 @@ function AdminSponsor() {
 
   //renders specific sponsor's details in input feilds to edit
   const renderSponsorDetail = (event, item) => {
-    console.log("clicking edit for Sponsor = ", item);
 
     //sets specific sponsor in sponsor reducer
-    dispatch({ type: "SET_SPONSOR_INFO", payload: item }); //
+    dispatch({ type: "SET_SPONSOR_INFO", payload: item });
 
     //renders form view from add to edit mode
     setEditMode(true);
@@ -107,6 +102,7 @@ function AdminSponsor() {
 
   //update (edit) sponsor information
   const updateSponsorInfo = () => {
+
     //create updated sponsor object
     const updatedSponsorInfo = {
       id: sponsor.id,
@@ -115,8 +111,6 @@ function AdminSponsor() {
       description: description,
       site_link: site_link,
     };
-
-    console.log("updated sponsor info:", updatedSponsorInfo);
 
     //send updated sponsor info to sponsor saga
     dispatch({ type: "UPDATE_SPONSOR_INFO", payload: updatedSponsorInfo });
@@ -139,6 +133,7 @@ function AdminSponsor() {
 
   //cancel (editMode) button - returns to add sponsor form
   const renderToInfo = () => {
+
     setEditMode(false);
 
     //clears input fields
@@ -150,7 +145,6 @@ function AdminSponsor() {
 
   //delete sponsor
   const deleteSponsor = (id) => {
-    console.log("deleting sponsor:", id);
 
     //dispatch to saga w sponsor id
     dispatch({ type: "DELETE_SPONSOR", payload: id });
@@ -158,7 +152,6 @@ function AdminSponsor() {
 
   //alerts admin to verify sponsor deletion
   const deleteValidation = (id) => {
-    console.log("delete clicked! id = ", id);
 
     swal({
       title: "Hello!",
@@ -177,49 +170,38 @@ function AdminSponsor() {
     });
   };
 
-    //changes db boolean to true which "publishes" item on public facing pages
-    const publish = (event, item) => {
-        console.log("clicking publish for Sponsor = ", item);
-    
-        //sets specific artist in artist reducer
-        dispatch({ type: "SET_SPONSOR_INFO", payload: item });
-    
-        let pubObject
-        // Sets putObject as opposite of current
-        // value to send as payload
-        if( item.published === true) {
-        pubObject = {
-          id: item.id,
-          published: false,
-        };
-        // //swal success indicator
-        // swal({
-        //   text: "This sponsor's information is now unpublished!",
-        //   icon: "success",
-        // });
-      } else {
-        pubObject = {
-          id: item.id,
-          published: true,
-        }
-        // //swal success indicator
-        // swal({
-        //   text: "This sponsor's information has been published!",
-        //   icon: "success",
-        // });
-      }
-    
-        //sends updated sponsor boolean (published/unpublished)) to sponsor saga
-        dispatch({ type: "UPDATE_PUBLISH_SPONSOR", payload: pubObject });
-    
-        
+  //changes db boolean to true which "publishes" item on public facing pages
+  const publish = (event, item) => {
+
+    //sets specific artist in artist reducer
+    dispatch({ type: "SET_SPONSOR_INFO", payload: item });
+
+    let pubObject
+    // Sets putObject as opposite of current
+    // value to send as payload
+    if (item.published === true) {
+      pubObject = {
+        id: item.id,
+        published: false,
       };
+    } else {
+      pubObject = {
+        id: item.id,
+        published: true,
+      }
+    }
+
+    //sends updated sponsor boolean (published/unpublished)) to sponsor saga
+    dispatch({ type: "UPDATE_PUBLISH_SPONSOR", payload: pubObject });
+
+  };
 
   return (
     <div>
       <AdminNav />
       <Grid container spacing={1} direction="row">
         {editMode ? (
+          // Edit Sponsor Form
           <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
               <div className={classes.cardContent}>
@@ -293,6 +275,7 @@ function AdminSponsor() {
             </Card>
           </Grid>
         ) : (
+          //Add Sponsor Form
           <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
               <div className={classes.cardContent}>
@@ -383,22 +366,21 @@ function AdminSponsor() {
                           className={classes.thumbnail}
                         />
                       </TableCell>
-
                       <TableCell>
                         <Typography variant="body1">{item.name}</Typography>
                       </TableCell>
                       <TableCell align="right">
-                      <FormControlLabel 
-                        control={
-                          <Switch
-                          size="small"
-                          checked={item.published}
-                          onChange={(event) => publish(event, item)}
-                          name="publish"
-                          color="primary"
-                        /> }
-                        labelPlacement="top"
-                        label="Publish"
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              size="small"
+                              checked={item.published}
+                              onChange={(event) => publish(event, item)}
+                              name="publish"
+                              color="primary"
+                            />}
+                          labelPlacement="top"
+                          label="Publish"
                         />
                       </TableCell>
                       <TableCell align="right">
