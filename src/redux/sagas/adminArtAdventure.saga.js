@@ -109,7 +109,7 @@ function* updatePublishSee(action) {
 
 function* deleteSee(action) {
   try{
-      yield axios.delete(`/api/admin/art-adventure/see/${action.payload}`); 
+      yield axios.delete(`/api/admin/art-adventure/see/${action.payload.id}`); 
       yield put({type: 'FETCH_SEE_LIST', payload: action.payload.activity_id }); 
   } catch (error) {
       console.log('Error deleting see: ', error);
@@ -160,7 +160,7 @@ function* updatePublishDo(action) {
 
 function* deleteDo(action) {
   try{
-      yield axios.delete(`/api/admin/art-adventure/do/${action.payload}`); 
+      yield axios.delete(`/api/admin/art-adventure/do/${action.payload.id}`); 
       yield put({type: 'FETCH_DO_LIST', payload: action.payload.activity_id}); 
   } catch (error) {
       console.log('Error deleting do: ', error);

@@ -356,7 +356,6 @@ function AdminArtwork({ truncateString }) {
     //dispatch to artwork saga w see id
     dispatch({ type: "DELETE_SEE_ARTWORK", payload: deleteObj });
 
-    //TODO - Get updated See list
   };
 
   const deleteSeeValidation = (item) => {

@@ -257,27 +257,71 @@ function AdminArtAdventure({truncateString}) {
   };
 
   //delete see
-  const deleteSee = (event, item) => {
+  const deleteSee = (item) => {
     console.log("deleting see:", item.id);
 
+    let deleteObj = {
+      id: item.id,
+      activity_id: item.activity_id
+    }
+
     //dispatch to artwork saga w see id
-    dispatch({ type: "DELETE_SEE", payload: item.id });
+    dispatch({ type: "DELETE_SEE", payload: deleteObj });
 
-    //TODO - Refresh See list for this specific adventure
+  };
 
-    //TODO - add sweet alert so admin knows item has been deleted
+  const deleteSeeValidation = (item) => {
+    console.log("delete clicked! item = ", item);
+
+    swal({
+      title: "Hello!",
+      text: "Are you sure you want to PERMANENTLY delete this See prompt?",
+      buttons: {
+        cancel: true,
+        confirm: "Delete",
+      },
+    }).then((val) => {
+      if (val) {
+        swal({
+          text: "You've deleted this prompt.",
+        });
+        deleteSee(item);
+      }
+    });
   };
 
   //delete do
-  const deleteDo = (event, item) => {
+  const deleteDo = (item) => {
     console.log("deleting do:", item.id);
 
+    let deleteObj = {
+      id: item.id,
+      activity_id: item.activity_id
+    }
+
     //dispatch to artwork saga w see id
-    dispatch({ type: "DELETE_DO", payload: item.id });
+    dispatch({ type: "DELETE_DO", payload: deleteObj });
 
-    //TODO - Refresh See list for this specific adventure
+  };
 
-    //TODO - add sweet alert so admin knows item has been deleted
+  const deleteDoValidation = (item) => {
+    console.log("delete clicked! item = ", item);
+
+    swal({
+      title: "Hello!",
+      text: "Are you sure you want to PERMANENTLY delete this Do prompt?",
+      buttons: {
+        cancel: true,
+        confirm: "Delete",
+      },
+    }).then((val) => {
+      if (val) {
+        swal({
+          text: "You've deleted this prompt.",
+        });
+        deleteDo(item);
+      }
+    });
   };
 
   //changes db boolean to true which "publishes" item on public facing pages
@@ -492,7 +536,7 @@ function AdminArtAdventure({truncateString}) {
                                   color="primary"
                                   className={classes.btn}
                                   variant="outlined"
-                                  onClick={(event) => deleteSee(event, item)}
+                                  onClick={() => deleteSeeValidation(item)}
                                 />
                               </IconButton>
                             </TableCell>
@@ -551,7 +595,7 @@ function AdminArtAdventure({truncateString}) {
                                   color="primary"
                                   className={classes.btn}
                                   variant="outlined"
-                                  onClick={(event) => deleteDo(event, item)}
+                                  onClick={() => deleteDoValidation(item)}
                                 />
                               </IconButton>
                             </TableCell>
