@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
       )
       ORDER BY id
       LIMIT 1;`;
+
     pool.query(queryText)
         .then(result => {
             res.send(result.rows[0]);

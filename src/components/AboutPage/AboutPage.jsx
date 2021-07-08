@@ -5,9 +5,10 @@ import {useStyles} from '../classes'
 function AboutPage() {
   const email = `shannon@wonderwander.art`
   const classes = useStyles();
-  const goEmail = () => {
-    window.location.href = `mailto:${email}`;
-    console.log('click');
+  
+  const goEmail = (event, text) => {
+    event.preventDefault();
+    window.location.href = `mailto:${email}?subject=${text}`;
   }
 
   return (
@@ -26,13 +27,13 @@ function AboutPage() {
         
         </div>
       </div>
-      <div>
+      <div className={classes.center}>
         <Button color="primary" type="button" onClick={(event) => {
           event.preventDefault();
-          window.location.href='https://www.wonderwander.art/?=fb&fbclid=IwAR3hrbHFrxazo1thiM26G_fBIxeR00jlPm6-uDje8Qoq_DDKP2vv0BniuQE'
+          window.location.href='https://studio.wonderwander.art/'
         }}>Visit Wonder Wander Studio</Button>
-        <Button onClick={goEmail} color="secondary">Get Your Collection Added</Button>
-        <Button onClick={goEmail} color="primary">Become A Sponsor</Button>
+        <Button onClick={(event) => goEmail(event, 'Submit A Collection')} color="secondary">Get Your Collection Added</Button>
+        <Button onClick={(event) => goEmail(event, 'Become a Sponsor')} color="primary">Become A Sponsor</Button>
       </div>
 
     </div>
