@@ -8,7 +8,7 @@ router.get('/:id', (req, res) => {
     // gets all from the sponsor where the sponsor id is the one sent from the client, request params id, ordered by the artwork.id
     const queryText = `SELECT * FROM "sponsor"
     JOIN "artwork" ON artwork.sponsor_id = sponsor.id
-    WHERE sponsor.id = $1
+    WHERE sponsor.id = $1 and sponsor.published = true
     ORDER BY artwork.id ASC;`
 
     pool.query(queryText, [req.params.id])
