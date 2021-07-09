@@ -29,7 +29,9 @@ function ArtworkDetail({ userLat, userLng }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const { id } = useParams();
+    const classes = useStyles();
+    
     // Function to create preview text 
     const truncateString = (str, num) => {
         if (str.length <= num) {

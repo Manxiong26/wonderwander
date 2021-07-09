@@ -47,7 +47,7 @@ router.get('/city', (req, res) => {
 router.get('/:id', (req, res) => {
     let sqlText = `SELECT collection.id AS collection_id, collection.image AS collection_image, 
     collection.name AS collection_name, collection.city, collection.state, collection.bio, 
-    collection.donate_link, collection.site_link, collection.search_text, artwork.id AS art_work_id, artwork.name AS artwork_name, 
+    collection.donate_link, collection.site_link, collection.search_text, artwork.id, artwork.name AS artwork_name, 
     artwork.year AS artwork_year, artwork.lat, artwork.lng, artwork.image AS artwork_image, 
     artwork.description AS artwork_description, artwork.vid_link, artwork.vid_description, 
     artwork.artist_id, artwork.sponsor_id, artwork.collection_id

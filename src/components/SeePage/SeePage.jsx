@@ -58,7 +58,7 @@ function SeePage() {
             {/* maps through the seeList and renders them all to the dom for that artwork */}
             {seeList.map((item, i) => {
                 return (
-                    <Card >
+                    <Card style={{marginBottom: '3%'}}>
                     <div key={i} className={classes.cardContent}>
                         
                         <ReactPlayer

@@ -80,7 +80,6 @@ const useStyles = makeStyles((theme) => ({
   pageMargin: {
     marginLeft: '6%',
     marginRight: '6%',
-    // marginBottom: '30%',
   },
   welcomeMargin: {
     marginLeft: '6%',
@@ -147,8 +146,6 @@ const useStyles = makeStyles((theme) => ({
     background: '#8C8A8C',
   },
 
-  //     float: 'right',    
-  // },
   cardForm: {
     width: '60%',
     height: 750,
@@ -186,8 +183,6 @@ const useStyles = makeStyles((theme) => ({
   },
   btn: {
     margin: '1%'
-
-
   },
   cameraBtn: {
     marginLeft: '25%',

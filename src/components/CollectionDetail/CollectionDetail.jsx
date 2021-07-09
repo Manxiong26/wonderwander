@@ -27,13 +27,23 @@ function CollectionDetail({ userLat, userLng }) {
     const history = useHistory();
     const classes = useStyles();
     // collection detail reducer
+    const center = {
+        lat: 44.9681,
+        lng: -93.2886,
+    };
 
     const collectionDet = useSelector(store => store.collectionDetail)
     console.log('CHECKING COLLECTDET STORE_____________', collectionDet);
 
+    const viewArtworkDetail = (event, artDet) => {  //artDet
+        console.log('HELLLLLLLLLLPPPPPPPPPPPP', artDet);
+        event.preventDefault();
+        history.push(`/artworkdetail/${artDet}`) //artDet.id
+        console.log('CLICKING');
+    }
 
     // using id to grab detail 
-    let { id } = useParams();
+    const { id } = useParams();
 
     //when page loads, make dispatch to server with the id as a payload
     useEffect(() => {
@@ -99,17 +109,23 @@ function CollectionDetail({ userLat, userLng }) {
                                 color="primary"
                                 href={collectionDet[0].donate_link}>$ Donate</Button>
                         </div>
-                        {/* Need to change to Number for lat & long for map to show */}
-
+            
                         {/* renders the google maps to the DOM */}
-                        <Map mapLat={Number(collectionDet[0].lat)} mapLng={Number(collectionDet[0].lng)} zoom={10}
-                            reducer={collectionDet} height={300} width={'90%'} userLat={userLat} userLng={userLng} />
+                        <Map 
+                        mapLat={center.lat}
+                        mapLng={center.lng}
+                        zoom={10}
+                        reducer={collectionDet} 
+                        height={300} 
+                        width={'90%'} 
+                        userLat={userLat} 
+                        userLng={userLng} />
                         <Typography variant="h6" className={classes.redCenter}>
                             ArtWork
                         </Typography>
 
                         {/* if the art_work_id is null, render that nothing is in the collection */}
-                        {collectionDet[0].art_work_id === null ? ( <Typography className={classes.center}>This collection does not contain any artwork.</Typography>) :
+                        {collectionDet[0].id === null ? ( <Typography className={classes.center}>This collection does not contain any artwork.</Typography>) :
                         (
                         <div >
 
@@ -118,7 +134,7 @@ function CollectionDetail({ userLat, userLng }) {
                                 return (
                                     <>
                                         <Divider />
-                                        <ListItem key={artDet.id}>
+                                        <ListItem >
                                             <ListItemAvatar>
                                                 <Avatar className={classes.thumbnail} src={artDet.artwork_image} />
                                             </ListItemAvatar>
@@ -129,7 +145,7 @@ function CollectionDetail({ userLat, userLng }) {
                                             {/* button that when clicked, calls the viewArtworkDetail function and passes the specific artwork into the function*/}
                                             <IconButton>
                                                 <ArrowForwardIosIcon
-                                                    onClick={(event) => viewArtworkDetail(event, artDet.art_work_id)}
+                                                    onClick={(event) => viewArtworkDetail(event, artDet.id)}
                                                     className={classes.nextBtn}
                                                 />
                                             </IconButton>

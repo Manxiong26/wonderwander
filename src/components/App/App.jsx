@@ -266,7 +266,7 @@ function App() {
               exact
               path="/admin/art-adventure"
             >
-              <AdminArtAdventure />
+              <AdminArtAdventure truncateString={truncateString}/>
             </ProtectedRoute>
 
             {/* ------------------- END ADMIN ROUTES ------------------- */}
