@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-//material UI
 import {
     Button,
     Typography,
@@ -25,7 +24,6 @@ function ArtworkDetail({ userLat, userLng }) {
 
     //gets the user information from the store, this is for handling the rendering of the button for marking a piece of art as seen
     const user = useSelector(store => store.user)
-    console.log('User: ', user.id)
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -33,27 +31,26 @@ function ArtworkDetail({ userLat, userLng }) {
     //to get the specific id for the art
     const { id } = useParams();
     const classes = useStyles();
-    
+
     // Function to create preview text 
     const truncateString = (str, num) => {
         if (str.length <= num) {
-          return str
+            return str
         }
         return str.slice(0, num) + '...'
-      }
-      
+    }
 
     // on page load, runs these dispatches to the server
     useEffect(() => {
         dispatch({ type: 'FETCH_ART_DETAIL', payload: id });
         dispatch({ type: 'FETCH_VIEWED_ART' });
         dispatch({ type: 'CLEAR_SPONSOR_DETAILS' });
-        
+
     }, []);
 
     //for rendering the page to the DOM
     return (
-         
+
         // button that when clicked, goes back to the previous page 
         <div className={classes.pageMargin}>
             <Button
@@ -64,13 +61,13 @@ function ArtworkDetail({ userLat, userLng }) {
                 <ArrowBackIosIcon />
             </Button>
             <ImageHeader artItem={artItem} />
-            <ArtworkDescription artItem={artItem}/>
+            <ArtworkDescription artItem={artItem} />
             <ArtworkLinks userLat={userLat} userLng={userLng} artItem={artItem} />
             <Typography variant="h6" className={classes.redCenter}>
-                See. Say. Do.     
+                See. Say. Do.
             </Typography>
             <Divider />
-            <SeePrompt truncateString={truncateString}/>
+            <SeePrompt truncateString={truncateString} />
             <SayPrompt />
             <DoPrompt truncateString={truncateString} />
         </div>

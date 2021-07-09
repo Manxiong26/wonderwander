@@ -78,7 +78,7 @@ app.use('/api/email', emailRouter);
 app.use('/s3', UploaderS3Router({
   bucket: 'wonder-wander-bucket',
   region: 'us-east-2',
-  headers: {'Access-Control-Allow-Origin': '*'},
+  headers: { 'Access-Control-Allow-Origin': '*' },
   ACL: 'public-read',
 }));
 

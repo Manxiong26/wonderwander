@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-//material UI
 import { ListItem, Grid, Button, Typography } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";

@@ -15,7 +15,7 @@ import { useHistory, useParams } from "react-router-dom";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 
-function AdventureSee({truncateString}) {
+function AdventureSee({ truncateString }) {
     const list = useSelector((store) => store.adventureReducer.adventureDetailReducer);
 
     // constant set to value of the seeList from store
@@ -39,9 +39,9 @@ function AdventureSee({truncateString}) {
     return (
         <>
 
-        {/* if this adventure is supposed to have a see page, meaning that there was a see received from the server for this adventure (length > 0),
+            {/* if this adventure is supposed to have a see page, meaning that there was a see received from the server for this adventure (length > 0),
         render the see page for that adventure */}
-        {(seeList.length) > 0 &&
+            {(seeList.length) > 0 &&
                 <List>
 
                     {/* map through the seeList to render it to the DOM */}
@@ -49,25 +49,25 @@ function AdventureSee({truncateString}) {
                         return (
                             <ListItem>
                                 <ListItemAvatar>
-                                    <Avatar variant="square" src={"http://simpleicon.com/wp-content/uploads/eye_1-256x256.png"}/>
+                                    <Avatar variant="square" src={"http://simpleicon.com/wp-content/uploads/eye_1-256x256.png"} />
                                 </ListItemAvatar>
                                 <ListItemText>
                                     <Typography className={classes.content} key={i}>
-                                        {truncateString(item.prompts,50)}
+                                        {truncateString(item.prompts, 50)}
                                     </Typography>
                                 </ListItemText>
 
                                 {/* when clicked, takes the user to the see page from this adventure page */}
                                 <ArrowForwardIosIcon
-                                className={classes.nextBtn}
-                                onClick={(event) => history.push(`/adventure/see/${id}`)} 
+                                    className={classes.nextBtn}
+                                    onClick={(event) => history.push(`/adventure/see/${id}`)}
                                 />
-                            </ListItem>   
+                            </ListItem>
                         )
                     })}
-                    <Divider/>
+                    <Divider />
                 </List>
-        }
+            }
         </>
     );
 }

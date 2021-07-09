@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
         .then(result => {
             res.send(result.rows);
         })
-        
+
         // unsuccessful = send error
         .catch(error => {
             console.log('Error with getting see', error);

@@ -64,7 +64,7 @@ function AdminArtwork({ truncateString }) {
     dispatch({ type: "FETCH_SPONSOR_LIST" });
     dispatch({ type: "FETCH_COLLECTION_LIST" });
   }, []);
-  
+
 
   //sets local state for Artwork post request
   const [name, setName] = useState("");
@@ -305,7 +305,6 @@ function AdminArtwork({ truncateString }) {
 
   //delete see
   const deleteSee = (item) => {
-    console.log("deleting see:", item.id);
 
     let deleteObj = {
       id: item.id,
@@ -318,7 +317,6 @@ function AdminArtwork({ truncateString }) {
   };
 
   const deleteSeeValidation = (item) => {
-    console.log("delete clicked! item = ", item);
 
     swal({
       title: "Hello!",
@@ -339,7 +337,6 @@ function AdminArtwork({ truncateString }) {
 
   //delete do
   const deleteDo = (item) => {
-    console.log("deleting do:", item.id);
 
     let deleteObj = {
       id: item.id,
@@ -348,12 +345,9 @@ function AdminArtwork({ truncateString }) {
 
     //dispatch to artwork saga w see id
     dispatch({ type: "DELETE_DO_ARTWORK", payload: deleteObj });
-
-    //TODO - Get updated do list
   };
 
   const deleteDoValidation = (item) => {
-    console.log("delete clicked! item = ", item);
 
     swal({
       title: "Hello!",
@@ -412,14 +406,12 @@ function AdminArtwork({ truncateString }) {
         published: false,
         artwork_id: item.artwork_id
       };
-      
     } else {
       pubObject = {
         id: item.id,
         published: true,
         artwork_id: item.artwork_id
       };
-      
     }
 
     //sends updated 'See' boolean (publish/unpublish) to artwork saga
@@ -441,7 +433,6 @@ function AdminArtwork({ truncateString }) {
         published: false,
         artwork_id: item.artwork_id
       };
-      
     } else {
       pubObject = {
         id: item.id,
@@ -550,7 +541,9 @@ function AdminArtwork({ truncateString }) {
                         setVidDescription(event.target.value)
                       }
                     />
+
                     {/* generates artist options dynamically */}
+
                     <FormControl className={classes.inputs}>
                       <InputLabel>Artist</InputLabel>
                       <Select
@@ -566,7 +559,7 @@ function AdminArtwork({ truncateString }) {
                     </FormControl>
 
                     {/* generates sponsor options dynamically */}
-                    
+
                     <FormControl className={classes.inputs}>
                       <InputLabel>Sponsor</InputLabel>
                       <Select
@@ -582,7 +575,7 @@ function AdminArtwork({ truncateString }) {
                     </FormControl>
 
                     {/* generates collection options dynamically */}
-          
+
                     <FormControl className={classes.inputs}>
                       <InputLabel>Collection</InputLabel>
                       <Select
@@ -596,7 +589,6 @@ function AdminArtwork({ truncateString }) {
                         ))}
                       </Select>
                     </FormControl>
-
 
                     {/* <ImageUpload /> */}
 
@@ -840,6 +832,7 @@ function AdminArtwork({ truncateString }) {
                         setVidDescription(event.target.value)
                       }
                     />
+
                     {/* generates artist options dynamically */}
 
                     <FormControl className={classes.inputs}>
@@ -857,7 +850,7 @@ function AdminArtwork({ truncateString }) {
                     </FormControl>
 
                     {/* generates sponsor options dynamically */}
-                    
+
                     <FormControl className={classes.inputs}>
                       <InputLabel>Sponsor</InputLabel>
                       <Select
@@ -873,7 +866,7 @@ function AdminArtwork({ truncateString }) {
                     </FormControl>
 
                     {/* generates collection options dynamically */}
-          
+
                     <FormControl className={classes.inputs}>
                       <InputLabel>Collection</InputLabel>
                       <Select
@@ -939,22 +932,6 @@ function AdminArtwork({ truncateString }) {
                       value={link}
                       onChange={(event) => setLink(event.target.value)}
                     />
-                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
-                    {/* generates artwork options dynamically */}
-                    {/* <select
-                      type="text"
-                      onChange={(event) => setArtworkId(event.target.value)}
-                    >
-                      <option value="Default">Artwork</option>
-                      {artworkList.map((artwork) => {
-                        return (
-                          <option key={artwork.id} value={artwork.id}>
-                            {artwork.name}
-                          </option>
-                        );
-                      })}
-                    </select> */}
-
                     <FormControl className={classes.inputs}>
                       <InputLabel>Artwork</InputLabel>
                       <Select
@@ -998,22 +975,6 @@ function AdminArtwork({ truncateString }) {
                       value={do_prompts}
                       onChange={(event) => setDoPrompts(event.target.value)}
                     />
-                    {/* TODO - CHANGE TO MUI STYLING TAGS */}
-                    {/* generates artwork options dynamically */}
-                    {/* <select
-                      type="text"
-                      onChange={(event) => setArtworkId(event.target.value)}
-                    >
-                      <option value="Default">Artwork</option>
-                      {artworkList.map((artwork) => {
-                        return (
-                          <option key={artwork.id} value={artwork.id}>
-                            {artwork.name}
-                          </option>
-                        );
-                      })}
-                    </select> */}
-
                     <FormControl className={classes.inputs}>
                       <InputLabel>Artwork</InputLabel>
                       <Select

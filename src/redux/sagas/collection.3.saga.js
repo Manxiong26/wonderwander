@@ -7,11 +7,11 @@ function* getThreeCollection() {
 
         // get request to get collection information for three collections from the server
         const response = yield axios.get('/api/collection/city');
-        
+
         // then sets the reducer to the response
         yield put({ type: 'SET_THREE_COLLECTION', payload: response.data })
 
-    // error if one occurs
+        // error if one occurs
     } catch (error) {
         console.log('GET collection request failed in saga:', error)
     }

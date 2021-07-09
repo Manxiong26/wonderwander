@@ -7,14 +7,14 @@ import {
     Avatar,
     ListItemAvatar,
     Divider
-    
+
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
-function AdventureDo({truncateString}) {
+function AdventureDo({ truncateString }) {
 
     //classes constant from classes.js for styling
     const classes = useStyles();
@@ -35,37 +35,36 @@ function AdventureDo({truncateString}) {
     //for rendering the adventure do page to the dom
     return (
         <>
+            {/* if this adventure is supposed to have a do page, meaning that there was a do received from the server for this adventure (length > 0),
+             render the do page for that adventure */}
+            {(doDetail.length) > 0 &&
+                <List>
 
-        {/* if this adventure is supposed to have a do page, meaning that there was a do received from the server for this adventure (length > 0),
-        render the do page for that adventure */}
-        {(doDetail.length) > 0 &&
-        <List>
+                    {/* map through the doDetail and render it to the DOM */}
+                    {doDetail.map((dolist, i) => {
+                        return (
+                            <>
+                                <ListItem>
+                                    <ListItemAvatar>
+                                        <Avatar variant="square" src={"http://simpleicon.com/wp-content/uploads/camera.png"} />
+                                    </ListItemAvatar>
+                                    <ListItemText>
+                                        <Typography className={classes.content} key={i}>
+                                            {truncateString(dolist.prompts, 50)}
+                                        </Typography>
+                                    </ListItemText>
 
-        {/* map through the doDetail and render it to the DOM */}
-        {doDetail.map((dolist, i) => {
-            return (
-                <>
-                    <ListItem>
-                        <ListItemAvatar>
-                            <Avatar variant="square" src={"http://simpleicon.com/wp-content/uploads/camera.png"}/>
-                        </ListItemAvatar>
-                        <ListItemText>
-                            <Typography className={classes.content} key={i}>
-                                {truncateString(dolist.prompts, 50)}
-                            </Typography>
-                        </ListItemText>
-
-                        {/* when clicked, takes the user to the do page from this adventure page */}
-                        <ArrowForwardIosIcon
-                            className={classes.nextBtn}
-                            onClick={(event) => history.push(`/adventure/do/${id}`)} />
-                    </ListItem>  
-                </>
-            )
-        })}
-        <Divider/>
-        </List>  
-        }         
+                                    {/* when clicked, takes the user to the do page from this adventure page */}
+                                    <ArrowForwardIosIcon
+                                        className={classes.nextBtn}
+                                        onClick={(event) => history.push(`/adventure/do/${id}`)} />
+                                </ListItem>
+                            </>
+                        )
+                    })}
+                    <Divider />
+                </List>
+            }
         </>
     );
 }

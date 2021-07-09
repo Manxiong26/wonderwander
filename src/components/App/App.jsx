@@ -10,10 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AdminRoute from '../AdminRoute/AdminRoute'
-
 import AboutPage from '../AboutPage/AboutPage';
 import HomePage from '../HomePage/HomePage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -35,12 +33,9 @@ import WelcomePage3 from '../WelcomePage/WelcomePage3';
 import WelcomePage4 from '../WelcomePage/WelcomePage4';
 import SponsorDetail from '../SponsorDetail/SponsorDetail';
 import EmailPage from '../EmailPage/EmailPage';
-
 import Collection from '../Collection/Collection';
 import CollectionDetail from '../CollectionDetail/CollectionDetail';
-
 import ArtworkDetail from '../ArtworkDetail/ArtworkDetail';
-
 import SeePage from '../SeePage/SeePage';
 import ArtistDetail from '../ArtistDetail/ArtistDetail'
 import SayPage from '../SayPage/SayPage';
@@ -53,7 +48,6 @@ import './App.css';
 import { Email } from '@material-ui/icons';
 
 import Menu from '../Menu/Menu'
-
 
 function App() {
   const dispatch = useDispatch();
@@ -78,132 +72,125 @@ function App() {
     }
   })
 
-    // Grab users location and store it in local state
-    useEffect(() => {
-      axios({
-          method: 'POST',
-          url: `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_GOOGLE_KEY}`,
-      })
+  // Grab users location and store it in local state
+  useEffect(() => {
+    axios({
+      method: 'POST',
+      url: `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.REACT_APP_GOOGLE_KEY}`,
+    })
       .then(res => {
-          console.log(res.data)
-          setUserLat(res.data.location.lat)
-          setUserLng(res.data.location.lng)
+        console.log(res.data)
+        setUserLat(res.data.location.lat)
+        setUserLng(res.data.location.lng)
 
       }, (err => {
-          console.log(err)
+        console.log(err)
       }))
-    }, []);
-  
-   
-     const [userLat, setUserLat] = useState(null);
-     console.log("user lat: ", userLat);
-     const [userLng, setUserLng] = useState(null);
-     console.log("user lng: ", userLng);
-    //  const [geoAvailable, setGeoAvailable] = useState(false);
+  }, []);
 
-    const user = useSelector(store => store.user);
-    console.log('Logged in user: ', user)
 
-    const truncateString = (str, num) => {
-      if (str.length <= num) {
-        return str
-      }
-      return str.slice(0, num) + '...'
+  const [userLat, setUserLat] = useState(null);
+  console.log("user lat: ", userLat);
+  const [userLng, setUserLng] = useState(null);
+  console.log("user lng: ", userLng);
+  //  const [geoAvailable, setGeoAvailable] = useState(false);
+
+  const user = useSelector(store => store.user);
+
+  const truncateString = (str, num) => {
+    if (str.length <= num) {
+      return str
     }
-
-    
+    return str.slice(0, num) + '...'
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Menu />
         <div>
-          {/* <Nav /> */}
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/welcome1" />
 
             {/* Visiting localhost:3000/about will show the about page. */}
             <Route
-              // shows AboutPage at all times (logged in or not)
               exact
               path="/about"
             >
               <AboutPage />
             </Route>
+
             <Route
-            
               exact
               path="/map"
             >
-                <MapView userLat={userLat} userLng={userLng}/>
+              <MapView userLat={userLat} userLng={userLng} />
             </Route>
+
             <Route
               exact
               path="/artist_detail/:id"
-              >
-                <ArtistDetail />
+            >
+              <ArtistDetail />
             </Route>
 
             {/* This is where the collection detail is */}
             <Route
-            exact
-            // Add in id
-            path="/artworkdetail/:id"
+              exact
+              path="/artworkdetail/:id"
             >
               <ArtworkDetail userLat={userLat} userLng={userLng} />
             </Route>
 
             <Route
-            exact
-            path="/adventure/:id"
+              exact
+              path="/adventure/:id"
             >
               <Adventure />
             </Route>
 
             <Route
-            // Add in id
-            exact
-            path="/see/:id"
+              exact
+              path="/see/:id"
             >
               <SeePage />
             </Route>
 
-            {/* Thi is for the adventure see */}
+            {/* This is for the adventure see */}
             <Route
-            exact
-            path="/adventure/see/:id"
+              exact
+              path="/adventure/see/:id"
             >
               <AdventureSeePage />
             </Route>
+
             <Route
-            exact
-            path="/adventure/do/:id"
+              exact
+              path="/adventure/do/:id"
             >
               <AdventureDoPage />
             </Route>
 
-        
             <Route
-            exact
-            path="/say/:id"
+              exact
+              path="/say/:id"
             >
               <SayPage />
             </Route>
 
             <Route
-            exact
-            path="/do/:id"
+              exact
+              path="/do/:id"
             >
               <DoPage />
             </Route>
 
             {/* ------------ADMIN PAGES----------------- */}
-            
-            <ProtectedRoute
 
-            exact
-            path="/admin/landing"
+            <ProtectedRoute
+              exact
+              path="/admin/landing"
             >
               <AdminLanding />
             </ProtectedRoute>
@@ -219,7 +206,6 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute
-              // shows AdminArtist Page only when admin is logged in
               exact
               path="/admin/artist"
             >
@@ -227,15 +213,13 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute
-              // shows AdminArtwork Page only when admin is logged in
               exact
               path="/admin/artwork"
             >
-              <AdminArtwork truncateString={truncateString}/>
+              <AdminArtwork truncateString={truncateString} />
             </ProtectedRoute>
 
             <ProtectedRoute
-              // shows AdminCollection Page only when admin is logged in
               exact
               path="/admin/collection"
             >
@@ -243,7 +227,6 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute
-              // shows AdminSponsor Page only when admin is logged in
               exact
               path="/admin/sponsor"
             >
@@ -251,7 +234,6 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute
-              // shows AdminQuote Page only when admin is logged in
               exact
               path="/admin/quote"
             >
@@ -259,45 +241,34 @@ function App() {
             </ProtectedRoute>
 
             <ProtectedRoute
-              // shows AdminArtAdventure Page only when admin is logged in
               exact
               path="/admin/art-adventure"
             >
-              <AdminArtAdventure truncateString={truncateString}/>
+              <AdminArtAdventure truncateString={truncateString} />
             </ProtectedRoute>
 
             {/* ------------------- END ADMIN ROUTES ------------------- */}
 
-            {/* For protected routes, the view could show one of several things on the same route.
-              Visiting localhost:3000/user will show the UserPage if the user is logged in.
-              If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-              Even though it seems like they are different pages, the user is always on localhost:3000/user */}
             <Route
-              // logged in shows HomePage else shows LoginPage
               exact
               path="/home"
-              
             >
               <HomePage />
             </Route>
 
             {/* route for all the collection */}
-              <Route
+            <Route
               exact
               path='/collection'>
-                <Collection />
-              </Route>
+              <Collection />
+            </Route>
 
-              {/* route for the specific collection */}
-              <Route
+            {/* route for the specific collection */}
+            <Route
               exact
               path='/collectionDetail/:id'>
-                <CollectionDetail userLat={userLat} userLng={userLng}/>
-              </Route>
-
-            {/* When a value is supplied for the authRedirect prop the user will
-              be redirected to the path supplied when logged in, otherwise they will
-              be taken to the component and path supplied. */}
+              <CollectionDetail userLat={userLat} userLng={userLng} />
+            </Route>
 
             <Route
               // with authRedirect:
@@ -305,8 +276,7 @@ function App() {
               // - else shows LoginPage at /login
               exact
               path="/login"
-              authRedirect="/user"  
-                       
+              authRedirect="/user"
             >
               <LoginPage />
             </Route>
@@ -321,17 +291,6 @@ function App() {
             >
               <RegisterPage />
             </Route>
-
-            {/* <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/admin/artist"
-              // - else shows LandingPage at "/home" ***Need to change this to WELCOME ***
-              exact
-              path="/home"
-              authRedirect="/admin/artist"
-            >
-              <AdminArtist />
-            </ProtectedRoute> */}
 
             {/* If none of the other routes matched, we will show a 404. */}
             {/* <Route>
@@ -365,16 +324,16 @@ function App() {
           <Route
             exact path='/sponsor/:id'
           >
-            <SponsorDetail userLat={userLat} userLng={userLng}/>
+            <SponsorDetail userLat={userLat} userLng={userLng} />
           </Route>
 
           {/* route for the page for the user to enter their email*/}
           <Route
-            exact path='/email'  
+            exact path='/email'
           >
             <EmailPage />
           </Route>
-        <Footer />
+          <Footer />
         </div>
       </Router>
     </ThemeProvider>

@@ -15,15 +15,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   res.send(req.user);
 });
 
-// Handles POST request with new user data
-// The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
+// Handles POST request with new user data & encrypts password before inserting
 router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
   const email = req.body.email
   const firstName = req.body.first_name;
-  
 
   const queryText = `INSERT INTO "users" (username, password, email, first_name)
     VALUES ($1, $2, $3, $4) RETURNING id`;

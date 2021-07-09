@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import Map from "../Map/Map";
 
-//matierl UI
 import {
     List,
     ListItem,
@@ -19,9 +18,6 @@ import {
 import { useStyles } from "../classes";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-
-
-
 
 function SponsorDetail({ userLat, userLng }) {
 
@@ -57,7 +53,7 @@ function SponsorDetail({ userLat, userLng }) {
     useEffect(() => {
         dispatch({ type: 'FETCH_SPONSOR_ART', payload: id })
     }, [])
-    
+
     //for rendering the pages
     return (
         <>
@@ -79,75 +75,75 @@ function SponsorDetail({ userLat, userLng }) {
 
                         {/* if there is no sponsor associated with the artwork, render this message */}
                         {details.id === undefined ? (<Typography className={classes.center}>There is no sponsor for this artwork.</Typography>) :
-                        (<> <div>
+                            (<> <div>
 
-                        {/* otherwise, render the below */}
-                        <img className={classes.image} src={details.logo}></img>
-                        </div>
-                        <div className={classes.textBox}>
-                        <Typography variant="body1" className={classes.center}>
-                        {details.description}
-                        </Typography>
-                        </div>
-                        {details.site_link &&
-                        <div className={classes.center}>
+                                {/* otherwise, render the below */}
+                                <img className={classes.image} src={details.logo}></img>
+                            </div>
+                                <div className={classes.textBox}>
+                                    <Typography variant="body1" className={classes.center}>
+                                        {details.description}
+                                    </Typography>
+                                </div>
+                                {details.site_link &&
+                                    <div className={classes.center}>
 
-                            {/* button that takes the user to the website for the sponsor */}
-                            <Button
-                                variant="outlined"
-                                color="primary"
-                                href={details.site_link}>Visit Website</Button>
-                        </div>
-                        }
-                        <div>
+                                        {/* button that takes the user to the website for the sponsor */}
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            href={details.site_link}>Visit Website</Button>
+                                    </div>
+                                }
+                                <div>
 
-                            {/* renders the map to the DOM */}
-                            <Map
-                                mapLat={center.lat}
-                                mapLng={center.lng}
-                                zoom={10}
-                                height={300}
-                                width={"90%"}
-                                reducer={sponsorArt}
-                                userLat={userLat}
-                                userLng={userLng}
-                            />
-                        </div>
+                                    {/* renders the map to the DOM */}
+                                    <Map
+                                        mapLat={center.lat}
+                                        mapLng={center.lng}
+                                        zoom={10}
+                                        height={300}
+                                        width={"90%"}
+                                        reducer={sponsorArt}
+                                        userLat={userLat}
+                                        userLng={userLng}
+                                    />
+                                </div>
 
-                        <Typography variant="h6" className={classes.redCenter}>ArtWork</Typography>
+                                <Typography variant="h6" className={classes.redCenter}>ArtWork</Typography>
 
-                        <div>
-                            <List>
+                                <div>
+                                    <List>
 
-                                {/* maps through the sponsor art array and renders all the art to the DOM */}
-                                {sponsorArt.map((art, index) => {
-                                    return (
-                                        <>
-                                            <Divider />
-                                            <ListItem>
-                                                <ListItemAvatar>
-                                                    <Avatar className={classes.thumbnail} src={art.image} />
-                                                </ListItemAvatar>
-                                                <ListItemText
-                                                    primary={art.name}
-                                                />
+                                        {/* maps through the sponsor art array and renders all the art to the DOM */}
+                                        {sponsorArt.map((art, index) => {
+                                            return (
+                                                <>
+                                                    <Divider />
+                                                    <ListItem>
+                                                        <ListItemAvatar>
+                                                            <Avatar className={classes.thumbnail} src={art.image} />
+                                                        </ListItemAvatar>
+                                                        <ListItemText
+                                                            primary={art.name}
+                                                        />
 
-                                                {/* when clicked, will go to the details page for the specific art, passing it in as an argument to the function */}
-                                                <IconButton>
-                                                    <ArrowForwardIosIcon
-                                                    onClick={(event) => toArt(event, art.id)}
-                                                    
-                                                    />
-                                                </IconButton>
-                                            </ListItem>
-                                            <Divider />
-                                        </>
-                                    )
-                                })}
-                            </List>
-                        </div>
-                        </>
-                        )}
+                                                        {/* when clicked, will go to the details page for the specific art, passing it in as an argument to the function */}
+                                                        <IconButton>
+                                                            <ArrowForwardIosIcon
+                                                                onClick={(event) => toArt(event, art.id)}
+
+                                                            />
+                                                        </IconButton>
+                                                    </ListItem>
+                                                    <Divider />
+                                                </>
+                                            )
+                                        })}
+                                    </List>
+                                </div>
+                            </>
+                            )}
                     </div>
                 </Grid>
             </Grid>

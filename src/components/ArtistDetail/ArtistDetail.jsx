@@ -44,7 +44,7 @@ const ArtistDetail = () => {
       <Grid container direction="column">
         <Grid item xs={12} sm={12} lg={12}>
           <div className={classes.pageMargin}>
-            
+
             {/* button that when clicked, goes back to the previous page  */}
             <Button
               onClick={() => {
@@ -53,16 +53,16 @@ const ArtistDetail = () => {
             >
               <ArrowBackIosIcon />
             </Button>
-           
+
             {/* check if the artistInfo is undefined, waits for all the information to be grabbed from the server before rendering everything to the DOM */}
-            {artistInfo === undefined ? ( <>
-            <div>
-                    <Typography variant="h4" className={classes.title}>
-                        Artist Detail
-                    </Typography>
-                </div>
+            {artistInfo === undefined ? (<>
+              <div>
+                <Typography variant="h4" className={classes.title}>
+                  Artist Detail
+                </Typography>
+              </div>
               <Typography className={classes.center}>Unknown Artist</Typography>
-            </> ) : (
+            </>) : (
               <div>
                 <Typography className={classes.title} variant="h4">
                   {artistInfo.name}
@@ -101,7 +101,7 @@ const ArtistDetail = () => {
                   </Typography>
                   <Divider />
                   <List>
-                    
+
                     {/* maps through the artist object brought back from the server and render it to the DOM*/}
                     {artist.map((item, i) => {
                       return (

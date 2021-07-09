@@ -363,7 +363,6 @@ function AdminArtist() {
                         <Typography variant="body1">{item.name}</Typography>
                       </TableCell>
                       <TableCell align="right">
-
                         <FormControlLabel
                           control={
                             <Switch

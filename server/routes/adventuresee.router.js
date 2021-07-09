@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-
 // Grabbing See Prompts for specific Adventure Item
 router.get('/:id', (req, res) => {
-    
+
     // query text to get all from the see table for the specific activity
     const queryText = `SELECT * FROM "see" WHERE "see".activity_id = $1 AND published = true;`;
     pool.query(queryText, [req.params.id])

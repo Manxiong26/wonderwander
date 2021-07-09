@@ -117,7 +117,6 @@ function Menu() {
   //this is to handle rendering the admin button to the DOM
   const user = useSelector((store) => store.user);
 
-
   let loginLinkData = {
     path: '/login',
     text: 'Login / Register',

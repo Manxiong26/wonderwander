@@ -3,7 +3,7 @@ import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
 import "./HomePage.css";
 import { useHistory, Link, useParams } from "react-router-dom";
-//matierl UI
+
 import {
   List,
   ListItem,
@@ -20,19 +20,18 @@ import {
 import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
+
 function HomePage() {
 
-  //this pushes to the next page
   const history = useHistory();
 
-  //this dispatch the saga
   const dispatch = useDispatch();
   const classes = useStyles();
   const { id } = useParams();
 
   //initialize to the DOM
   useEffect(() => {
-    
+
     dispatch({ type: "FETCH_RANDOM_ART" });
     dispatch({ type: "FETCH_THREE_COLLECTION" });
     dispatch({ type: 'FETCH_ADVENTURES' });
@@ -62,17 +61,17 @@ function HomePage() {
 
   // pushes to adventure info page
   const toAdventure = (event, advDet) => {
-    console.log('Adventure', advDet);
     event.preventDefault();
     history.push(`/adventure/${advDet.id}`);
-    console.log('clicking to adventure');
   };
+
   // function to render collection location text
   const collectionText = (collection) => (
     <>
       {collection.city}, {collection.state}
     </>
   );
+
   return (
     <>
       <Grid container direction="column">
@@ -109,7 +108,7 @@ function HomePage() {
                           primary={collection.name}
                           secondary={collectionText(collection)}
                         />
-                        <ListItemText/>
+                        <ListItemText />
                         <IconButton>
 
                           {/* when clicked, calls the viewCollectionDetail and passes in the specific collection as an argument */}
@@ -136,8 +135,8 @@ function HomePage() {
               </Button>
             </div>
             <div>
-            <Typography variant="h6" className={classes.red}>
-              Other Art Adventures:
+              <Typography variant="h6" className={classes.red}>
+                Other Art Adventures:
               </Typography>
               <List>
 
@@ -147,7 +146,7 @@ function HomePage() {
                     <>
                       <Divider />
                       <ListItem key={i}>
-                      <ListItemAvatar>
+                        <ListItemAvatar>
                           <Avatar className={classes.thumbnail} src={advDet.image} />
                         </ListItemAvatar>
                         <ListItemText>{advDet.title}</ListItemText>
@@ -172,6 +171,6 @@ function HomePage() {
     </>
   );
 }
-// this allows us to use <App /> in index.js
+
 export default HomePage;
 

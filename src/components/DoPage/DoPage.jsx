@@ -31,56 +31,56 @@ function DoPage() {
   }, []);
 
   return (
-      <>
+    <>
 
-    {/* function that when clicked takes the user back to the previous page */}
-    <Button
-    onClick={() => {
-        history.goBack();
-    }}
->
-    <ArrowBackIosIcon />
-</Button>
-    <Grid container direction="column">
-      <Grid item xs={12} sm={12} lg={12}>
-        <div className={classes.pageMargin}>
-          <Typography variant="h5" className={classes.title}>
-            Do
-          </Typography>
-          <Card className={classes.promptCard}>
-            <div style={{ position: "relative" }}>
+      {/* function that when clicked takes the user back to the previous page */}
+      <Button
+        onClick={() => {
+          history.goBack();
+        }}
+      >
+        <ArrowBackIosIcon />
+      </Button>
+      <Grid container direction="column">
+        <Grid item xs={12} sm={12} lg={12}>
+          <div className={classes.pageMargin}>
+            <Typography variant="h5" className={classes.title}>
+              Do
+            </Typography>
+            <Card className={classes.promptCard}>
+              <div style={{ position: "relative" }}>
 
-              {/* makes through the do list to render it to the DOM */}
-              {doList.map((item, i) => {
-                return (
-                  <>
-                    <Typography
-                      variant="body1"
-                      className={classes.cardContent}
-                      key={i}
-                    >
-                      <b>{item.prompts}</b>
-                    </Typography>
-                    <Divider />
-                  </>
-                );
-              })}
+                {/* makes through the do list to render it to the DOM */}
+                {doList.map((item, i) => {
+                  return (
+                    <>
+                      <Typography
+                        variant="body1"
+                        className={classes.cardContent}
+                        key={i}
+                      >
+                        <b>{item.prompts}</b>
+                      </Typography>
+                      <Divider />
+                    </>
+                  );
+                })}
 
-              <Button
-                size="small"
-                variant="contained"
-                className={classes.cameraBtn}
-              >
-                <Avatar
-                  variant="square"
-                  src={"http://simpleicon.com/wp-content/uploads/camera.png"}
-                />
-              </Button>
-            </div>
-          </Card>
-        </div>
+                <Button
+                  size="small"
+                  variant="contained"
+                  className={classes.cameraBtn}
+                >
+                  <Avatar
+                    variant="square"
+                    src={"http://simpleicon.com/wp-content/uploads/camera.png"}
+                  />
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
     </>
   );
 }

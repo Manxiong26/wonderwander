@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-
 // SEE PAGE GET ROUTE to grab See prompt 
 // based on specific artwork ID
 router.get('/:id', (req, res) => {
@@ -23,6 +22,5 @@ router.get('/:id', (req, res) => {
             res.sendStatus(500);
         })
 })
-
 
 module.exports = router;

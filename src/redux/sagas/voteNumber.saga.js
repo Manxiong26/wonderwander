@@ -7,11 +7,11 @@ function* voteNumber(action) {
     // get request to get the vote count from the server for a specific piece of artwork
     try {
         const response = yield axios.get(`/api/say/count/${action.payload.artwork_id}`);
-       
+
         // then sets the reducer to the response
         yield put({ type: 'SET_TOTAL_VOTE', payload: response.data })
 
-    // error if one occurs
+        // error if one occurs
     } catch (error) {
         console.log('GET voteNumber request failed in saga:', error)
     }

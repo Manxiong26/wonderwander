@@ -31,16 +31,16 @@ router.get('/city', (req, res) => {
 
     pool.query(sqlText)
 
-    // success will send back the data
-    .then((result) => {
-        res.send(result.rows)
-    })
+        // success will send back the data
+        .then((result) => {
+            res.send(result.rows)
+        })
 
-    // failure will send back error
-    .catch((error) => {
-        console.log('ERROR FETCHING 3 COLLECTION', error);
-        res.sendStatus(500)
-    })
+        // failure will send back error
+        .catch((error) => {
+            console.log('ERROR FETCHING 3 COLLECTION', error);
+            res.sendStatus(500)
+        })
 })
 
 // router get to get the specific collection information, determined by the id in the request params

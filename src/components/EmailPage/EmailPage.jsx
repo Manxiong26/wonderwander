@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {useStyles} from '../classes'
+import { useStyles } from '../classes'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {
     Button,
@@ -9,9 +9,9 @@ import {
     TextField,
     FormGroup,
     FormControlLabel,
-  } from "@material-ui/core";
+} from "@material-ui/core";
 
-function EmailPage(){
+function EmailPage() {
 
     // sets local state for email, firstName, and lastName to be defaulted as empty
     const [email, setEmail] = useState('');
@@ -33,7 +33,7 @@ function EmailPage(){
 
     // when this function is called, dispatches to the server to store that object above in the database
     const storeInfo = () => {
-        dispatch({type: 'STORE_INFO', payload: emailInfo});
+        dispatch({ type: 'STORE_INFO', payload: emailInfo });
 
         // clear inputs after
         clearInputs();
