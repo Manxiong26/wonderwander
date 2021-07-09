@@ -8,7 +8,7 @@ router.get('/:id', (req, res) => {
 
     // queryText to select from the Do table where the activity id is the one provided 
     const queryText = `
-    SELECT "do".id, "do".prompts FROM "do" WHERE "do".activity_id = $1;`;
+    SELECT "do".id, "do".prompts FROM "do" WHERE "do".activity_id = $1 AND "do".published=true;`;
     pool.query(queryText, [req.params.id])
 
         // successful query = send back info to client

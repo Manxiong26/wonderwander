@@ -50,8 +50,8 @@ function AdventureDoPage() {
               Do
             </Typography>
             <Card className={classes.promptCard}>
-              <div style={{ position: "relative" }}>
-
+              <div style={{ position: "relative"}}>
+                <div style={{overflow: 'auto', height: '325px'}}>
                 {/* maps through the list grabbed from the server */}
                 {list.map((item, i) => {
                   return (
@@ -67,6 +67,7 @@ function AdventureDoPage() {
                     </>
                   );
                 })}
+                </div>
                 <Button
                   size="small"
                   variant="contained"

@@ -138,6 +138,7 @@ function HomePage() {
               <Typography variant="h6" className={classes.red}>
                 Other Art Adventures:
               </Typography>
+              <div style={{height: '200px', overflow: 'auto'}}>
               <List>
 
                 {/* maps through other art adventure array and renders them to the dom */}
@@ -164,6 +165,7 @@ function HomePage() {
                 })}
                 <Divider />
               </List>
+              </div>
             </div>
           </div>
         </Grid>

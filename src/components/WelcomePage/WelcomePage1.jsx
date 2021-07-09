@@ -42,8 +42,8 @@ function WelcomePage1() {
   // renders the welcome page to the DOM
   return (
     <>
-      <div className={classes.pageMargin}>
-        <div className={classes.welcomeMargin}>
+      
+      <div className={classes.welcomeMargin}>
 
           {/* button that when clicked, will go to the next welcome page */}
           <ArrowForwardIosIcon onClick={goNext} className={classes.nextBtn} />
@@ -52,7 +52,6 @@ function WelcomePage1() {
           <div>
             <HomeIcon onClick={skipWelcome} />
           </div>
-        </div>
 
         <Grid container direction="column">
           <Grid item xs={12} sm={12} lg={12}>

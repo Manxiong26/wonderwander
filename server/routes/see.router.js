@@ -8,7 +8,7 @@ router.get('/:id', (req, res) => {
 
     // grabs see information for specific artwork
     const queryText = `
-    SELECT "see".id, "see".prompts, "see".link, "see".image FROM "see" WHERE "see".artwork_id = $1;`;
+    SELECT "see".id, "see".prompts, "see".link, "see".image FROM "see" WHERE "see".artwork_id = $1 AND "see".published = true;`;
     pool.query(queryText, [req.params.id])
 
         // success will send back data to client

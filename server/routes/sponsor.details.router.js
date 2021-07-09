@@ -9,7 +9,7 @@ router.get('/:id', (req, res) => {
     const details = req.params.id;
 
     // will get all the information from the sponsor for that ID
-    const queryText = `SELECT * FROM "sponsor" WHERE sponsor.id = $1;`
+    const queryText = `SELECT * FROM "sponsor" WHERE sponsor.id = $1 AND sponsor.published=true;`
 
     pool.query(queryText, [details])
 
