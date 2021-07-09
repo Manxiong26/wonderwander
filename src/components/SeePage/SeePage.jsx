@@ -33,7 +33,7 @@ function SeePage() {
 
     // render the page to the DOM
     return (<>
-        <div className={classes.welcomeMargin}>
+        <div className={classes.pageMargin}>
 
             {/* button to go back to previous page */}
             <Button
@@ -43,7 +43,7 @@ function SeePage() {
             >
                 <ArrowBackIosIcon />
             </Button>
-        </div>
+        
 
         <Grid container direction="column">
             <Grid item xs={12} sm={12} lg={12}>
@@ -72,6 +72,7 @@ function SeePage() {
                 </div>
             </Grid>
         </Grid>
+        </div>
     </>
     );
 }

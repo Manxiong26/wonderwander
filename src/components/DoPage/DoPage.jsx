@@ -32,6 +32,7 @@ function DoPage() {
 
   return (
     <>
+    <div className={classes.pageMargin}>
 
       {/* function that when clicked takes the user back to the previous page */}
       <Button
@@ -43,13 +44,13 @@ function DoPage() {
       </Button>
       <Grid container direction="column">
         <Grid item xs={12} sm={12} lg={12}>
-          <div className={classes.pageMargin}>
+          <div>
             <Typography variant="h5" className={classes.title}>
               Do
             </Typography>
             <Card className={classes.promptCard}>
-              <div style={{ position: "relative" }}>
-
+              <div style={{ position: "relative"}}>
+                <div style={{overflow: 'auto', height: '325px'}}>
                 {/* makes through the do list to render it to the DOM */}
                 {doList.map((item, i) => {
                   return (
@@ -65,6 +66,7 @@ function DoPage() {
                     </>
                   );
                 })}
+                </div>
 
                 <Button
                   size="small"
@@ -81,6 +83,7 @@ function DoPage() {
           </div>
         </Grid>
       </Grid>
+      </div>
     </>
   );
 }
