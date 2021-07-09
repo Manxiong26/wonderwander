@@ -9,7 +9,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
-import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -17,8 +16,6 @@ import AdminRoute from '../AdminRoute/AdminRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
 import HomePage from '../HomePage/HomePage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AdminArtist from '../AdminArtist/AdminArtist';
@@ -297,13 +294,6 @@ function App() {
               path='/collectionDetail/:id'>
                 <CollectionDetail userLat={userLat} userLng={userLng}/>
               </Route>
-            <Route
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/info"
-            >
-              <InfoPage />
-            </Route>
 
             {/* When a value is supplied for the authRedirect prop the user will
               be redirected to the path supplied when logged in, otherwise they will
@@ -330,18 +320,6 @@ function App() {
               authRedirect="/user"
             >
               <RegisterPage />
-            </Route>
-
-
-            <Route
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LandingPage at "/home"
-              exact
-              path="/home"
-              authRedirect="/user"
-            >
-              <LandingPage />
             </Route>
 
             {/* <ProtectedRoute

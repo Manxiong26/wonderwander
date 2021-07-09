@@ -29,6 +29,8 @@ function ArtworkDetail({ userLat, userLng }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
+
+    //to get the specific id for the art
     const { id } = useParams();
     const classes = useStyles();
     
@@ -48,10 +50,6 @@ function ArtworkDetail({ userLat, userLng }) {
         dispatch({ type: 'CLEAR_SPONSOR_DETAILS' });
         
     }, []);
-
-    //to get the specific id for the art
-    const { id } = useParams();
-    const classes = useStyles();
 
     //for rendering the page to the DOM
     return (

@@ -35,11 +35,10 @@ function CollectionDetail({ userLat, userLng }) {
     const collectionDet = useSelector(store => store.collectionDetail)
     console.log('CHECKING COLLECTDET STORE_____________', collectionDet);
 
+    // function that when called, takes the user to the artwork detail page with a specific piece of artwork, artDet, as an argument
     const viewArtworkDetail = (event, artDet) => {  //artDet
-        console.log('HELLLLLLLLLLPPPPPPPPPPPP', artDet);
         event.preventDefault();
         history.push(`/artworkdetail/${artDet}`) //artDet.id
-        console.log('CLICKING');
     }
 
     // using id to grab detail 
@@ -50,12 +49,6 @@ function CollectionDetail({ userLat, userLng }) {
         dispatch({ type: 'FETCH_COLLECTION_DETAIL', payload: id })
         dispatch({ type: 'FETCH_ART_DETAIL', payload: id })
     }, [])
-
-    // function that when called, takes the user to the artwork detail page with a specific piece of artwork, artDet, as an argument
-    const viewArtworkDetail = (event, artDet) => {  //artDet
-        event.preventDefault();
-        history.push(`/artworkdetail/${artDet}`) //artDet.id
-    }
 
     return (
         <>
