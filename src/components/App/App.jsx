@@ -283,11 +283,15 @@ function App() {
             >
               <HomePage />
             </Route>
+
+            {/* route for all the collection */}
               <Route
               exact
               path='/collection'>
                 <Collection />
               </Route>
+
+              {/* route for the specific collection */}
               <Route
               exact
               path='/collectionDetail/:id'>
@@ -356,6 +360,8 @@ function App() {
               <h1>404</h1>
             </Route> */}
           </Switch>
+
+          {/* these are the routes for the four welcome pages that great the user on start-up */}
           <Route
             exact path='/welcome1'
           >
@@ -376,11 +382,15 @@ function App() {
           >
             <WelcomePage4></WelcomePage4>
           </Route>
+
+          {/* route for the specific sponsor */}
           <Route
             exact path='/sponsor/:id'
           >
             <SponsorDetail userLat={userLat} userLng={userLng}/>
           </Route>
+
+          {/* route for the page for the user to enter their email*/}
           <Route
             exact path='/email'  
           >
@@ -388,7 +398,6 @@ function App() {
           </Route>
         <Footer />
         </div>
-        
       </Router>
     </ThemeProvider>
   );

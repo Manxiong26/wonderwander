@@ -10,11 +10,13 @@ function LoginPage() {
 
   return (
     <div>
-      <LoginForm />
 
+      {/* login form component */}
+      <LoginForm />
       <center>
+
+        {/* button that when clicked, takes user to registration page to create an account */}
         <Button
-          
           type="button"
           className={classes.btn}
           onClick={() => {

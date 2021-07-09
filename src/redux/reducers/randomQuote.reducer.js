@@ -1,3 +1,4 @@
+// reducer to set state of random quote from the server
 const randomQuoteReducer = (state = {}, action) => {
     switch (action.type) {
         case 'SET_RANDOM_QUOTE':

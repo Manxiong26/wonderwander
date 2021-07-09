@@ -31,9 +31,7 @@ import collection from './collection.reducer';
 import collectionThree from './collection.3.reducer';
 import collectionDetail from './collection.detail.reducer';
 import adventureSeeDo from './adventureSeeDo.reducer';
-import addVote from './addVote.reducer';
 import viewedArt from './viewedArt.reducer';
-// import artistDetail from './artist.reducer';
 import seesaydoReducer from './seesaydo.reducer';
 import artistDetail from './artist.reducer';
 import adventureReducer from './adventure.reducer';
@@ -77,7 +75,6 @@ const rootReducer = combineReducers({
   adventureReducer,
   adventureSeeDo,
   imageUrlReducer,
-  addVote,
   voteNumber,
   viewedArt,
 });

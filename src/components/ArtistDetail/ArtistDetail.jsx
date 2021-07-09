@@ -33,15 +33,19 @@ const ArtistDetail = () => {
   const artist = useSelector((store) => store.artistDetail);
   const artistInfo = artist[0];
 
+  // function to handle clicking a specific artwork for this artist page, goes to the detail page for that artwork
   const toArtDetail = (item) => {
     history.push(`/artworkdetail/${item.art_id}`);
   };
 
+  //for rendering the page to the DOM
   return (
     <>
       <Grid container direction="column">
         <Grid item xs={12} sm={12} lg={12}>
           <div className={classes.pageMargin}>
+            
+            {/* button that when clicked, goes back to the previous page  */}
             <Button
               onClick={() => {
                 history.goBack();
@@ -50,6 +54,7 @@ const ArtistDetail = () => {
               <ArrowBackIosIcon />
             </Button>
            
+            {/* check if the artistInfo is undefined, waits for all the information to be grabbed from the server before rendering everything to the DOM */}
             {artistInfo === undefined ? ( <>
             <div>
                     <Typography variant="h4" className={classes.title}>
@@ -96,6 +101,8 @@ const ArtistDetail = () => {
                   </Typography>
                   <Divider />
                   <List>
+                    
+                    {/* maps through the artist object brought back from the server and render it to the DOM*/}
                     {artist.map((item, i) => {
                       return (
                         <>

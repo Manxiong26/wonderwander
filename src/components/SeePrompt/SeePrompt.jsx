@@ -30,17 +30,18 @@ function SeePrompt({truncateString}) {
 
   const { id } = useParams();
 
-  console.log("IN SEE PROMPT", seelist);
 
   return (
-    // {list && list.name && editMode?}
     <>
+
+    {/* if the length of the see list is over 0, so that the artwork is supposed to have see attached to it, then it will render the seeList to the DOM */}
     {(seelist.length) > 0 &&
       <List>
+
+        {/* renders the see list to the DOM */}
         {seelist.map((seel, i) => {
           return (
             <>
-            {/* <Divider/> */}
               <ListItem>
                 <ListItemAvatar>
                   <Avatar variant="square" src={"http://simpleicon.com/wp-content/uploads/eye_1-256x256.png"} />
@@ -50,6 +51,8 @@ function SeePrompt({truncateString}) {
                     {truncateString(seel.prompts, 50)}
                   </Typography>
                 </ListItemText>
+
+                {/* takes user to the specific see pages */}
                 <IconButton onClick={(event) => history.push(`/see/${id}`)}>
                   <ArrowForwardIosIcon />
                 </IconButton>
@@ -58,7 +61,6 @@ function SeePrompt({truncateString}) {
             </>
           );
         })}
-        
       </List>
     }
     </>

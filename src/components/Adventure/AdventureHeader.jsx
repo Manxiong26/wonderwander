@@ -6,11 +6,11 @@ import React from "react";
 
 
 function AdventureHeader({ advDetail }) {
+
+    // classes constant from classes.js import for styling 
     const classes = useStyles();
 
-    console.log('In AdventureHeader..Checking adventure detail: ', advDetail)
-
-
+    //to render the header for the adventure page
     return (
         <>
             <Typography variant="h4" className={classes.title}>
@@ -26,4 +26,5 @@ function AdventureHeader({ advDetail }) {
     );
 }
 
+// for exporting to adventure
 export default AdventureHeader;

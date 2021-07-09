@@ -21,12 +21,15 @@ import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 function HomePage() {
+
   //this pushes to the next page
   const history = useHistory();
+
   //this dispatch the saga
   const dispatch = useDispatch();
   const classes = useStyles();
   const { id } = useParams();
+
   //initialize to the DOM
   useEffect(() => {
     
@@ -34,22 +37,29 @@ function HomePage() {
     dispatch({ type: "FETCH_THREE_COLLECTION" });
     dispatch({ type: 'FETCH_ADVENTURES' });
   }, []);
+
   //Adventure reducer
   const adventure = useSelector((store) => store.adventureReducer.adventureList);
+
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+
   //randomArt Store reducer
   const randomArt = useSelector((store) => store.randomArt);
+
   //collection Store reducer
   const collectionThreeList = useSelector((store) => store.collectionThree);
+
   // pushes to Collection Detail
   const viewCollectionDetail = (event, collDet) => {
     history.push(`/collectionDetail/${collDet.id}`);
   };
+
   // pushes to email enter
   const toEmail = () => {
     history.push("/email");
   };
+
   // pushes to adventure info page
   const toAdventure = (event, advDet) => {
     console.log('Adventure', advDet);
@@ -85,6 +95,8 @@ function HomePage() {
             </Typography>
             <div>
               <List>
+
+                {/* makes through the collection list of three items and renders them to the DOM */}
                 {collectionThreeList.map((collection, i) => {
                   return (
                     <>
@@ -99,6 +111,8 @@ function HomePage() {
                         />
                         <ListItemText/>
                         <IconButton>
+
+                          {/* when clicked, calls the viewCollectionDetail and passes in the specific collection as an argument */}
                           <ArrowForwardIosIcon
                             onClick={(event) =>
                               viewCollectionDetail(event, collection)
@@ -114,6 +128,8 @@ function HomePage() {
               </List>
             </div>
             <div className="weekly">
+
+              {/* button that when clicked, calls the toEmail function */}
               <Button onClick={toEmail} variant="outlined">
                 {" "}
                 <MailOutlineIcon className="email" /> Get Weekly Wonder News
@@ -124,6 +140,8 @@ function HomePage() {
               Other Art Adventures:
               </Typography>
               <List>
+
+                {/* maps through other art adventure array and renders them to the dom */}
                 {adventure.map((advDet, i) => {
                   return (
                     <>
@@ -133,6 +151,8 @@ function HomePage() {
                           <Avatar className={classes.thumbnail} src={advDet.image} />
                         </ListItemAvatar>
                         <ListItemText>{advDet.title}</ListItemText>
+
+                        {/* when clicked, will call toAdventure function, passing in the advDet as an argument */}
                         <IconButton >
                           <ArrowForwardIosIcon
                             onClick={(event) => toAdventure(event, advDet)}

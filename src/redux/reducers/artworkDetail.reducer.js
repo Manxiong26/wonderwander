@@ -1,3 +1,5 @@
+
+// reducer to set state of the detail for an artwork
 const artworkDetailReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_ART_DETAIL':

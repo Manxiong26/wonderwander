@@ -22,14 +22,15 @@ function SayPrompt() {
   const dispatch = useDispatch();
   const list = useSelector((store) => store.seesaydoReducer.sayReducer);
 
+  //on page load, fetches the details from the server, using the id of the artwork as the payload to get the say for that artwork
   useEffect(() => {
-    console.log("in useEffect param: SayPrompt");
     dispatch({ type: "FETCH_SAY_DETAIL", payload: id });
   }, []);
 
+  // to get id of artwork
   const { id } = useParams();
 
-  // Currently using red to tell the cards apart at the moment
+  // render the page to the dom
   return (
     <>
       <List>

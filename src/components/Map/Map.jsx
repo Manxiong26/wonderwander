@@ -39,6 +39,8 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
   };
 
   return (
+
+        // renders the map to the DOM
         <div style={{ height: height, width: width }} id="map" className={classes.map}>
           <GoogleMapReact
             bootstrapURLKeys={{ 
@@ -49,12 +51,14 @@ const Map = ({ mapLat, mapLng, zoom, reducer, height, width, userLat, userLng })
             yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
           >
+
             {/* Looping through artwork reducer to populate map w/ ballon markers */}
             {reducer.map((item, i) => (
               <BalloonMarker  item={item} key={i} lat={item.lat} lng={item.lng} />
             ))}
             {/* If user location is found/granted
              then location marker gets placed on the map */}
+
             {userLat !== null && userLng !== null ? (
             <UserLocation lat={userLat} lng={userLng} />
             ) : ('')}

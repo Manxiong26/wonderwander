@@ -10,16 +10,23 @@ import { useStyles } from "../classes";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
+import HomeIcon from "@material-ui/icons/Home";
 
 function WelcomePage2() {
     const history = useHistory();
     const classes = useStyles();
+
+    //when called, will take user to third welcome page
     const goNext = () => {
         history.push('/welcome3');
     }
+
+    //when called, takes user back to welcome page 1
     const goBack = () => {
         history.push('/welcome1');
     }
+
+    // when called, skips user to home page
     const skipWelcome = () => {
         history.push('/home');
     }
@@ -27,17 +34,25 @@ function WelcomePage2() {
 
     return (
         <>
+
+            {/* renders the buttons to the dom */}
             <div className={classes.welcomeMargin}>
+
+                {/* when clicked, goes back to page 1 */}
                 <ArrowBackIosIcon
                     onClick={goBack}
                     className={classes.backBtn}
                 />
+
+                {/* when clicked, goes to next page */}
                 <ArrowForwardIosIcon
                     onClick={goNext}
                     className={classes.nextBtn}
                 />
+
+                {/* when clicked, takes user to home */}
                 <div className={classes.center}>
-                    <SkipNextIcon
+                    <HomeIcon
                         onClick={skipWelcome}
                     />
                 </div>
