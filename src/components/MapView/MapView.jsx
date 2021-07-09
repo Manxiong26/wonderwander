@@ -22,7 +22,6 @@ import env from "react-dotenv";
 import { useHistory } from "react-router-dom";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
-
 const MapView = ({ userLat, userLng }) => {
   useEffect(() => {
     dispatch({ type: "FETCH_ARTWORK" });
@@ -83,7 +82,7 @@ const MapView = ({ userLat, userLng }) => {
   return (
     <>
       <div className={classes.pageMargin}>
-        
+
         {/* button that when clicked will return a user to the previous page */}
         <Button
           onClick={() => {
@@ -140,7 +139,7 @@ const MapView = ({ userLat, userLng }) => {
             <div>
               <List>
                 <Divider />
-          
+
                 {/* maps through the artwork array to display everything to the DOM */}
                 {artwork.map((item, i) => {
                   return (

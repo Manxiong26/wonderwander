@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import {
-    List,
-    Avatar,
-    ListItem,
-    ListItemText,
-    ListItemAvatar,
-    IconButton,
-    Typography,
-    Divider,
-    makeStyles,
+  List,
+  Avatar,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  IconButton,
+  Typography,
+  Divider,
+  makeStyles,
 } from "@material-ui/core";
 import { useStyles } from "../classes";
 import { useHistory, useParams } from "react-router-dom";

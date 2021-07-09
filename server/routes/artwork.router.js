@@ -5,22 +5,22 @@ const router = express.Router();
 // GET request to grab all artwork info
 // where published = true
 router.get('/', (req, res) => {
-    const query = `SELECT artwork.id, artwork.name as title, artwork.year, artwork.lat, artwork.lng, artwork.image, artwork.description, artwork.vid_link, artwork.vid_description, artist.name, artist.bio, artist.site_link FROM artwork
+  const query = `SELECT artwork.id, artwork.name as title, artwork.year, artwork.lat, artwork.lng, artwork.image, artwork.description, artwork.vid_link, artwork.vid_description, artist.name, artist.bio, artist.site_link FROM artwork
     LEFT OUTER JOIN artist ON artist.id=artwork.artist_id
     WHERE artwork.published=true;`;
 
-    pool.query(query)
+  pool.query(query)
 
-      // success will send back data to client
-      .then(result => {
-        res.send(result.rows)
-      })
+    // success will send back data to client
+    .then(result => {
+      res.send(result.rows)
+    })
 
-      //failure will send back error
-      .catch( error => {
-        console.log('Something went wrong GETting artwork:', error)
-        res.sendStatus(500);
-      })
-  });
+    //failure will send back error
+    .catch(error => {
+      console.log('Something went wrong GETting artwork:', error)
+      res.sendStatus(500);
+    })
+});
 
 module.exports = router;

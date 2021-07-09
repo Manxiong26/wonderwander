@@ -20,7 +20,7 @@ function Adventure() {
     const advDetail = useSelector((store) => store.adventureReducer.adventureDetailReducer);
     const dispatch = useDispatch();
     const history = useHistory();
-    
+
     //to get id for specific adventure
     const { id } = useParams();
 
@@ -30,10 +30,10 @@ function Adventure() {
     // Function to create preview of prompt
     const truncateString = (str, num) => {
         if (str.length <= num) {
-          return str
+            return str
         }
         return str.slice(0, num) + '...'
-      }
+    }
 
 
     //on page load, dispatch for getting adventure detail from server with the payload of that id from useParams
@@ -60,10 +60,10 @@ function Adventure() {
                     <Divider />
                 </Typography>
                 <div className={classes.textBox}>
-                <ListItemText
-                    className={classes.center}
-                    primary={advDetail.description}
-                />
+                    <ListItemText
+                        className={classes.center}
+                        primary={advDetail.description}
+                    />
                 </div>
                 <Divider />
                 <Typography variant="h6" className={classes.redCenter}>

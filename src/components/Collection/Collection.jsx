@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './Collection.css'
 
-//material UI
 import {
   List,
   ListItem,
@@ -20,10 +19,11 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 function Collection() {
+
   const classes = useStyles();
-  //this pushes to the next page
+
   const history = useHistory();
-  //this dispatch the saga
+
   const dispatch = useDispatch();
 
   //initialize to the DOM
@@ -33,7 +33,6 @@ function Collection() {
 
   //collection Store reducer
   const collectionList = useSelector((store) => store.collection);
-  console.log('WHAT IS IN COLLECTION__________', collectionList);
 
   // function that when called, will take the user to the collection detail for a specific collection, passed in as the argument collDet
   const viewCollectionDetail = (event, collDet) => {
@@ -47,7 +46,7 @@ function Collection() {
   return (
     <>
 
-    {/* button that when clicked, will take the user back to the previous page */}
+      {/* button that when clicked, will take the user back to the previous page */}
       <Button
         onClick={() => {
           history.goBack();

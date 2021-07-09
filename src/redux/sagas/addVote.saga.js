@@ -4,12 +4,12 @@ import { put, takeLatest } from "redux-saga/effects";
 // function that handles user votes from the server
 function* AddVote(action) {
     try {
-        
+
         //will make post request to server to add a new vote to a piece of artwork
         yield axios.post('/api/say/', action.payload);
 
         // then will fetch the total votes from the server
-        yield put({ type: 'FETCH_TOTAL_VOTE', payload: action.payload});
+        yield put({ type: 'FETCH_TOTAL_VOTE', payload: action.payload });
 
         // error if one occurs
     } catch (error) {

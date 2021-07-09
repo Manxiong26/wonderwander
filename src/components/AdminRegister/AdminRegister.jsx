@@ -96,7 +96,6 @@ function AdminRegister() {
               required
               onChange={(event) => setName(event.target.value)}
             />
-
             <div className={classes.btn}>
               <Button
                 color="primary"

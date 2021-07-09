@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-
-
-//material UI
 import {
     Grid,
     Typography,
@@ -18,7 +15,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 function ImageHeader({ artItem }) {
 
     const classes = useStyles();
-  
+
     const dispatch = useDispatch();
 
     // handles the state for whether an item is selected by using a local state for selected, defaulted to false
@@ -47,19 +44,19 @@ function ImageHeader({ artItem }) {
         swal({
             text: `Please Login or Register to access this feature`,
             icon: "warning",
-          });
+        });
     }
 
     // function that checks if the artwork has been viewed by checking if the viewed item from the store has the same id as the artwork being viewed, returns true if that is the case
     const checkId = (artItem) => {
         for (let item of viewed) {
-          if (artItem.id == item.artwork_id) {
-            return true;
-          } else {
-            false;
-          }
+            if (artItem.id == item.artwork_id) {
+                return true;
+            } else {
+                false;
+            }
         } // end of loop
-      }; // end checkId
+    }; // end checkId
 
     // render the page to the DOM
     return (
@@ -67,12 +64,12 @@ function ImageHeader({ artItem }) {
             <Typography variant="h4" className={classes.title}>
                 Art Detail
             </Typography>
-            
+
             <img
                 className={classes.image}
                 src={artItem.image}
             />
-            
+
             {/* if the user id is NOT undefined, render this codeblock to the DOM */}
             {user.id !== undefined ?
                 <div className={classes.center}>
@@ -94,7 +91,7 @@ function ImageHeader({ artItem }) {
                         : (
                             <>
                                 <Typography variant="body1" className={classes.imageInfo}>
-                                <b>{artItem.name}</b>
+                                    <b>{artItem.name}</b>
                                     <IconButton>
                                         <VisibilityIcon
                                             color="primary"

@@ -33,10 +33,9 @@ import EditIcon from "@material-ui/icons/Edit";
 
 import { useStyles } from "../classes";
 
-
-function AdminArtAdventure({truncateString}) {
+function AdminArtAdventure({ truncateString }) {
   let { id } = useParams();
-  
+
   const history = useHistory();
 
   const classes = useStyles();
@@ -66,6 +65,7 @@ function AdminArtAdventure({truncateString}) {
 
   //post to saga
   const addArtAdventure = () => {
+
     //create object to send
     const newArtAdventure = {
       title: title,
@@ -93,7 +93,6 @@ function AdminArtAdventure({truncateString}) {
 
   //renders a specific art adventure's details in input feilds to edit
   const renderArtAdventureDetail = (event, item) => {
-    console.log("clicking edit for Art Adventure = ", item);
 
     //sets specific art adventure in art adventure reducer
     dispatch({ type: "SET_ADVENTURE_INFO", payload: item });
@@ -113,6 +112,7 @@ function AdminArtAdventure({truncateString}) {
 
   //update (edit) art adventure information
   const updateArtAdventureInfo = () => {
+
     //create updated art adventure object
     const updatedArtAdventureInfo = {
       id: artAdventure.id,
@@ -120,8 +120,6 @@ function AdminArtAdventure({truncateString}) {
       description: description,
       image: image,
     };
-
-    console.log("updated art adventure info:", updatedArtAdventureInfo);
 
     //send updated art adventure info to art adventure saga
     dispatch({
@@ -156,7 +154,6 @@ function AdminArtAdventure({truncateString}) {
 
   //delete art adventure
   const deleteArtAdventure = (id) => {
-    console.log("deleting art adventure:", id);
 
     //dispatch to saga w art adventure id
     dispatch({ type: "DELETE_ADVENTURE", payload: id });
@@ -164,7 +161,6 @@ function AdminArtAdventure({truncateString}) {
 
   //alerts admin to verify artist deletion
   const deleteValidation = (id) => {
-    console.log("delete clicked! id = ", id);
 
     swal({
       title: "Hello!",
@@ -193,7 +189,6 @@ function AdminArtAdventure({truncateString}) {
   const [doId, setDoId] = useState("");
 
   const addSee = () => {
-    console.log("Add See Clicked.");
 
     //create object to send
     const newSee = {
@@ -203,7 +198,6 @@ function AdminArtAdventure({truncateString}) {
       artwork_id: null,
       activity_id: adventure_id,
     };
-    console.log("Adding see object: ", newSee);
 
     //dispatch to artAdventure saga
     dispatch({ type: "ADD_SEE", payload: newSee });
@@ -214,8 +208,6 @@ function AdminArtAdventure({truncateString}) {
       icon: "success",
     });
 
-    //TODO - Reset dropdown to default value
-
     //clears input fields
     setSeePrompts("");
     setSeeImage("");
@@ -224,7 +216,6 @@ function AdminArtAdventure({truncateString}) {
   };
 
   const addDo = () => {
-    console.log("Add Do Clicked.");
 
     //create object to send
     const newDo = {
@@ -232,7 +223,6 @@ function AdminArtAdventure({truncateString}) {
       artwork_id: null,
       activity_id: adventure_id,
     };
-    console.log("Adding do object: ", newDo);
 
     //dispatch to artAdventure saga
     dispatch({ type: "ADD_DO", payload: newDo });
@@ -243,8 +233,6 @@ function AdminArtAdventure({truncateString}) {
       icon: "success",
     });
 
-    //TODO - Reset dropdown to default value
-
     //clears input fields
     setDoPrompts("");
     setAdventureId("");
@@ -252,7 +240,6 @@ function AdminArtAdventure({truncateString}) {
 
   //delete see
   const deleteSee = (item) => {
-    console.log("deleting see:", item.id);
 
     let deleteObj = {
       id: item.id,
@@ -266,7 +253,6 @@ function AdminArtAdventure({truncateString}) {
 
   // Delete See confirmation prompt
   const deleteSeeValidation = (item) => {
-    console.log("delete clicked! item = ", item);
 
     swal({
       title: "Hello!",
@@ -287,7 +273,6 @@ function AdminArtAdventure({truncateString}) {
 
   //delete do
   const deleteDo = (item) => {
-    console.log("deleting do:", item.id);
 
     let deleteObj = {
       id: item.id,
@@ -301,7 +286,6 @@ function AdminArtAdventure({truncateString}) {
 
   // Delete Do confirmation alert
   const deleteDoValidation = (item) => {
-    console.log("delete clicked! item = ", item);
 
     swal({
       title: "Hello!",
@@ -322,7 +306,6 @@ function AdminArtAdventure({truncateString}) {
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publish = (event, item) => {
-    console.log("clicking publish for Art Adventure = ", item);
 
     //sets specific adventure in artAdventure reducer
     dispatch({ type: "SET_ADVENTURE_INFO", payload: item });
@@ -335,13 +318,13 @@ function AdminArtAdventure({truncateString}) {
         id: item.id,
         published: false,
       };
-     
+
     } else {
       pubObject = {
         id: item.id,
         published: true,
       };
-     
+
     }
 
     //sends updated art adventure boolean (published/unpublished) to artAdventure saga
@@ -350,7 +333,6 @@ function AdminArtAdventure({truncateString}) {
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publishSee = (event, item) => {
-    console.log("clicking publish for See = ", item);
 
     //sets specific see in See reducer
     dispatch({ type: "SET_SEE_INFO", payload: item });
@@ -364,14 +346,14 @@ function AdminArtAdventure({truncateString}) {
         published: false,
         activity_id: item.activity_id
       };
-      
+
     } else {
       pubObject = {
         id: item.id,
         published: true,
         activity_id: item.activity_id
       };
-      
+
     }
 
     //sends updated 'See' boolean (publish/unpublish) to art adventure saga
@@ -380,9 +362,6 @@ function AdminArtAdventure({truncateString}) {
 
   //changes db boolean to true which "publishes" item on public facing pages
   const publishDo = (event, item) => {
-
-    console.log("clicking publish for Do = ", item);
-
 
     //sets specific do in Do reducer
     dispatch({ type: "SET_DO_INFO", payload: item });
@@ -394,18 +373,14 @@ function AdminArtAdventure({truncateString}) {
       pubObject = {
         id: item.id,
         published: false,
-
         activity_id: item.activity_id
       };
-
     } else {
       pubObject = {
         id: item.id,
         published: true,
-
         activity_id: item.activity_id
       };
-
     }
 
     //sends updated 'Do' boolean (publish/unpublish) to art adventure saga
@@ -420,7 +395,6 @@ function AdminArtAdventure({truncateString}) {
           <>
 
             {/* Edit Adventure Form */}
-
             <Grid item lg={4} sm={12} xs={12}>
               <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
@@ -444,7 +418,6 @@ function AdminArtAdventure({truncateString}) {
                       value={title}
                       onChange={(event) => setTitle(event.target.value)}
                     />
-
                     <TextField
                       type="text"
                       className={classes.inputs}
@@ -456,7 +429,6 @@ function AdminArtAdventure({truncateString}) {
                       rows={6}
                       onChange={(event) => setDescription(event.target.value)}
                     />
-
                     <TextField
                       type="text"
                       className={classes.inputs}
@@ -466,8 +438,6 @@ function AdminArtAdventure({truncateString}) {
                       value={image}
                       onChange={(event) => setImage(event.target.value)}
                     />
-
-
                     <Button
                       className={classes.formBtn}
                       type="submit"
@@ -484,7 +454,6 @@ function AdminArtAdventure({truncateString}) {
                     >
                       Cancel
                     </Button>
-
                   </form>
                 </div>
               </Card>
@@ -621,7 +590,6 @@ function AdminArtAdventure({truncateString}) {
           <>
 
             {/* Add Adventure Form */}
- 
             <Grid item lg={5} sm={12} xs={12}>
               <Card elevation={6} className={classes.cardForm}>
                 <div className={classes.cardContent}>
@@ -642,7 +610,6 @@ function AdminArtAdventure({truncateString}) {
                       value={title}
                       onChange={(event) => setTitle(event.target.value)}
                     />
-
                     <TextField
                       type="text"
                       className={classes.inputs}
@@ -654,7 +621,6 @@ function AdminArtAdventure({truncateString}) {
                       rows={6}
                       onChange={(event) => setDescription(event.target.value)}
                     />
-
                     <TextField
                       type="text"
                       className={classes.inputs}
@@ -664,8 +630,6 @@ function AdminArtAdventure({truncateString}) {
                       value={image}
                       onChange={(event) => setImage(event.target.value)}
                     />
-
-           
                     <Button
                       className={classes.formBtn}
                       type="submit"
@@ -677,6 +641,7 @@ function AdminArtAdventure({truncateString}) {
                     </Button>
                   </form>
                   <Divider style={{ marginBottom: "5%" }} />
+
                   {/* Add See Form */}
                   <Typography
                     className={classes.title}
@@ -714,7 +679,6 @@ function AdminArtAdventure({truncateString}) {
                       onChange={(event) => setLink(event.target.value)}
                     />
                     {/* generates adventure options dynamically */}
-
                     <FormControl className={classes.inputs}>
                       <InputLabel>Adventure</InputLabel>
                       <Select
@@ -749,7 +713,7 @@ function AdminArtAdventure({truncateString}) {
                     Add Do
                   </Typography>
                   <form className={classes.form} onSubmit={addDo}>
-                  <TextField
+                    <TextField
                       className={classes.inputs}
                       variant="outlined"
                       type="text"
@@ -799,7 +763,6 @@ function AdminArtAdventure({truncateString}) {
                 className={classes.cardTable}
               >
                 <div className={classes.tableContent}>
-
                   <Typography
                     className={classes.title}
                     align="center"
@@ -819,7 +782,6 @@ function AdminArtAdventure({truncateString}) {
                             />
                           </TableCell>
                           <TableCell>
-
                             <Typography variant="body1">
                               {item.title}
                             </Typography>

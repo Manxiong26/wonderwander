@@ -92,18 +92,17 @@ router.post('/see', rejectUnauthenticated, rejectNonAdmin, (req, res) => {
 
     let newSee = req.body;
 
-    
-    const query  = `INSERT INTO "see" ("prompts", "link", "image", "artwork_id", "activity_id")
+    const query = `INSERT INTO "see" ("prompts", "link", "image", "artwork_id", "activity_id")
         VALUES ($1, $2, $3, $4, $5);`;
     pool.query(query, [newSee.prompts, newSee.link, newSee.image, newSee.artwork_id, newSee.activity_id])
-    .then(result => {
-        console.log(`new 'See' for adventure object POST`, result.rows);
-        res.sendStatus(201);
-    }).catch (error => {
-        console.log(error);
-        res.sendStatus(500)
-    })
-  
+        .then(result => {
+            console.log(`new 'See' for adventure object POST`, result.rows);
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log(error);
+            res.sendStatus(500)
+        })
+
 
 });//end add new 'See' for adventure POST route
 

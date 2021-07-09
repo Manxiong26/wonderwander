@@ -10,8 +10,8 @@ function* getCollection() {
 
         // then sets reducer to the response
         yield put({ type: 'SET_COLLECTION', payload: response.data })
-    
-    // error if one occurs
+
+        // error if one occurs
     } catch (error) {
         console.log('GET collection request failed in saga:', error)
     }

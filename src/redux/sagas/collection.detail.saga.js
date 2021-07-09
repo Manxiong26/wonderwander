@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest} from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 // function to get the details for a specific collection from the server
 function* getCollectionDetail(action) {
@@ -11,7 +11,7 @@ function* getCollectionDetail(action) {
         // then sets the reducer to the response
         yield put({ type: 'SET_COLLECTION_DETAIL', payload: collectionDetail.data })
 
-    // error for if one occurs
+        // error for if one occurs
     } catch (error) {
         console.log('Error with collection detail request', error);
     }

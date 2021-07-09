@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-function DoPrompt({truncateString}) {
+function DoPrompt({ truncateString }) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -50,39 +50,39 @@ function DoPrompt({truncateString}) {
 
   // render the page to the DOM
   return (
-      <>
+    <>
 
       {/* if the doDetail array has a length greater than 1, meaning that the artwork is supposed to have a do element, render those elements to the DOM */}
       {(doDetail.length) > 0 &&
-    <List>
-      {doDetail.map((dolist, i) => {
-        return (
-          <>
-            <Divider />
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar
-                  variant="square"
-                  src={"http://simpleicon.com/wp-content/uploads/camera.png"}
-                />
-              </ListItemAvatar>
-              <ListItemText>
-                <Typography className={classes.content} key={i}>
-                  {truncateString(dolist.prompts, 50)}
-                </Typography>
-              </ListItemText>
+        <List>
+          {doDetail.map((dolist, i) => {
+            return (
+              <>
+                <Divider />
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar
+                      variant="square"
+                      src={"http://simpleicon.com/wp-content/uploads/camera.png"}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText>
+                    <Typography className={classes.content} key={i}>
+                      {truncateString(dolist.prompts, 50)}
+                    </Typography>
+                  </ListItemText>
 
-              {/* button that takes the user to the page for the specific do prompt using the id of the do prompt */}
-              <IconButton onClick={(event) => history.push(`/do/${id}`)}>
-                <ArrowForwardIosIcon />
-              </IconButton>
-            </ListItem>
-          </>
-        );
-      })}
-      <Divider />
-    </List>
-        }   
+                  {/* button that takes the user to the page for the specific do prompt using the id of the do prompt */}
+                  <IconButton onClick={(event) => history.push(`/do/${id}`)}>
+                    <ArrowForwardIosIcon />
+                  </IconButton>
+                </ListItem>
+              </>
+            );
+          })}
+          <Divider />
+        </List>
+      }
     </>
   );
 }

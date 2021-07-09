@@ -1,48 +1,65 @@
 
-# Wonder Wander
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+# Wonder Wander Public Art App
+This version uses Javascript, React, Redux, Node.js, Express.js, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+
 ## Description
+
 _Duration: 3 Weeks_
-This project, Wonder Wander, is a client requested project about exploring and learning art. It is a responsive web application built for Phone view. 
-This application was created in a three week sprint.
-The timeline of our project was:
-- One week for developing a Scope document along with wireframes that were developed in Figma and Creating a Database with postgresql.
-- Two weeks for developing the Wonder Wander application.
-Wonder Wander allows the user to view different pieces of art that are in collections. There is a intergrated Google map view that lets the user view what art pieces are near them based on distance. The google maps can also filter art by what collection you are currently in. When looking at a specific art piece, the user will be able to do acitivites based on See. Say. and Do. Wonder Wander also allows the user to sign up or login if already an exsisting user. Logging in you are able to check on an icon to mark if the artwork has been already seen or not. Wonder Wander has multiple email intergrated systems that allow the user to sign up for an email listing or to become a sponsor of a collection. There is an admin side where the administrator can add, edit, delete or publish collections, art pieces, sponsors, and artists.  
-The problem we were trying to solve with this application was to highlight artwork with educational content, Track users viewing progress, Create art collections, and Streamline admin usability.
-How we solved these problems was to set up user initial experience, Create distinct features for registered users, and simplify and streamline admin actions.
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+
+This project, Wonder Wander Publis Art App, is a client requested project that encourages the public to explore community art and to engage with it through See. Say. Do. educational prompts. It is a responsive web application built to offer a phone view for mobile users and a desktop view for administators. Anyone can use this app without login in, however, user's who do register and/or login are able to track their artviewing progress. Wonder Wander allows the user to locate public art with an integrated Google Map API that shows the user art that is near them. There is also a list view of all art that indicates the distance an art piece is from the user's current location. There is an art detail screen that shows an image of the artwork it's name, the artist who created it, and any sponosor's or collections that the artwork is supported by. When looking at a specific art piece, the user is able to engage in educational acitivites based on See. Say. and Do. prompts. This app has an integrated email system that allows user's to sign up for a Weekly Wander Newsletter, or to contact Wonder Wander to add a collection to the app, become a sponosr, or to connect with the agency. Wonder Wander has multiple email intergrated systems that allow the user to sign up for an email listing or to become a sponsor of a collection. One challenge the building of this app addressed was to streamline administrative usability in collecting all of the details for and the curating of the artworks featured in the app. An administrator must be logged in to view the admin pages of the app where they have the ability to add, edit, publish, or delete individual pieces of art, artists, collections, sponsors, other art adventures, and quotes. The building of the app was an absolutely wonderful experience. 
+
+This application was created in a three week sprint. The timeline of our project was:
+
+- Week One: Client meeting, project scoping, creating Figma wireframes and a completed scope document describing the app functionality with sign off from the client.
+
+- Week Two: Project launch, creating a database in PostgreSQL, building out all base components and functionality for the app. 
+
+- Week Three: Wrapping up building base components and functionality, testing and bug fixes, creating presentation for the application, documentation and client hand off. 
+
+
+To see the fully functional site, please visit: 
+
+https://calm-lowlands-28823.herokuapp.com/#/welcome1 
+
 ## Screen Shot
 SCREEN SHOTS HERE
+
 ## Prerequisites
+
 Before you get started, make sure you have the following software installed on your computer:
+
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
+
 ## Installation
-1. Create a database named `wonder_db`,
-2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
+
+1. Create a PostgreSQL database named `wonder_db`,
+2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that downloaded. We recommend using Postico to run those queries as that was used to create the queries.
 3. Open up your editor of choice and run an `npm install`
 4. HERE GOES FOR INSTALL ISSUES (MAILCHIMP) (IAN) (NOTE: Add in command for legacy peer deps)
 5. Run `npm run server` in your terminal
 6. Run `npm run client` in your terminal
-7. The `npm run client` command will open up a new browser tab for you!
-8. Create a .env file at the root of the project and paste this line into the file:
-SERVER_SESSION_SECRET=superDuperSecret
+7. The `npm run client` command will open up a new browser tab for you.
+8. Create a .env file at the root of the project and paste this line into the file: SERVER_SESSION_SECRET=superDuperSecret
 While you're in your new .env file, take the time to replace superDuperSecret with some long random string like 25POUbVtx6RKVNWszd9ERB9Bb6 to keep your application secure. Here's a site that can help you: https://passwordsgenerator.net/. If you don't do this step, create a secret with less than eight characters, or leave it as superDuperSecret, you will get a warning.
 Start postgres if not running already by using brew services start postgresql
 9. Inside your .env file put in any api key such as Google Maps Api, (IAN FOR MAIL CHIMP, AWS)
+
 ## Usage
-1. The user will come to the welcome pages and read through what Wonder Wander is all about. There will be an option to sign up at the end of the welcome pages
-2. When the user is done with the welcome pages, the user will be sent to the Home page. This is where the users will be able to see art of the day, different collections, other adventures, and be able to sign up for a news letter. If signed in, the user will not see the prompt to be able to sign up for a news letter. 
-3. There is a menu bar where the user will be able to see a list of different options such as a Map/List view of artwork, ability to contact Wonder Wander, request to be a sponsor, or add an art collection. When on the admin side the user will see the admin button to take them to the admin view. 
-4. In the Map/List view the user will see a google intergrated map that shows all the artwork and where the current location of the user is in relation to all the artworks. There is a list view that shows all the art along with the distance from the user. The user can click on a specific art piece to view.
-5. When inside the art, it will show the detail of the art along with a description, options to take the user to Artist detail, Collection, Sponsor of that art, and Directions to the art piece. 
-6. Below that will be a See, Say, and Do options which is the educational part of the app. The See gives more information on the art piece, Say askes you to vote on how you feel about the art piece, and the Do will prompt the user to take a picture along with some instructions.
-7. In the sponsor and collection pages, there will be a map similar to the map/list view where the user can see what art is either in that collection or is sponsored by. These pages will have links to either donate or to view the website of these collections/sponsors.
-8. Other Art adventures is an activity that encourages the user to get out and explore certain places. There will be a See and Do option on these pages.
-9. The Admin side after logging in as an admin and clicking on the admin link in the menu will take the user to the admin landing page.
-10. In the admin side the user can create, edit and delete new collections, art pieces, new sponsors, quotes, and other art adventures.
+1. The user arrives at the welcome page which includes a quote of the day with the option to read through the welcome tutorial or to skip to the home page. There is also an option to sign up at the end of the welcome tutorial.
+2. Once the user arrives at the home page they will see an artwork of the day, a list of public art collections, the option to sign up for the Weekly Wander Newsletter and a list of other art adventures. If the user is signed in, they will not see the prompt to sign up for a news letter. 
+3. There is a menu bar where the user can see a list of options such as a Map/List view of artwork, ability to contact Wonder Wander, request to be a sponsor, or add an art collection. If the user is an administrator who is signed into the app, they will see an admin link in the menu bar that will route them to the adminisration pages. 
+4. In the Map/List view the user will see a google map that shows all the artwork near the current location of the user. There is also a list view that shows all the artwork in the app including the distance that each piece is from the user's current location. The user can click on a balloon in the map or on a listed artwork to view that specific piece of art.
+5. After clicking on a balloon or artwork list item, the user is routed to an artwork detail page which shows an image of the work, it's name, year created, and a description of the piece. This view also hosts a link the the artist, sponosor of, and collection that the piece is in, if any. The user can click on a link to get directions from their location to the artwork. They also have the option to click on See. Say. Do. educational prompts that are listed on this page and unique to the artwork. 
+6. The See. Say. and Do. prompts provide a the opportunity for users to learn more about each artwork (See), vote on various elements of how they feel about it (Say), and engage in additional actions inspired by it (Do).
+7. From the artwork detail page, if the user clicks on the artist link they are routed to an artist detail page which contains information about the artist including an image of them, their name, a biography, and additional works of art they have created, along with a link to their website. 
+8. From the artwork detail page, if the user clicks on the sponsor link they are routed to a sponosor detail page that contains information about the sponsor including their logo, name, a description of them, a map view with balloons to indicate works of art they sponsor, a list of artwork they sponsor, and a link to their website. 
+9. From the artwork detail page, if the user clicks on the collection link they are routed to a collection detail page which contains information about the collection including an image, it's name, a description, a map view with balloons to indicate works of art in the collection, a list of artwork in the collection, a link to their website, and a donation link.
+10. The other Art Adventures, located on the home screen are activities meant to inspire a sence of awe and wonder. They are activities that encourage the user to get out and explore their environment. The other art adventures also include See. and Do. prompts to engage the user in their process.
+11. The About page highlights the founder of Wonder Wander, Shannon Steven, and includes her name, an image of her, a biography and mission statement, and the ability to contact Wonder Wander to sponsor art, add a collection, or to connect for future learning opportunities. 
+12. The Administration pages are accessible to registered administrators who are signed into the application. Once they are signed in an admin link renders in the menu bar. Clicking on the link routes the administrator to teh admin landing page which offers a brief tutorial of how to use the admin pages. There is also a button to create new admin users on the landing page. 
+12. A logged in administrator can view a list of all artwork, artists, sponsors, collections, art adventures, and quotes. They can also add, edit and delete artworks, artists, sponsors, collections, art adventures, and quotes. There is also a publish feature for each item that allows the administrator to set it to published (which makes it veiwable on the public facing pages of the app) or unpublished (which hides it from the In the admin side the user can create, edit and delete new collections, art pieces, new sponsors, quotes, and other art adventures.
 
 ## Installation -- AWS Setup Instructions 
 1. First, go to https://console.aws.amazon.com and follow the steps to create an account, a root account 
@@ -115,8 +132,10 @@ At this point, the app is now set to work with the created bucket
 - Mail Chimp
 - AWS S3
 - React Video Player
+
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. (Thank your people)
+
 ## Support
 If you have suggestions or issues, please email me at [youremail@whatever.com](www.google.com)
 

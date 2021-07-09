@@ -7,11 +7,11 @@ function* getArtwork() {
 
         // get request to the server to get all the artwork from the server
         const response = yield axios.get('/api/artwork');
-        
+
         // then sets the reducer to the response
         yield put({ type: 'SET_ARTWORK', payload: response.data })
 
-    // error if one occurs
+        // error if one occurs
     } catch (error) {
         console.log('GET artwork request failed in saga:', error)
     }

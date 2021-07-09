@@ -27,23 +27,18 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
 function AdminCollection() {
-  let { id } = useParams();
-  //console.log(id);
 
-  //functionality to route to a page
+  let { id } = useParams();
+
   const history = useHistory();
 
-  //functionality to dispatch information to a saga or reducer
   const dispatch = useDispatch();
 
   const classes = useStyles();
 
   //redux store instances
-  const collectionList = useSelector(
-    (store) => store.adminCollectionListReducer
-  );
+  const collectionList = useSelector((store) => store.adminCollectionListReducer);
   const collection = useSelector((store) => store.adminCollectionInfoReducer);
-  console.log("collection reducer id:", collection.id);
 
   //retrieves collections' info from DB
   useEffect(() => {
@@ -65,6 +60,7 @@ function AdminCollection() {
 
   //post to saga
   const addCollection = () => {
+
     //create object to send
     const newCollection = {
       name: name,
@@ -102,7 +98,6 @@ function AdminCollection() {
 
   //renders specific collections's details in input feilds to edit
   const renderCollectionDetail = (event, item) => {
-    console.log("clicking edit for Collection = ", item);
 
     //sets specific collection in artist reducer
     dispatch({ type: "SET_COLLECTION_INFO", payload: item }); //
@@ -123,6 +118,7 @@ function AdminCollection() {
 
   //update (edit) collection information
   const updateCollectionInfo = () => {
+
     //create updated collection object
     const updatedCollectionInfo = {
       id: collection.id,
@@ -135,8 +131,6 @@ function AdminCollection() {
       site_link: site_link,
       search_text: search_text,
     };
-
-    console.log("updated collection info:", updatedCollectionInfo);
 
     //send updated collection info to collection saga
     dispatch({
@@ -181,7 +175,6 @@ function AdminCollection() {
 
   //delete collection
   const deleteCollection = (id) => {
-    console.log("deleting collection:", id);
 
     //dispatch to saga w collection id
     dispatch({ type: "DELETE_COLLECTION", payload: id });
@@ -189,7 +182,6 @@ function AdminCollection() {
 
   //alerts admin to verify collection deletion
   const deleteValidation = (id) => {
-    console.log("delete clicked! id = ", id);
 
     swal({
       title: "Hello!",
@@ -238,6 +230,7 @@ function AdminCollection() {
       <AdminNav />
       <Grid container spacing={1} direction="row">
         {editMode ? (
+          // Edit Collection Form
           <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
               <div className={classes.cardContent}>
@@ -326,8 +319,6 @@ function AdminCollection() {
 
                   {/* <ImageUpload /> */}
 
-                  {/* TODO - Add Image Upload Component here */}
-
                   <Button
                     className={classes.formBtn}
                     type="submit"
@@ -349,6 +340,7 @@ function AdminCollection() {
             </Card>
           </Grid>
         ) : (
+          // Add Collection Form
           <Grid item lg={5} sm={12} xs={12} className={classes.grid}>
             <Card elevation={6} className={classes.cardForm}>
               <div className={classes.cardContent}>
@@ -413,7 +405,7 @@ function AdminCollection() {
                     variant="outlined"
                     placeholder="Donation URL"
                     label="Donation URL"
-                    value={donate_link}     
+                    value={donate_link}
                     onChange={(event) => setDonateLink(event.target.value)}
                   />
                   <TextField
@@ -436,6 +428,7 @@ function AdminCollection() {
                   />
 
                   {/* <ImageUpload /> */}
+
                   <Button
                     className={classes.formBtn}
                     type="submit"

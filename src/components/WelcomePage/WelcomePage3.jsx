@@ -1,6 +1,4 @@
 import { useHistory } from 'react-router-dom';
-
-//material UI
 import {
     Grid,
     Divider,
@@ -30,7 +28,6 @@ function WelcomePage3() {
     const skipWelcome = () => {
         history.push('/home');
     }
-
 
     return (
         <>

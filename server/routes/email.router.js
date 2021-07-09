@@ -19,8 +19,8 @@ router.post('/', (req, res) => {
             res.sendStatus(201);
 
         // failure will send error code
-        }).catch (error => {
-            console.log('Error with posting email info to database:',error)
+        }).catch(error => {
+            console.log('Error with posting email info to database:', error)
             res.sendStatus(500);
         })
 });

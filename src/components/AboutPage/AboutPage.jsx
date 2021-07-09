@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button, Typography, Divider} from '@material-ui/core';
-import {useStyles} from '../classes'
+import { Button, Typography, Divider } from '@material-ui/core';
+import { useStyles } from '../classes'
 
 function AboutPage() {
 
@@ -9,7 +9,7 @@ function AboutPage() {
 
   //classes variable to bring in classes.js file for styling 
   const classes = useStyles();
-  
+
   //function to handle opening the user's email to send an email to contact wonder wander
   //takes a string of text and event as an argument 
   const goEmail = (event, text) => {
@@ -25,10 +25,10 @@ function AboutPage() {
       <div>
         <div className={classes.center}>
           <Typography variant="h3" className={classes.title}>Shannon Steven</Typography>
-          <img className={classes.image} src="https://uploads-ssl.webflow.com/5ee5775bed4e85640a7db47f/600e48af247f2becaa582044_New%20Image%20WW-p-500.jpeg" alt="Shannon Steven, founder of Wonder Wander"/>
+          <img className={classes.image} src="https://uploads-ssl.webflow.com/5ee5775bed4e85640a7db47f/600e48af247f2becaa582044_New%20Image%20WW-p-500.jpeg" alt="Shannon Steven, founder of Wonder Wander" />
         </div>
-        <div style={{marginTop: '10%'}}></div>
-        <Divider/>
+        <div style={{ marginTop: '10%' }}></div>
+        <Divider />
         <div className={classes.textBox}>
           <Typography variant="body1">Shannon Steven is an art teacher with a master's degree in K12 Art Education. She has worked in a classroom predominantly with elementary aged students but has also worked with adults throughout her career.
             She has an insatiable curiosity and loves to learn and try new art techniques. She also enjoys engaging her students in discussions about art and how they see the world.
@@ -41,10 +41,10 @@ function AboutPage() {
         {/* when the button is clicked, the user is directed to the wonder wander webpage */}
         <Button color="primary" type="button" onClick={(event) => {
           event.preventDefault();
-          window.location.href='https://studio.wonderwander.art/'
-          }}>Visit Wonder Wander Studio</Button>
+          window.location.href = 'https://studio.wonderwander.art/'
+        }}>Visit Wonder Wander Studio</Button>
 
-          {/* when the button is clicked, the email is opened with the 'Submit A Collection' as the subject line*/}
+        {/* when the button is clicked, the email is opened with the 'Submit A Collection' as the subject line*/}
         <Button onClick={(event) => goEmail(event, 'Submit A Collection')} color="secondary">Get Your Collection Added</Button>
 
         {/* when the button is clicked, the email is opened with the 'Become a Sponsor' as the subject line */}

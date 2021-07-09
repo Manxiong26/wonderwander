@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-
 // say PAGE ROUTER to get specific say for artwork
 router.get('/:id', (req, res) => {
 
@@ -21,28 +20,27 @@ router.get('/:id', (req, res) => {
         })
 });
 
-
 // Post route to post new poll information to client
 router.post('/', (req, res) => {
-    
+
     // query text to insert new vote into the say_poll database
     let queryText = `INSERT INTO "say_poll" ("say_id", "artwork_id") VALUES ($1, $2);`;
     pool.query(queryText, [req.body.say_id, req.body.artwork_id])
 
-    // success will send back ok
-    .then((result) => {
-        res.sendStatus(201);
+        // success will send back ok
+        .then((result) => {
+            res.sendStatus(201);
 
-    // failure will send back error
-    }).catch((error) => {
-        console.log('ERROR IN SAY POST', error);
-        res.sendStatus(500);
-    })
+            // failure will send back error
+        }).catch((error) => {
+            console.log('ERROR IN SAY POST', error);
+            res.sendStatus(500);
+        })
 });
 
 // get rout for the count for specific id
 router.get('/count/:id', (req, res) => {
-    
+
     // will select the count for the say poll for specified artwork
     const queryText = `SELECT "say".id, "say".prompts, "say".image, COUNT (*)
     FROM "say_poll"
