@@ -21,8 +21,8 @@ To see the fully functional site, please visit:
 
 https://calm-lowlands-28823.herokuapp.com/#/welcome1 
 
-## Screen Shot
-SCREEN SHOTS HERE
+## App Demo
+![Show WonderWander App](Pictures/WonderWander.gif)
 
 ## Prerequisites
 
